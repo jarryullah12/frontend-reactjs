@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media App</title>
+  <style>
+    /* Base styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #F5F8FA;
+      color: #14171A;
+    }
+    
+    /* Utility classes */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    .card {
+      background-color: white;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      border: 1px solid #E1E8ED;
+      margin-bottom: 15px;
+    }
+    
+    .btn-primary {
+      background-color: #1DA1F2;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .btn-primary:hover {
+      background-color: #1a91da;
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      color: #1DA1F2;
+      border: 1px solid #1DA1F2;
+      padding: 6px 12px;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .btn-outline:hover {
+      background-color: #1DA1F2;
+      color: white;
+    }
+    
+    /* Layout */
+    .layout {
+      display: flex;
+    }
+    
+    /* Navbar */
+    .navbar {
+      background-color: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    
+    .navbar-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 15px;
+    }
+    
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1DA1F2;
+    }
+    
+    .nav-links {
+      display: none;
+    }
+    
+    .search-bar {
+      display: flex;
+      align-items: center;
+    }
+    
+    .search-input {
+      background-color: #F5F8FA;
+      border: none;
+      border-radius: 50px;
+      padding: 8px 15px;
+      font-size: 14px;
+      outline: none;
+    }
+    
+    .profile-pic {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      margin-left: 15px;
+      background-color: #ccc;
+      overflow: hidden;
+    }
+    
+    .profile-pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      display: none;
+    }
+    
+    /* Main content */
+    .main-content {
+      flex: 1;
+      padding: 15px;
+    }
+    
+    /* Post creation */
+    .post-create {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    
+    .post-create-input {
+      flex: 1;
+      margin-left: 12px;
+    }
+    
+    .post-input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #E1E8ED;
+      border-radius: 8px;
+      resize: none;
+      margin-bottom: 10px;
+      font-family: inherit;
+    }
+    
+    .post-create-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    /* Posts */
+    .post {
+      display: flex;
+      margin-bottom: 15px;
+    }
+    
+    .post-content {
+      flex: 1;
+      margin-left: 12px;
+    }
+    
+    .post-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+    
+    .post-name {
+      font-weight: 700;
+      margin-right: 5px;
+    }
+    
+    .post-handle {
+      color: #657786;
+      font-size: 14px;
+    }
+    
+    .post-time {
+      color: #657786;
+      font-size: 14px;
+      margin-left: 5px;
+    }
+    
+    .post-text {
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    
+    .post-image {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      max-height: 300px;
+      object-fit: cover;
+    }
+    
+    .post-actions {
+      display: flex;
+      justify-content: space-between;
+      color: #657786;
+    }
+    
+    .post-action {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    
+    .post-action:hover {
+      color: #1DA1F2;
+    }
+    
+    .post-action.like:hover {
+      color: #e0245e;
+    }
+    
+    .post-action.share:hover {
+      color: #17bf63;
+    }
+    
+    /* Right sidebar */
+    .right-sidebar {
+      display: none;
+    }
+    
+    /* Responsive */
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+        gap: 30px;
+      }
+      
+      .nav-link {
+        color: #657786;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      
+      .nav-link:hover {
+        color: #1DA1F2;
+      }
+    }
+    
+    @media (min-width: 992px) {
+      .sidebar {
+        display: block;
+        width: 240px;
+        position: sticky;
+        top: 60px;
+        height: calc(100vh - 60px);
+        padding: 15px;
+      }
+      
+      .right-sidebar {
+        display: block;
+        width: 280px;
+        padding: 15px;
+        position: sticky;
+        top: 60px;
+        height: calc(100vh - 60px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <div class="logo">SocialApp</div>
+      
+      <div class="nav-links">
+        <a href="#" class="nav-link">Home</a>
+        <a href="#" class="nav-link">Explore</a>
+        <a href="#" class="nav-link">Notifications</a>
+        <a href="#" class="nav-link">Messages</a>
+      </div>
+      
+      <div class="search-bar">
+        <input type="text" class="search-input" placeholder="Search">
+        <div class="profile-pic">
+          <img src="https://via.placeholder.com/32" alt="Profile">
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container">
+    <div class="layout">
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+        <div class="card">
+          <div style="display: flex; margin-bottom: 15px;">
+            <div class="profile-pic" style="width: 48px; height: 48px;">
+              <img src="https://via.placeholder.com/48" alt="Profile">
+            </div>
+            <div style="margin-left: 10px;">
+              <div style="font-weight: 700;">John Doe</div>
+              <div style="color: #657786; font-size: 14px;">@johndoe</div>
+            </div>
+          </div>
+          
+          <div style="display: flex; justify-content: space-between; font-size: 14px;">
+            <div>
+              <div style="font-weight: 700;">268</div>
+              <div style="color: #657786;">Following</div>
+            </div>
+            <div>
+              <div style="font-weight: 700;">1,542</div>
+              <div style="color: #657786;">Followers</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div style="font-weight: 700; margin-bottom: 10px;">Trending Topics</div>
+          <div id="trending-topics">
+            <!-- Trending topics will be inserted here -->
+          </div>
+        </div>
+      </aside>
+      
+      <!-- Main Content -->
+      <main class="main-content">
+        <div class="card">
+          <div class="post-create">
+            <div class="profile-pic">
+              <img src="https://via.placeholder.com/32" alt="Your profile">
+            </div>
+            <div class="post-create-input">
+              <textarea class="post-input" placeholder="What's happening?" rows="3"></textarea>
+              <div class="post-create-actions">
+                <div>
+                  <button class="btn-outline" style="padding: 6px; border-radius: 50%;">📷</button>
+                  <button class="btn-outline" style="padding: 6px; border-radius: 50%;">😊</button>
+                </div>
+                <button class="btn-primary">Post</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div id="posts-container">
+          <!-- Posts will be inserted here -->
+        </div>
+      </main>
+      
+      <!-- Right Sidebar -->
+      <aside class="right-sidebar">
+        <div class="card">
+          <div style="font-weight: 700; margin-bottom: 10px;">Who to follow</div>
+          <div id="suggestions-container">
+            <!-- Suggestions will be inserted here -->
+          </div>
+          <a href="#" style="color: #1DA1F2; font-size: 14px; display: block; margin-top: 10px;">Show more</a>
+        </div>
+        
+        <div class="card">
+          <div style="font-weight: 700; margin-bottom: 10px;">What's happening</div>
+          <div id="happenings-container">
+            <!-- Happenings will be inserted here -->
+          </div>
+          <a href="#" style="color: #1DA1F2; font-size: 14px; display: block; margin-top: 10px;">Show more</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+  
+  <script>
+    // Sample data
+    const posts = [
+      {
+        id: 1,
+        name: 'Jane Smith',
+        handle: 'janesmith',
+        time: '2h ago',
+        content: 'Just finished working on an amazing new project! Can\'t wait to share it with everyone!',
+        image: 'https://via.placeholder.com/600x300',
+        likes: 24,
+        comments: 3,
+        shares: 5
+      },
+      {
+        id: 2,
+        name: 'John Doe',
+        handle: 'johndoe',
+        time: '4h ago',
+        content: 'Beautiful day for a hike! 🌲 #nature #outdoors',
+        image: 'https://via.placeholder.com/600x300',
+        likes: 142,
+        comments: 12,
+        shares: 8
+      },
+      {
+        id: 3,
+        name: 'Tech News',
+        handle: 'technews',
+        time: '6h ago',
+        content: 'Breaking: New AI model can generate realistic images from text descriptions. What are your thoughts on this technology?',
+        likes: 89,
+        comments: 32,
+        shares: 15
+      }
+    ];
+    
+    const suggestions = [
+      { id: 1, name: 'Alex Johnson', handle: 'alexj' },
+      { id: 2, name: 'Sarah Williams', handle: 'sarahw' },
+      { id: 3, name: 'David Chen', handle: 'davidc' }
+    ];
+    
+    const trending = ['Technology', 'Sports', 'Politics', 'Entertainment', 'Science'];
+    
+    const happenings = [
+      { tag: '#TechTrends', posts: 10 },
+      { tag: '#WorldNews', posts: 15 },
+      { tag: '#SportsUpdates', posts: 20 }
+    ];
+    
+    // Render posts
+    const postsContainer = document.getElementById('posts-container');
+    posts.forEach(post => {
+      const postEl = document.createElement('div');
+      postEl.className = 'card';
+      postEl.innerHTML = `
+        <div class="post">
+          <div class="profile-pic">
+            <img src="https://via.placeholder.com/32" alt="${post.name}">
+          </div>
+          <div class="post-content">
+            <div class="post-header">
+              <span class="post-name">${post.name}</span>
+              <span class="post-handle">@${post.handle}</span>
+              <span class="post-time">· ${post.time}</span>
+            </div>
+            <div class="post-text">${post.content}</div>
+            ${post.image ? `<img src="${post.image}" alt="Post image" class="post-image">` : ''}
+            <div class="post-actions">
+              <div class="post-action">
+                💬 <span style="margin-left: 5px;">${post.comments}</span>
+              </div>
+              <div class="post-action share">
+                🔄 <span style="margin-left: 5px;">${post.shares}</span>
+              </div>
+              <div class="post-action like">
+                ❤️ <span style="margin-left: 5px;">${post.likes}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      postsContainer.appendChild(postEl);
+    });
+    
+    // Render suggestions
+    const suggestionsContainer = document.getElementById('suggestions-container');
+    suggestions.forEach(suggestion => {
+      const suggestionEl = document.createElement('div');
+      suggestionEl.style.display = 'flex';
+      suggestionEl.style.alignItems = 'center';
+      suggestionEl.style.justifyContent = 'space-between';
+      suggestionEl.style.marginBottom = '10px';
+      suggestionEl.innerHTML = `
+        <div style="display: flex; align-items: center;">
+          <div class="profile-pic" style="width: 32px; height: 32px;">
+            <img src="https://via.placeholder.com/32" alt="${suggestion.name}">
+          </div>
+          <div style="margin-left: 10px;">
+            <div style="font-weight: 600;">${suggestion.name}</div>
+            <div style="color: #657786; font-size: 14px;">@${suggestion.handle}</div>
+          </div>
+        </div>
+        <button class="btn-outline">Follow</button>
+      `;
+      suggestionsContainer.appendChild(suggestionEl);
+    });
+    
+    // Render trending topics
+    const trendingContainer = document.getElementById('trending-topics');
+    trending.forEach(topic => {
+      const topicEl = document.createElement('div');
+      topicEl.style.display = 'flex';
+      topicEl.style.alignItems = 'center';
+      topicEl.style.marginBottom = '10px';
+      topicEl.innerHTML = `
+        <span style="background-color: #E1E8ED; border-radius: 50%; width: 24px; height: 24px; display: flex; justify-content: center; align-items: center; font-size: 12px; margin-right: 8px;">#</span>
+        <span style="font-weight: 500;">${topic}</span>
+      `;
+      trendingContainer.appendChild(topicEl);
+    });
+    
+    // Render happenings
+    const happeningsContainer = document.getElementById('happenings-container');
+    happenings.forEach(happening => {
+      const happeningEl = document.createElement('div');
+      happeningEl.style.marginBottom = '12px';
+      happeningEl.innerHTML = `
+        <div style="color: #657786; font-size: 14px;">Trending</div>
+        <div style="font-weight: 600;">${happening.tag}</div>
+        <div style="color: #657786; font-size: 14px;">${happening.posts}K posts</div>
+      `;
+      happeningsContainer.appendChild(happeningEl);
+    });
+  </script>
+</body>
+</html>

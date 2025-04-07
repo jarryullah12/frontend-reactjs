@@ -1,0 +1,14 @@
+// Default profile picture as a URL to a static asset
+export const DEFAULT_PROFILE_PICTURE = '/assets/images/user-silhouette.svg';
+
+// Gray circular user silhouette for profile image (new version)
+export const DEFAULT_USER_ICON = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iI2E0YTRhNCIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iMzgiIHI9IjE0IiBmaWxsPSIjZmZmZmZmIi8+PHBhdGggZD0iTTI1LDgwIGE0MCw0MCAwIDAsMSA1MCwwIiBmaWxsPSIjZmZmZmZmIi8+PC9zdmc+';
+
+// Default cover photo as a solid color (fallback)
+export const DEFAULT_COVER_PHOTO_FALLBACK = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgMjAwIj48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2VlZWVlZSIvPjwvc3ZnPg==';
+
+// New cover photo URL - using a light pink/beige solid color
+export const DEFAULT_COVER_PHOTO = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgMjAwIj48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2RjY2NjYyIvPjwvc3ZnPg==';
+
+// Gray circular user silhouette for profile image
+export const DEFAULT_GRAY_PROFILE_IMAGE = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iI2JiYmJiYiIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iMzYiIHI9IjE0IiBmaWxsPSIjZmZmZmZmIi8+PHBhdGggZD0iTTI1LDg1IGE0MCw0MCAwIDAsMSA1MCwwIiBmaWxsPSIjZmZmZmZmIi8+PC9zdmc+';
