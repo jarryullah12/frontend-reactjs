@@ -1,0 +1,24 @@
+Full Name
+Email Address
+Phone Number
+Preferred Date
+Pickup Location
+Dropoff Location
+Distance (km)
+Vehicle
+Estimated Total
+
+
+
+Project url:
+https://hhftqoauatvtxscsacjl.supabase.co
+API Key:
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhoZnRxb2F1YXR2dHhzY3NhY2psIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4NzcwNDQsImV4cCI6MjA4MTQ1MzA0NH0.po4A4K14D7yZ3BYLHpX0D6BnIBJ_FtpG4haN2-vwzTc
+
+
+
+
+
+
+
+

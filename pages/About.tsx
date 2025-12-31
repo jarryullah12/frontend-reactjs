@@ -7,6 +7,7 @@ const About: React.FC = () => {
 
   return (
     <div className="bg-white">
+<<<<<<< HEAD
       {/* Intro Header - Updated to Blue */}
       <section className="bg-slate-900 py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-transparent"></div>
@@ -19,6 +20,17 @@ const About: React.FC = () => {
           </p>
         </div>
       </section>
+=======
+      {/* Intro Header */}
+      <div className="bg-slate-900 text-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl font-bold mb-4">{t('about.title')}</h1>
+          <p className="text-xl text-slate-300 max-w-2xl mx-auto">
+            {t('about.subtitle')}
+          </p>
+        </div>
+      </div>
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Company Intro */}
@@ -38,7 +50,11 @@ const About: React.FC = () => {
         <div className="bg-gray-50 rounded-2xl p-12 mb-20">
            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div>
+<<<<<<< HEAD
                 <div className="text-4xl font-bold text-blue-500 mb-2">10k+</div>
+=======
+                <div className="text-4xl font-bold text-orange-500 mb-2">10k+</div>
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
                 <div className="text-gray-600 font-medium">{t('about.stats.clients')}</div>
               </div>
               <div>
@@ -61,8 +77,13 @@ const About: React.FC = () => {
           <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">{t('about.fleetTitle')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center p-6 border rounded-xl hover:shadow-lg transition-shadow">
+<<<<<<< HEAD
                <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Truck className="w-8 h-8 text-blue-600" />
+=======
+               <div className="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Truck className="w-8 h-8 text-orange-600" />
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
                </div>
                <h3 className="text-xl font-bold mb-2">{t('about.fleetVans')}</h3>
                <p className="text-gray-600 text-sm">

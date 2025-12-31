@@ -37,7 +37,11 @@ const Customers: React.FC = () => {
                    : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
                }`}
              >
+<<<<<<< HEAD
                {t(`customers.filter.${status}`)}
+=======
+               {status}
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
              </button>
            ))}
         </div>
@@ -48,8 +52,13 @@ const Customers: React.FC = () => {
                type="text" 
                value={searchQuery}
                onChange={(e) => setSearchQuery(e.target.value)}
+<<<<<<< HEAD
                placeholder={t('customers.searchPlaceholder')}
                className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none w-64 bg-white text-black font-medium"
+=======
+               placeholder={`${t('common.search')}...`}
+               className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 outline-none w-64 bg-white text-slate-900"
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
              />
              <Search className="absolute left-3 top-2.5 w-4 h-4 text-gray-400" />
           </div>
@@ -61,12 +70,21 @@ const Customers: React.FC = () => {
           <table className="w-full text-left">
             <thead className="bg-gray-50 text-gray-500 text-xs uppercase">
               <tr>
+<<<<<<< HEAD
                 <th className="px-6 py-4 font-semibold">{t('customers.table.name')}</th>
                 <th className="px-6 py-4 font-semibold">{t('common.email')}</th>
                 <th className="px-6 py-4 font-semibold">{t('common.phone')}</th>
                 <th className="px-6 py-4 font-semibold text-center">{t('customers.table.orders')}</th>
                 <th className="px-6 py-4 font-semibold text-right">{t('customers.table.totalSpent')}</th>
                 <th className="px-6 py-4 font-semibold text-center">{t('customers.table.status')}</th>
+=======
+                <th className="px-6 py-4 font-semibold">Customer Name</th>
+                <th className="px-6 py-4 font-semibold">{t('common.email')}</th>
+                <th className="px-6 py-4 font-semibold">{t('common.phone')}</th>
+                <th className="px-6 py-4 font-semibold text-center">Orders</th>
+                <th className="px-6 py-4 font-semibold text-right">Total Spent</th>
+                <th className="px-6 py-4 font-semibold text-center">Status</th>
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
@@ -101,7 +119,11 @@ const Customers: React.FC = () => {
                         customer.status === 'Active' ? 'bg-green-100 text-green-700' :
                         'bg-gray-100 text-gray-500'
                       }`}>
+<<<<<<< HEAD
                         {t(`customers.status.${customer.status.toLowerCase()}`)}
+=======
+                        {customer.status}
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
                       </span>
                     </td>
                   </tr>
@@ -109,7 +131,11 @@ const Customers: React.FC = () => {
               ) : (
                 <tr>
                   <td colSpan={6} className="px-6 py-12 text-center text-gray-500">
+<<<<<<< HEAD
                     {t('customers.table.noCustomers')}
+=======
+                    No customers found.
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
                   </td>
                 </tr>
               )}

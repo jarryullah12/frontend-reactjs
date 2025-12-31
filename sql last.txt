@@ -1,0 +1,68 @@
+-- 1. Enable UUID extension for unique identifiers
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+-- 2. Create Profiles Table (Users)
+CREATE TABLE IF NOT EXISTS public.profiles (
+  id uuid REFERENCES auth.users NOT NULL PRIMARY KEY,
+  email text UNIQUE,
+  full_name text,
+  role text DEFAULT 'client', -- 'client' or 'admin'
+  phone text,
+  address text,
+  join_date text,
+  password text -- Fallback for manual login bypass
+);
+
+-- 3. Create Orders Table (Booking Requests)
+CREATE TABLE IF NOT EXISTS public.orders (
+  id text NOT NULL PRIMARY KEY DEFAULT gen_random_uuid()::text,
+  client text, -- Customer Name
+  email text,
+  phone text,
+  pickup text,
+  dropoff text,
+  distance text,
+  vehicle text,
+  route text,
+  amount text,
+  status text DEFAULT 'Pending Review',
+  date text, -- Preferred Date
+  invoice_url text, -- For Official Invoices uploaded by Admin
+  client_proof_url text, -- For Payment Proof uploaded by Client
+  created_at timestamp with time zone DEFAULT timezone('utc'::text, now())
+);
+
+-- 4. Create Fleet Table (Vehicle Management)
+CREATE TABLE IF NOT EXISTS public.fleet (
+  id text NOT NULL PRIMARY KEY,
+  type text,
+  plate text UNIQUE,
+  driver text,
+  status text DEFAULT 'Available',
+  location text
+);
+
+-- 5. Enable Row Level Security (RLS)
+ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.orders ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.fleet ENABLE ROW LEVEL SECURITY;
+
+-- 6. Create Permissive Policies (Allow all operations for now)
+-- Note: In a production app, you would restrict these to authenticated users only.
+CREATE POLICY "Allow all on profiles" ON public.profiles FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Allow all on orders" ON public.orders FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Allow all on fleet" ON public.fleet FOR ALL USING (true) WITH CHECK (true);
+
+-- 7. Grant Permissions to API roles
+GRANT USAGE ON SCHEMA public TO anon, authenticated, service_role;
+GRANT ALL ON TABLE public.profiles TO anon, authenticated, service_role;
+GRANT ALL ON TABLE public.orders TO anon, authenticated, service_role;
+GRANT ALL ON TABLE public.fleet TO anon, authenticated, service_role;
+
+-- 8. Important: Manual Step for Storage
+-- You cannot create storage buckets via SQL reliably in all Supabase versions.
+-- INSTRUCTIONS:
+-- 1. Go to 'Storage' in your Supabase Dashboard.
+-- 2. Click 'New Bucket'.
+-- 3. Name it: invoices
+-- 4. Set it to 'Public'.

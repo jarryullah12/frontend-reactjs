@@ -38,7 +38,11 @@ const CalculatorWidget: React.FC<CalculatorWidgetProps> = ({ initialVehicle, cla
     <div className={`bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100 ${className}`}>
       <div className="bg-slate-900 p-6 text-white">
         <h3 className="text-xl font-bold flex items-center gap-2">
+<<<<<<< HEAD
           <Calculator className="w-5 h-5 text-blue-500" />
+=======
+          <Calculator className="w-5 h-5 text-orange-500" />
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
           {t('calculator.widgetTitle')}
         </h3>
         <p className="text-slate-400 text-sm mt-1">{t('calculator.widgetSubtitle')}</p>
@@ -53,7 +57,11 @@ const CalculatorWidget: React.FC<CalculatorWidgetProps> = ({ initialVehicle, cla
             <select
               value={vehicle}
               onChange={(e) => setVehicle(e.target.value as VehicleType)}
+<<<<<<< HEAD
               className="w-full py-3 pl-4 pr-10 border border-gray-300 rounded-lg appearance-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white text-slate-900 cursor-pointer"
+=======
+              className="w-full py-3 pl-4 pr-10 border border-gray-300 rounded-lg appearance-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-slate-900 cursor-pointer"
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
             >
               {Object.entries(VEHICLE_CATEGORIES).map(([category, types]) => (
                 <optgroup key={category} label={t(`vehicleCategories.${category}`)} className="text-slate-900 font-bold bg-gray-50">
@@ -78,7 +86,11 @@ const CalculatorWidget: React.FC<CalculatorWidgetProps> = ({ initialVehicle, cla
             placeholder="e.g., 150"
             value={distance}
             onChange={(e) => setDistance(e.target.value ? parseFloat(e.target.value) : '')}
+<<<<<<< HEAD
             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white text-slate-900 placeholder-gray-400"
+=======
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none bg-white text-slate-900 placeholder-gray-400"
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
           />
         </div>
 
@@ -95,7 +107,11 @@ const CalculatorWidget: React.FC<CalculatorWidgetProps> = ({ initialVehicle, cla
 
         <button 
           onClick={handleBookClick}
+<<<<<<< HEAD
           className="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition-transform active:scale-95 shadow-lg shadow-blue-200"
+=======
+          className="w-full bg-orange-600 text-white py-3 rounded-lg font-bold hover:bg-orange-700 transition-transform active:scale-95 shadow-lg shadow-orange-200"
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
         >
           {t('calculator.bookQuote')}
         </button>

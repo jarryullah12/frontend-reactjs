@@ -85,8 +85,11 @@ export interface NavItem {
   label: string;
   path: string;
 }
+<<<<<<< HEAD
 
 export const getVehicleEnumKey = (value: VehicleType): string => {
   const entry = Object.entries(VehicleType).find(([_, v]) => v === value);
   return entry ? entry[0] : '';
 };
+=======
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def

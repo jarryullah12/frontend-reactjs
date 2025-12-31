@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 
+<<<<<<< HEAD
 const supabaseUrl = 'https://lmscgfbzialxaooczozs.supabase.co';
 const supabaseKey = 'sb_publishable_4mDLtE8JdFEX52qC1hCZ9g_re8WQgIg';
 
@@ -8,6 +9,12 @@ const safeUrl = supabaseUrl?.trim() || '';
 const safeKey = supabaseKey?.trim() || '';
 
 export const supabase = createClient(safeUrl, safeKey);
+=======
+const supabaseUrl = 'https://hhftqoauatvtxscsacjl.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhoZnRxb2F1YXR2dHhzY3NhY2psIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4NzcwNDQsImV4cCI6MjA4MTQ1MzA0NH0.po4A4K14D7yZ3BYLHpX0D6BnIBJ_FtpG4haN2-vwzTc';
+
+export const supabase = createClient(supabaseUrl.trim(), supabaseKey.trim());
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
 
 export const SQL_SETUP_SNIPPET = `-- Enable UUID extension
 create extension if not exists "uuid-ossp";
@@ -31,10 +38,14 @@ create table if not exists public.orders (
   email text,
   phone text,
   pickup text,
+<<<<<<< HEAD
   pickup_time text,
   dropoff text,
   delivery_time text,
   billing_address text,
+=======
+  dropoff text,
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
   distance text,
   vehicle text,
   route text,

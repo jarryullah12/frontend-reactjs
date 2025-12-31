@@ -7,10 +7,14 @@ import {
   AlertCircle,
   ChevronDown,
   RefreshCw,
+<<<<<<< HEAD
   CheckCircle2,
   Clock,
   MapPin,
   Receipt
+=======
+  CheckCircle2
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
 } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
@@ -48,6 +52,11 @@ const Dashboard: React.FC = () => {
     setUpdatingId(order.id);
     setSuccessId(null);
     try {
+<<<<<<< HEAD
+=======
+      console.log(`Updating order ${order.id} status to ${newStatus}`);
+      
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       const { error } = await supabase
         .from('orders')
         .update({ status: newStatus })
@@ -57,6 +66,10 @@ const Dashboard: React.FC = () => {
       
       dispatch(updateOrder({ ...order, status: newStatus }));
       
+<<<<<<< HEAD
+=======
+      // Show success icon briefly
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       setSuccessId(order.id);
       setTimeout(() => setSuccessId(null), 2000);
       
@@ -82,7 +95,11 @@ const Dashboard: React.FC = () => {
   };
 
   return (
+<<<<<<< HEAD
     <AdminLayout title={t('dashboard.title')}>
+=======
+    <AdminLayout title={t('admin.dashboard')}>
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
@@ -90,9 +107,15 @@ const Dashboard: React.FC = () => {
              <div className="bg-green-100 p-3 rounded-lg">
                 <DollarSign className="w-6 h-6 text-green-600" />
              </div>
+<<<<<<< HEAD
              <span className="text-green-600 text-sm font-bold bg-green-50 px-2 py-1 rounded">{t('dashboard.stats.live')}</span>
           </div>
           <p className="text-gray-500 text-sm">{t('dashboard.stats.revenue')}</p>
+=======
+             <span className="text-green-600 text-sm font-bold bg-green-50 px-2 py-1 rounded">Live</span>
+          </div>
+          <p className="text-gray-500 text-sm">{t('admin.stats.revenue')}</p>
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
           <h3 className="text-2xl font-bold text-slate-900">
             €{totalRevenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </h3>
@@ -103,9 +126,15 @@ const Dashboard: React.FC = () => {
              <div className="bg-blue-100 p-3 rounded-lg">
                 <Package className="w-6 h-6 text-blue-600" />
              </div>
+<<<<<<< HEAD
              <span className="text-blue-600 text-sm font-bold bg-blue-50 px-2 py-1 rounded">{t('dashboard.stats.active')}</span>
           </div>
           <p className="text-gray-500 text-sm">{t('dashboard.stats.activeOrders')}</p>
+=======
+             <span className="text-blue-600 text-sm font-bold bg-blue-50 px-2 py-1 rounded">Active</span>
+          </div>
+          <p className="text-gray-500 text-sm">{t('admin.stats.activeOrders')}</p>
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
           <h3 className="text-2xl font-bold text-slate-900">{activeOrdersCount}</h3>
         </div>
 
@@ -114,9 +143,15 @@ const Dashboard: React.FC = () => {
              <div className="bg-red-100 p-3 rounded-lg">
                 <AlertCircle className="w-6 h-6 text-red-600" />
              </div>
+<<<<<<< HEAD
              <span className="text-red-600 text-sm font-bold">{t('dashboard.stats.pending')}</span>
           </div>
           <p className="text-gray-500 text-sm">{t('dashboard.stats.pending')}</p>
+=======
+             <span className="text-red-600 text-sm font-bold">Action Req.</span>
+          </div>
+          <p className="text-gray-500 text-sm">{t('admin.stats.pending')}</p>
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
           <h3 className="text-2xl font-bold text-slate-900">{pendingOrdersCount}</h3>
         </div>
       </div>
@@ -124,6 +159,7 @@ const Dashboard: React.FC = () => {
       {/* Recent Orders */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="p-6 border-b border-gray-100 flex justify-between items-center">
+<<<<<<< HEAD
            <h2 className="text-lg font-bold text-slate-900">{t('dashboard.recentOrders')}</h2>
            <Link to="/admin/orders" className="text-sm text-blue-600 font-bold hover:underline">{t('dashboard.viewAll')}</Link>
         </div>
@@ -138,11 +174,28 @@ const Dashboard: React.FC = () => {
                 <th className="px-6 py-4">{t('dashboard.table.billingAddress')}</th>
                 <th className="px-6 py-4">{t('booking.estTotal')}</th>
                 <th className="px-6 py-4">{t('common.status')}</th>
+=======
+           <h2 className="text-lg font-bold text-slate-900">{t('admin.recentOrders')}</h2>
+           <Link to="/admin/orders" className="text-sm text-orange-600 font-bold hover:underline">View All</Link>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left whitespace-nowrap">
+            <thead className="bg-gray-50 text-gray-500 text-xs uppercase">
+              <tr>
+                <th className="px-6 py-4 font-semibold">{t('admin.table.id')}</th>
+                <th className="px-6 py-4 font-semibold">{t('common.date')}</th>
+                <th className="px-6 py-4 font-semibold">{t('common.pickup')}</th>
+                <th className="px-6 py-4 font-semibold">{t('common.dropoff')}</th>
+                <th className="px-6 py-4 font-semibold">{t('common.vehicle')}</th>
+                <th className="px-6 py-4 font-semibold">{t('booking.estTotal')}</th>
+                <th className="px-6 py-4 font-semibold">{t('common.status')}</th>
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {recentOrders.map((order) => (
                 <tr key={order.id} className="hover:bg-gray-50 transition-colors">
+<<<<<<< HEAD
                   <td className="px-6 py-4 text-[10px] font-black text-blue-600">
                      #{order.id.substring(0,8).toUpperCase()}
                   </td>
@@ -174,6 +227,16 @@ const Dashboard: React.FC = () => {
                         <Receipt className="w-3.5 h-3.5 text-gray-400 shrink-0" />
                         <span title={order.billing_address}>{order.billing_address || t('dashboard.table.notProvided')}</span>
                      </div>
+=======
+                  <td className="px-6 py-4 text-sm font-medium text-slate-900">
+                     <span title={order.id} className="cursor-help">#{order.id.substring(0,8)}</span>
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-600">{order.date}</td>
+                  <td className="px-6 py-4 text-sm text-gray-600 truncate max-w-[120px]">{order.pickup || '-'}</td>
+                  <td className="px-6 py-4 text-sm text-gray-600 truncate max-w-[120px]">{order.dropoff || '-'}</td>
+                  <td className="px-6 py-4 text-sm text-gray-600">
+                     <span className="bg-slate-100 px-2 py-1 rounded text-[10px] font-bold text-slate-700 uppercase">{order.vehicle?.split('(')[0] || 'Standard'}</span>
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
                   </td>
                   <td className="px-6 py-4 text-sm font-bold text-slate-900">{order.amount}</td>
                   <td className="px-6 py-4 text-sm">
@@ -184,6 +247,7 @@ const Dashboard: React.FC = () => {
                             onChange={(e) => handleStatusChange(order, e.target.value)} 
                             className={`appearance-none pl-3 pr-8 py-1.5 rounded text-[10px] font-black uppercase tracking-wider cursor-pointer border-none outline-none ring-1 ring-black/5 shadow-sm disabled:opacity-50 transition-all ${getStatusColor(order.status)}`}
                         >
+<<<<<<< HEAD
                             <option value="Pending Review">{t('dashboard.status.pendingReview')}</option>
                             <option value="Approved (Payment Pending)">{t('dashboard.status.approved')}</option>
                             <option value="Payment Review">{t('dashboard.status.paymentReview')}</option>
@@ -191,6 +255,15 @@ const Dashboard: React.FC = () => {
                             <option value="In Transit">{t('dashboard.status.inTransit')}</option>
                             <option value="Delivered">{t('dashboard.status.delivered')}</option>
                             <option value="Cancelled">{t('dashboard.status.cancelled')}</option>
+=======
+                            <option value="Pending Review">Pending Review</option>
+                            <option value="Approved (Payment Pending)">Approved (Payment Pending)</option>
+                            <option value="Payment Review">Payment Review</option>
+                            <option value="Paid">Paid</option>
+                            <option value="In Transit">In Transit</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Cancelled">Cancelled</option>
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
                         </select>
                         {updatingId === order.id ? (
                           <RefreshCw className="absolute right-2 top-2.5 w-3 h-3 animate-spin text-gray-500" />
@@ -206,8 +279,13 @@ const Dashboard: React.FC = () => {
             </tbody>
           </table>
           {recentOrders.length === 0 && (
+<<<<<<< HEAD
               <div className="p-12 text-center text-gray-500 text-sm font-medium">
                   {t('dashboard.noOrders')}
+=======
+              <div className="p-12 text-center text-gray-500 text-sm">
+                  No recent orders available.
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
               </div>
           )}
         </div>

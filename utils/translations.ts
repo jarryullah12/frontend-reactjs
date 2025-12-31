@@ -24,7 +24,10 @@ export const translations = {
       total: 'Total',
       km: 'km',
       vehicle: 'Vehicle',
+<<<<<<< HEAD
       language: 'en',
+=======
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       pickup: 'Pickup Location',
       dropoff: 'Dropoff Location',
       distance: 'Distance',
@@ -35,10 +38,15 @@ export const translations = {
       saveChanges: 'Save Changes',
       cancel: 'Cancel',
       address: 'Address',
+<<<<<<< HEAD
         upload: 'Upload',
         brandName: 'Spedition Askari',
         standard: 'Standard',
       },
+=======
+      upload: 'Upload',
+    },
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
     nav: {
       home: 'Home',
       services: 'Services',
@@ -49,11 +57,15 @@ export const translations = {
       fleet: 'Our Fleet',
       account: 'Account',
       profile: 'My Profile',
+<<<<<<< HEAD
       industrySolutions: 'Industry Solutions',
+=======
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
     },
     home: {
       hero: {
         tag: 'Trusted Logistics Partner',
+<<<<<<< HEAD
         title: 'Booked today,',
         titleSuffix: 'delivered today',
         features: [
@@ -70,6 +82,11 @@ export const translations = {
             desc: 'We ensure smooth transport and take care of all the details.'
           }
         ]
+=======
+        title: 'Reliable Logistics for',
+        titleSuffix: 'Modern Business',
+        subtitle: 'Fast, secure, and transparent transport solutions for business and private clients across Germany. Book your vehicle in seconds.',
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       },
       services: {
         title: 'Our Transport Solutions',
@@ -89,6 +106,7 @@ export const translations = {
       cta: {
         title: 'Ready to move your cargo?',
         subtitle: 'Join thousands of satisfied businesses who trust us with their most important shipments.'
+<<<<<<< HEAD
       },
       fleet: {
         title: 'Our courier vehicles',
@@ -100,6 +118,8 @@ export const translations = {
         rateKm: 'Rate/KM',
         showing: 'Showing {{start}} - {{end}} of {{total}} vehicles',
         calculateAndBook: 'Calculate price and book',
+=======
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       }
     },
     profile: {
@@ -108,9 +128,12 @@ export const translations = {
       bookings: 'Recent Bookings',
       settings: 'Account Settings',
       edit: 'Edit Profile',
+<<<<<<< HEAD
       editProfile: 'Edit Profile',
       deleteAccount: 'Delete Account',
       deleteConfirm: 'Delete account permanently?',
+=======
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       memberSince: 'Member Since',
       totalOrders: 'Total Orders',
       paymentInfo: 'Invoice Payment Information',
@@ -121,6 +144,7 @@ export const translations = {
       downloadFile: 'Download Invoice (PDF)',
       uploadProof: 'Upload Payment Proof',
       proofUploaded: 'Proof Uploaded',
+<<<<<<< HEAD
       customer: 'Customer',
       invoice: {
         title: 'Invoice',
@@ -167,6 +191,16 @@ export const translations = {
           reference: 'Reference / Verwendungszweck',
           terms: 'Payment Terms: Payable within 7 days from invoice date.'
         },
+=======
+      invoiceDetails: {
+        paymentMethod: 'Payment Method: Bank Transfer (SEPA)',
+        accHolder: 'Account Holder: Spedition Askari GmbH',
+        bankName: 'Bank Name: Volksbank in Ostwestfalen',
+        bankAddress: 'Taunusanlage 12, 60325 Frankfurt am Main, Germany',
+        reference: 'Reference / Verwendungszweck',
+        terms: 'Payment Terms: Payable within 7 days from invoice date.'
+      },
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       mockUser: {
         role: 'Business Client'
       },
@@ -175,9 +209,12 @@ export const translations = {
         subtitle: 'Update your personal information and contact details.',
         changePhoto: 'Change Photo',
         success: 'Profile updated successfully!',
+<<<<<<< HEAD
         error: 'Failed to update profile',
         nameLabel: 'Name',
         phoneLabel: 'Phone',
+=======
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       }
     },
     booking: {
@@ -194,6 +231,7 @@ export const translations = {
       estTotal: 'Estimated Total',
       estTotalSub: 'Excludes taxes and extra services',
       confirmRequest: 'Confirm Booking Request',
+<<<<<<< HEAD
       pickupAddress: 'Pickup Address',
       pickupTime: 'Pickup Time',
       dropoffAddress: 'Dropoff Address',
@@ -292,6 +330,17 @@ signup: {
             passwordsDoNotMatch: 'Passwords do not match',
             failed: 'Registration failed. Please try again.'
           },
+=======
+    },
+    admin: {
+      portal: 'Admin Portal',
+      dashboard: 'Dashboard',
+      fleetManager: 'Fleet Manager',
+      orders: 'Orders',
+      customers: 'Customers',
+      settings: 'Settings',
+      restricted: 'Restricted access. Authorized personnel only.',
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       approve: 'Approve Payment',
       markPaid: 'Mark as Paid',
       uploadInvoice: 'Upload Official Invoice',
@@ -304,6 +353,7 @@ signup: {
         pending: 'Pending Requests',
       },
       recentOrders: 'Recent Booking Requests',
+<<<<<<< HEAD
 table: {
           id: 'Order ID',
           customer: 'Customer',
@@ -349,6 +399,20 @@ dashboard: {
           }
         },
       about: {
+=======
+      table: {
+        id: 'Order ID',
+        customer: 'Customer',
+        route: 'Route',
+        amount: 'Amount',
+        driver: 'Driver',
+        plate: 'Plate Number',
+        type: 'Type',
+        location: 'Location',
+      }
+    },
+    about: {
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       title: 'About Spedition Askari',
       subtitle: 'Moving Germany forward, one shipment at a time.',
       storyTitle: 'Our Story',
@@ -358,8 +422,12 @@ dashboard: {
         clients: 'Happy Clients',
         km: 'Kilometers Driven',
         vehicles: 'Active Vehicles',
+<<<<<<< HEAD
         ontime: 'On-time Delivery',
         germany: 'Germany'
+=======
+        ontime: 'On-time Delivery'
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       },
       fleetTitle: 'Our Fleet',
       fleetVans: 'Express Vans',
@@ -369,6 +437,7 @@ dashboard: {
       fleetSemi: 'Semi Trailers',
       fleetSemiDesc: 'Heavy-duty transport for national freight.'
     },
+<<<<<<< HEAD
       contact: {
         title: 'Get in Touch',
         subtitle: 'Have questions about our services or need a custom quote? We are here to help.',
@@ -732,6 +801,31 @@ dashboard: {
         deleteBtn: 'DELETE ACCOUNT',
         error: 'Error deleting account: '
       }
+=======
+    contact: {
+      title: 'Get in Touch',
+      subtitle: 'Have questions about our services or need a custom quote? We are here to help.',
+      ourLocation: 'Our Location',
+      openingHours: 'Mon - Fri, 8:00 - 18:00'
+    },
+    services: {
+      title: 'Our Services',
+      subtitle: 'Tailored logistics solutions for every need.',
+      express: {
+        title: 'Express Delivery',
+        desc: 'Fastest service for urgent shipments with real-time tracking.'
+      },
+      extra: {
+        title: 'Specialized Transport',
+        desc: 'Handling oversized, fragile, or hazardous materials with care.'
+      },
+      lkw: {
+        title: 'Heavy Freight',
+        desc: 'Large capacity trucking for Germany logistics.'
+      },
+      specs: 'Technical Specs',
+      capacity: 'Load Capacity'
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
     },
     calculator: {
       title: 'Price Calculator',
@@ -757,8 +851,12 @@ dashboard: {
       title: 'Live Support',
       online: 'Agents Online',
       welcome: 'Hello! How can we help you today with your shipment?',
+<<<<<<< HEAD
       placeholder: 'Type your message...',
       agentResponse: 'Thank you for reaching out. An agent will be with you shortly.'
+=======
+      placeholder: 'Type your message...'
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
     },
     auth: {
       welcomeBack: 'Spedition Askari',
@@ -798,6 +896,7 @@ dashboard: {
       '5t shipment (Truck)': '5t shipment (Truck)',
       '12t shipment (Truck)': '12t shipment (Truck)',
       '24t shipment (Truck)': '24t shipment (Truck)',
+<<<<<<< HEAD
     },
       services: {
         title: 'Professional Logistics & Fleet Services',
@@ -905,6 +1004,8 @@ dashboard: {
         capacity: '24,000 kg Payload',
         features: ['International haulage', 'Max capacity', 'Logistics powerhouse']
       }
+=======
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
     }
   },
   de: {
@@ -932,7 +1033,10 @@ dashboard: {
       total: 'Gesamt',
       km: 'km',
       vehicle: 'Fahrzeug',
+<<<<<<< HEAD
       language: 'de',
+=======
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       pickup: 'Abholort',
       dropoff: 'Lieferort',
       distance: 'Entfernung',
@@ -943,10 +1047,15 @@ dashboard: {
       saveChanges: 'Änderungen speichern',
       cancel: 'Abbrechen',
       address: 'Adresse',
+<<<<<<< HEAD
         upload: 'Hochladen',
         brandName: 'Spedition Askari',
         standard: 'Standard',
       },
+=======
+      upload: 'Hochladen',
+    },
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
     nav: {
       home: 'Startseite',
       services: 'Dienstleistungen',
@@ -957,11 +1066,15 @@ dashboard: {
       fleet: 'Unsere Flotte',
       account: 'Konto',
       profile: 'Mein Profil',
+<<<<<<< HEAD
       industrySolutions: 'Branchenlösungen',
+=======
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
     },
     home: {
       hero: {
         tag: 'Ihr zuverlässiger Logistikpartner',
+<<<<<<< HEAD
         title: 'Heute gebucht,',
         titleSuffix: 'heute geliefert',
         features: [
@@ -978,6 +1091,11 @@ dashboard: {
             desc: 'Wir sorgen für einen reibungslosen Transport und kümmern uns um alle Details.'
           }
         ]
+=======
+        title: 'Zuverlässige Logistik für',
+        titleSuffix: 'Moderne Unternehmen',
+        subtitle: 'Schnelle, sichere und transparente Transportlösungen für Geschäfts- und Privatkunden in ganz Deutschland. Buchen Sie Ihr Fahrzeug in Sekunden.',
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       },
       services: {
         title: 'Unsere Transportlösungen',
@@ -997,6 +1115,7 @@ dashboard: {
       cta: {
         title: 'Bereit, Ihre Fracht zu bewegen?',
         subtitle: 'Schließen Sie sich tausenden zufriedenen Unternehmen an, die uns ihre wichtigsten Sendungen anvertrauen.'
+<<<<<<< HEAD
       },
       fleet: {
         title: 'Unsere Kurierfahrzeuge',
@@ -1008,6 +1127,8 @@ dashboard: {
         rateKm: 'Preis/KM',
         showing: 'Anzeige von {{start}} - {{end}} von {{total}} Fahrzeugen',
         calculateAndBook: 'Preis berechnen und buchen',
+=======
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       }
     },
     profile: {
@@ -1016,9 +1137,12 @@ dashboard: {
       bookings: 'Meine Buchungen',
       settings: 'Kontoeinstellungen',
       edit: 'Profil bearbeiten',
+<<<<<<< HEAD
       editProfile: 'Profil bearbeiten',
       deleteAccount: 'Konto löschen',
       deleteConfirm: 'Konto dauerhaft löschen?',
+=======
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       memberSince: 'Mitglied seit',
       totalOrders: 'Bestellungen gesamt',
       paymentInfo: 'Rechnungszahlungsinformationen',
@@ -1029,6 +1153,7 @@ dashboard: {
       downloadFile: 'Rechnung laden (PDF)',
       uploadProof: 'Zahlungsbeleg hochladen',
       proofUploaded: 'Beleg hochgeladen',
+<<<<<<< HEAD
       customer: 'Kunde',
       invoice: {
         title: 'Rechnung',
@@ -1073,6 +1198,16 @@ dashboard: {
           reference: 'Referenz / Verwendungszweck',
           terms: 'Zahlungsbedingungen: Zahlbar innerhalb von 7 Tagen ab Rechnungsdatum.'
         },
+=======
+      invoiceDetails: {
+        paymentMethod: 'Zahlungsart: Banküberweisung (SEPA)',
+        accHolder: 'Kontoinhaber: Spedition Askari GmbH',
+        bankName: 'Bankname: Volksbank in Ostwestfalen',
+        bankAddress: 'Taunusanlage 12, 60325 Frankfurt am Main, Deutschland',
+        reference: 'Referenz / Verwendungszweck',
+        terms: 'Zahlungsbedingungen: Zahlbar innerhalb von 7 Tagen ab Rechnungsdatum.'
+      },
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       mockUser: {
         role: 'Geschäftskunde'
       },
@@ -1081,9 +1216,12 @@ dashboard: {
         subtitle: 'Aktualisieren Sie Ihre persönlichen Daten und Kontaktinformationen.',
         changePhoto: 'Foto ändern',
         success: 'Profil erfolgreich aktualisiert!',
+<<<<<<< HEAD
         error: 'Fehler beim Aktualisieren des Profils',
         nameLabel: 'Name',
         phoneLabel: 'Telefon',
+=======
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       }
     },
     booking: {
@@ -1100,6 +1238,7 @@ dashboard: {
       estTotal: 'Geschätzter Gesamtpreis',
       estTotalSub: 'Exklusive Steuern und Zusatzleistungen',
       confirmRequest: 'Buchungsanfrage bestätigen',
+<<<<<<< HEAD
       pickupAddress: 'Abholadresse',
       pickupTime: 'Abholzeit',
       dropoffAddress: 'Lieferadresse',
@@ -1198,6 +1337,17 @@ signup: {
             passwordsDoNotMatch: 'Passwörter stimmen nicht überein',
             failed: 'Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut.'
         },
+=======
+    },
+    admin: {
+      portal: 'Admin-Portal',
+      dashboard: 'Dashboard',
+      fleetManager: 'Flottenmanager',
+      orders: 'Bestellungen',
+      customers: 'Kunden',
+      settings: 'Einstellungen',
+      restricted: 'Eingeschränkter Zugang. Nur autorisiertes Personal.',
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       approve: 'Zahlung genehmigen',
       markPaid: 'Als bezahlt markieren',
       uploadInvoice: 'Offizielle Rechnung hochladen',
@@ -1210,6 +1360,7 @@ signup: {
         pending: 'Ausstehende Anfragen',
       },
       recentOrders: 'Aktuelle Buchungsanfragen',
+<<<<<<< HEAD
 table: {
           id: 'Bestell-ID',
           customer: 'Kunde',
@@ -1258,14 +1409,35 @@ dashboard: {
       title: 'Über Spedition Askari',
       subtitle: 'Deutschland bewegen, eine Sendung nach der anderen.',
       storyTitle: 'Unsere Geschichte',
+=======
+      table: {
+        id: 'Bestell-ID',
+        customer: 'Kunde',
+        route: 'Route',
+        amount: 'Betrag',
+        driver: 'Fahrer',
+        plate: 'Kennzeichen',
+        type: 'Typ',
+        location: 'Standort',
+      }
+    },
+    about: {
+      title: 'Über Spedition Askari',
+      subtitle: 'Deutschland bewegen, eine Sendung nach der anderen.',
+      storyTitle: 'Our Story',
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       storyP1: 'Gegründet mit der Vision, Logistik zu vereinfachen, hat sich Spedition Askari von einem lokalen Kurierdienst zu einem führenden deutschen Transportdienstleister entwickelt.',
       storyP2: 'Wir nutzen modernste Technologie und eine engagierte Flotte, um unübertroffene Zuverlässigkeit und Pfizienz zu bieten.',
       stats: {
         clients: 'Zufriedene Kunden',
         km: 'Gefahrene Kilometer',
         vehicles: 'Aktive Fahrzeuge',
+<<<<<<< HEAD
         ontime: 'Pünktliche Lieferung',
         germany: 'Deutschland'
+=======
+        ontime: 'Pünktliche Lieferung'
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       },
       fleetTitle: 'Unsere Flotte',
       fleetVans: 'Express-Transporter',
@@ -1282,8 +1454,13 @@ dashboard: {
       openingHours: 'Mo - Fr, 8:00 - 18:00'
     },
     services: {
+<<<<<<< HEAD
       title: 'Professionelle Logistik- & Flottendienstleistungen',
       subtitle: 'Von schnellen urbanen Express-Zustellungen bis hin zu schweren 24-Tonnen-Frachtlösungen – unsere synchronisierte Flotte ist bereit, Ihr Unternehmen in ganz Deutschland und Europa zu bewegen.',
+=======
+      title: 'Unsere Dienstleistungen',
+      subtitle: 'Maßgeschneiderte Logistiklösungen für jeden Bedarf.',
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       express: {
         title: 'Express-Lieferung',
         desc: 'Schnellster Service für dringende Sendungen mit Echtzeit-Tracking.'
@@ -1297,6 +1474,7 @@ dashboard: {
         desc: 'Große Kapazitäten für Logistik in Deutschland.'
       },
       specs: 'Technische Daten',
+<<<<<<< HEAD
       capacity: 'Ladekapazität',
       basePrice: 'Grundpreis',
       priceAndBooking: 'Preis und Buchung',
@@ -1660,6 +1838,9 @@ dashboard: {
         deleteBtn: 'KONTO LÖSCHEN',
         error: 'Fehler beim Löschen des Kontos: '
       }
+=======
+      capacity: 'Load Capacity'
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
     },
     calculator: {
       title: 'Preisrechner',
@@ -1673,7 +1854,11 @@ dashboard: {
       howItWorks: 'Wie die Preisgestaltung funktioniert',
       baseFee: 'Grundgebühr',
       baseFeeDesc: 'Fixkosten für Verwaltung und Fahrzeugdisposition.',
+<<<<<<< HEAD
       distRate: 'Kilometerpauschale',
+=======
+      distRate: 'Distance Rate',
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       distRateDesc: 'Variable Kosten berechnet pro gefahrenem Kilometer.',
       vehicleClass: 'Fahrzeugklasse',
       vehicleClassDesc: 'Die Raten variieren je nach Fahrzeuggröße und Spezialausrüstung.',
@@ -1685,11 +1870,18 @@ dashboard: {
       title: 'Live-Support',
       online: 'Agenten online',
       welcome: 'Hallo! Wie können wir Ihnen heute bei Ihrer Sendung helfen?',
+<<<<<<< HEAD
       placeholder: 'Nachricht eingeben...',
       agentResponse: 'Vielen Dank für Ihre Anfrage. Ein Mitarbeiter wird in Kürze bei Ihnen sein.'
     },
     auth: {
       welcomeBack: '',
+=======
+      placeholder: 'Nachricht eingeben...'
+    },
+    auth: {
+      welcomeBack: 'Spedition Askari',
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       welcomeDesc: 'Melden Sie sich an, um Ihre Buchungen zu verwalten.',
       magicLinkTitle: 'Passwort zurücksetzen',
       magicLinkDesc: 'E-Mail eingeben, um einen Link zu erhalten.',
@@ -1708,7 +1900,11 @@ dashboard: {
     },
     vehicleCategories: {
       'EXPRESS': 'EXPRESS',
+<<<<<<< HEAD
       'Extra EXPRESS': 'Sonder-EXPRESS',
+=======
+      'Extra EXPRESS': 'Extra EXPRESS',
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
       'Truck': 'LKW'
     },
     vehicleTypes: {
@@ -1726,6 +1922,7 @@ dashboard: {
       '5t shipment (Truck)': '5t LKW',
       '12t shipment (Truck)': '12t LKW',
       '24t shipment (Truck)': '24t LKW'
+<<<<<<< HEAD
     },
     vehicleDetails: {
       'EXPRESS_SMALL_VAN': {
@@ -1812,6 +2009,8 @@ dashboard: {
         capacity: '24.000 kg Nutzlast',
         features: ['Internationaler Transport', 'Maximale Kapazität', 'Logistik-Kraftpaket']
       }
+=======
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
     }
   }
 };

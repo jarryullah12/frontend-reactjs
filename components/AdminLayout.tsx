@@ -44,6 +44,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => {
 
   return (
     <div className="flex min-h-screen bg-slate-100 font-sans">
+<<<<<<< HEAD
         <aside className="w-64 bg-slate-900 text-white flex-shrink-0 hidden md:flex flex-col">
             <div className="h-28 flex items-center px-6 border-b border-slate-800">
               <img 
@@ -52,6 +53,13 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => {
                 className="h-20 w-auto" 
               />
             </div>
+=======
+      <aside className="w-64 bg-slate-900 text-white flex-shrink-0 hidden md:flex flex-col">
+        <div className="h-20 flex items-center px-6 border-b border-slate-800">
+          <Truck className="w-6 h-6 text-orange-500 mr-2 flex-shrink-0" />
+          <span className="font-bold text-base tracking-wide leading-tight">Spedition Askari Admin Panel</span>
+        </div>
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
         
         <nav className="flex-1 py-6 px-3 space-y-1">
           {navItems.map((item) => (
@@ -60,7 +68,11 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => {
               to={item.path}
               className={`flex items-center px-3 py-3 text-sm font-medium rounded-lg transition-colors ${
                 isActive(item.path)
+<<<<<<< HEAD
                   ? 'bg-slate-800 text-blue-500'
+=======
+                  ? 'bg-slate-800 text-orange-500'
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
                   : 'text-slate-300 hover:bg-slate-800 hover:text-white'
               }`}
             >
@@ -96,7 +108,11 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title }) => {
                 <p className="text-sm font-bold text-slate-900">{user?.name || 'Admin User'}</p>
                 <p className="text-xs text-gray-500">{user?.email || 'Admin'}</p>
              </div>
+<<<<<<< HEAD
              <div className="h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold border border-blue-200">
+=======
+             <div className="h-10 w-10 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 font-bold border border-orange-200">
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
                 {user?.name ? user.name.charAt(0).toUpperCase() : 'A'}
              </div>
           </div>

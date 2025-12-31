@@ -6,6 +6,7 @@ const Contact: React.FC = () => {
   const { t } = useLanguage();
 
   return (
+<<<<<<< HEAD
     <div className="bg-gray-50 min-h-screen">
       {/* Page Header - Updated to Blue */}
       <section className="bg-slate-900 py-24 relative overflow-hidden">
@@ -21,11 +22,24 @@ const Contact: React.FC = () => {
       </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+=======
+    <div className="bg-gray-50 py-12 min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h1 className="text-3xl font-bold text-slate-900">{t('contact.title')}</h1>
+          <p className="text-gray-600 mt-2 max-w-2xl mx-auto">{t('contact.subtitle')}</p>
+        </div>
+
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           
           {/* Location */}
           <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+<<<<<<< HEAD
             <div className="bg-blue-100 p-4 rounded-full text-blue-600 mb-6">
+=======
+            <div className="bg-orange-100 p-4 rounded-full text-orange-600 mb-6">
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
               <MapPin className="w-8 h-8" />
             </div>
             <h3 className="text-xl font-bold text-slate-900 mb-2">{t('contact.ourLocation')}</h3>

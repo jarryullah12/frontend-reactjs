@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@emailjs/browser": "^4.4.1",
     "@google/genai": "^1.33.0",
     "@reduxjs/toolkit": "^2.11.2",
@@ -19,6 +20,16 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.10.1",
     "resend": "^6.6.0"
+=======
+    "@google/genai": "^1.33.0",
+    "lucide-react": "^0.561.0",
+    "react-router-dom": "^7.10.1",
+    "react-dom": "^19.2.3",
+    "react": "^19.2.3",
+    "@reduxjs/toolkit": "^2.11.2",
+    "react-redux": "^9.2.0",
+    "@supabase/supabase-js": "^2.87.3"
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

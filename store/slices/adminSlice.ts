@@ -8,10 +8,14 @@ export interface Order {
   phone?: string;
   date: string; // Preferred Date
   pickup?: string;
+<<<<<<< HEAD
   pickup_time?: string;
   dropoff?: string;
   delivery_time?: string;
   billing_address?: string;
+=======
+  dropoff?: string;
+>>>>>>> a37e29a5227f4751358a4e01f6c1c26447416def
   distance?: string;
   route: string; // Keep for backward compatibility (summary)
   amount: string; // Estimated Total
