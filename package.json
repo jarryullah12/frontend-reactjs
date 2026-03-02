@@ -1,0 +1,31 @@
+{
+  "name": "react-ecommerce",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@paypal/react-paypal-js": "^7.8.3",
+    "@reduxjs/toolkit": "^2.6.1",
+    "@stripe/react-stripe-js": "^2.3.2",
+    "@stripe/stripe-js": "^2.1.10",
+    "@supabase/supabase-js": "^2.98.0",
+    "framer-motion": "^12.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.10.1",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^6.16.0",
+    "redux": "^5.0.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.27",
+    "tailwindcss": "^3.3.3",
+    "vite": "^4.4.9"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  }
+}
