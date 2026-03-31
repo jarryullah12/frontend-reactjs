@@ -1,0 +1,704 @@
+{
+  "home": {
+    "languages_customization": {
+      "title": "Languages and Customization Options",
+      "desc": "Our platform is designed to cater to a global audience, offering comprehensive support for multiple languages to ensure your content reaches users worldwide. We understand that every business has unique needs, which is why we provide extensive customization options for all our tools. You can tailor settings, preferences, and output formats to perfectly align with your brand identity and specific project requirements. Whether you are a small business owner or a large enterprise, our flexible features empower you to create content that resonates with your target audience. Experience the freedom to adapt, refine, and optimize your SEO strategy with ease, knowing that our platform grows alongside your business. Unlock the full potential of your content with tools that are as versatile and dynamic as your goals. Start customizing your experience today and see the difference tailored solutions can make for your digital presence."
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "items": [
+        { "q": "What is this platform?", "a": "This is an all-in-one SEO and content generation platform designed to help you rank higher and create better content faster." },
+        { "q": "Is it free to use?", "a": "Yes, we offer a range of free tools to help you get started with your SEO and content journey." },
+        { "q": "How does the AI content generator work?", "a": "Our AI uses advanced language models to generate high-quality, relevant content based on your focus keywords and topics." },
+        { "q": "Can I use these tools for commercial projects?", "a": "Absolutely! Our tools are designed to help you scale your content production for any project." },
+        { "q": "Do I need technical SEO knowledge?", "a": "Not at all. Our tools are designed to be user-friendly, even if you have no prior SEO experience." },
+        { "q": "How often are the tools updated?", "a": "We regularly update our tools to ensure they align with the latest search engine algorithms and industry best practices." },
+        { "q": "Is my data secure?", "a": "Yes, we take data security very seriously and use industry-standard encryption to protect your information." },
+        { "q": "Can I export the generated content?", "a": "Yes, you can easily copy and export your generated content for use in your projects." },
+        { "q": "Do you offer support?", "a": "Yes, our support team is available to help you with any questions or issues you may encounter." },
+        { "q": "How do I get started?", "a": "Simply sign up for a free account and start exploring our tools right away!" }
+      ]
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "tools": "Tools",
+    "blog": "Blog",
+    "pricing": "Pricing",
+    "about": "About",
+    "contact": "Contact",
+    "reviews": "Reviews",
+    "login": "Login",
+    "signup": "Get Started",
+    "dashboard": "Dashboard",
+    "logout": "Logout"
+  },
+  "hero": {
+    "title": "The Ultimate SEO & AI Content Platform",
+    "subtitle": "Boost your website's ranking and generate high-quality content with our suite of 50+ professional tools.",
+    "cta_primary": "Get Started for Free",
+    "cta_secondary": "Explore Tools",
+    "no_card": "Monthly & Lifetime Payment Required",
+    "free_tools": "50+ Premium Tools",
+    "search_placeholder": "Enter website URL for analysis",
+    "analyze_button": "Analyze",
+    "traffic_score": "Traffic Score",
+    "seo_health": "SEO Health",
+    "platform_badge": "The Ultimate SEO & AI Platform"
+  },
+  "features": {
+    "title": "Everything you need to rank higher",
+    "subtitle": "Our platform combines traditional SEO analysis with cutting-edge AI generation to give you an unfair advantage.",
+    "seo_analysis": {
+      "title": "Advanced SEO Analysis",
+      "desc": "Comprehensive tools to analyze and optimize your website's search engine performance."
+    },
+    "ai_content": {
+      "title": "AI Content Generation",
+      "desc": "Create high-quality, SEO-optimized content in seconds using advanced AI models."
+    },
+    "fast": {
+      "title": "Lightning Fast",
+      "desc": "Get instant results for all your SEO checks and content generation requests."
+    },
+    "secure": {
+      "title": "Secure & Reliable",
+      "desc": "Your data is safe with us. We use enterprise-grade security for all operations."
+    }
+  },
+  "popular": {
+    "title": "Popular Tools",
+    "subtitle": "Quickly access our most used SEO and AI tools.",
+    "view_all": "View All Tools",
+    "view_all_mobile": "View all tools"
+  },
+  "stats": {
+    "tools_count": "50+",
+    "tools_label": "Professional Tools",
+    "content_count": "1M+",
+    "content_label": "Content Generated",
+    "users_count": "100k+",
+    "users_label": "Happy Users"
+  },
+  "popular_tools_items": {
+    "meta": { "name": "Meta Tag Generator", "category": "SEO Tools" },
+    "blog": { "name": "AI Blog Post Generator", "category": "AI Content" },
+    "keyword": { "name": "Keyword Density Checker", "category": "Analysis" },
+    "speed": { "name": "Website Speed Tester", "category": "Performance" }
+  },
+  "tools": {
+    "search_placeholder": "Search for a tool...",
+    "categories": {
+      "all": "All Tools",
+      "seo": "SEO Tools",
+      "minifiers": "Minifiers",
+      "validators": "Validators",
+      "keyword": "Keyword & Ranking",
+      "analysis": "Website Analysis",
+      "technical": "Technical SEO",
+      "usability": "Usability",
+      "performance": "Performance",
+      "social": "Social",
+      "security": "Security",
+      "technology": "Technology",
+      "ai_content": "AI Content Writing",
+      "ai_email": "AI Email & Sales",
+      "ai_ideas": "AI Ideas & Planning",
+      "ai_text": "AI Text Enhancement",
+      "ai_headlines": "AI Headlines & Titles",
+      "ai_business": "AI Business Tools",
+      "ai_seo": "AI SEO Tools",
+      "ai_social": "AI Social Media"
+    }
+  },
+  "about": {
+    "title": "Empowering creators with",
+    "title_accent": "intelligent tools",
+    "subtitle": "We are a team of SEO experts, developers, and AI enthusiasts dedicated to building the most comprehensive platform for digital marketers and content creators.",
+    "stats": {
+      "tools": "Tools",
+      "tools_count": "50+",
+      "users": "Active Users",
+      "users_count": "100k",
+      "generations": "Generations",
+      "generations_count": "5M+",
+      "uptime": "Uptime",
+      "uptime_count": "99.9%"
+    },
+    "values": {
+      "title": "Our Core Values",
+      "subtitle": "Everything we build is guided by these fundamental principles.",
+      "accuracy_title": "Accuracy First",
+      "accuracy_desc": "We prioritize data accuracy in our SEO tools and factual correctness in our AI generation models.",
+      "speed_title": "Lightning Fast",
+      "speed_desc": "Time is money. Our infrastructure is optimized to deliver results in milliseconds, not minutes.",
+      "privacy_title": "Privacy & Security",
+      "privacy_desc": "Your data is yours. We employ enterprise-grade security and never train our public models on your private data.",
+      "community_title": "Community Driven",
+      "community_desc": "We listen to our users. Most of our new features and tools come directly from community feedback."
+    },
+    "team": {
+      "title": "Meet the Team",
+      "subtitle": "The passionate people behind the platform.",
+      "roles": {
+        "ceo": "CEO & Founder",
+        "head_ai": "Head of AI",
+        "lead_dev": "Lead Developer"
+      }
+    }
+  },
+  "pricing": {
+    "title": "Simple, transparent pricing",
+    "subtitle": "Get unlimited access to all our SEO and AI tools forever. One-time payment, no recurring fees.",
+    "month": "one-time",
+    "popular": "Best Value",
+    "pro": {
+      "name": "Lifetime Pro",
+      "description": "Permanent access to all professional features and future updates.",
+      "cta": "Get Lifetime Access",
+      "features": {
+        "tools": "Unlimited Tool Uses",
+        "ai": "Unlimited AI Generations",
+        "seo": "Advanced SEO Analysis",
+        "support": "Priority Support",
+        "export": "Export Results (PDF)",
+        "ads": "No Ads",
+        "api": "API Access"
+      }
+    }
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Have a question, feedback, or need support? We're here to help.",
+    "info_title": "Contact Information",
+    "info_desc": "Fill out the form and our team will get back to you within 24 hours. For urgent inquiries, please call us directly.",
+    "email": {
+      "title": "Email Us",
+      "support": "jarryullah46@gmail.com",
+      "sales": "jarryullah46@gmail.com"
+    },
+    "phone": {
+      "title": "Call Us",
+      "number": "+1 (555) 123-4567",
+      "hours": "Mon-Fri from 9am to 6pm EST"
+    },
+    "visit": {
+      "title": "Visit Us",
+      "address": "123 Innovation Drive, Tech District, CA 94105, United States"
+    },
+    "form": {
+      "title": "Send a Message",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "email": "Email Address",
+      "subject": "Subject",
+      "message": "Message",
+      "submit": "Send Message",
+      "placeholder_first": "John",
+      "placeholder_last": "Doe",
+      "placeholder_email": "john@example.com",
+      "placeholder_message": "How can we help you?",
+      "subjects": {
+        "general": "General Inquiry",
+        "support": "Technical Support",
+        "billing": "Billing Question",
+        "partnership": "Partnership"
+      }
+    }
+  },
+  "footer": {
+    "desc": "The ultimate platform for SEO tools and AI content generation. Boost your rankings and create amazing content in seconds.",
+    "product": "Product",
+    "company": "Company",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "subscribe": "Subscribe",
+    "subscribe_desc": "Get the latest news and updates delivered to your inbox.",
+    "email_placeholder": "Enter your email",
+    "subscribe_btn": "Subscribe",
+    "rights": "All rights reserved."
+  },
+  "blog": {
+    "title": "Our Blog",
+    "subtitle": "Insights, strategies, and updates from the world of SEO and Artificial Intelligence.",
+    "load_more": "Load More Articles",
+    "posts": {
+      "post1": {
+        "title": "10 SEO Strategies to Dominate Search Rankings in 2026",
+        "excerpt": "Discover the latest strategies and algorithm updates that are shaping the future of search engine optimization."
+      },
+      "post2": {
+        "title": "How AI is Revolutionizing Content Creation",
+        "excerpt": "Learn how artificial intelligence is changing the way we write, edit, and optimize content for the web."
+      },
+      "post3": {
+        "title": "The Ultimate Guide to Technical SEO",
+        "excerpt": "A comprehensive guide to fixing technical issues that might be holding your website back from ranking higher."
+      },
+      "post4": {
+        "title": "Mastering Keyword Research with AI Tools",
+        "excerpt": "Stop guessing and start knowing. How to use AI to find low-competition, high-volume keywords."
+      },
+      "post5": {
+        "title": "Why Site Speed is More Important Than Ever",
+        "excerpt": "Core Web Vitals are crucial. Here is how to optimize your site speed and pass Google's tests."
+      },
+      "post6": {
+        "title": "Local SEO: How to Rank in the Local Pack",
+        "excerpt": "A step-by-step guide to optimizing your Google Business Profile and dominating local search results."
+      }
+    }
+  },
+  "login": {
+    "back_home": "Back to Home",
+    "welcome": "Welcome Back",
+    "subtitle": "Sign in to your account to continue",
+    "email": "Email",
+    "password": "Password",
+    "forgot": "Forgot password?",
+    "submit": "Sign In",
+    "no_account": "Don't have an account?",
+    "signup": "Sign up"
+  },
+  "forgot_password": {
+    "title": "Recover Password",
+    "subtitle": "Enter your email to retrieve your password",
+    "email_label": "Email Address",
+    "button": "Show Password",
+    "success_msg": "Password found for this account:",
+    "error_msg": "No account found with this email.",
+    "back_login": "Back to Login"
+  },
+  "signup": {
+    "back_home": "Back to Home",
+    "title": "Create Account",
+    "subtitle": "Join us and start optimizing your content",
+    "name": "Full Name",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Create Account",
+    "has_account": "Already have an account?",
+    "login": "Sign in"
+  },
+  "dashboard": {
+    "welcome": "Welcome",
+    "overview": "Here's an overview of your activity and usage.",
+    "stats": {
+      "tools": "Tools Used",
+      "ai": "AI Generations",
+      "time": "Time Saved",
+      "plan": "Current Plan"
+    },
+    "recent": "Recent Activity",
+    "saved": "Saved Items",
+    "view_result": "View Result",
+    "no_saved": "No saved items yet.",
+    "activity": {
+      "meta": "Used Meta Tag Generator",
+      "time": "2 hours ago"
+    }
+  },
+  "tools_list": {
+    "title": "SEO & AI Tools",
+    "categories_title": "Categories",
+    "no_tools": "No tools found",
+    "no_tools_desc": "Try adjusting your search or category filter.",
+    "items": {
+      "meta_tag": {
+        "name": "Meta Tag Generator",
+        "desc": "Generate SEO-friendly meta tags for your website."
+      },
+      "robots": {
+        "name": "Robots.txt Generator",
+        "desc": "Create a robots.txt file to guide search engine crawlers."
+      },
+      "sitemap": {
+        "name": "XML Sitemap Generator",
+        "desc": "Generate an XML sitemap to help search engines index your site."
+      },
+      "schema": {
+        "name": "Schema Markup Validator",
+        "desc": "Validate your JSON-LD structured data for Schema.org compliance."
+      },
+      "density": {
+        "name": "Keyword Density Checker",
+        "desc": "Analyze your content for keyword frequency and density."
+      },
+      "analyzer": {
+        "name": "Content SEO Analyzer",
+        "desc": "Analyze your content against a focus keyword for SEO optimization."
+      },
+      "css_min": {
+        "name": "CSS Minifier",
+        "desc": "Compress your CSS code to reduce file size and improve load times."
+      },
+      "js_min": {
+        "name": "JS Minifier",
+        "desc": "Minify JavaScript code to optimize website performance."
+      },
+      "blog_gen": {
+        "name": "AI Blog Post Generator",
+        "desc": "Generate high-quality, SEO-optimized blog posts in seconds."
+      },
+      "rewriter": {
+        "name": "AI Article Rewriter",
+        "desc": "Rewrite existing articles to create unique content."
+      },
+      "ideas": {
+        "name": "AI Content Ideas Generator",
+        "desc": "Generate highly engaging and SEO-optimized blog post ideas."
+      },
+      "sales_email": {
+        "name": "AI Sales Email Generator",
+        "desc": "Create compelling sales emails that convert."
+      },
+      "bio": {
+        "name": "AI Bio Generator",
+        "desc": "Generate engaging bios for your social media profiles."
+      },
+      "website_analyzer": {
+        "name": "Website Analysis Tool",
+        "desc": "Get a comprehensive analysis of your website's SEO and performance."
+      },
+      "backlink_checker": {
+        "name": "Backlink Checker",
+        "desc": "Check the backlinks of any website to understand its link profile."
+      },
+      "plagiarism_checker": {
+        "name": "Plagiarism Checker",
+        "desc": "Check your content for plagiarism to ensure it is unique."
+      },
+      "product_description": {
+        "name": "AI Product Description Generator",
+        "desc": "Generate compelling product descriptions for your e-commerce store."
+      },
+      "privacy_policy": {
+        "name": "Privacy Policy & T&C Generator",
+        "desc": "Generate professional Privacy Policy and Terms & Conditions for your site."
+      },
+      "da_checker": {
+        "name": "Domain Authority Checker",
+        "desc": "Check the Domain Authority (DA) of any website."
+      },
+      "broken_link": {
+        "name": "Broken Link Checker",
+        "desc": "Find and fix broken links on your website to improve SEO."
+      },
+      "social_caption": {
+        "name": "AI Social Media Caption Generator",
+        "desc": "Generate engaging captions for your social media posts."
+      },
+      "url_codec": {
+        "name": "URL Encoder/Decoder",
+        "desc": "Easily encode or decode URLs for your web projects."
+      }
+    }
+  },
+  "tool_page": {
+    "generate": "Generate",
+    "copy": "Copy to clipboard",
+    "download": "Download",
+    "share": "Share",
+    "copied": "Copied!",
+    "placeholder_fill": "Fill the form and click generate to see results here.",
+    "backlink": {
+      "title": "Backlink Checker",
+      "subtitle": "Analyze the backlink profile of any website to improve your link building strategy.",
+      "form": {
+        "url": "Website URL",
+        "placeholder_url": "e.g. https://example.com"
+      },
+      "output": "Backlink Analysis"
+    },
+    "plagiarism": {
+      "title": "Plagiarism Checker",
+      "subtitle": "Ensure your content is 100% unique and free from plagiarism.",
+      "form": {
+        "content": "Content to Check",
+        "placeholder_content": "Paste your text here..."
+      },
+      "output": "Plagiarism Report"
+    },
+    "product_desc": {
+      "title": "AI Product Description Generator",
+      "subtitle": "Create persuasive and SEO-friendly product descriptions that sell.",
+      "form": {
+        "product_name": "Product Name",
+        "features": "Key Features",
+        "placeholder_product": "e.g. Wireless Noise Cancelling Headphones",
+        "placeholder_features": "e.g. 30h battery life, Bluetooth 5.0, Premium sound"
+      },
+      "output": "Generated Description"
+    },
+    "privacy": {
+      "title": "Privacy Policy & T&C Generator",
+      "subtitle": "Generate legal documents for your website in seconds.",
+      "form": {
+        "company": "Company/Website Name",
+        "url": "Website URL",
+        "type": "Document Type",
+        "types": {
+          "privacy": "Privacy Policy",
+          "terms": "Terms & Conditions"
+        }
+      },
+      "output": "Generated Document"
+    },
+    "da": {
+      "title": "Domain Authority Checker",
+      "subtitle": "Check the Domain Authority (DA) and Page Authority (PA) of any URL.",
+      "form": {
+        "url": "Website URL",
+        "placeholder_url": "e.g. https://google.com"
+      },
+      "output": "Authority Metrics"
+    },
+    "broken": {
+      "title": "Broken Link Checker",
+      "subtitle": "Scan your website for dead links that could hurt your SEO and user experience.",
+      "form": {
+        "url": "Website URL",
+        "placeholder_url": "e.g. https://mysite.com"
+      },
+      "output": "Broken Links Report"
+    },
+    "caption": {
+      "title": "AI Social Media Caption Generator",
+      "subtitle": "Generate catchy and engaging captions for Instagram, Facebook, and more.",
+      "form": {
+        "topic": "Post Topic",
+        "platform": "Platform",
+        "placeholder_topic": "e.g. My new summer collection launch"
+      },
+      "output": "Generated Captions"
+    },
+    "url_codec": {
+      "title": "URL Encoder/Decoder",
+      "subtitle": "Quickly encode or decode URLs to ensure they are safe for web transmission.",
+      "form": {
+        "input": "URL/Text",
+        "mode": "Mode",
+        "modes": {
+          "encode": "Encode",
+          "decode": "Decode"
+        }
+      },
+      "output": "Result"
+    },
+    "meta": {
+      "title": "Meta Tag Generator",
+      "subtitle": "Create SEO-friendly HTML meta tags for your website to improve search engine rankings.",
+      "form": {
+        "site_title": "Site Title",
+        "site_desc": "Site Description",
+        "keywords": "Site Keywords (comma separated)",
+        "author": "Author",
+        "robots_index": "Robots Index",
+        "robots_follow": "Robots Follow",
+        "placeholder_title": "e.g. OptiSEO - The Ultimate SEO Platform",
+        "placeholder_desc": "Brief description of your website...",
+        "placeholder_keywords": "seo, tools, ai, generator",
+        "placeholder_author": "John Doe",
+        "chars": "chars"
+      },
+      "output": "Generated Tags"
+    },
+    "blog": {
+      "title": "AI Blog Post Generator",
+      "subtitle": "Generate high-quality, SEO-optimized blog posts in seconds using advanced AI.",
+      "form": {
+        "topic": "Blog Topic",
+        "keywords": "Keywords (optional)",
+        "tone": "Tone of Voice",
+        "length": "Target Length",
+        "placeholder_topic": "e.g. The Future of AI in Digital Marketing",
+        "placeholder_keywords": "ai, marketing, trends",
+        "tones": {
+          "professional": "Professional",
+          "casual": "Casual",
+          "informative": "Informative",
+          "creative": "Creative"
+        },
+        "lengths": {
+          "short": "Short (~500 words)",
+          "medium": "Medium (~1000 words)",
+          "long": "Long (~1500+ words)"
+        }
+      },
+      "output": "Generated Blog Post"
+    },
+    "robots": {
+      "title": "Robots.txt Generator",
+      "subtitle": "Create a robots.txt file to guide search engine crawlers on how to index your site.",
+      "form": {
+        "allow": "Allow",
+        "disallow": "Disallow",
+        "sitemap": "Sitemap URL",
+        "add_rule": "Add Rule",
+        "user_agent": "User Agent"
+      },
+      "output": "Generated Robots.txt"
+    },
+    "sitemap": {
+      "title": "XML Sitemap Generator",
+      "subtitle": "Generate an XML sitemap to help search engines index your site more effectively.",
+      "form": {
+        "url": "Website URL",
+        "frequency": "Change Frequency",
+        "priority": "Priority",
+        "frequencies": {
+          "always": "Always",
+          "hourly": "Hourly",
+          "daily": "Daily",
+          "weekly": "Weekly",
+          "monthly": "Monthly",
+          "yearly": "Yearly",
+          "never": "Never"
+        }
+      },
+      "output": "Generated Sitemap"
+    },
+    "minifier": {
+      "css_title": "CSS Minifier",
+      "js_title": "JS Minifier",
+      "subtitle": "Compress your code to reduce file size and improve website performance.",
+      "form": {
+        "input": "Input Code",
+        "placeholder": "Paste your code here..."
+      },
+      "output": "Minified Code"
+    },
+    "rewriter": {
+      "title": "AI Article Rewriter",
+      "subtitle": "Rewrite existing articles to create unique, high-quality content.",
+      "form": {
+        "content": "Original Content",
+        "placeholder": "Paste the article you want to rewrite..."
+      },
+      "output": "Rewritten Article"
+    },
+    "sales_email": {
+      "title": "AI Sales Email Generator",
+      "subtitle": "Create compelling sales emails that convert leads into customers.",
+      "form": {
+        "product": "Product/Service Name",
+        "audience": "Target Audience",
+        "benefits": "Key Benefit",
+        "product_placeholder": "e.g. OptiSEO Pro",
+        "audience_placeholder": "e.g. Small business owners",
+        "benefits_placeholder": "e.g. 50% more organic traffic"
+      },
+      "output": "Generated Sales Email"
+    },
+    "bio": {
+      "title": "AI Bio Generator",
+      "subtitle": "Generate engaging bios for your social media profiles.",
+      "form": {
+        "name": "Your Name/Brand",
+        "about": "About You",
+        "platform": "Platform",
+        "profession": "Profession/Role",
+        "placeholder": "e.g. Software Engineer, Digital Marketer, Fitness Coach",
+        "placeholder_name": "e.g. Jane Doe",
+        "placeholder_about": "e.g. Digital nomad, coffee lover, SEO expert",
+        "platforms": {
+          "twitter": "Twitter/X",
+          "instagram": "Instagram",
+          "linkedin": "LinkedIn",
+          "tiktok": "TikTok"
+        }
+      },
+      "output": "Generated Bios"
+    },
+    "ideas": {
+      "title": "AI Content Ideas Generator",
+      "subtitle": "Generate highly engaging and SEO-optimized blog post ideas.",
+      "form": {
+        "niche": "Niche/Industry",
+        "placeholder": "e.g. Sustainable Fashion",
+        "audience": "Target Audience",
+        "audience_placeholder": "e.g. Millennials, Tech Enthusiasts"
+      },
+      "output": "Content Ideas"
+    },
+    "schema": {
+      "title": "Schema Markup Validator",
+      "subtitle": "Validate your JSON-LD structured data for Schema.org compliance.",
+      "form": {
+        "code": "JSON-LD Code",
+        "placeholder": "Paste your JSON-LD here..."
+      },
+      "output": "Validation Result"
+    },
+    "density": {
+      "title": "Keyword Density Checker",
+      "subtitle": "Analyze your content for keyword frequency and density to avoid keyword stuffing.",
+      "form": {
+        "content": "Content",
+        "keyword": "Target Keyword",
+        "content_placeholder": "Paste your article or content here...",
+        "keyword_placeholder": "e.g. SEO tools"
+      },
+      "stats": {
+        "total": "Total Words",
+        "count": "Occurrences",
+        "density": "Density"
+      },
+      "top_words": "Top Used Words (3+ chars)",
+      "times": "times",
+      "output": "Analysis Results"
+    },
+    "analyzer": {
+      "title": "Content SEO Analyzer",
+      "subtitle": "Analyze your content against a focus keyword to ensure it is optimized for search engines.",
+      "form": {
+        "content": "Article Content",
+        "keyword": "Focus Keyword",
+        "title": "Article Title",
+        "content_placeholder": "Paste your article content here...",
+        "keyword_placeholder": "e.g. SEO tools",
+        "title_placeholder": "Enter your article title..."
+      },
+      "score_label": "Overall Score",
+      "detailed_analysis": "Detailed Analysis",
+      "placeholder_fill": "Enter title, content, and keyword to see analysis.",
+      "checks": {
+        "title": {
+          "label": "Keyword in Title",
+          "passed": "Great! Your focus keyword is in the title.",
+          "failed": "Add your focus keyword to the title."
+        },
+        "intro": {
+          "label": "Keyword in Introduction",
+          "passed": "Excellent! Keyword appears in the first 100 words.",
+          "failed": "Try to include your keyword early in the content."
+        },
+        "density": {
+          "label": "Keyword Density",
+          "passed": "Perfect keyword density.",
+          "low": "Keyword density is too low. Use it more often.",
+          "high": "Keyword density is too high. Avoid keyword stuffing."
+        },
+        "length": {
+          "label": "Content Length",
+          "passed": "Good length ({{count}} words).",
+          "failed": "Content is too short ({{count}} words). Aim for at least 300 words."
+        }
+      },
+      "output": "SEO Score"
+    },
+    "website_analyzer": {
+      "title": "Website Analysis Tool",
+      "subtitle": "Get a comprehensive analysis of your website's SEO and performance.",
+      "form": {
+        "url_placeholder": "Enter your website URL..."
+      },
+      "analyze_button": "Analyze",
+      "results_title": "Analysis Results for",
+      "checks": {
+        "speed": "Page Speed",
+        "seo": "SEO Analysis"
+      }
+    }
+  }
+}

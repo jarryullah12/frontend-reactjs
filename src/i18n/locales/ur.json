@@ -1,0 +1,586 @@
+{
+  "home": {
+    "languages_customization": {
+      "title": "Talen en aanpassingsopties",
+      "desc": "Ons platform is ontworpen voor een wereldwijd publiek en biedt uitgebreide ondersteuning voor meerdere talen om ervoor te zorgen dat uw inhoud gebruikers wereldwijd bereikt. Wij begrijpen dat elk bedrijf unieke behoeften heeft, daarom bieden wij uitgebreide aanpassingsopties voor al onze tools. U kunt instellingen, voorkeuren en uitvoerformaten aanpassen om perfect aan te sluiten bij uw merkidentiteit en specifieke projectvereisten. Of u nu een kleine ondernemer of een grote onderneming bent, onze flexibele functies stellen u in staat inhoud te creëren die resoneert met uw doelgroep. Ervaar de vrijheid om uw SEO-strategie eenvoudig aan te passen, te verfijnen en te optimaliseren, wetende dat ons platform meegroeit met uw bedrijf. Ontgrendel het volledige potentieel van uw inhoud met tools die net zo veelzijdig en dynamisch zijn als uw doelen. Begin vandaag nog met het aanpassen van uw ervaring en zie het verschil dat op maat gemaakte oplossingen kunnen maken voor uw digitale aanwezigheid."
+    },
+    "faq": {
+      "title": "Veelgestelde vragen",
+      "items": [
+        { "q": "Wat is dit platform?", "a": "Dit is een alles-in-één SEO- en contentgeneratieplatform dat is ontworpen om u te helpen hoger te scoren en sneller betere inhoud te creëren." },
+        { "q": "Is het gratis te gebruiken?", "a": "Ja, we bieden een reeks gratis tools om u op weg te helpen met uw SEO- en contentreis." },
+        { "q": "Hoe werkt de AI-contentgenerator?", "a": "Onze AI gebruikt geavanceerde taalmodellen om hoogwaardige, relevante inhoud te genereren op basis van uw focuszoekwoorden en onderwerpen." },
+        { "q": "Kan ik deze tools gebruiken voor commerciële projecten?", "a": "Absoluut! Onze tools zijn ontworpen om u te helpen uw contentproductie voor elk project op te schalen." },
+        { "q": "Heb ik technische SEO-kennis nodig?", "a": "Helemaal niet. Onze tools zijn ontworpen om gebruiksvriendelijk te zijn, zelfs als u geen eerdere SEO-ervaring heeft." },
+        { "q": "Hoe vaak worden de tools bijgewerkt?", "a": "We werken onze tools regelmatig bij om ervoor te zorgen dat ze aansluiten bij de nieuwste zoekmachinealgoritmen en best practices uit de sector." },
+        { "q": "Zijn mijn gegevens veilig?", "a": "Ja, we nemen gegevensbeveiliging zeer serieus en gebruiken industriestandaard encryptie om uw informatie te beschermen." },
+        { "q": "Kan ik de gegenereerde inhoud exporteren?", "a": "Ja, u kunt uw gegenereerde inhoud eenvoudig kopiëren en exporteren voor gebruik in uw projecten." },
+        { "q": "Bieden jullie ondersteuning?", "a": "Ja, ons ondersteuningsteam staat klaar om u te helpen met eventuele vragen of problemen die u tegenkomt." },
+        { "q": "Hoe ga ik aan de slag?", "a": "Meld u eenvoudig aan voor een gratis account en begin direct met het verkennen van onze tools!" }
+      ]
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "tools": "Tools",
+    "blog": "Blog",
+    "pricing": "Prijzen",
+    "about": "Over ons",
+    "contact": "Contact",
+    "login": "Inloggen",
+    "signup": "Beginnen",
+    "dashboard": "Dashboard",
+    "logout": "Uitloggen"
+  },
+  "hero": {
+    "title": "Het beste SEO- en AI-contentplatform",
+    "subtitle": "Verbeter de ranking van je website en creëer inhoud van hoge kwaliteit met onze 10+ professionele tools.",
+    "cta_primary": "Begin gratis",
+    "cta_secondary": "Ontdek tools",
+    "no_card": "Maandelijks abonnement vereist",
+    "free_tools": "10+ gratis tools",
+    "search_placeholder": "Voer website-URL in voor analyse",
+    "analyze_button": "Analyseren",
+    "traffic_score": "Verkeersscore",
+    "seo_health": "SEO-gezondheid",
+    "platform_badge": "Het beste SEO- en AI-platform"
+  },
+  "features": {
+    "title": "Alles wat je nodig hebt om te ranken",
+    "subtitle": "Ons platform combineert traditionele SEO-analyse met de nieuwste AI-generatie om je een uitzonderlijk voordeel te geven.",
+    "seo_analysis": {
+      "title": "Geavanceerde SEO-analyse",
+      "desc": "Uitgebreide tools voor het analyseren en verbeteren van de zoekmachineprestaties van je website."
+    },
+    "ai_content": {
+      "title": "AI-contentcreatie",
+      "desc": "Genereer in seconden hoogwaardige, SEO-geoptimaliseerde inhoud met behulp van geavanceerde AI-modellen."
+    },
+    "fast": {
+      "title": "Bliksemsnel",
+      "desc": "Krijg direct resultaten voor al je SEO-checks en verzoeken voor het genereren van inhoud."
+    },
+    "secure": {
+      "title": "Veilig en betrouwbaar",
+      "desc": "Je gegevens zijn veilig bij ons. We gebruiken enterprise-grade beveiliging voor alle operaties."
+    }
+  },
+  "popular": {
+    "title": "Populaire tools",
+    "subtitle": "Krijg snel toegang tot onze meest gebruikte SEO- en AI-tools.",
+    "view_all": "Bekijk alle tools",
+    "view_all_mobile": "Bekijk alle tools"
+  },
+  "stats": {
+    "tools_count": "50+",
+    "tools_label": "Professionele tools",
+    "content_count": "1M+",
+    "content_label": "Content gegenereerd",
+    "users_count": "100k+",
+    "users_label": "Blije gebruikers"
+  },
+  "tool_page": {
+    "website_analyzer": {
+      "title": "Website-analysetool",
+      "subtitle": "Krijg een uitgebreide analyse van de SEO en prestaties van uw website.",
+      "form": {
+        "url_placeholder": "Voer de URL van uw website in..."
+      },
+      "analyze_button": "Analyseren",
+      "results_title": "Analyseresultaten voor",
+      "checks": {
+        "speed": "Paginasnelheid",
+        "seo": "SEO-analyse"
+      }
+    }
+  },
+  "popular_tools_items": {
+    "meta": { "name": "Meta-tag generator", "category": "SEO-tools" },
+    "blog": { "name": "AI-blogpost generator", "category": "AI-content" },
+    "keyword": { "name": "Zoekwoorddichtheidscontrole", "category": "Analyse" },
+    "speed": { "name": "Website snelheidstester", "category": "Prestaties" }
+  },
+  "tools": {
+    "search_placeholder": "Zoek een tool...",
+    "categories": {
+      "all": "Alle tools",
+      "seo": "SEO-tools",
+      "minifiers": "Minifiers",
+      "validators": "Validators",
+      "keyword": "Zoekwoorden en ranking",
+      "analysis": "Website-analyse",
+      "technical": "Technische SEO",
+      "usability": "Bruikbaarheid",
+      "performance": "Prestaties",
+      "social": "Sociaal",
+      "security": "Beveiliging",
+      "technology": "Technologie",
+      "ai_content": "AI-content schrijven",
+      "ai_email": "AI-e-mail en verkoop",
+      "ai_ideas": "AI-ideeën en planning",
+      "ai_text": "AI-tekstverbetering",
+      "ai_headlines": "AI-koppen en titels",
+      "ai_business": "AI-zakelijke tools",
+      "ai_seo": "AI-SEO-tools",
+      "ai_social": "AI-sociale media"
+    }
+  },
+  "about": {
+    "title": "Creators empoweren",
+    "title_accent": "met intelligente tools",
+    "subtitle": "Wij zijn een team van SEO-experts, ontwikkelaars en AI-enthousiastelingen die zich inzetten voor het bouwen van het meest uitgebreide platform voor digitale marketeers en content creators.",
+    "stats": {
+      "tools": "Gemaakte tools",
+      "tools_count": "50+",
+      "users": "Actieve gebruikers",
+      "users_count": "100k",
+      "generations": "Generaties",
+      "generations_count": "5M+",
+      "uptime": "Uptime",
+      "uptime_count": "99.9%"
+    },
+    "values": {
+      "title": "Onze kernwaarden",
+      "subtitle": "Alles wat we bouwen volgt deze basisprincipes.",
+      "accuracy_title": "Nauwkeurigheid eerst",
+      "accuracy_desc": "We geven prioriteit aan datanauwkeurigheid in onze SEO-tools en feitelijke juistheid in onze AI-generatiemodellen.",
+      "speed_title": "Bliksemsnel",
+      "speed_desc": "Tijd is geld. Onze infrastructuur is geoptimaliseerd om resultaten in milliseconden te leveren.",
+      "privacy_title": "Privacy en beveiliging",
+      "privacy_desc": "Jouw data is van jou. We gebruiken enterprise-grade beveiliging en trainen onze publieke modellen niet op jouw privégegevens.",
+      "community_title": "Community-gedreven",
+      "community_desc": "We luisteren naar onze gebruikers. De meeste van onze nieuwe functies en tools komen rechtstreeks voort uit feedback van de community."
+    },
+    "team": {
+      "title": "Ontmoet het team",
+      "subtitle": "De gepassioneerde mensen achter het platform.",
+      "roles": {
+        "ceo": "CEO en oprichter",
+        "head_ai": "Hoofd AI",
+        "lead_dev": "Lead developer"
+      }
+    }
+  },
+  "pricing": {
+    "title": "Eenvoudige en transparante prijzen",
+    "subtitle": "Krijg voor altijd onbeperkte toegang tot al onze SEO- en AI-tools. Eenmalige betaling, geen terugkerende kosten.",
+    "month": "eenmalig",
+    "popular": "Beste Waarde",
+    "pro": {
+      "name": "Lifetime Pro",
+      "description": "Permanente toegang tot alle professionele functies en toekomstige updates.",
+      "cta": "Krijg levenslange toegang",
+      "features": {
+        "tools": "Onbeperkt toolgebruik",
+        "ai": "Onbeperkte AI-generatie",
+        "seo": "Geavanceerde SEO-analyse",
+        "support": "Prioriteitsondersteuning",
+        "export": "Resultaten exporteren (PDF)",
+        "ads": "Geen advertenties"
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact opnemen",
+    "subtitle": "Vragen, feedback of hulp nodig? We zijn hier om te helpen.",
+    "info_title": "Contactinformatie",
+    "info_desc": "Vul het formulier in en ons team neemt binnen 24 uur contact met je op. Voor dringende vragen kun je ons direct bellen.",
+    "email": {
+      "title": "E-mail ons",
+      "support": "support@seoai.example.com",
+      "sales": "sales@seoai.example.com"
+    },
+    "phone": {
+      "title": "Bel ons",
+      "number": "+1 (555) 123-4567",
+      "hours": "Ma-Vr 9:00 - 18:00 EST"
+    },
+    "visit": {
+      "title": "Bezoek ons",
+      "address": "123 Innovation Drive, Tech District, CA 94105, Verenigde Staten"
+    },
+    "form": {
+      "title": "Stuur een bericht",
+      "first_name": "Voornaam",
+      "last_name": "Achternaam",
+      "email": "E-mailadres",
+      "subject": "Onderwerp",
+      "message": "Bericht",
+      "submit": "Bericht verzenden",
+      "placeholder_first": "John",
+      "placeholder_last": "Doe",
+      "placeholder_email": "john@example.com",
+      "placeholder_message": "Hoe kunnen we je helpen?",
+      "subjects": {
+        "general": "Algemene vraag",
+        "support": "Technische ondersteuning",
+        "billing": "Facturatievraag",
+        "partnership": "Partnerschap"
+      }
+    }
+  },
+  "footer": {
+    "desc": "Het beste platform voor SEO-tools en AI-contentcreatie. Verbeter je ranking en maak in seconden geweldige content.",
+    "product": "Product",
+    "company": "Bedrijf",
+    "privacy": "Privacybeleid",
+    "terms": "Servicevoorwaarden",
+    "subscribe": "Abonneren",
+    "subscribe_desc": "Ontvang het laatste nieuws en updates in je inbox.",
+    "email_placeholder": "Voer je e-mail in",
+    "subscribe_btn": "Abonneren",
+    "rights": "Alle rechten voorbehouden."
+  },
+  "blog": {
+    "title": "Onze blog",
+    "subtitle": "Inzichten, strategieën en updates uit de wereld van SEO en kunstmatige intelligentie.",
+    "load_more": "Laad meer artikelen",
+    "posts": {
+      "post1": {
+        "title": "10 SEO-strategieën om zoekresultaten te domineren in 2026",
+        "excerpt": "Ontdek de nieuwste strategieën en algoritme-updates die de toekomst van zoekmachineoptimalisatie vormgeven."
+      },
+      "post2": {
+        "title": "Hoe AI een revolutie teweegbrengt in contentcreatie",
+        "excerpt": "Leer hoe kunstmatige intelligentie de manier verandert waarop we inhoud voor het web schrijven, bewerken en optimaliseren."
+      },
+      "post3": {
+        "title": "De ultieme gids voor technische SEO",
+        "excerpt": "Een uitgebreide gids voor het oplossen van technische problemen die je website kunnen tegenhouden van een hoge ranking."
+      },
+      "post4": {
+        "title": "Zoekwoordonderzoek beheersen met AI-tools",
+        "excerpt": "Stop met gissen en begin met weten. Hoe je AI gebruikt om zoekwoorden met weinig concurrentie en een hoog volume te vinden."
+      },
+      "post5": {
+        "title": "Waarom sitesnelheid belangrijker is dan ooit",
+        "excerpt": "Core Web Vitals zijn cruciaal. Hier is hoe je de snelheid van je site verbetert en de tests van Google doorstaat."
+      },
+      "post6": {
+        "title": "Lokale SEO: Hoe te ranken in het lokale pakket",
+        "excerpt": "Een stapsgewijze handleiding om je Google Bedrijfsprofiel te optimaliseren en lokale zoekresultaten te domineren."
+      }
+    }
+  },
+  "login": {
+    "back_home": "Terug naar home",
+    "welcome": "Welkom",
+    "subtitle": "Meld je aan bij je account om door te gaan",
+    "email": "E-mail",
+    "password": "Wachtwoord",
+    "forgot": "Wachtwoord vergeten?",
+    "submit": "Inloggen",
+    "no_account": "Geen account?",
+    "signup": "Aanmelden"
+  },
+  "signup": {
+    "back_home": "Terug naar home",
+    "title": "Account aanmaken",
+    "subtitle": "Sluit je bij ons aan en begin met het verbeteren van je content",
+    "name": "Volledige naam",
+    "email": "E-mail",
+    "password": "Wachtwoord",
+    "submit": "Account aanmaken",
+    "has_account": "Al een account?",
+    "login": "Inloggen"
+  },
+  "dashboard": {
+    "welcome": "Welkom",
+    "overview": "Hier is een overzicht van je activiteit en gebruik.",
+    "stats": {
+      "tools": "Gebruikte tools",
+      "ai": "AI-generaties",
+      "time": "Bespaarde tijd",
+      "plan": "Huidig plan"
+    },
+    "recent": "Recente activiteit",
+    "saved": "Opgeslagen items",
+    "view_result": "Bekijk resultaat",
+    "no_saved": "Nog geen opgeslagen items.",
+    "activity": {
+      "meta": "Meta-tag generator gebruikt",
+      "time": "2 uur geleden"
+    }
+  },
+  "tools_list": {
+    "title": "SEO- en AI-tools",
+    "categories_title": "Categorieën",
+    "no_tools": "Geen tools gevonden",
+    "no_tools_desc": "Probeer je zoekopdracht of categoriefilter aan te passen.",
+    "items": {
+      "meta_tag": {
+        "name": "Meta-tag generator",
+        "desc": "Genereer SEO-vriendelijke meta-tags voor je website."
+      },
+      "robots": {
+        "name": "Robots.txt generator",
+        "desc": "Maak een robots.txt-bestand om zoekmachinecrawlers te begeleiden."
+      },
+      "sitemap": {
+        "name": "XML-sitemap generator",
+        "desc": "Genereer een XML-sitemap om zoekmachines te helpen je site te indexeren."
+      },
+      "schema": {
+        "name": "Schema markup validator",
+        "desc": "Valideer je JSON-LD gestructureerde data voor Schema.org-compliance."
+      },
+      "density": {
+        "name": "Zoekwoorddichtheidscontrole",
+        "desc": "Analyseer je inhoud op zoekwoordfrequentie en dichtheid."
+      },
+      "analyzer": {
+        "name": "Content SEO-analysator",
+        "desc": "Analyseer je inhoud op basis van een focuszoekwoord voor SEO-optimalisatie."
+      },
+      "css_min": {
+        "name": "CSS-minifier",
+        "desc": "Comprimeer je CSS-code om de bestandsgrootte te verkleinen en de laadtijd te verbeteren."
+      },
+      "js_min": {
+        "name": "JS-minifier",
+        "desc": "Minify JavaScript-code om de prestaties van de website te verbeteren."
+      },
+      "blog_gen": {
+        "name": "AI-blogpost generator",
+        "desc": "Genereer in seconden hoogwaardige, SEO-geoptimaliseerde blogposts."
+      },
+      "rewriter": {
+        "name": "AI-artikelherschrijver",
+        "desc": "Herschrijf bestaande artikelen om unieke inhoud te creëren."
+      },
+      "ideas": {
+        "name": "AI-contentideeën generator",
+        "desc": "Genereer zeer boeiende en SEO-geoptimaliseerde blogpost-ideeën."
+      },
+      "sales_email": {
+        "name": "AI-verkoop-e-mail generator",
+        "desc": "Maak boeiende verkoop-e-mails die leiden tot conversies."
+      },
+      "bio": {
+        "name": "AI-bio generator",
+        "desc": "Genereer boeiende bio's voor je sociale mediaprofielen."
+      }
+    }
+  },
+  "tool_page": {
+    "generate": "Genereren",
+    "copy": "Kopiëren naar klembord",
+    "download": "Downloaden",
+    "share": "Delen",
+    "copied": "Gekopieerd!",
+    "placeholder_fill": "Vul het formulier in en klik op genereren om de resultaten te zien.",
+    "meta": {
+      "title": "Meta-tag generator",
+      "subtitle": "Maak SEO-vriendelijke HTML-meta-tags voor je website om de zoekmachineranking te verbeteren.",
+      "form": {
+        "site_title": "Site titel",
+        "site_desc": "Site beschrijving",
+        "keywords": "Site zoekwoorden (gescheiden door komma's)",
+        "author": "Auteur",
+        "robots_index": "Robots index",
+        "robots_follow": "Robots follow",
+        "placeholder_title": "Bijv. OptiSEO - Het beste SEO-platform",
+        "placeholder_desc": "Een korte beschrijving van je website...",
+        "placeholder_keywords": "seo, tools, ai, generator",
+        "placeholder_author": "John Doe",
+        "chars": "tekens"
+      },
+      "output": "Gegenereerde tags"
+    },
+    "blog": {
+      "title": "AI-blogpost generator",
+      "subtitle": "Genereer in seconden hoogwaardige, SEO-geoptimaliseerde blogposts met behulp van geavanceerde AI.",
+      "form": {
+        "topic": "Blog onderwerp",
+        "keywords": "Zoekwoorden (optioneel)",
+        "tone": "Toon",
+        "length": "Doellengte",
+        "placeholder_topic": "Bijv. De toekomst van AI in digitale marketing",
+        "placeholder_keywords": "ai, marketing, trends",
+        "tones": {
+          "professional": "Professioneel",
+          "casual": "Informeel",
+          "informative": "Informatief",
+          "creative": "Creatief"
+        },
+        "lengths": {
+          "short": "Kort (~500 woorden)",
+          "medium": "Gemiddeld (~1000 woorden)",
+          "long": "Lang (~1500+ woorden)"
+        }
+      },
+      "output": "Gegenereerde blogpost"
+    },
+    "robots": {
+      "title": "Robots.txt generator",
+      "subtitle": "Maak een robots.txt-bestand om zoekmachinecrawlers te begeleiden bij het indexeren van je site.",
+      "form": {
+        "allow": "Toestaan",
+        "disallow": "Niet toestaan",
+        "sitemap": "Sitemap URL",
+        "add_rule": "Regel toevoegen",
+        "user_agent": "User-agent"
+      },
+      "output": "Gegenereerde Robots.txt"
+    },
+    "sitemap": {
+      "title": "XML-sitemap generator",
+      "subtitle": "Genereer een XML-sitemap om zoekmachines te helpen je site efficiënter te indexeren.",
+      "form": {
+        "url": "Website URL",
+        "frequency": "Wijzigingsfrequentie",
+        "priority": "Prioriteit",
+        "frequencies": {
+          "always": "Altijd",
+          "hourly": "Per uur",
+          "daily": "Dagelijks",
+          "weekly": "Wekelijks",
+          "monthly": "Maandelijks",
+          "yearly": "Jaarlijks",
+          "never": "Nooit"
+        }
+      },
+      "output": "Gegenereerde sitemap"
+    },
+    "minifier": {
+      "css_title": "CSS-minifier",
+      "js_title": "JS-minifier",
+      "subtitle": "Comprimeer je code om de bestandsgrootte te verkleinen en de prestaties van de website te verbeteren.",
+      "form": {
+        "input": "Input code",
+        "placeholder": "Plak je code hier..."
+      },
+      "output": "Gecomprimeerde code"
+    },
+    "rewriter": {
+      "title": "AI-artikelherschrijver",
+      "subtitle": "Herschrijf bestaande artikelen om unieke en hoogwaardige inhoud te creëren.",
+      "form": {
+        "content": "Originele inhoud",
+        "placeholder": "Plak het artikel dat je wilt herschrijven..."
+      },
+      "output": "Herschreven artikel"
+    },
+    "sales_email": {
+      "title": "AI-verkoop-e-mail generator",
+      "subtitle": "Maak verkoop-e-mails die leads omzetten in klanten.",
+      "form": {
+        "product": "Product/Dienstnaam",
+        "audience": "Doelgroep",
+        "benefit": "Belangrijkste voordeel",
+        "placeholder_product": "Bijv. OptiSEO Pro",
+        "placeholder_audience": "Bijv. Kleine ondernemers",
+        "placeholder_benefit": "Bijv. 50% meer organisch verkeer"
+      },
+      "output": "Gegenereerde verkoop-e-mail"
+    },
+    "bio": {
+      "title": "AI-bio generator",
+      "subtitle": "Genereer boeiende bio's voor je sociale mediaprofielen.",
+      "form": {
+        "name": "Jouw naam/merk",
+        "about": "Over jou",
+        "platform": "Platform",
+        "profession": "Beroep/Rol",
+        "placeholder": "Bijv. Software Engineer, Digitale Marketeer, Fitness Coach",
+        "placeholder_name": "Bijv. Jenny Doe",
+        "placeholder_about": "Bijv. Digitale nomade, koffieliefhebber, SEO-expert",
+        "platforms": {
+          "twitter": "Twitter/X",
+          "instagram": "Instagram",
+          "linkedin": "LinkedIn",
+          "tiktok": "TikTok"
+        }
+      },
+      "output": "Gegenereerde bio"
+    },
+    "ideas": {
+      "title": "AI-contentideeën generator",
+      "subtitle": "Genereer zeer boeiende en SEO-geoptimaliseerde blogpost-ideeën.",
+      "form": {
+        "niche": "Niche/Industrie",
+        "placeholder_niche": "Bijv. Duurzame mode"
+      },
+      "output": "Contentideeën"
+    },
+    "schema": {
+      "title": "Schema markup validator",
+      "subtitle": "Valideer je JSON-LD-data voor Schema.org-compliance.",
+      "form": {
+        "input": "JSON-LD code",
+        "placeholder": "Plak je JSON-LD hier..."
+      },
+      "output": "Validatieresultaat"
+    },
+    "density": {
+      "title": "Zoekwoorddichtheidscontrole",
+      "subtitle": "Analyseer je inhoud op zoekwoordfrequentie en dichtheid om keyword stuffing te voorkomen.",
+      "form": {
+        "content": "Inhoud",
+        "keyword": "Focus zoekwoord",
+        "content_placeholder": "Plak je artikel of inhoud hier...",
+        "keyword_placeholder": "Bijv. SEO-tools"
+      },
+      "stats": {
+        "total": "Totaal aantal woorden",
+        "count": "Aantal",
+        "density": "Dichtheid"
+      },
+      "top_words": "Meest gebruikte woorden (3+ tekens)",
+      "times": "keer",
+      "output": "Analyse resultaten"
+    },
+    "analyzer": {
+      "title": "Content SEO-analysator",
+      "subtitle": "Analyseer je inhoud op basis van een focuszoekwoord om ervoor te zorgen dat deze is geoptimaliseerd voor zoekmachines.",
+      "form": {
+        "content": "Artikelinhoud",
+        "keyword": "Focus zoekwoord",
+        "title": "Artikel titel",
+        "content_placeholder": "Plak je artikelinhoud hier...",
+        "keyword_placeholder": "Bijv. SEO-tools",
+        "title_placeholder": "Voer je artikeltitel in..."
+      },
+      "score_label": "Algemene score",
+      "detailed_analysis": "Gedetailleerde analyse",
+      "placeholder_fill": "Voer titel, inhoud en zoekwoord in om de analyse te bekijken.",
+      "checks": {
+        "title": {
+          "label": "Zoekwoord in titel",
+          "passed": "Geweldig! Je focuszoekwoord staat in de titel.",
+          "failed": "Voeg je focuszoekwoord toe aan de titel."
+        },
+        "intro": {
+          "label": "Zoekwoord in introductie",
+          "passed": "Uitstekend! Het zoekwoord verschijnt in de eerste 100 woorden.",
+          "failed": "Probeer je zoekwoord aan het begin van de inhoud toe te voegen."
+        },
+        "density": {
+          "label": "Zoekwoorddichtheid",
+          "passed": "Optimale zoekwoorddichtheid.",
+          "low": "Zoekwoorddichtheid is te laag. Gebruik het vaker.",
+          "high": "Zoekwoorddichtheid is te hoog. Vermijd keyword stuffing."
+        },
+        "length": {
+          "label": "Inhoudslengte",
+          "passed": "Goede lengte ({{count}} woorden).",
+          "failed": "Inhoud is te kort ({{count}} woorden). Streef naar minimaal 300 woorden."
+        }
+      },
+      "output": "SEO-score"
+    },
+    "website_analyzer": {
+      "title": "Website-analysetool",
+      "subtitle": "Krijg een uitgebreide analyse van de SEO en prestaties van uw website.",
+      "form": {
+        "url_placeholder": "Voer de URL van uw website in..."
+      },
+      "analyze_button": "Analyseren",
+      "results_title": "Analyseresultaten voor",
+      "checks": {
+        "speed": "Paginasnelheid",
+        "seo": "SEO-analyse"
+      }
+    }
+  }
+}

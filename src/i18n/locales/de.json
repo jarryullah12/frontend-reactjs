@@ -1,0 +1,586 @@
+{
+  "home": {
+    "languages_customization": {
+      "title": "Sprachen und Anpassungsoptionen",
+      "desc": "Unsere Plattform ist für ein globales Publikum konzipiert und bietet umfassende Unterstützung für mehrere Sprachen, um sicherzustellen, dass Ihre Inhalte Benutzer weltweit erreichen. Wir verstehen, dass jedes Unternehmen einzigartige Bedürfnisse hat, weshalb wir umfangreiche Anpassungsoptionen für alle unsere Tools anbieten. Sie können Einstellungen, Präferenzen und Ausgabeformate anpassen, um sie perfekt an Ihre Markenidentität und spezifische Projektanforderungen anzupassen. Egal, ob Sie ein Kleinunternehmer oder ein Großunternehmen sind, unsere flexiblen Funktionen ermöglichen es Ihnen, Inhalte zu erstellen, die bei Ihrer Zielgruppe Anklang finden. Erleben Sie die Freiheit, Ihre SEO-Strategie einfach anzupassen, zu verfeinern und zu optimieren, in dem Wissen, dass unsere Plattform mit Ihrem Unternehmen wächst. Erschließen Sie das volle Potenzial Ihrer Inhalte mit Tools, die so vielseitig und dynamisch sind wie Ihre Ziele. Beginnen Sie noch heute mit der Anpassung Ihrer Erfahrung und sehen Sie den Unterschied, den maßgeschneiderte Lösungen für Ihre digitale Präsenz machen können."
+    },
+    "faq": {
+      "title": "Häufig gestellte Fragen",
+      "items": [
+        { "q": "Was ist diese Plattform?", "a": "Dies ist eine All-in-One-SEO- und Content-Generierungsplattform, die entwickelt wurde, um Ihnen zu helfen, ein höheres Ranking zu erzielen und schneller bessere Inhalte zu erstellen." },
+        { "q": "Ist die Nutzung kostenlos?", "a": "Ja, wir bieten eine Reihe kostenloser Tools an, die Ihnen den Einstieg in Ihre SEO- und Content-Reise erleichtern." },
+        { "q": "Wie funktioniert der KI-Content-Generator?", "a": "Unsere KI verwendet fortschrittliche Sprachmodelle, um hochwertige, relevante Inhalte basierend auf Ihren Fokus-Keywords und Themen zu generieren." },
+        { "q": "Kann ich diese Tools für kommerzielle Projekte nutzen?", "a": "Absolut! Unsere Tools sind darauf ausgelegt, Ihnen bei der Skalierung Ihrer Content-Produktion für jedes Projekt zu helfen." },
+        { "q": "Benötige ich technisches SEO-Wissen?", "a": "Überhaupt nicht. Unsere Tools sind benutzerfreundlich gestaltet, auch wenn Sie keine vorherige SEO-Erfahrung haben." },
+        { "q": "Wie oft werden die Tools aktualisiert?", "a": "Wir aktualisieren unsere Tools regelmäßig, um sicherzustellen, dass sie mit den neuesten Suchmaschinenalgorithmen und Best Practices der Branche übereinstimmen." },
+        { "q": "Sind meine Daten sicher?", "a": "Ja, wir nehmen Datensicherheit sehr ernst und verwenden branchenübliche Verschlüsselung, um Ihre Informationen zu schützen." },
+        { "q": "Kann ich die generierten Inhalte exportieren?", "a": "Ja, Sie können Ihre generierten Inhalte einfach kopieren und für die Verwendung in Ihren Projekten exportieren." },
+        { "q": "Bieten Sie Unterstützung an?", "a": "Ja, unser Support-Team steht Ihnen bei Fragen oder Problemen, auf die Sie stoßen könnten, zur Seite." },
+        { "q": "Wie fange ich an?", "a": "Registrieren Sie sich einfach für ein kostenloses Konto und beginnen Sie sofort damit, unsere Tools zu erkunden!" }
+      ]
+    }
+  },
+  "nav": {
+    "home": "Startseite",
+    "tools": "Tools",
+    "blog": "Blog",
+    "pricing": "Preise",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "login": "Anmelden",
+    "signup": "Loslegen",
+    "dashboard": "Dashboard",
+    "logout": "Abmelden"
+  },
+  "hero": {
+    "title": "Die ultimative SEO- & KI-Content-Plattform",
+    "subtitle": "Verbesser Sie das Ranking Ihrer Website und erstellen Sie hochwertige Inhalte mit unserer Suite von über 10 professionellen Tools.",
+    "cta_primary": "Kostenlos starten",
+    "cta_secondary": "Tools erkunden",
+    "no_card": "Monatliches Abonnement erforderlich",
+    "free_tools": "10+ kostenlose Tools",
+    "search_placeholder": "Website-URL zur Analyse eingeben",
+    "analyze_button": "Analysieren",
+    "traffic_score": "Traffic-Score",
+    "seo_health": "SEO-Gesundheit",
+    "platform_badge": "Die ultimative SEO- & KI-Plattform"
+  },
+  "features": {
+    "title": "Alles, was Sie für ein höheres Ranking benötigen",
+    "subtitle": "Unsere Plattform kombiniert traditionelle SEO-Analyse mit modernster KI-Generierung, um Ihnen einen unfairen Vorteil zu verschaffen.",
+    "seo_analysis": {
+      "title": "Erweiterte SEO-Analyse",
+      "desc": "Umfassende Tools zur Analyse und Optimierung der Suchmaschinenleistung Ihrer Website."
+    },
+    "ai_content": {
+      "title": "KI-Content-Generierung",
+      "desc": "Erstellen Sie in Sekundenschnelle hochwertige, SEO-optimierte Inhalte mit fortschrittlichen KI-Modellen."
+    },
+    "fast": {
+      "title": "Blitzschnell",
+      "desc": "Erhalten Sie sofortige Ergebnisse für alle Ihre SEO-Prüfungen und Content-Generierungsanfragen."
+    },
+    "secure": {
+      "title": "Sicher & Zuverlässig",
+      "desc": "Ihre Daten sind bei uns sicher. Wir verwenden Sicherheit auf Unternehmensniveau für alle Vorgänge."
+    }
+  },
+  "popular": {
+    "title": "Beliebte Tools",
+    "subtitle": "Greifen Sie schnell auf unsere meistgenutzten SEO- und KI-Tools zu.",
+    "view_all": "Alle Tools anzeigen",
+    "view_all_mobile": "Alle Tools anzeigen"
+  },
+  "stats": {
+    "tools_count": "50+",
+    "tools_label": "Professionelle Tools",
+    "content_count": "1M+",
+    "content_label": "Generierte Inhalte",
+    "users_count": "100k+",
+    "users_label": "Zufriedene Benutzer"
+  },
+  "tool_page": {
+    "website_analyzer": {
+      "title": "Website-Analyse-Tool",
+      "subtitle": "Erhalten Sie eine umfassende Analyse der SEO und Leistung Ihrer Website.",
+      "form": {
+        "url_placeholder": "Geben Sie Ihre Website-URL ein..."
+      },
+      "analyze_button": "Analysieren",
+      "results_title": "Analyseergebnisse für",
+      "checks": {
+        "speed": "Seitengeschwindigkeit",
+        "seo": "SEO-Analyse"
+      }
+    }
+  },
+  "popular_tools_items": {
+    "meta": { "name": "Meta-Tag-Generator", "category": "SEO-Tools" },
+    "blog": { "name": "KI-Blogpost-Generator", "category": "KI-Inhalt" },
+    "keyword": { "name": "Keyword-Dichte-Prüfer", "category": "Analyse" },
+    "speed": { "name": "Website-Geschwindigkeitstester", "category": "Leistung" }
+  },
+  "tools": {
+    "search_placeholder": "Nach einem Tool suchen...",
+    "categories": {
+      "all": "Alle Tools",
+      "seo": "SEO-Tools",
+      "minifiers": "Minifier",
+      "validators": "Validatoren",
+      "keyword": "Keywords & Ranking",
+      "analysis": "Website-Analyse",
+      "technical": "Technisches SEO",
+      "usability": "Benutzerfreundlichkeit",
+      "performance": "Leistung",
+      "social": "Sozial",
+      "security": "Sicherheit",
+      "technology": "Technologie",
+      "ai_content": "KI-Content-Schreiben",
+      "ai_email": "KI-E-Mail & Vertrieb",
+      "ai_ideas": "KI-Ideen & Planung",
+      "ai_text": "KI-Textverbesserung",
+      "ai_headlines": "KI-Schlagzeilen & Titel",
+      "ai_business": "KI-Business-Tools",
+      "ai_seo": "KI-SEO-Tools",
+      "ai_social": "KI-Social-Media"
+    }
+  },
+  "about": {
+    "title": "Creators stärken",
+    "title_accent": "mit intelligenten Tools",
+    "subtitle": "Wir sind ein Team aus SEO-Experten, Entwicklern und KI-Enthusiasten, die sich dem Aufbau der umfassendsten Plattform für digitale Vermarkter und Content-Ersteller widmen.",
+    "stats": {
+      "tools": "Erstellte Tools",
+      "tools_count": "50+",
+      "users": "Aktive Benutzer",
+      "users_count": "100k",
+      "generations": "Generierungen",
+      "generations_count": "5M+",
+      "uptime": "Verfügbarkeit",
+      "uptime_count": "99.9%"
+    },
+    "values": {
+      "title": "Unsere Grundwerte",
+      "subtitle": "Alles, was wir bauen, folgt diesen Grundprinzipien.",
+      "accuracy_title": "Genauigkeit zuerst",
+      "accuracy_desc": "Wir priorisieren Datengenauigkeit in unseren SEO-Tools und faktische Korrektheit in unseren KI-Generierungsmodellen.",
+      "speed_title": "Blitzschnell",
+      "speed_desc": "Zeit ist Geld. Unsere Infrastruktur ist darauf optimiert, Ergebnisse in Millisekunden zu liefern.",
+      "privacy_title": "Datenschutz & Sicherheit",
+      "privacy_desc": "Ihre Daten gehören Ihnen. Wir verwenden Sicherheit auf Unternehmensniveau und trainieren unsere öffentlichen Modelle nicht mit Ihren privaten Daten.",
+      "community_title": "Community-getrieben",
+      "community_desc": "Wir hören unseren Benutzern zu. Die meisten unserer neuen Funktionen und Tools stammen direkt aus dem Feedback der Community."
+    },
+    "team": {
+      "title": "Treffen Sie das Team",
+      "subtitle": "Die leidenschaftlichen Menschen hinter der Plattform.",
+      "roles": {
+        "ceo": "CEO & Gründer",
+        "head_ai": "Leiter KI",
+        "lead_dev": "Lead-Entwickler"
+      }
+    }
+  },
+  "pricing": {
+    "title": "Einfache und transparente Preise",
+    "subtitle": "Lebenslanger Zugriff auf alle unsere SEO- und KI-Tools. Einmalige Zahlung, keine wiederkehrenden Gebühren.",
+    "month": "einmalig",
+    "popular": "Bester Wert",
+    "pro": {
+      "name": "Lifetime Pro",
+      "description": "Dauerhafter Zugriff auf alle professionellen Funktionen und zukünftige Updates.",
+      "cta": "Lebenslangen Zugriff erhalten",
+      "features": {
+        "tools": "Unbegrenzte Tool-Nutzung",
+        "ai": "Unbegrenzte KI-Generierungen",
+        "seo": "Erweiterte SEO-Analyse",
+        "support": "Prioritäts-Support",
+        "export": "Ergebnisse exportieren (PDF)",
+        "ads": "Keine Werbung"
+      }
+    }
+  },
+  "contact": {
+    "title": "Kontakt aufnehmen",
+    "subtitle": "Haben Sie eine Frage, Feedback oder benötigen Sie Unterstützung? Wir sind hier, um zu helfen.",
+    "info_title": "Kontaktinformationen",
+    "info_desc": "Füllen Sie das Formular aus und unser Team wird sich innerhalb von 24 Stunden bei Ihnen melden. Bei dringenden Anfragen rufen Sie uns bitte direkt an.",
+    "email": {
+      "title": "E-Mail an uns",
+      "support": "support@seoai.example.com",
+      "sales": "sales@seoai.example.com"
+    },
+    "phone": {
+      "title": "Rufen Sie uns an",
+      "number": "+1 (555) 123-4567",
+      "hours": "Mo-Fr von 9:00 bis 18:00 Uhr EST"
+    },
+    "visit": {
+      "title": "Besuchen Sie uns",
+      "address": "123 Innovation Drive, Tech District, CA 94105, Vereinigte Staaten"
+    },
+    "form": {
+      "title": "Nachricht senden",
+      "first_name": "Vorname",
+      "last_name": "Nachname",
+      "email": "E-Mail-Adresse",
+      "subject": "Betreff",
+      "message": "Nachricht",
+      "submit": "Nachricht senden",
+      "placeholder_first": "John",
+      "placeholder_last": "Doe",
+      "placeholder_email": "john@example.com",
+      "placeholder_message": "Wie können wir Ihnen helfen?",
+      "subjects": {
+        "general": "Allgemeine Anfrage",
+        "support": "Technische Unterstützung",
+        "billing": "Rechnungsfrage",
+        "partnership": "Partnerschaft"
+      }
+    }
+  },
+  "footer": {
+    "desc": "Die ultimative Plattform für SEO-Tools und KI-Content-Generierung. Verbessern Sie Ihr Ranking und erstellen Sie in Sekunden erstaunliche Inhalte.",
+    "product": "Produkt",
+    "company": "Unternehmen",
+    "privacy": "Datenschutzrichtlinie",
+    "terms": "Nutzungsbedingungen",
+    "subscribe": "Abonnieren",
+    "subscribe_desc": "Erhalten Sie die neuesten Nachrichten und Updates in Ihren Posteingang.",
+    "email_placeholder": "Geben Sie Ihre E-Mail ein",
+    "subscribe_btn": "Abonnieren",
+    "rights": "Alle Rechte vorbehalten."
+  },
+  "blog": {
+    "title": "Unser Blog",
+    "subtitle": "Einblicke, Strategien und Updates aus der Welt von SEO und künstlicher Intelligenz.",
+    "load_more": "Weitere Artikel laden",
+    "posts": {
+      "post1": {
+        "title": "10 SEO-Strategien, um Suchrankings 2026 zu dominieren",
+        "excerpt": "Entdecken Sie die neuesten Strategien und Algorithmus-Updates, die die Zukunft der Suchmaschinenoptimierung prägen."
+      },
+      "post2": {
+        "title": "Wie KI die Content-Erstellung revolutioniert",
+        "excerpt": "Erfahren Sie, wie künstliche Intelligenz die Art und Weise verändert, wie wir Inhalte für das Web schreiben, bearbeiten und optimieren."
+      },
+      "post3": {
+        "title": "Der ultimative Leitfaden für technisches SEO",
+        "excerpt": "Ein umfassender Leitfaden zur Behebung technischer Probleme, die Ihre Website möglicherweise an einem höheren Ranking hindern."
+      },
+      "post4": {
+        "title": "Keyword-Recherche meistern mit KI-Tools",
+        "excerpt": "Hören Sie auf zu raten und fangen Sie an zu wissen. Wie Sie KI nutzen, um Keywords mit geringem Wettbewerb und hohem Volumen zu finden."
+      },
+      "post5": {
+        "title": "Warum Seitengeschwindigkeit wichtiger ist als je zuvor",
+        "excerpt": "Core Web Vitals sind entscheidend. Hier erfahren Sie, wie Sie Ihre Seitengeschwindigkeit optimieren und Googles Tests bestehen."
+      },
+      "post6": {
+        "title": "Lokales SEO: Wie man im Local Pack rankt",
+        "excerpt": "Eine Schritt-für-Schritt-Anleitung zur Optimierung Ihres Google-Unternehmensprofils und zur Dominanz lokaler Suchergebnisse."
+      }
+    }
+  },
+  "login": {
+    "back_home": "Zurück zur Startseite",
+    "welcome": "Willkommen zurück",
+    "subtitle": "Melden Sie sich bei Ihrem Konto an, um fortzufahren",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "forgot": "Passwort vergessen?",
+    "submit": "Anmelden",
+    "no_account": "Sie haben noch kein Konto?",
+    "signup": "Registrieren"
+  },
+  "signup": {
+    "back_home": "Zurück zur Startseite",
+    "title": "Konto erstellen",
+    "subtitle": "Treten Sie uns bei und beginnen Sie mit der Optimierung Ihrer Inhalte",
+    "name": "Vollständiger Name",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "submit": "Konto erstellen",
+    "has_account": "Sie haben bereits ein Konto?",
+    "login": "Anmelden"
+  },
+  "dashboard": {
+    "welcome": "Willkommen",
+    "overview": "Hier ist ein Überblick über Ihre Aktivität und Nutzung.",
+    "stats": {
+      "tools": "Genutzte Tools",
+      "ai": "KI-Generierungen",
+      "time": "Gesparte Zeit",
+      "plan": "Aktueller Plan"
+    },
+    "recent": "Letzte Aktivität",
+    "saved": "Gespeicherte Elemente",
+    "view_result": "Ergebnis anzeigen",
+    "no_saved": "Noch keine gespeicherten Elemente.",
+    "activity": {
+      "meta": "Meta-Tag-Generator verwendet",
+      "time": "Vor 2 Stunden"
+    }
+  },
+  "tools_list": {
+    "title": "SEO- & KI-Tools",
+    "categories_title": "Kategorien",
+    "no_tools": "Keine Tools gefunden",
+    "no_tools_desc": "Versuchen Sie, Ihre Suche oder Ihren Kategoriefilter anzupassen.",
+    "items": {
+      "meta_tag": {
+        "name": "Meta-Tag-Generator",
+        "desc": "Generieren Sie SEO-freundliche Meta-Tags für Ihre Website."
+      },
+      "robots": {
+        "name": "Robots.txt-Generator",
+        "desc": "Erstellen Sie eine robots.txt-Datei, um Suchmaschinen-Crawler zu leiten."
+      },
+      "sitemap": {
+        "name": "XML-Sitemap-Generator",
+        "desc": "Generieren Sie eine XML-Sitemap, um Suchmaschinen bei der Indexierung Ihrer Website zu helfen."
+      },
+      "schema": {
+        "name": "Schema-Markup-Validator",
+        "desc": "Validieren Sie Ihre JSON-LD-strukturierten Daten auf Schema.org-Konformität."
+      },
+      "density": {
+        "name": "Keyword-Dichte-Prüfer",
+        "desc": "Analysieren Sie Ihre Inhalte auf Keyword-Häufigkeit und -Dichte."
+      },
+      "analyzer": {
+        "name": "Content-SEO-Analysator",
+        "desc": "Analysieren Sie Ihre Inhalte anhand eines Fokus-Keywords zur SEO-Optimierung."
+      },
+      "css_min": {
+        "name": "CSS-Minifier",
+        "desc": "Komprimieren Sie Ihren CSS-Code, um die Dateigröße zu reduzieren und Ladezeiten zu verbessern."
+      },
+      "js_min": {
+        "name": "JS-Minifier",
+        "desc": "Minify JavaScript-Code, um die Website-Leistung zu optimieren."
+      },
+      "blog_gen": {
+        "name": "KI-Blogpost-Generator",
+        "desc": "Generieren Sie in Sekunden hochwertige, SEO-optimierte Blogposts."
+      },
+      "rewriter": {
+        "name": "KI-Artikel-Herschreiber",
+        "desc": "Schreiben Sie vorhandene Artikel um, um einzigartige Inhalte zu erstellen."
+      },
+      "ideas": {
+        "name": "KI-Content-Ideen-Generator",
+        "desc": "Generieren Sie hochgradig ansprechende und SEO-optimierte Blogpost-Ideen."
+      },
+      "sales_email": {
+        "name": "KI-Verkaufs-E-Mail-Generator",
+        "desc": "Erstellen Sie überzeugende Verkaufs-E-Mails, die konvertieren."
+      },
+      "bio": {
+        "name": "KI-Bio-Generator",
+        "desc": "Generieren Sie ansprechende Bios für Ihre Social-Media-Profile."
+      }
+    }
+  },
+  "tool_page": {
+    "generate": "Generieren",
+    "copy": "In die Zwischenablage kopieren",
+    "download": "Herunterladen",
+    "share": "Teilen",
+    "copied": "Kopiert!",
+    "placeholder_fill": "Füllen Sie das Formular aus und klicken Sie auf Generieren, um die Ergebnisse hier zu sehen.",
+    "meta": {
+      "title": "Meta-Tag-Generator",
+      "subtitle": "Erstellen Sie SEO-freundliche HTML-Meta-Tags für Ihre Website, um die Suchmaschinenrankings zu verbessern.",
+      "form": {
+        "site_title": "Seitentitel",
+        "site_desc": "Seitenbeschreibung",
+        "keywords": "Seiten-Keywords (durch Kommas getrennt)",
+        "author": "Autor",
+        "robots_index": "Robots-Index",
+        "robots_follow": "Robots-Follow",
+        "placeholder_title": "z.B. OptiSEO - Die ultimative SEO-Plattform",
+        "placeholder_desc": "Kurze Beschreibung Ihrer Website...",
+        "placeholder_keywords": "seo, tools, ai, generator",
+        "placeholder_author": "John Doe",
+        "chars": "Zeichen"
+      },
+      "output": "Generierte Tags"
+    },
+    "blog": {
+      "title": "KI-Blogpost-Generator",
+      "subtitle": "Generieren Sie in Sekunden hochwertige, SEO-optimierte Blogposts mit fortschrittlicher KI.",
+      "form": {
+        "topic": "Blog-Thema",
+        "keywords": "Keywords (optional)",
+        "tone": "Tonfall",
+        "length": "Ziellänge",
+        "placeholder_topic": "z.B. Die Zukunft der KI im digitalen Marketing",
+        "placeholder_keywords": "ai, marketing, trends",
+        "tones": {
+          "professional": "Professionell",
+          "casual": "Locker",
+          "informative": "Informativ",
+          "creative": "Kreativ"
+        },
+        "lengths": {
+          "short": "Kurz (~500 Wörter)",
+          "medium": "Mittel (~1000 Wörter)",
+          "long": "Lang (~1500+ Wörter)"
+        }
+      },
+      "output": "Generierter Blogpost"
+    },
+    "robots": {
+      "title": "Robots.txt-Generator",
+      "subtitle": "Erstellen Sie eine robots.txt-Datei, um Suchmaschinen-Crawler bei der Indexierung Ihrer Website zu leiten.",
+      "form": {
+        "allow": "Erlauben",
+        "disallow": "Nicht erlauben",
+        "sitemap": "Sitemap-URL",
+        "add_rule": "Regel hinzufügen",
+        "user_agent": "User-Agent"
+      },
+      "output": "Generierte Robots.txt"
+    },
+    "sitemap": {
+      "title": "XML-Sitemap-Generator",
+      "subtitle": "Generieren Sie eine XML-Sitemap, um Suchmaschinen bei der effizienteren Indexierung Ihrer Website zu helfen.",
+      "form": {
+        "url": "Website-URL",
+        "frequency": "Änderungshäufigkeit",
+        "priority": "Priorität",
+        "frequencies": {
+          "always": "Immer",
+          "hourly": "Stündlich",
+          "daily": "Täglich",
+          "weekly": "Wöchentlich",
+          "monthly": "Monatlich",
+          "yearly": "Jährlich",
+          "never": "Nie"
+        }
+      },
+      "output": "Generierte Sitemap"
+    },
+    "minifier": {
+      "css_title": "CSS-Minifier",
+      "js_title": "JS-Minifier",
+      "subtitle": "Komprimieren Sie Ihren Code, um die Dateigröße zu reduzieren und die Website-Leistung zu verbessern.",
+      "form": {
+        "input": "Eingabecode",
+        "placeholder": "Fügen Sie Ihren Code hier ein..."
+      },
+      "output": "Minifizierter Code"
+    },
+    "rewriter": {
+      "title": "KI-Artikel-Herschreiber",
+      "subtitle": "Schreiben Sie vorhandene Artikel um, um einzigartige und hochwertige Inhalte zu erstellen.",
+      "form": {
+        "content": "Originalinhalt",
+        "placeholder": "Fügen Sie den Artikel ein, den Sie umschreiben möchten..."
+      },
+      "output": "Umgeschriebener Artikel"
+    },
+    "sales_email": {
+      "title": "KI-Verkaufs-E-Mail-Generator",
+      "subtitle": "Erstellen Sie überzeugende Verkaufs-E-Mails, die Leads in Kunden verwandeln.",
+      "form": {
+        "product": "Produkt-/Dienstname",
+        "audience": "Zielgruppe",
+        "benefit": "Hauptvorteil",
+        "placeholder_product": "z.B. OptiSEO Pro",
+        "placeholder_audience": "z.B. Kleinunternehmer",
+        "placeholder_benefit": "z.B. 50% mehr organischer Traffic"
+      },
+      "output": "Generierte Verkaufs-E-Mail"
+    },
+    "bio": {
+      "title": "KI-Bio-Generator",
+      "subtitle": "Generieren Sie ansprechende Bios für Ihre Social-Media-Profile.",
+      "form": {
+        "name": "Ihr Name/Marke",
+        "about": "Über Sie",
+        "platform": "Plattform",
+        "profession": "Beruf/Rolle",
+        "placeholder": "z.B. Softwareentwickler, Digital Marketer, Fitness Coach",
+        "placeholder_name": "z.B. Jane Doe",
+        "placeholder_about": "z.B. Digitaler Nomade, Kaffeeliebhaber, SEO-Experte",
+        "platforms": {
+          "twitter": "Twitter/X",
+          "instagram": "Instagram",
+          "linkedin": "LinkedIn",
+          "tiktok": "TikTok"
+        }
+      },
+      "output": "Generierte Bios"
+    },
+    "ideas": {
+      "title": "KI-Content-Ideen-Generator",
+      "subtitle": "Generieren Sie hochgradig ansprechende und SEO-optimierte Blogpost-Ideen.",
+      "form": {
+        "niche": "Nische/Branche",
+        "placeholder_niche": "z.B. Nachhaltige Mode"
+      },
+      "output": "Content-Ideen"
+    },
+    "schema": {
+      "title": "Schema-Markup-Validator",
+      "subtitle": "Validieren Sie Ihre JSON-LD-strukturierten Daten auf Schema.org-Konformität.",
+      "form": {
+        "input": "JSON-LD-Code",
+        "placeholder": "Fügen Sie Ihr JSON-LD hier ein..."
+      },
+      "output": "Validierungsergebnis"
+    },
+    "density": {
+      "title": "Keyword-Dichte-Prüfer",
+      "subtitle": "Analysieren Sie Ihre Inhalte auf Keyword-Häufigkeit und -Dichte, um Keyword-Stuffing zu vermeiden.",
+      "form": {
+        "content": "Inhalt",
+        "keyword": "Fokus-Keyword",
+        "content_placeholder": "Fügen Sie Ihren Artikel oder Inhalt hier ein...",
+        "keyword_placeholder": "z.B. SEO-Tools"
+      },
+      "stats": {
+        "total": "Gesamtwörter",
+        "count": "Vorkommen",
+        "density": "Dichte"
+      },
+      "top_words": "Meistgenutzte Wörter (3+ Zeichen)",
+      "times": "Mal",
+      "output": "Analyseergebnisse"
+    },
+    "analyzer": {
+      "title": "Content-SEO-Analysator",
+      "subtitle": "Analysieren Sie Ihre Inhalte anhand eines Fokus-Keywords, um sicherzustellen, dass sie für Suchmaschinen optimiert sind.",
+      "form": {
+        "content": "Artikelinhalt",
+        "keyword": "Fokus-Keyword",
+        "title": "Artikeltitel",
+        "content_placeholder": "Fügen Sie Ihren Artikelinhalt hier ein...",
+        "keyword_placeholder": "z.B. SEO-Tools",
+        "title_placeholder": "Geben Sie Ihren Artikeltitel ein..."
+      },
+      "score_label": "Gesamtpunktzahl",
+      "detailed_analysis": "Detaillierte Analyse",
+      "placeholder_fill": "Geben Sie Titel, Inhalt und Keyword ein, um die Analyse anzuzeigen.",
+      "checks": {
+        "title": {
+          "label": "Keyword im Titel",
+          "passed": "Großartig! Ihr Fokus-Keyword ist im Titel.",
+          "failed": "Fügen Sie Ihr Fokus-Keyword zum Titel hinzu."
+        },
+        "intro": {
+          "label": "Keyword in der Einleitung",
+          "passed": "Ausgezeichnet! Das Keyword erscheint in den ersten 100 Wörtern.",
+          "failed": "Versuchen Sie, Ihr Keyword frühzeitig in den Inhalt aufzunehmen."
+        },
+        "density": {
+          "label": "Keyword-Dichte",
+          "passed": "Optimale Keyword-Dichte.",
+          "low": "Die Keyword-Dichte ist zu niedrig. Verwenden Sie es öfter.",
+          "high": "Die Keyword-Dichte ist zu hoch. Vermeiden Sie Keyword-Stuffing."
+        },
+        "length": {
+          "label": "Inhaltslänge",
+          "passed": "Gute Länge ({{count}} Wörter).",
+          "failed": "Der Inhalt ist zu kurz ({{count}} Wörter). Streben Sie mindestens 300 Wörter an."
+        }
+      },
+      "output": "SEO-Punktzahl"
+    },
+    "website_analyzer": {
+      "title": "Website-Analyse-Tool",
+      "subtitle": "Erhalten Sie eine umfassende Analyse der SEO und Leistung Ihrer Website.",
+      "form": {
+        "url_placeholder": "Geben Sie Ihre Website-URL ein..."
+      },
+      "analyze_button": "Analysieren",
+      "results_title": "Analyseergebnisse für",
+      "checks": {
+        "speed": "Seitengeschwindigkeit",
+        "seo": "SEO-Analyse"
+      }
+    }
+  }
+}
