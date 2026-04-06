@@ -1,0 +1,368 @@
+{
+  "home": {
+    "languages_customization": {
+      "title": "Idiomas y opciones de personalización",
+      "desc": "Nuestra plataforma está diseñada para un público global, ofreciendo un soporte integral para múltiples idiomas para garantizar que su contenido llegue a usuarios de todo el mundo. Entendemos que cada negocio tiene necesidades únicas, por lo que ofrecemos amplias opciones de personalización para todas nuestras herramientas. Puede adaptar la configuración, las preferencias y los formatos de salida para alinearlos perfectamente con su identidad de marca y los requisitos específicos del proyecto. Ya sea que sea propietario de una pequeña empresa o una gran empresa, nuestras funciones flexibles le permiten crear contenido que resuene con su público objetivo. Experimente la libertad de adaptar, refinar y optimizar su estrategia de SEO con facilidad, sabiendo que nuestra plataforma crece junto con su negocio. Libere todo el potencial de su contenido con herramientas que son tan versátiles y dinámicas como sus objetivos. Comience a personalizar su experiencia hoy y vea la diferencia que las soluciones personalizadas pueden marcar para su presencia digital."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "items": [
+        { "q": "¿Qué es esta plataforma?", "a": "Esta es una plataforma todo en uno de SEO y generación de contenido diseñada para ayudarle a obtener una mejor clasificación y crear mejor contenido más rápido." },
+        { "q": "¿Es gratis de usar?", "a": "Sí, ofrecemos una gama de herramientas gratuitas para ayudarle a comenzar su viaje de SEO y contenido." },
+        { "q": "¿Cómo funciona el generador de contenido de IA?", "a": "Nuestra IA utiliza modelos de lenguaje avanzados para generar contenido relevante y de alta calidad basado en sus palabras clave y temas de enfoque." },
+        { "q": "¿Puedo usar estas herramientas para proyectos comerciales?", "a": "¡Absolutamente! Nuestras herramientas están diseñadas para ayudarle a escalar su producción de contenido para cualquier proyecto." },
+        { "q": "¿Necesito conocimientos técnicos de SEO?", "a": "En absoluto. Nuestras herramientas están diseñadas para ser fáciles de usar, incluso si no tiene experiencia previa en SEO." },
+        { "q": "¿Con qué frecuencia se actualizan las herramientas?", "a": "Actualizamos nuestras herramientas regularmente para garantizar que se alineen con los últimos algoritmos de los motores de búsqueda y las mejores prácticas de la industria." },
+        { "q": "¿Están seguros mis datos?", "a": "Sí, nos tomamos la seguridad de los datos muy en serio y utilizamos cifrado estándar de la industria para proteger su información." },
+        { "q": "¿Puedo exportar el contenido generado?", "a": "Sí, puede copiar y exportar fácilmente su contenido generado para usarlo en sus proyectos." },
+        { "q": "¿Ofrecen soporte?", "a": "Sí, nuestro equipo de soporte está disponible para ayudarle con cualquier pregunta o problema que pueda encontrar." },
+        { "q": "¿Cómo empiezo?", "a": "¡Simplemente regístrese para obtener una cuenta gratuita y comience a explorar nuestras herramientas de inmediato!" }
+      ]
+    }
+  },
+  "nav": {
+    "home": "Inicio",
+    "tools": "Herramientas",
+    "blog": "Blog",
+    "pricing": "Precios",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "login": "Iniciar sesión",
+    "signup": "Comenzar",
+    "dashboard": "Panel",
+    "logout": "Cerrar sesión"
+  },
+  "hero": {
+    "title": "La plataforma definitiva de SEO y contenido de IA",
+    "subtitle": "Aumente la clasificación de su sitio web y genere contenido de alta calidad con nuestro conjunto de más de 10 herramientas profesionales.",
+    "cta_primary": "Comenzar gratis",
+    "cta_secondary": "Explorar herramientas",
+    "no_card": "Se requiere suscripción mensual",
+    "free_tools": "Más de 10 herramientas gratuitas",
+    "search_placeholder": "Ingrese la URL para el análisis",
+    "analyze_button": "Analizar",
+    "traffic_score": "Puntuación de tráfico",
+    "seo_health": "Salud SEO"
+  },
+  "features": {
+    "title": "Todo lo que necesitas para posicionarte mejor",
+    "subtitle": "Nuestra plataforma combina el análisis SEO tradicional con la generación de IA de vanguardia para brindarle una ventaja injusta.",
+    "seo_analysis": {
+      "title": "Análisis SEO avanzado",
+      "desc": "Herramientas integrales para analizar y optimizar el rendimiento de su sitio web en los motores de búsqueda."
+    },
+    "ai_content": {
+      "title": "Generación de contenido con IA",
+      "desc": "Cree contenido de alta calidad optimizado para SEO en segundos utilizando modelos de IA avanzados."
+    },
+    "fast": {
+      "title": "Rápido como el rayo",
+      "desc": "Obtenga resultados instantáneos para todos sus controles de SEO y solicitudes de generación de contenido."
+    },
+    "secure": {
+      "title": "Seguro y confiable",
+      "desc": "Tus datos están seguros con nosotros. Utilizamos seguridad de nivel empresarial para todas las operaciones."
+    }
+  },
+  "popular": {
+    "title": "Herramientas populares",
+    "subtitle": "Acceda rápidamente a nuestras herramientas de SEO e IA más utilizadas.",
+    "view_all": "Ver todas las herramientas"
+  },
+  "tools": {
+    "search_placeholder": "Buscar una herramienta...",
+    "categories": {
+      "all": "Todas las herramientas",
+      "seo": "Herramientas SEO",
+      "minifiers": "Minificadores",
+      "validators": "Validadores",
+      "keyword": "Palabras clave y clasificación",
+      "analysis": "Análisis de sitios web",
+      "technical": "SEO técnico",
+      "usability": "Usabilidad",
+      "performance": "Rendimiento",
+      "social": "Social",
+      "security": "Seguridad",
+      "technology": "Tecnología",
+      "ai_content": "Redacción de contenido con IA",
+      "ai_email": "Correos y ventas con IA",
+      "ai_ideas": "Ideas y planificación con IA",
+      "ai_text": "Mejora de texto con IA",
+      "ai_headlines": "Titulares y títulos con IA",
+      "ai_business": "Herramientas de negocios con IA",
+      "ai_seo": "Herramientas SEO con IA",
+      "ai_social": "Redes sociales con IA"
+    }
+  },
+  "about": {
+    "title": "Empoderando a los creadores con",
+    "title_accent": "herramientas inteligentes",
+    "subtitle": "Somos un equipo de expertos en SEO, desarrolladores y entusiastas de la IA dedicados a construir la plataforma más completa para especialistas en marketing digital y creadores de contenido.",
+    "stats": {
+      "tools": "Herramientas creadas",
+      "tools_count": "50+",
+      "users": "Usuarios activos",
+      "users_count": "100k",
+      "generations": "Generaciones",
+      "generations_count": "5M+",
+      "uptime": "Tiempo de actividad",
+      "uptime_count": "99.9%"
+    },
+    "values": {
+      "title": "Nuestros valores fundamentales",
+      "subtitle": "Todo lo que construimos está guiado por estos principios fundamentales.",
+      "accuracy_title": "Precisión primero",
+      "accuracy_desc": "Priorizamos la precisión de los datos en nuestras herramientas de SEO y la corrección de los hechos en nuestros modelos de generación de IA.",
+      "speed_title": "Rápido como el rayo",
+      "speed_desc": "El tiempo es dinero. Nuestra infraestructura está optimizada para ofrecer resultados en milisegundos, no en minutos.",
+      "privacy_title": "Privacidad y seguridad",
+      "privacy_desc": "Tus datos son tuyos. Empleamos seguridad de nivel empresarial y nunca entrenamos nuestros modelos públicos con tus datos privados.",
+      "community_title": "Impulsado por la comunidad",
+      "community_desc": "Escuchamos a nuestros usuarios. La mayoría de nuestras nuevas funciones y herramientas provienen directamente de los comentarios de la comunidad."
+    },
+    "team": {
+      "title": "Conoce al equipo",
+      "subtitle": "Las personas apasionadas detrás de la plataforma.",
+      "roles": {
+        "ceo": "CEO y Fundador",
+        "head_ai": "Jefe de IA",
+        "lead_dev": "Desarrollador Principal"
+      }
+    }
+  },
+  "pricing": {
+    "title": "Precios simples y transparentes",
+    "subtitle": "Obtenga acceso ilimitado a todas nuestras herramientas de SEO e IA para siempre. Pago único, sin tarifas recurrentes.",
+    "month": "pago único",
+    "popular": "Mejor Valor",
+    "pro": {
+      "name": "Pro de por vida",
+      "description": "Acceso permanente a todas las funciones profesionales y futuras actualizaciones.",
+      "cta": "Obtener acceso de por vida",
+      "features": {
+        "tools": "Usos ilimitados de herramientas",
+        "ai": "Generaciones ilimitadas de IA",
+        "seo": "Análisis SEO avanzado",
+        "support": "Soporte prioritario",
+        "export": "Exportar resultados (PDF)",
+        "ads": "Sin anuncios",
+        "api": "Acceso a la API"
+      }
+    }
+  },
+  "contact": {
+    "title": "Ponte en contacto",
+    "subtitle": "¿Tienes alguna pregunta, comentario o necesitas ayuda? Estamos aquí para ayudarte.",
+    "info_title": "Información de contacto",
+    "info_desc": "Complete el formulario y nuestro equipo se comunicará con usted dentro de las 24 horas. Para consultas urgentes, llámenos directamente.",
+    "email": {
+      "title": "Envíanos un correo",
+      "support": "support@seoai.example.com",
+      "sales": "sales@seoai.example.com"
+    },
+    "phone": {
+      "title": "Llámanos",
+      "number": "+1 (555) 123-4567",
+      "hours": "Lun-Vie de 9am a 6pm EST"
+    },
+    "visit": {
+      "title": "Visítanos",
+      "address": "123 Innovation Drive, Tech District, CA 94105, Estados Unidos"
+    },
+    "form": {
+      "title": "Enviar un mensaje",
+      "first_name": "Nombre",
+      "last_name": "Apellido",
+      "email": "Correo electrónico",
+      "subject": "Asunto",
+      "message": "Mensaje",
+      "submit": "Enviar mensaje",
+      "placeholder_first": "Juan",
+      "placeholder_last": "Pérez",
+      "placeholder_email": "juan@example.com",
+      "placeholder_message": "¿Cómo podemos ayudarte?",
+      "subjects": {
+        "general": "Consulta general",
+        "support": "Soporte técnico",
+        "billing": "Pregunta de facturación",
+        "partnership": "Asociación"
+      }
+    }
+  },
+  "footer": {
+    "desc": "La plataforma definitiva para herramientas de SEO y generación de contenido de IA. Mejore sus clasificaciones y cree contenido increíble en segundos.",
+    "product": "Producto",
+    "company": "Compañía",
+    "privacy": "Política de privacidad",
+    "terms": "Términos de servicio",
+    "subscribe": "Suscribirse",
+    "subscribe_desc": "Reciba las últimas noticias y actualizaciones en su bandeja de entrada.",
+    "email_placeholder": "Ingrese su correo electrónico",
+    "subscribe_btn": "Suscribirse",
+    "rights": "Todos los derechos reservados."
+  },
+  "blog": {
+    "title": "Nuestro Blog",
+    "subtitle": "Perspectivas, estrategias y actualizaciones del mundo del SEO y la Inteligencia Artificial.",
+    "load_more": "Cargar más artículos",
+    "posts": {
+      "post1": {
+        "title": "10 estrategias de SEO para dominar los rankings de búsqueda en 2026",
+        "excerpt": "Descubra las últimas estrategias y actualizaciones de algoritmos que están dando forma al futuro de la optimización de motores de búsqueda."
+      },
+      "post2": {
+        "title": "Cómo la IA está revolucionando la creación de contenido",
+        "excerpt": "Aprenda cómo la inteligencia artificial está cambiando la forma en que escribimos, editamos y optimizamos el contenido para la web."
+      },
+      "post3": {
+        "title": "La guía definitiva para el SEO técnico",
+        "excerpt": "Una guía completa para solucionar problemas técnicos que podrían estar impidiendo que su sitio web se posicione mejor."
+      },
+      "post4": {
+        "title": "Dominando la investigación de palabras clave con herramientas de IA",
+        "excerpt": "Deja de adivinar y empieza a saber. Cómo utilizar la IA para encontrar palabras clave de baja competencia y alto volumen."
+      },
+      "post5": {
+        "title": "Por qué la velocidad del sitio es más importante que nunca",
+        "excerpt": "Los Core Web Vitals son cruciales. Aquí se explica cómo optimizar la velocidad de su sitio y pasar las pruebas de Google."
+      },
+      "post6": {
+        "title": "SEO local: cómo posicionarse en el paquete local",
+        "excerpt": "Una guía paso a paso para optimizar su Perfil de Empresa en Google y dominar los resultados de búsqueda local."
+      }
+    }
+  },
+  "login": {
+    "back_home": "Volver al inicio",
+    "welcome": "Bienvenido de nuevo",
+    "subtitle": "Inicie sesión en su cuenta para continuar",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "forgot": "¿Olvidaste tu contraseña?",
+    "submit": "Iniciar sesión",
+    "no_account": "¿No tienes una cuenta?",
+    "signup": "Registrarse"
+  },
+  "signup": {
+    "back_home": "Volver al inicio",
+    "title": "Crear cuenta",
+    "subtitle": "Únete a nosotros y comienza a optimizar tu contenido",
+    "name": "Nombre completo",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "submit": "Crear cuenta",
+    "has_account": "¿Ya tienes una cuenta?",
+    "login": "Iniciar sesión"
+  },
+  "dashboard": {
+    "welcome": "Bienvenido",
+    "overview": "Aquí tienes un resumen de tu actividad y uso.",
+    "stats": {
+      "tools": "Herramientas utilizadas",
+      "ai": "Generaciones de IA",
+      "time": "Tiempo ahorrado",
+      "plan": "Plan actual"
+    },
+    "recent": "Actividad reciente",
+    "saved": "Elementos guardados",
+    "view_result": "Ver resultado",
+    "no_saved": "Aún no hay elementos guardados.",
+    "activity": {
+      "meta": "Usó el Generador de Meta Tags",
+      "time": "Hace 2 horas"
+    }
+  },
+  "tools_list": {
+    "title": "Herramientas de SEO e IA",
+    "categories_title": "Categorías",
+    "no_tools": "No se encontraron herramientas",
+    "no_tools_desc": "Intente ajustar su búsqueda o filtro de categoría.",
+    "items": {
+      "meta_tag": {
+        "name": "Generador de Meta Tags",
+        "desc": "Genere meta tags amigables para el SEO para su sitio web."
+      },
+      "robots": {
+        "name": "Generador de Robots.txt",
+        "desc": "Cree un archivo robots.txt para guiar a los rastreadores de los motores de búsqueda."
+      },
+      "sitemap": {
+        "name": "Generador de XML Sitemap",
+        "desc": "Genere un mapa del sitio XML para ayudar a los motores de búsqueda a indexar su sitio."
+      },
+      "schema": {
+        "name": "Validador de Marcado de Esquema",
+        "desc": "Valide sus datos estructurados JSON-LD para cumplir con Schema.org."
+      },
+      "density": {
+        "name": "Verificador de Densidad de Palabras Clave",
+        "desc": "Analice su contenido para determinar la frecuencia y densidad de las palabras clave."
+      },
+      "analyzer": {
+        "name": "Analizador de SEO de Contenido",
+        "desc": "Analice su contenido con una palabra clave de enfoque para la optimización SEO."
+      },
+      "css_min": {
+        "name": "Minificador de CSS",
+        "desc": "Comprima su código CSS para reducir el tamaño del archivo y mejorar los tiempos de carga."
+      },
+      "js_min": {
+        "name": "Minificador de JS",
+        "desc": "Minifique el código JavaScript para optimizar el rendimiento del sitio web."
+      },
+      "blog_gen": {
+        "name": "Generador de Blog con IA",
+        "desc": "Genere publicaciones de blog de alta calidad y optimizadas para SEO en segundos."
+      },
+      "rewriter": {
+        "name": "Reescritor de Artículos con IA",
+        "desc": "Reescriba artículos existentes para crear contenido único."
+      },
+      "ideas": {
+        "name": "Generador de Ideas de Contenido con IA",
+        "desc": "Genere ideas para publicaciones de blog altamente atractivas y optimizadas para SEO."
+      },
+      "sales_email": {
+        "name": "Generador de Correos de Ventas con IA",
+        "desc": "Cree correos electrónicos de ventas convincentes que conviertan."
+      },
+      "bio": {
+        "name": "Generador de Bio con IA",
+        "desc": "Genere biografías atractivas para sus perfiles de redes sociales."
+      },
+      "website_analyzer": {
+        "name": "Herramienta de análisis de sitios web",
+        "desc": "Obtenga un análisis completo del SEO y el rendimiento de su sitio web."
+      }
+    }
+  },
+  "tool_page": {
+    "website_analyzer": {
+      "title": "Herramienta de análisis de sitios web",
+      "subtitle": "Obtenga un análisis completo del SEO y el rendimiento de su sitio web.",
+      "form": {
+        "url_placeholder": "Ingrese la URL de su sitio web..."
+      },
+      "analyze_button": "Analizar",
+      "results_title": "Resultados del análisis para",
+      "checks": {
+        "speed": "Velocidad de página",
+        "seo": "Análisis SEO"
+      }
+    }
+  },
+  "popular_tools_items": {
+    "meta": { "name": "Generador de Meta Tags", "category": "Herramientas SEO" },
+    "blog": { "name": "Generador de Blog con IA", "category": "Contenido de IA" },
+    "keyword": { "name": "Verificador de Densidad de Palabras Clave", "category": "Análisis" },
+    "speed": { "name": "Probador de Velocidad del Sitio", "category": "Rendimiento" }
+  },
+  "stats": {
+    "tools_count": "50+",
+    "tools_label": "Herramientas profesionales",
+    "content_count": "1M+",
+    "content_label": "Contenido generado",
+    "users_count": "100k+",
+    "users_label": "Usuarios felices"
+  }
+}

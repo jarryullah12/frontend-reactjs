@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  /* Custom #4f39f6 Indigo Palette */
+  --color-indigo-50: #efedfe;
+  --color-indigo-100: #e2dffd;
+  --color-indigo-200: #cbbdfa;
+  --color-indigo-300: #aa95f6;
+  --color-indigo-400: #8b7af9;
+  --color-indigo-500: #614df7;
+  --color-indigo-600: #4f39f6;
+  --color-indigo-700: #3e2cd4;
+  --color-indigo-800: #3326ad;
+  --color-indigo-900: #2a208c;
+  --color-indigo-950: #18115c;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+  }
+
+  body {
+    @apply bg-white text-gray-900 antialiased selection:bg-indigo-100 selection:text-indigo-900;
+  }
+
+  .dark body {
+    @apply bg-gray-950 text-gray-100 selection:bg-indigo-900/50 selection:text-indigo-100;
+  }
+}
+
+  @keyframes progress-indeterminate {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  .animate-progress-indeterminate {
+    animation: progress-indeterminate 1.5s infinite linear;
+  }
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-600;
+}
+
+/* Quill Editor Styles for Frontend & Admin */
+.ql-align-center { text-align: center !important; }
+.ql-align-right { text-align: right !important; }
+.ql-align-justify { 
+  text-align: left !important; /* Override justify to prevent huge gaps */
+}
+.ql-video { width: 100%; height: auto; aspect-ratio: 16/9; }
+
+.ql-container {
+  font-family: inherit !important;
+  font-size: 14px !important;
+  border-bottom-left-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+}
+.quill .ql-editor {
+  min-height: 300px;
+  max-height: 400px;
+  overflow-y: auto !important;
+}
+.ql-toolbar {
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  background-color: #f9fafb;
+}
+.dark .ql-toolbar, .dark .ql-container {
+  border-color: #374151 !important;
+}
+.dark .ql-toolbar {
+  background-color: #1f2937;
+}
+.dark .ql-stroke { stroke: #d1d5db !important; }
+.dark .ql-fill { fill: #d1d5db !important; }
+.dark .ql-picker { color: #d1d5db !important; }
+
+/* Fix Quill lists and indents */
+.ql-editor {
+  font-weight: 400 !important;
+  line-height: 1.8 !important;
+  font-size: 14px !important;
+  color: #374151 !important; /* text-gray-700 */
+  letter-spacing: normal !important;
+  font-family: var(--font-sans) !important;
+  text-rendering: optimizeLegibility !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  white-space: normal !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
+  -webkit-hyphens: none !important;
+  hyphens: none !important;
+  box-sizing: border-box !important;
+}
+.ql-editor p, .ql-editor div, .ql-editor h1, .ql-editor h2, .ql-editor h3, .ql-editor h4, .ql-editor h5, .ql-editor h6 {
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  max-width: 100% !important;
+}
+.ql-editor span {
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  /* Do NOT set display:block on span - it breaks inline text flow */
+}
+.ql-editor pre {
+  white-space: pre-wrap !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  display: block !important;
+}
+.ql-editor a {
+  overflow-wrap: break-word !important;
+  word-break: break-all !important;
+}
+.blog-content {
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Blog content display styles */
+.blog-content .ql-editor {
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+  max-height: none !important;
+  min-height: auto !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  -webkit-hyphens: none !important;
+  hyphens: none !important;
+}
+
+/* Clean blog prose renderer - used in BlogPost.tsx display */
+/* Uses !important to override Quill's globally injected white-space:pre-wrap */
+.blog-prose {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  font-family: var(--font-sans) !important;
+  font-size: 1rem !important;
+  line-height: 1.8 !important;
+  color: #374151 !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  white-space: normal !important;
+  -webkit-hyphens: none !important;
+  hyphens: none !important;
+}
+.dark .blog-prose {
+  color: #d1d5db !important;
+}
+/* Override ALL child elements — Quill CSS bleeds globally */
+.blog-prose * {
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  -webkit-hyphens: none !important;
+  hyphens: none !important;
+}
+.blog-prose p {
+  margin-bottom: 1em !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+}
+.blog-prose h1, .blog-prose h2, .blog-prose h3,
+.blog-prose h4, .blog-prose h5, .blog-prose h6 {
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  margin-top: 1.5em !important;
+  margin-bottom: 0.5em !important;
+}
+.blog-prose h1 { font-size: 1.75rem !important; }
+.blog-prose h2 { font-size: 1.4rem !important; }
+.blog-prose h3 { font-size: 1.2rem !important; }
+.blog-prose h4 { font-size: 1.1rem !important; }
+.blog-prose strong, .blog-prose b { font-weight: 700 !important; }
+.blog-prose em, .blog-prose i { font-style: italic !important; }
+.blog-prose a { color: #4f39f6 !important; text-decoration: underline !important; overflow-wrap: break-word !important; word-break: normal !important; }
+.blog-prose ul { list-style-type: disc !important; padding-left: 1.5em !important; margin-bottom: 1em !important; }
+.blog-prose ol { list-style-type: decimal !important; padding-left: 1.5em !important; margin-bottom: 1em !important; }
+.blog-prose li { margin: 0.25em 0 !important; padding-left: 0.5em !important; }
+.blog-prose blockquote { border-left: 4px solid #4f39f6 !important; padding-left: 1em !important; margin: 1em 0 !important; color: #6b7280 !important; }
+.blog-prose pre { white-space: pre-wrap !important; word-break: normal !important; overflow-wrap: break-word !important; background: #f3f4f6 !important; padding: 1em !important; border-radius: 0.5rem !important; }
+.blog-prose img { max-width: 100% !important; height: auto !important; border-radius: 0.5rem !important; display: block !important; }
+.blog-prose .ql-align-center { text-align: center !important; }
+.blog-prose .ql-align-right { text-align: right !important; }
+.blog-prose .ql-align-justify { text-align: left !important; }
+.blog-prose .ql-indent-1 { padding-left: 3em; }
+.blog-prose .ql-indent-2 { padding-left: 6em; }
+.blog-prose .ql-indent-3 { padding-left: 9em; }
+
+/* Images aur Videos ko container ke andar rakhne ke liye */
+.blog-content .ql-editor img,
+.blog-content .ql-editor iframe {
+  max-width: 100%;
+  height: auto;
+}
+.dark .ql-editor {
+  color: #d1d5db !important; /* text-gray-300 */
+}
+.ql-editor p {
+  margin-bottom: 1em !important;
+  font-weight: 400 !important;
+}
+.ql-editor h1, .ql-editor h2, .ql-editor h3, .ql-editor h4, .ql-editor h5, .ql-editor h6 {
+  margin-top: 1.5em !important;
+  margin-bottom: 0.5em !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  letter-spacing: normal !important;
+}
+.ql-editor h1 { font-size: 16px !important; }
+.ql-editor h2 { font-size: 14px !important; }
+.ql-editor h3 { font-size: 14px !important; }
+.ql-editor h4 { font-size: 14px !important; }
+
+.ql-editor ul, .ql-editor ol {
+  padding-left: 1.5em !important;
+  margin-bottom: 1em !important;
+  list-style-position: outside !important;
+}
+.ql-editor ul {
+  list-style-type: disc !important;
+}
+.ql-editor ol {
+  list-style-type: decimal !important;
+}
+.ql-editor ul > li {
+  list-style-type: disc !important;
+}
+.ql-editor ol > li {
+  list-style-type: decimal !important;
+}
+.ql-editor li {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  padding-left: 0.5em !important;
+  display: list-item !important;
+  font-weight: 400 !important;
+}
+.ql-editor strong, .ql-editor b {
+  font-weight: 700 !important;
+}
+.ql-editor[data-placeholder]:empty::before {
+  font-style: italic;
+}
+.ql-indent-1 { padding-left: 3em !important; }
+.ql-indent-2 { padding-left: 6em !important; }
+.ql-indent-3 { padding-left: 9em !important; }
+.ql-indent-4 { padding-left: 12em !important; }
+.ql-indent-5 { padding-left: 15em !important; }
+.ql-indent-6 { padding-left: 18em !important; }
+.ql-indent-7 { padding-left: 21em !important; }
+.ql-indent-8 { padding-left: 24em !important; }
+
+.ql-editor img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 0 !important;
+  display: block;
+}
+
+/* Ensure no extra padding when used in blog post */
+.blog-content .ql-editor {
+  padding: 0 !important;
+}
+
