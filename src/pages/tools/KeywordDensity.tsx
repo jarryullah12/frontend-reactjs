@@ -1,14 +1,12 @@
 import { SEO } from '../../components/SEO';
 import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Hash, BarChart3, Download } from 'lucide-react';
-import { usePdfGenerator } from '../../hooks/usePdfGenerator';
+import { Hash, BarChart3 } from 'lucide-react';
 import { ToolDescription } from '../../components/ToolDescription';
 import { toolDescriptions } from '../../data/toolDescriptions';
 
 export function KeywordDensity() {
   const { t } = useTranslation();
-  const { downloadAsPdf } = usePdfGenerator();
   const [text, setText] = useState('SEO is the process of optimizing a website for search engines. Good SEO practices improve rankings. SEO tools help analyze SEO performance.');
   const [targetKeyword, setTargetKeyword] = useState('SEO');
 
@@ -50,10 +48,6 @@ export function KeywordDensity() {
 
     return { totalWords, keywordCount, density, topWords };
   }, [text, targetKeyword]);
-
-  const handleDownloadPdf = () => {
-    downloadAsPdf('density-result', 'keyword-density-report.pdf');
-  };
 
   return (
     <>
@@ -98,15 +92,6 @@ export function KeywordDensity() {
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
               <BarChart3 className="w-5 h-5 text-[#4f39f6]" /> {t('tool_page.density.output')}
             </h3>
-            {analysis && (
-              <button
-                onClick={handleDownloadPdf}
-                className="p-2 text-gray-500 hover:text-[#4f39f6] dark:text-gray-400 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors"
-                title={t('tool_page.download')}
-              >
-                <Download className="w-4 h-4" />
-              </button>
-            )}
           </div>
           
           <div id="density-result" className="flex-1 bg-white dark:bg-gray-950 rounded-xl p-6 overflow-auto border border-gray-200 dark:border-gray-700 shadow-inner">

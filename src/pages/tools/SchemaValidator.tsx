@@ -1,14 +1,12 @@
 import { SEO } from '../../components/SEO';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Shield, AlertTriangle, CheckCircle2, Code, Download } from 'lucide-react';
-import { usePdfGenerator } from '../../hooks/usePdfGenerator';
+import { Shield, AlertTriangle, CheckCircle2, Code } from 'lucide-react';
 import { ToolDescription } from '../../components/ToolDescription';
 import { toolDescriptions } from '../../data/toolDescriptions';
 
 export function SchemaValidator() {
   const { t } = useTranslation();
-  const { downloadAsPdf } = usePdfGenerator();
   const [jsonInput, setJsonInput] = useState('{\n  "@context": "https://schema.org",\n  "@type": "Article",\n  "headline": "Understanding SEO",\n  "author": {\n    "@type": "Person",\n    "name": "Jane Doe"\n  }\n}');
   const [validationResult, setValidationResult] = useState<{ isValid: boolean; message: string; errors: string[] } | null>(null);
 
@@ -38,10 +36,6 @@ export function SchemaValidator() {
     } catch (e: any) {
       setValidationResult({ isValid: false, message: 'Invalid JSON format', errors: [e.message] });
     }
-  };
-
-  const handleDownloadPdf = () => {
-    downloadAsPdf('schema-result', 'schema-validation-report.pdf');
   };
 
   return (
@@ -76,15 +70,6 @@ export function SchemaValidator() {
         <div className="bg-gray-50 dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 flex flex-col">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('tool_page.schema.output')}</h3>
-            {validationResult && (
-              <button
-                onClick={handleDownloadPdf}
-                className="p-2 text-gray-500 hover:text-[#4f39f6] dark:text-gray-400 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors"
-                title={t('tool_page.download')}
-              >
-                <Download className="w-4 h-4" />
-              </button>
-            )}
           </div>
           
           <div id="schema-result" className="flex-1 bg-white dark:bg-gray-950 rounded-xl p-6 overflow-auto border border-gray-200 dark:border-gray-700 shadow-inner">

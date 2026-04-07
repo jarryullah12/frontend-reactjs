@@ -118,17 +118,10 @@ export function About() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {[
-              { name: 'Alex Johnson', role: t('about.team.roles.ceo') },
-              { name: 'Sarah Williams', role: 'Head of SEO Tools' },
-              { name: 'Michael Brown', role: t('about.team.roles.lead_dev') },
-            ].map((member, i) => (
-              <div key={i} className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">{member.name}</h3>
-                <p className="text-indigo-600 dark:text-indigo-400 font-medium">{member.role}</p>
-              </div>
-            ))}
+          <div className="text-center p-12 bg-white dark:bg-gray-800 rounded-3xl border border-gray-200 dark:border-gray-700 shadow-sm max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
+              {t('about.team.description')}
+            </p>
           </div>
         </div>
       </section>

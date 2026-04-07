@@ -140,6 +140,7 @@
     "team": {
       "title": "Meet the Team",
       "subtitle": "The passionate people behind the platform.",
+      "description": "Our dedicated team of SEO experts, developers, and content strategists works to build high-quality tools for marketers and businesses.",
       "roles": {
         "ceo": "CEO & Founder",
         "head_ai": "Head of AI",

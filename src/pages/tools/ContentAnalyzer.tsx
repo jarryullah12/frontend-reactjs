@@ -1,14 +1,12 @@
 import { SEO } from '../../components/SEO';
 import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { BarChart, CheckCircle2, AlertTriangle, XCircle, Search, Download } from 'lucide-react';
-import { usePdfGenerator } from '../../hooks/usePdfGenerator';
+import { BarChart, CheckCircle2, AlertTriangle, XCircle, Search } from 'lucide-react';
 import { ToolDescription } from '../../components/ToolDescription';
 import { toolDescriptions } from '../../data/toolDescriptions';
 
 export function ContentAnalyzer() {
   const { t } = useTranslation();
-  const { downloadAsPdf } = usePdfGenerator();
   const [title, setTitle] = useState('10 Best SEO Tools for 2026');
   const [content, setContent] = useState('SEO tools are essential for any digital marketing strategy. The best SEO tools help you analyze your website, find keywords, and track your rankings over time. In this article, we will look at the top 10 SEO tools you need to use in 2026.');
   const [keyword, setKeyword] = useState('SEO tools');
@@ -76,10 +74,6 @@ export function ContentAnalyzer() {
     };
   }, [title, content, keyword, t]);
 
-  const handleDownloadPdf = () => {
-    downloadAsPdf('analyzer-result', 'content-analysis-report.pdf');
-  };
-
   return (
     <>
       <SEO title="Content Analyzer - OptiSEO Tools" description="Use our free Content Analyzer tool to optimize your website." />
@@ -134,15 +128,6 @@ export function ContentAnalyzer() {
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
               <Search className="w-5 h-5 text-[#4f39f6]" /> {t('tool_page.analyzer.output')}
             </h3>
-            {analysis && (
-              <button
-                onClick={handleDownloadPdf}
-                className="p-2 text-gray-500 hover:text-[#4f39f6] dark:text-gray-400 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors"
-                title={t('tool_page.download')}
-              >
-                <Download className="w-4 h-4" />
-              </button>
-            )}
           </div>
           
           <div id="analyzer-result" className="flex-1 bg-white dark:bg-gray-950 rounded-xl p-6 overflow-auto border border-gray-200 dark:border-gray-700 shadow-inner">
