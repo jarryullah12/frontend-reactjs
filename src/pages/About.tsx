@@ -33,29 +33,6 @@ export function About() {
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-16 border-y border-gray-200 dark:border-gray-800">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-4xl font-bold text-[#4f39f6] dark:text-[#4f39f6] mb-2">{t('about.stats.tools_count')}</div>
-              <div className="text-sm font-medium text-gray-500 uppercase tracking-wider">{t('about.stats.tools')}</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-[#4f39f6] dark:text-[#4f39f6] mb-2">{t('about.stats.users_count')}</div>
-              <div className="text-sm font-medium text-gray-500 uppercase tracking-wider">{t('about.stats.users')}</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-[#4f39f6] dark:text-[#4f39f6] mb-2">{t('about.stats.generations_count')}</div>
-              <div className="text-sm font-medium text-gray-500 uppercase tracking-wider">{t('about.stats.generations')}</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-[#4f39f6] dark:text-[#4f39f6] mb-2">{t('about.stats.uptime_count')}</div>
-              <div className="text-sm font-medium text-gray-500 uppercase tracking-wider">{t('about.stats.uptime')}</div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Values */}
       <section className="py-24">

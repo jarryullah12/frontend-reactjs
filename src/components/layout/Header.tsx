@@ -26,29 +26,27 @@ export function Header() {
     navigate('/login');
   };
 
-  const tools = [
-    { id: 'meta-tag-generator', name: 'Meta Tag Generator' },
-    { id: 'robots-txt-generator', name: 'Robots.txt Generator' },
-    { id: 'xml-sitemap-generator', name: 'XML Sitemap Generator' },
-    { id: 'schema-validator', name: 'Schema Validator' },
-    { id: 'keyword-density', name: 'Keyword Density Checker' },
-    { id: 'website-analyzer', name: 'Website Analyzer' },
-    { id: 'content-analyzer', name: 'Content Analyzer' },
-    { id: 'css-minifier', name: 'CSS Minifier' },
-    { id: 'js-minifier', name: 'JS Minifier' },
-    { id: 'ai-blog-generator', name: 'AI Blog Generator' },
-    { id: 'ai-article-rewriter', name: 'AI Article Rewriter' },
-    { id: 'ai-content-ideas', name: 'AI Content Ideas' },
-    { id: 'ai-sales-email', name: 'AI Sales Email' },
-    { id: 'ai-social-bio', name: 'AI Social Bio' },
-    { id: 'backlink-checker', name: 'Backlink Checker' },
-    { id: 'plagiarism-checker', name: 'Plagiarism Checker' },
-    { id: 'ai-product-description', name: 'AI Product Description' },
-    { id: 'privacy-policy-generator', name: 'Privacy Policy Generator' },
-    { id: 'da-checker', name: 'DA Checker' },
-    { id: 'broken-link-checker', name: 'Broken Link Checker' },
-    { id: 'ai-social-caption', name: 'AI Social Caption' },
-    { id: 'url-encoder-decoder', name: 'URL Encoder/Decoder' },
+      const tools = [
+    { id: 'meta-tag-generator', name: t('tools_list.items.meta_tag.name') },
+    { id: 'robots-txt-generator', name: t('tools_list.items.robots.name') },
+    { id: 'xml-sitemap-generator', name: t('tools_list.items.sitemap.name') },
+    { id: 'backlink-checker', name: t('tools_list.items.backlink_checker.name') },
+    { id: 'da-checker', name: t('tools_list.items.da_checker.name') },
+    { id: 'broken-link-checker', name: t('tools_list.items.broken_link.name') },
+    { id: 'schema-validator', name: t('tools_list.items.schema.name') },
+    { id: 'plagiarism-checker', name: t('tools_list.items.plagiarism_checker.name') },
+    { id: 'keyword-density', name: t('tools_list.items.density.name') },
+    { id: 'website-analyzer', name: t('tools_list.items.website_analyzer.name') },
+    { id: 'content-analyzer', name: t('tools_list.items.analyzer.name') },
+    { id: 'css-minifier', name: t('tools_list.items.css_min.name') },
+    { id: 'js-minifier', name: t('tools_list.items.js_min.name') },
+    { id: 'ai-blog-generator', name: t('tools_list.items.blog_gen.name') },
+    { id: 'ai-article-rewriter', name: t('tools_list.items.rewriter.name') },
+    { id: 'ai-product-description', name: t('tools_list.items.product_description.name') },
+    { id: 'ai-content-ideas', name: t('tools_list.items.ideas.name') },
+    { id: 'ai-sales-email', name: t('tools_list.items.sales_email.name') },
+    { id: 'ai-social-bio', name: t('tools_list.items.bio.name') },
+    { id: 'ai-social-caption', name: t('tools_list.items.social_caption.name') },
     { id: 'keyword-suggestion-tool', name: 'Keyword Suggestion Tool' },
     { id: 'long-tail-keyword-generator', name: 'Long Tail Keyword Generator' },
     { id: 'page-authority-checker', name: 'Page Authority Checker' },
@@ -79,6 +77,58 @@ export function Header() {
     { id: 'twitter-card-generator', name: 'Twitter Card Generator' },
     { id: 'canonical-tag-generator', name: 'Canonical Tag Generator' },
     { id: 'http-headers-checker', name: 'HTTP Headers Checker' },
+    { id: 'privacy-policy-generator', name: t('tools_list.items.privacy_policy.name') },
+    { id: 'url-encoder-decoder', name: t('tools_list.items.url_codec.name') },
+    { id: 'keyword-clustering-tool', name: 'Keyword Clustering Tool' },
+    { id: 'serp-simulator', name: 'SERP Simulator' },
+    { id: 'lsi-keyword-generator', name: 'LSI Keyword Generator' },
+    { id: 'bulk-url-checker', name: 'Bulk URL Checker' },
+    { id: 'hreflang-tag-generator', name: 'Hreflang Tag Generator' },
+    { id: 'schema-generator-faq', name: 'Schema Generator (FAQ)' },
+    { id: 'schema-generator-local', name: 'Schema Generator (Local Business)' },
+    { id: 'schema-generator-review', name: 'Schema Generator (Review)' },
+    { id: 'meta-description-generator', name: 'Meta Description Generator' },
+    { id: 'title-tag-generator', name: 'Title Tag Generator' },
+    { id: 'blog-post-title-generator', name: 'Blog Post Title Generator' },
+    { id: 'content-outline-generator', name: 'Content Outline Generator' },
+    { id: 'paragraph-rewriter', name: 'Paragraph Rewriter' },
+    { id: 'sentence-expander', name: 'Sentence Expander' },
+    { id: 'text-summarizer', name: 'Text Summarizer' },
+    { id: 'readability-improver', name: 'Readability Improver' },
+    { id: 'keyword-typo-generator', name: 'Keyword Typo Generator' },
+    { id: 'google-autocomplete-extractor', name: 'Google Autocomplete Extractor' },
+    { id: 'youtube-keyword-tool', name: 'YouTube Keyword Tool' },
+    { id: 'amazon-keyword-tool', name: 'Amazon Keyword Tool' },
+    { id: 'bing-keyword-tool', name: 'Bing Keyword Tool' },
+    { id: 'yandex-keyword-tool', name: 'Yandex Keyword Tool' },
+    { id: 'app-store-keyword-tool', name: 'App Store Keyword Tool' },
+    { id: 'seo-report-generator', name: 'SEO Report Generator' },
+    { id: 'competitor-analysis-tool', name: 'Competitor Analysis Tool' },
+    { id: 'backlink-maker', name: 'Backlink Maker' },
+    { id: 'link-value-calculator', name: 'Link Value Calculator' },
+    { id: 'website-speed-test', name: 'Website Speed Test' },
+    { id: 'mobile-friendly-test', name: 'Mobile Friendly Test' },
+    { id: 'core-web-vitals-checker', name: 'Core Web Vitals Checker' },
+    { id: 'html-validator', name: 'HTML Validator' },
+    { id: 'css-validator', name: 'CSS Validator' },
+    { id: 'xml-sitemap-formatter', name: 'XML Sitemap Formatter' },
+    { id: 'robots-txt-tester', name: 'Robots.txt Tester' },
+    { id: 'redirect-checker', name: 'Redirect Checker' },
+    { id: 'http2-checker', name: 'HTTP/2 Checker' },
+    { id: 'dns-lookup-tool', name: 'DNS Lookup Tool' },
+    { id: 'whois-lookup', name: 'WHOIS Lookup' },
+    { id: 'ip-location-finder', name: 'IP Location Finder' },
+    { id: 'reverse-ip-domain-checker', name: 'Reverse IP Domain Checker' },
+    { id: 'server-port-scanner', name: 'Server Port Scanner' },
+    { id: 'email-privacy-checker', name: 'Email Privacy Checker' },
+    { id: 'safe-browsing-checker', name: 'Safe Browsing Checker' },
+    { id: 'google-cache-checker', name: 'Google Cache Checker' },
+    { id: 'mozrank-checker', name: 'Mozrank Checker' },
+    { id: 'alexa-rank-checker', name: 'Alexa Rank Checker' },
+    { id: 'keyword-roi-calculator', name: 'Keyword ROI Calculator' },
+    { id: 'cpc-calculator', name: 'CPC Calculator' },
+    { id: 'url-slug-generator', name: 'URL Slug Generator' },
+    { id: 'domain-age-checker', name: 'Domain Age Checker' }
   ];
 
   useEffect(() => {
@@ -96,29 +146,7 @@ export function Header() {
             </span>
           </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600 dark:text-gray-300">
-            <div className="relative">
-              <button 
-                onClick={() => setIsToolsOpen(!isToolsOpen)}
-                className="flex items-center gap-1 hover:text-[#4f39f6] dark:hover:text-[#4f39f6] transition-colors"
-              >
-                {t('nav.tools')}
-                {isToolsOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-              </button>
-              {isToolsOpen && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-gray-900 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 py-2 z-50 max-h-[60vh] overflow-y-auto">
-                  {tools.map((tool) => (
-                    <Link 
-                      key={tool.id} 
-                      to={`/tools/${tool.id}`} 
-                      onClick={() => setIsToolsOpen(false)}
-                      className="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-[#4f39f6] dark:hover:text-[#4f39f6]"
-                    >
-                      {tool.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
+            <Link to="/tools" className="hover:text-[#4f39f6] dark:hover:text-[#4f39f6] transition-colors">{t('nav.tools')}</Link>
             <Link to="/pricing" className="hover:text-[#4f39f6] dark:hover:text-[#4f39f6] transition-colors">{t('nav.pricing')}</Link>
             <Link to="/blog" className="hover:text-[#4f39f6] dark:hover:text-[#4f39f6] transition-colors">{t('nav.blog')}</Link>
             <Link to="/contact" className="hover:text-[#4f39f6] dark:hover:text-[#4f39f6] transition-colors">{t('nav.contact')}</Link>
@@ -170,22 +198,7 @@ export function Header() {
       {isMenuOpen && (
         <div className="md:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-4 space-y-4">
           <nav className="flex flex-col gap-4 text-sm font-medium text-gray-600 dark:text-gray-300">
-            <div className="flex flex-col gap-2">
-              <button 
-                onClick={() => setIsToolsOpen(!isToolsOpen)}
-                className="flex items-center justify-between w-full"
-              >
-                {t('nav.tools')}
-                {isToolsOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-              </button>
-              {isToolsOpen && (
-                <div className="flex flex-col gap-2 pl-4">
-                  {tools.map((tool) => (
-                    <Link key={tool.id} to={`/tools/${tool.id}`} onClick={() => { setIsMenuOpen(false); setIsToolsOpen(false); }}>{tool.name}</Link>
-                  ))}
-                </div>
-              )}
-            </div>
+            <Link to="/tools" onClick={() => setIsMenuOpen(false)}>{t('nav.tools')}</Link>
             <Link to="/pricing" onClick={() => setIsMenuOpen(false)}>{t('nav.pricing')}</Link>
             <Link to="/blog" onClick={() => setIsMenuOpen(false)}>{t('nav.blog')}</Link>
             <Link to="/contact" onClick={() => setIsMenuOpen(false)}>{t('nav.contact')}</Link>

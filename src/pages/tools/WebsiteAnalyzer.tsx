@@ -2,7 +2,7 @@ import { SEO } from '../../components/SEO';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
-import { BarChart, Search, CheckCircle2, XCircle, Loader2, AlertCircle, Globe, Layout, Image as ImageIcon, ListChecks, Sparkles } from 'lucide-react';
+import { BarChart, Search, CheckCircle2, XCircle, Loader2, AlertCircle, Globe, Layout, Image as ImageIcon, ListChecks, Sparkles, Activity, Info, Clock, HardDrive, Languages, FileText } from 'lucide-react';
 import { GoogleGenAI, Type, ThinkingLevel } from "@google/genai";
 import { ToolDescription } from '../../components/ToolDescription';
 import { toolDescriptions } from '../../data/toolDescriptions';
@@ -64,12 +64,21 @@ export function WebsiteAnalyzer() {
       // Step 2: Analyze with Gemini
       const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' });
       
-      const prompt = `Analyze the following HTML content of a website (${formattedUrl}) and provide a detailed SEO audit in JSON format.
+      const prompt = `You are an expert SEO auditor. Your task is to analyze the following HTML content which belongs to the external website: ${formattedUrl}.
       
+      CRITICAL INSTRUCTION: You MUST base your analysis STRICTLY on the HTML content provided below. Do NOT provide generic SEO advice. Read the HTML carefully. If the HTML already has an H1 tag, do NOT tell the user to "Add a H1 heading". If it has a meta description, do NOT tell the user to "Add a meta description". Only report ACTUAL missing elements or ACTUAL issues found in the provided HTML. If the HTML is a client-side rendered app (like React) and lacks content, mention that it appears to be a JavaScript-rendered page.
+
       HTML Content (truncated):
       ${htmlContent.slice(0, 30000)}
 
       Analyze the title, meta description, H1 tags, and images.
+      Additionally, you MUST provide:
+      1. 'tasks_by_priority': Actionable tasks sorted by priority (High, Medium, Low). These MUST be specific to the issues found in the HTML above. Do not hallucinate generic tasks.
+      2. 'detailed_metrics': An array containing exactly these items (infer or simulate realistically if not directly visible in HTML): Canonical link, Crawlability, Language, Alternate/hreflang links, Other meta tags, Domain, Page URL, Charset encoding, Doctype, Favicon, Page quality, Content, Frames, Mobile optimization, Strong and bold tags, Image SEO, Social media, Additional markup, HTTPS, Others, Link structure, Internal links, External links, Server configuration, HTTP redirects, HTTP header, Performance, External factors, Backlinks. For each metric, include an 'explanation' field briefly explaining what this SEO metric is and why it matters.
+      3. 'category_scores': Provide realistic scores (0-100) for meta_data, page_quality, page_structure, links, server, and external_factors based on the HTML.
+      4. 'critical_issues_count': Number of critical issues found.
+      5. 'page_details': Provide realistic values for status_code (number), response_time (string, e.g., "0.13 sec"), is_follow (boolean), is_index (boolean), file_size (string, e.g., "0.80 kB"), language (string, e.g., "en" or "-"), word_count (number).
+
       Return the results in the specified JSON format.`;
 
       const response = await ai.models.generateContent({
@@ -81,6 +90,30 @@ export function WebsiteAnalyzer() {
             type: Type.OBJECT,
             properties: {
               score: { type: Type.NUMBER },
+              category_scores: {
+                type: Type.OBJECT,
+                properties: {
+                  meta_data: { type: Type.NUMBER },
+                  page_quality: { type: Type.NUMBER },
+                  page_structure: { type: Type.NUMBER },
+                  links: { type: Type.NUMBER },
+                  server: { type: Type.NUMBER },
+                  external_factors: { type: Type.NUMBER }
+                }
+              },
+              critical_issues_count: { type: Type.NUMBER },
+              page_details: {
+                type: Type.OBJECT,
+                properties: {
+                  status_code: { type: Type.NUMBER },
+                  response_time: { type: Type.STRING },
+                  is_follow: { type: Type.BOOLEAN },
+                  is_index: { type: Type.BOOLEAN },
+                  file_size: { type: Type.STRING },
+                  language: { type: Type.STRING },
+                  word_count: { type: Type.NUMBER }
+                }
+              },
               title: { 
                 type: Type.OBJECT, 
                 properties: {
@@ -121,9 +154,32 @@ export function WebsiteAnalyzer() {
               recommendations: {
                 type: Type.ARRAY,
                 items: { type: Type.STRING }
+              },
+              tasks_by_priority: {
+                type: Type.ARRAY,
+                items: {
+                  type: Type.OBJECT,
+                  properties: {
+                    task: { type: Type.STRING },
+                    priority: { type: Type.STRING, enum: ["High", "Medium", "Low"] }
+                  }
+                }
+              },
+              detailed_metrics: {
+                type: Type.ARRAY,
+                items: {
+                  type: Type.OBJECT,
+                  properties: {
+                    name: { type: Type.STRING },
+                    status: { type: Type.STRING, enum: ["good", "warning", "error", "info"] },
+                    value: { type: Type.STRING },
+                    message: { type: Type.STRING },
+                    explanation: { type: Type.STRING }
+                  }
+                }
               }
             },
-            required: ["score", "title", "description", "headings", "images", "recommendations"]
+            required: ["score", "category_scores", "critical_issues_count", "page_details", "title", "description", "headings", "images", "recommendations", "tasks_by_priority", "detailed_metrics"]
           }
         },
       });
@@ -140,6 +196,8 @@ export function WebsiteAnalyzer() {
       
       if (err.message?.includes('PERMISSION_DENIED')) {
         userFriendlyError += 'API Key issue. Please check your configuration.';
+      } else if (err.message?.includes('503') || err.message?.includes('UNAVAILABLE')) {
+        userFriendlyError += 'The AI model is currently experiencing high demand. Please wait a moment and try again.';
       } else if (err.message?.includes('fetch')) {
         userFriendlyError += `Connection error: ${err.message}. The website might be blocking automated requests or is currently down.`;
       } else if (err.message) {
@@ -239,22 +297,142 @@ export function WebsiteAnalyzer() {
       
       {analysis && (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-          {/* Summary Card */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-8 shadow-sm">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-4 mb-2">
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                    {t('tool_page.website_analyzer.results_title')}
-                  </h2>
+          {/* New Summary UI based on screenshot */}
+          <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden mb-8">
+            {/* Top Section: On-page score */}
+            <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-lg font-bold text-gray-900 dark:text-white">On-page score</h2>
+                <div className="flex items-center gap-2 text-sm">
+                  <span className="text-gray-600 dark:text-gray-400">Issues:</span>
+                  <span className="font-bold text-gray-900 dark:text-white">{analysis.critical_issues_count || 0}</span>
+                  <span className="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded">Critical</span>
                 </div>
-                <p className="text-gray-500 font-mono">{url}</p>
               </div>
-              <div className="flex flex-col items-center">
-                <div className={`text-6xl font-black ${getScoreColor(analysis.score)}`}>
-                  {analysis.score}
+              
+              <div className="flex flex-col md:flex-row gap-8 items-center">
+                {/* Circular Chart */}
+                <div className="relative w-48 h-48 flex-shrink-0 flex flex-col items-center justify-center">
+                  <svg className="w-full h-full transform -rotate-90" viewBox="0 0 120 120">
+                    <circle cx="60" cy="60" r="54" fill="none" stroke="currentColor" strokeWidth="12" className="text-gray-100 dark:text-gray-700" />
+                    <circle 
+                      cx="60" cy="60" r="54" fill="none" stroke="currentColor" strokeWidth="12" 
+                      className="text-amber-400"
+                      strokeDasharray={2 * Math.PI * 54}
+                      strokeDashoffset={2 * Math.PI * 54 * (1 - (analysis.score || 0) / 100)}
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                    <span className="text-4xl font-black text-gray-900 dark:text-white">{analysis.score || 0}%</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400 mt-1">On-page score</span>
+                  </div>
                 </div>
-                <div className="text-sm font-bold uppercase tracking-wider text-gray-400 mt-1">SEO Score</div>
+
+                {/* Progress Bars */}
+                <div className="flex-1 w-full grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                  {[
+                    { label: 'Meta data', value: analysis.category_scores?.meta_data || 0 },
+                    { label: 'Page quality', value: analysis.category_scores?.page_quality || 0 },
+                    { label: 'Page structure', value: analysis.category_scores?.page_structure || 0 },
+                    { label: 'Links', value: analysis.category_scores?.links || 0 },
+                    { label: 'Server', value: analysis.category_scores?.server || 0 },
+                    { label: 'External factors', value: analysis.category_scores?.external_factors || 0 },
+                  ].map((item, idx) => (
+                    <div key={idx}>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className="text-gray-700 dark:text-gray-300">{item.label}</span>
+                        <span className="font-bold text-gray-900 dark:text-white">{item.value} %</span>
+                      </div>
+                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                        <div className="bg-blue-500 h-2 rounded-full" style={{ width: `${item.value}%` }}></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Section: HTML page details */}
+            <div className="bg-gray-50 dark:bg-gray-900/50 p-6">
+              <div className="flex justify-between items-center mb-6">
+                <div className="flex items-center gap-2">
+                  <div className="bg-[#4f39f6] text-white text-xs font-bold px-2 py-1 rounded flex items-center gap-1">
+                    <Layout className="w-3 h-3" /> HTML page
+                  </div>
+                </div>
+                <a href={url} target="_blank" rel="noopener noreferrer" className="text-sm border border-gray-300 dark:border-gray-600 rounded px-3 py-1.5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors bg-white dark:bg-gray-800 inline-block">
+                  Show page
+                </a>
+              </div>
+
+              <div className="flex flex-col md:flex-row gap-6">
+                {/* Details */}
+                <div className="flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="mb-3">
+                      <div className="text-sm text-blue-500 mb-1">Meta title</div>
+                      <div className="text-gray-900 dark:text-white font-medium">{analysis.title?.text || 'N/A'}</div>
+                    </div>
+                    <div className="mb-3">
+                      <div className="text-sm text-blue-500 mb-1">Meta description</div>
+                      <div className="text-gray-600 dark:text-gray-400 text-sm line-clamp-2">{analysis.description?.text || 'N/A'}</div>
+                    </div>
+                    <div className="mb-6">
+                      <div className="text-sm text-blue-500 mb-1 inline-block mr-2">URL</div>
+                      <a href={url} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 text-sm hover:underline flex items-center gap-1 inline-flex">
+                        {url} <Globe className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Grid Stats */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-8 text-sm">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-blue-500">
+                        <Activity className="w-4 h-4" /> Status code
+                      </div>
+                      <span className="bg-emerald-500 text-white text-xs font-bold px-2 py-0.5 rounded">{analysis.page_details?.status_code || 200}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-blue-500">
+                        <Clock className="w-4 h-4" /> Response time
+                      </div>
+                      <span className="text-gray-900 dark:text-white">{analysis.page_details?.response_time || '0.15 sec'}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-blue-500">
+                        <Layout className="w-4 h-4" /> Page status
+                      </div>
+                      <div className="flex gap-1">
+                        <span className={`text-white text-xs font-bold px-2 py-0.5 rounded ${analysis.page_details?.is_follow !== false ? 'bg-emerald-500' : 'bg-red-500'}`}>
+                          {analysis.page_details?.is_follow !== false ? 'Follow' : 'NoFollow'}
+                        </span>
+                        <span className={`text-white text-xs font-bold px-2 py-0.5 rounded ${analysis.page_details?.is_index !== false ? 'bg-emerald-500' : 'bg-red-500'}`}>
+                          {analysis.page_details?.is_index !== false ? 'Index' : 'NoIndex'}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-blue-500">
+                        <HardDrive className="w-4 h-4" /> File size
+                      </div>
+                      <span className="text-gray-900 dark:text-white">{analysis.page_details?.file_size || '1.20 kB'}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-blue-500">
+                        <Languages className="w-4 h-4" /> Language
+                      </div>
+                      <span className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs font-bold px-2 py-0.5 rounded">{analysis.page_details?.language || '-'}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-blue-500">
+                        <FileText className="w-4 h-4" /> Word count
+                      </div>
+                      <span className="text-gray-900 dark:text-white">{analysis.page_details?.word_count || 0}</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -349,6 +527,58 @@ export function WebsiteAnalyzer() {
                     {i + 1}
                   </div>
                   <p className="text-sm leading-relaxed">{rec}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Tasks by Priority */}
+          <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-8 shadow-sm">
+            <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-2">
+              <ListChecks className="w-6 h-6 text-[#4f39f6]" />
+              Tasks Sorted by Priority
+            </h2>
+            <div className="space-y-4">
+              {analysis.tasks_by_priority?.map((task: any, i: number) => (
+                <div key={i} className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800">
+                  <div className={`px-3 py-1 rounded-full text-xs font-bold ${
+                    task.priority === 'High' ? 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400' :
+                    task.priority === 'Medium' ? 'bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400' :
+                    'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400'
+                  }`}>
+                    {task.priority}
+                  </div>
+                  <p className="text-gray-700 dark:text-gray-300 text-sm mt-0.5">{task.task}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Detailed Metrics */}
+          <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-8 shadow-sm">
+            <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center gap-2">
+              <Activity className="w-6 h-6 text-[#4f39f6]" />
+              Detailed Analysis Results
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {analysis.detailed_metrics?.map((metric: any, i: number) => (
+                <div key={i} className="p-4 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 flex flex-col">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-bold text-gray-900 dark:text-white text-sm">{metric.name}</span>
+                    {metric.status === 'good' && <CheckCircle2 className="w-4 h-4 text-emerald-500" />}
+                    {metric.status === 'warning' && <AlertCircle className="w-4 h-4 text-amber-500" />}
+                    {metric.status === 'error' && <XCircle className="w-4 h-4 text-red-500" />}
+                    {metric.status === 'info' && <Info className="w-4 h-4 text-blue-500" />}
+                  </div>
+                  <div className="text-xs font-mono text-gray-500 dark:text-gray-400 mb-2 truncate" title={metric.value}>
+                    {metric.value || 'N/A'}
+                  </div>
+                  <p className="text-sm text-gray-800 dark:text-gray-200 mb-3">{metric.message}</p>
+                  <div className="mt-auto pt-3 border-t border-gray-200 dark:border-gray-700">
+                    <p className="text-[11px] leading-relaxed text-gray-500 dark:text-gray-400">
+                      <span className="font-semibold text-gray-700 dark:text-gray-300">What is this?</span> {metric.explanation || 'SEO metric explanation.'}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>

@@ -38,7 +38,6 @@ export function GrammarChecker() {
         ${input}
         """`,
         config: {
-          thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
           responseMimeType: "application/json",
           responseSchema: {
             type: Type.OBJECT,

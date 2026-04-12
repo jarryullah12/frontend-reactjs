@@ -35,11 +35,11 @@
   },
   "hero": {
     "title": "The Ultimate SEO & AI Content Platform",
-    "subtitle": "Boost your website's ranking and generate high-quality content with our suite of 50+ professional tools.",
+    "subtitle": "Boost your website's ranking and generate high-quality content with our suite of 100+ professional tools.",
     "cta_primary": "Get Started for Free",
     "cta_secondary": "Explore Tools",
     "no_card": "Monthly & Lifetime Payment Required",
-    "free_tools": "50+ Premium Tools",
+    "free_tools": "100+ Premium Tools",
     "search_placeholder": "Enter website URL for analysis",
     "analyze_button": "Analyze",
     "traffic_score": "Traffic Score",
@@ -73,7 +73,7 @@
     "view_all_mobile": "View all tools"
   },
   "stats": {
-    "tools_count": "50+",
+    "tools_count": "100+",
     "tools_label": "Professional Tools",
     "content_count": "1M+",
     "content_label": "Content Generated",
@@ -117,7 +117,7 @@
     "subtitle": "We are a team of SEO experts, developers, and AI enthusiasts dedicated to building the most comprehensive platform for digital marketers and content creators.",
     "stats": {
       "tools": "Tools",
-      "tools_count": "50+",
+      "tools_count": "100+",
       "users": "Active Users",
       "users_count": "100k",
       "generations": "Generations",

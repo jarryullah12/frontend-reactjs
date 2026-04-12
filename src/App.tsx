@@ -77,6 +77,56 @@ import { OpenGraphChecker } from './pages/tools/OpenGraphChecker';
 import { TwitterCardGenerator } from './pages/tools/TwitterCardGenerator';
 import { CanonicalTagGenerator } from './pages/tools/CanonicalTagGenerator';
 import { HTTPHeadersChecker } from './pages/tools/HTTPHeadersChecker';
+import { KeywordClusteringTool } from "./pages/tools/KeywordClusteringTool";
+import { SERPSimulator } from "./pages/tools/SERPSimulator";
+import { LSIKeywordGenerator } from "./pages/tools/LSIKeywordGenerator";
+import { BulkURLChecker } from "./pages/tools/BulkURLChecker";
+import { HreflangTagGenerator } from "./pages/tools/HreflangTagGenerator";
+import { SchemaGeneratorFAQ } from "./pages/tools/SchemaGeneratorFAQ";
+import { SchemaGeneratorLocal } from "./pages/tools/SchemaGeneratorLocal";
+import { SchemaGeneratorReview } from "./pages/tools/SchemaGeneratorReview";
+import { MetaDescriptionGenerator } from "./pages/tools/MetaDescriptionGenerator";
+import { TitleTagGenerator } from "./pages/tools/TitleTagGenerator";
+import { BlogPostTitleGenerator } from "./pages/tools/BlogPostTitleGenerator";
+import { ContentOutlineGenerator } from "./pages/tools/ContentOutlineGenerator";
+import { ParagraphRewriter } from "./pages/tools/ParagraphRewriter";
+import { SentenceExpander } from "./pages/tools/SentenceExpander";
+import { TextSummarizer } from "./pages/tools/TextSummarizer";
+import { ReadabilityImprover } from "./pages/tools/ReadabilityImprover";
+import { KeywordTypoGenerator } from "./pages/tools/KeywordTypoGenerator";
+import { GoogleAutocompleteExtractor } from "./pages/tools/GoogleAutocompleteExtractor";
+import { YouTubeKeywordTool } from "./pages/tools/YouTubeKeywordTool";
+import { AmazonKeywordTool } from "./pages/tools/AmazonKeywordTool";
+import { BingKeywordTool } from "./pages/tools/BingKeywordTool";
+import { YandexKeywordTool } from "./pages/tools/YandexKeywordTool";
+import { AppStoreKeywordTool } from "./pages/tools/AppStoreKeywordTool";
+import { SEOReportGenerator } from "./pages/tools/SEOReportGenerator";
+import { CompetitorAnalysisTool } from "./pages/tools/CompetitorAnalysisTool";
+import { BacklinkMaker } from "./pages/tools/BacklinkMaker";
+import { LinkValueCalculator } from "./pages/tools/LinkValueCalculator";
+import { WebsiteSpeedTest } from "./pages/tools/WebsiteSpeedTest";
+import { MobileFriendlyTest } from "./pages/tools/MobileFriendlyTest";
+import { CoreWebVitalsChecker } from "./pages/tools/CoreWebVitalsChecker";
+import { HTMLValidator } from "./pages/tools/HTMLValidator";
+import { CSSValidator } from "./pages/tools/CSSValidator";
+import { XMLSitemapFormatter } from "./pages/tools/XMLSitemapFormatter";
+import { RobotsTxtTester } from "./pages/tools/RobotsTxtTester";
+import { RedirectChecker } from "./pages/tools/RedirectChecker";
+import { HTTP2Checker } from "./pages/tools/HTTP2Checker";
+import { DNSLookupTool } from "./pages/tools/DNSLookupTool";
+import { WHOISLookup } from "./pages/tools/WHOISLookup";
+import { IPLocationFinder } from "./pages/tools/IPLocationFinder";
+import { ReverseIPDomainChecker } from "./pages/tools/ReverseIPDomainChecker";
+import { ServerPortScanner } from "./pages/tools/ServerPortScanner";
+import { EmailPrivacyChecker } from "./pages/tools/EmailPrivacyChecker";
+import { SafeBrowsingChecker } from "./pages/tools/SafeBrowsingChecker";
+import { GoogleCacheChecker } from "./pages/tools/GoogleCacheChecker";
+import { MozrankChecker } from "./pages/tools/MozrankChecker";
+import { AlexaRankChecker } from "./pages/tools/AlexaRankChecker";
+import { KeywordROICalculator } from "./pages/tools/KeywordROICalculator";
+import { CPCCalculator } from "./pages/tools/CPCCalculator";
+import { URLSlugGenerator } from "./pages/tools/URLSlugGenerator";
+import { DomainAgeChecker } from "./pages/tools/DomainAgeChecker";
 import './i18n/i18n'; // Initialize i18n
 
 export default function App() {
@@ -166,6 +216,56 @@ export default function App() {
             <Route path="tools/twitter-card-generator" element={<TwitterCardGenerator />} />
             <Route path="tools/canonical-tag-generator" element={<CanonicalTagGenerator />} />
             <Route path="tools/http-headers-checker" element={<HTTPHeadersChecker />} />
+            <Route path="tools/keyword-clustering-tool" element={<KeywordClusteringTool />} />
+            <Route path="tools/serp-simulator" element={<SERPSimulator />} />
+            <Route path="tools/lsi-keyword-generator" element={<LSIKeywordGenerator />} />
+            <Route path="tools/bulk-url-checker" element={<BulkURLChecker />} />
+            <Route path="tools/hreflang-tag-generator" element={<HreflangTagGenerator />} />
+            <Route path="tools/schema-generator-faq" element={<SchemaGeneratorFAQ />} />
+            <Route path="tools/schema-generator-local" element={<SchemaGeneratorLocal />} />
+            <Route path="tools/schema-generator-review" element={<SchemaGeneratorReview />} />
+            <Route path="tools/meta-description-generator" element={<MetaDescriptionGenerator />} />
+            <Route path="tools/title-tag-generator" element={<TitleTagGenerator />} />
+            <Route path="tools/blog-post-title-generator" element={<BlogPostTitleGenerator />} />
+            <Route path="tools/content-outline-generator" element={<ContentOutlineGenerator />} />
+            <Route path="tools/paragraph-rewriter" element={<ParagraphRewriter />} />
+            <Route path="tools/sentence-expander" element={<SentenceExpander />} />
+            <Route path="tools/text-summarizer" element={<TextSummarizer />} />
+            <Route path="tools/readability-improver" element={<ReadabilityImprover />} />
+            <Route path="tools/keyword-typo-generator" element={<KeywordTypoGenerator />} />
+            <Route path="tools/google-autocomplete-extractor" element={<GoogleAutocompleteExtractor />} />
+            <Route path="tools/youtube-keyword-tool" element={<YouTubeKeywordTool />} />
+            <Route path="tools/amazon-keyword-tool" element={<AmazonKeywordTool />} />
+            <Route path="tools/bing-keyword-tool" element={<BingKeywordTool />} />
+            <Route path="tools/yandex-keyword-tool" element={<YandexKeywordTool />} />
+            <Route path="tools/app-store-keyword-tool" element={<AppStoreKeywordTool />} />
+            <Route path="tools/seo-report-generator" element={<SEOReportGenerator />} />
+            <Route path="tools/competitor-analysis-tool" element={<CompetitorAnalysisTool />} />
+            <Route path="tools/backlink-maker" element={<BacklinkMaker />} />
+            <Route path="tools/link-value-calculator" element={<LinkValueCalculator />} />
+            <Route path="tools/website-speed-test" element={<WebsiteSpeedTest />} />
+            <Route path="tools/mobile-friendly-test" element={<MobileFriendlyTest />} />
+            <Route path="tools/core-web-vitals-checker" element={<CoreWebVitalsChecker />} />
+            <Route path="tools/html-validator" element={<HTMLValidator />} />
+            <Route path="tools/css-validator" element={<CSSValidator />} />
+            <Route path="tools/xml-sitemap-formatter" element={<XMLSitemapFormatter />} />
+            <Route path="tools/robots-txt-tester" element={<RobotsTxtTester />} />
+            <Route path="tools/redirect-checker" element={<RedirectChecker />} />
+            <Route path="tools/http2-checker" element={<HTTP2Checker />} />
+            <Route path="tools/dns-lookup-tool" element={<DNSLookupTool />} />
+            <Route path="tools/whois-lookup" element={<WHOISLookup />} />
+            <Route path="tools/ip-location-finder" element={<IPLocationFinder />} />
+            <Route path="tools/reverse-ip-domain-checker" element={<ReverseIPDomainChecker />} />
+            <Route path="tools/server-port-scanner" element={<ServerPortScanner />} />
+            <Route path="tools/email-privacy-checker" element={<EmailPrivacyChecker />} />
+            <Route path="tools/safe-browsing-checker" element={<SafeBrowsingChecker />} />
+            <Route path="tools/google-cache-checker" element={<GoogleCacheChecker />} />
+            <Route path="tools/mozrank-checker" element={<MozrankChecker />} />
+            <Route path="tools/alexa-rank-checker" element={<AlexaRankChecker />} />
+            <Route path="tools/keyword-roi-calculator" element={<KeywordROICalculator />} />
+            <Route path="tools/cpc-calculator" element={<CPCCalculator />} />
+            <Route path="tools/url-slug-generator" element={<URLSlugGenerator />} />
+            <Route path="tools/domain-age-checker" element={<DomainAgeChecker />} />
           </Route>
         </Route>
       </Routes>

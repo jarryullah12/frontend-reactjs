@@ -100,7 +100,7 @@
     "subtitle": "Somos un equipo de expertos en SEO, desarrolladores y entusiastas de la IA dedicados a construir la plataforma más completa para especialistas en marketing digital y creadores de contenido.",
     "stats": {
       "tools": "Herramientas creadas",
-      "tools_count": "50+",
+      "tools_count": "100+",
       "users": "Usuarios activos",
       "users_count": "100k",
       "generations": "Generaciones",
@@ -358,7 +358,7 @@
     "speed": { "name": "Probador de Velocidad del Sitio", "category": "Rendimiento" }
   },
   "stats": {
-    "tools_count": "50+",
+    "tools_count": "100+",
     "tools_label": "Herramientas profesionales",
     "content_count": "1M+",
     "content_label": "Contenido generado",

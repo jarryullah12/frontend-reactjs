@@ -100,7 +100,7 @@
     "subtitle": "Nous sommes une équipe d'experts en référencement, de développeurs et de passionnés d'IA dédiés à la création de la plateforme la plus complète pour les spécialistes du marketing numérique et les créateurs de contenu.",
     "stats": {
       "tools": "Outils créés",
-      "tools_count": "50+",
+      "tools_count": "100+",
       "users": "Utilisateurs actifs",
       "users_count": "100k",
       "generations": "Générations",
@@ -354,7 +354,7 @@
     "speed": { "name": "Testeur de vitesse de site", "category": "Performance" }
   },
   "stats": {
-    "tools_count": "50+",
+    "tools_count": "100+",
     "tools_label": "Outils professionnels",
     "content_count": "1M+",
     "content_label": "Contenu généré",

@@ -17,7 +17,6 @@ export function Home() {
   const navigate = useNavigate();
   const { user, isAuthenticated, subscription } = useAuthStore();
   const targetRef = useRef(null);
-  const [url, setUrl] = useState('');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -90,7 +89,7 @@ export function Home() {
             <div className="container mx-auto flex items-center justify-center gap-2 text-sm md:text-base font-medium">
               <Clock className="w-4 h-4 md:w-5 md:h-5 animate-pulse" />
               <span>
-                Start your <strong className="font-bold text-amber-300">7-Days Free Trial</strong> today and get access to 10 essential SEO tools!
+                Start your <strong className="font-bold text-amber-300">7-Days Free Trial</strong> today and get access to 50 essential SEO tools!
               </span>
               <Link to="/pricing" className="ml-2 underline hover:text-amber-200 transition-colors">
                 View Plans
@@ -134,20 +133,22 @@ export function Home() {
                   {t('hero.subtitle')}
                 </p>
                 
-                <div className="flex gap-2 mb-8 max-w-lg">
-                  <input
-                    type="text"
-                    value={url}
-                    onChange={(e) => setUrl(e.target.value)}
-                    placeholder="Enter website URL (e.g., example.com)"
-                    className="flex-1 px-4 py-4 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#4f39f6] outline-none"
-                  />
-                  <button
-                    onClick={() => navigate(`/tools/website-analyzer?url=${encodeURIComponent(url)}`)}
-                    className="px-6 py-4 bg-[#4f39f6] text-white rounded-xl font-semibold hover:bg-[#4f39f6]/90 transition-all shadow-lg shadow-[#4f39f6]/20 flex items-center gap-2"
-                  >
-                    Analyze <Search className="w-5 h-5" />
-                  </button>
+                <div className="flex gap-4 mb-8 max-w-lg">
+                  {isAuthenticated ? (
+                    <Link
+                      to="/tools"
+                      className="px-8 py-4 bg-[#4f39f6] text-white rounded-xl font-bold text-lg hover:bg-[#4f39f6]/90 transition-all shadow-lg shadow-[#4f39f6]/20 flex items-center gap-2"
+                    >
+                      Explore Tools <ArrowRight className="w-5 h-5" />
+                    </Link>
+                  ) : (
+                    <Link
+                      to="/signup"
+                      className="px-8 py-4 bg-[#4f39f6] text-white rounded-xl font-bold text-lg hover:bg-[#4f39f6]/90 transition-all shadow-lg shadow-[#4f39f6]/20 flex items-center gap-2"
+                    >
+                      Get Started <ArrowRight className="w-5 h-5" />
+                    </Link>
+                  )}
                 </div>
 
                 <div className="mt-10 flex items-center gap-8 text-sm text-gray-500 dark:text-gray-400 font-medium">
@@ -362,37 +363,6 @@ export function Home() {
       {/* How OptiSEO Works Section */}
       <HowOptiSEOWorks />
 
-      {/* Social Proof */}
-      <motion.section 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="py-24 bg-gradient-to-r from-[#4f39f6] to-purple-600 text-white overflow-hidden relative"
-      >
-        <div className="absolute inset-0 bg-[url('https://picsum.photos/seed/pattern/1920/1080?blur=10')] opacity-10 mix-blend-overlay" />
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-            {[
-              { count: t('stats.tools_count'), label: t('stats.tools_label') },
-              { count: t('stats.content_count'), label: t('stats.content_label') },
-              { count: t('stats.users_count'), label: t('stats.users_label') }
-            ].map((stat, index) => (
-              <motion.div 
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2, duration: 0.5 }}
-                whileHover={{ scale: 1.05 }}
-              >
-                <div className="text-5xl font-bold mb-2">{stat.count}</div>
-                <div className="text-indigo-200 font-medium">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.section>
 
       {/* FAQ Section */}
       <motion.section 
@@ -453,10 +423,10 @@ export function Home() {
           <h2 className="text-4xl md:text-5xl font-bold mb-6">What Are You Waiting For?</h2>
           <p className="text-xl md:text-2xl mb-10 text-indigo-100">Try OptiSEO Today!</p>
           <Link
-            to="/signup"
+            to={isAuthenticated ? "/tools" : "/signup"}
             className="inline-block px-10 py-4 bg-white text-[#4f39f6] rounded-xl font-bold text-lg hover:bg-gray-100 transition-all shadow-xl"
           >
-            Get Started Now
+            {isAuthenticated ? "Explore Tools" : "Get Started Now"}
           </Link>
         </div>
       </motion.section>
