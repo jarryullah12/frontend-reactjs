@@ -69,12 +69,20 @@ export function Navbar() {
                 )}
               </Link>
             ))}
+<<<<<<< HEAD
             <Link
+=======
+            {/* <Link
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
               to="/upload-blog"
               className="ml-3 inline-flex items-center gap-1.5 rounded-lg bg-brand-accent px-4 py-2 text-sm font-bold text-brand-dark hover:bg-yellow-400 transition-all duration-200 hover:shadow-lg hover:shadow-brand-accent/20"
             >
               Admin
+<<<<<<< HEAD
             </Link>
+=======
+            </Link> */}
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
           </div>
 
           {/* Mobile menu button */}

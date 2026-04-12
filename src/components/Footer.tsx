@@ -1,5 +1,9 @@
 import { Link } from 'react-router-dom';
+<<<<<<< HEAD
 import { ArrowRight, Mail, MapPin, Phone, Calculator, Instagram, Film } from 'lucide-react';
+=======
+import { ArrowRight, Mail, MapPin, Phone, Calculator } from 'lucide-react';
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
 
 const navLinks = [
   { name: 'Home', path: '/' },
@@ -8,16 +12,23 @@ const navLinks = [
   { name: 'Contact', path: '/contact' },
 ];
 
+<<<<<<< HEAD
 const socialLinks = [
     { name: 'Instagram', path: 'https://www.instagram.com/jarryullah22/', icon: Instagram },
     { name: 'TikTok', path: 'https://www.tiktok.com/jarryullah22', icon: Film },
 ];
 
+=======
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
 export function Footer() {
   return (
     <footer className="bg-brand-dark text-gray-300">
       <div className="mx-auto max-w-7xl px-6 lg:px-8 py-16">
+<<<<<<< HEAD
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12">
+=======
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
           {/* About Section */}
           <div className="md:col-span-2 lg:col-span-1">
             <Link to="/" className="flex items-center space-x-2.5 group">
@@ -76,7 +87,11 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-400">
                 <Phone className="h-4 w-4" />
+<<<<<<< HEAD
                 +923356471303
+=======
+                +923497034892
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-400">
                 <MapPin className="h-4 w-4" />
@@ -84,6 +99,7 @@ export function Footer() {
               </div>
             </div>
           </div>
+<<<<<<< HEAD
           {/* Follow Us */}
           <div>
             <h3 className="text-sm font-bold text-white uppercase tracking-widest mb-5">Follow Us</h3>
@@ -95,6 +111,8 @@ export function Footer() {
               ))}
             </div>
           </div>
+=======
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
         </div>
 
         {/* Bottom Bar */}

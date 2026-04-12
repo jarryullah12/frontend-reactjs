@@ -1,11 +1,18 @@
+<<<<<<< HEAD
 
 import { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
+=======
+import { useState, useEffect } from 'react';
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
 import { CalculatorWrapper } from '../../components/CalculatorWrapper';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+<<<<<<< HEAD
 import html2canvas from 'html2canvas-pro';
+=======
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
 
 export function CompoundInterestCalculator() {
   const [principal, setPrincipal] = useState(10000);
@@ -14,12 +21,16 @@ export function CompoundInterestCalculator() {
   const [frequency, setFrequency] = useState(1);
   const [amount, setAmount] = useState(0);
   const [interestEarned, setInterestEarned] = useState(0);
+<<<<<<< HEAD
   const chartRef = useRef<HTMLDivElement>(null);
+=======
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
 
   useEffect(() => {
     const r = rate / 100;
     const n = frequency;
     const t = years;
+<<<<<<< HEAD
     const p = principal;
     const a = p * Math.pow(1 + r / n, n * t);
 
@@ -30,11 +41,26 @@ export function CompoundInterestCalculator() {
   const data = [
     { name: 'Principal Amount', value: principal > 0 ? principal : 0 },
     { name: 'Total Interest', value: interestEarned > 0 ? interestEarned : 0 },
+=======
+    const a = principal * Math.pow(1 + r / n, n * t);
+
+    setAmount(Math.round(a));
+    setInterestEarned(Math.round(a - principal));
+  }, [principal, rate, years, frequency]);
+
+  const data = [
+    { name: 'Principal Amount', value: principal },
+    { name: 'Total Interest', value: interestEarned },
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
   ];
 
   const COLORS = ['#0B3C5D', '#D9B310'];
 
+<<<<<<< HEAD
   const fmt = (v: number) => `₹${v.toLocaleString()}`;
+=======
+  const fmt = (v: number) => `$${v.toLocaleString()}`;
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
 
   const frequencyMap: { [key: number]: string } = {
     1: 'Annually',
@@ -43,6 +69,7 @@ export function CompoundInterestCalculator() {
     12: 'Monthly',
   };
 
+<<<<<<< HEAD
   const handleDownload = async () => {
     const chartElement = chartRef.current;
     if (!chartElement) {
@@ -112,6 +139,26 @@ export function CompoundInterestCalculator() {
         <link rel="canonical" href="https://www.finovacalc.com/calculators/compound-interest" />
         <meta name="keywords" content="compound interest calculator, investment calculator, future value calculator, interest calculator" />
     </Helmet>
+=======
+  const handleDownload = () => {
+    const doc = new jsPDF();
+    doc.text("Compound Interest Calculator Report", 20, 10);
+    autoTable(doc, {
+      head: [['Field', 'Value']],
+      body: [
+        ['Principal Amount', fmt(principal)],
+        ['Interest Rate (%)', rate],
+        ['Time Period (Years)', years],
+        ['Compounding Frequency', frequencyMap[frequency]],
+        ['Maturity Amount', fmt(amount)],
+        ['Interest Earned', fmt(interestEarned)],
+      ],
+    });
+    doc.save('compound-interest-report.pdf');
+  };
+
+  return (
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
     <CalculatorWrapper
       title="Compound Interest Calculator"
       description="Calculate the future value of your investment with compound interest."
@@ -143,7 +190,11 @@ export function CompoundInterestCalculator() {
 
           <div>
             <label className="block text-sm font-medium leading-6 text-gray-900">
+<<<<<<< HEAD
               Annual Interest Rate (%): {rate}
+=======
+              Interest Rate (%): {rate}
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
             </label>
             <input
               type="range"
@@ -216,12 +267,20 @@ export function CompoundInterestCalculator() {
               <span className="font-semibold">{fmt(principal)}</span>
             </div>
             <div className="flex justify-between border-b pb-2">
+<<<<<<< HEAD
               <span className="text-gray-600">Total Interest Earned</span>
+=======
+              <span className="text-gray-600">Interest Earned</span>
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
               <span className="font-semibold text-brand-accent">{fmt(interestEarned)}</span>
             </div>
           </div>
 
+<<<<<<< HEAD
           <div className="h-64 w-full mt-6" ref={chartRef}>
+=======
+          <div className="h-64 w-full mt-6">
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
              <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -255,6 +314,7 @@ export function CompoundInterestCalculator() {
       </div>
       
       <div className="mt-8">
+<<<<<<< HEAD
         <h2 className="text-2xl font-bold mb-4">About the Compound Interest Calculator</h2>
         <ul className="list-disc list-inside space-y-2">
           <li>A compound interest calculator is a powerful tool that demonstrates how your investment can grow over time.</li>
@@ -271,5 +331,22 @@ export function CompoundInterestCalculator() {
       </div>
     </CalculatorWrapper>
     </>
+=======
+        <h2 className="text-2xl font-bold mb-4">About Compound Interest Calculator</h2>
+        <ul className="list-disc list-inside space-y-2">
+          <li>A compound interest calculator helps you understand the power of compounding on your investments.</li>
+          <li>Enter the principal amount, interest rate, tenure, and compounding frequency to see your investment grow.</li>
+          <li>The calculator shows the total maturity amount and the interest earned over the investment period.</li>
+          <li>It's a great tool for planning your long-term financial goals, such as retirement or a child's education.</li>
+          <li>You can see how different compounding frequencies (monthly, quarterly, annually) affect your returns.</li>
+          <li>The pie chart visualizes the proportion of the principal amount to the total interest earned.</li>
+          <li>Adjust the tenure to see how the power of compounding accelerates your wealth over time.</li>
+          <li>This calculator is essential for anyone looking to make informed investment decisions.</li>
+          <li>Our tool is free, easy to use, and provides accurate calculations to help you plan your future.</li>
+          <li>Make the most of your investments by understanding and leveraging the magic of compound interest.</li>
+        </ul>
+      </div>
+    </CalculatorWrapper>
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
   );
 }

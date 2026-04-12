@@ -1,11 +1,18 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
 import { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { CalculatorWrapper } from '../../components/CalculatorWrapper';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+<<<<<<< HEAD
 import html2canvas from 'html2canvas-pro';
+=======
+import html2canvas from 'html2canvas';
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
 
 export function CarLoanCalculator() {
   const [carPrice, setCarPrice] = useState(800000);
@@ -55,7 +62,11 @@ export function CarLoanCalculator() {
 
   const COLORS = ['#0B3C5D', '#D9B310'];
 
+<<<<<<< HEAD
   const fmt = (v: number) => `₹${v.toLocaleString()}`;
+=======
+  const fmt = (v: number) => `$${v.toLocaleString()}`;
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
 
   const handleDownload = async () => {
     const chartElement = chartRef.current;
@@ -75,7 +86,11 @@ export function CarLoanCalculator() {
       
       doc.setFontSize(20);
       doc.text("Car Loan Calculator Report", 14, 22);
+<<<<<<< HEAD
       let finalY = 0;
+=======
+
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
       autoTable(doc, {
         startY: 30,
         head: [['Field', 'Value']],
@@ -91,9 +106,12 @@ export function CarLoanCalculator() {
         ],
         theme: 'striped',
         headStyles: { fillColor: '#0B3C5D' },
+<<<<<<< HEAD
         didDrawPage: (data) => {
             finalY = data.cursor.y;
         }
+=======
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
       });
 
       const imgData = canvas.toDataURL('image/png');
@@ -101,7 +119,12 @@ export function CarLoanCalculator() {
       const pdfWidth = doc.internal.pageSize.getWidth();
       const imgWidth = 120;
       const imgHeight = (imgProps.height * imgWidth) / imgProps.width;
+<<<<<<< HEAD
       let imageY = finalY + 15;
+=======
+      const lastTable = (doc as any).lastAutoTable;
+      let imageY = lastTable.finalY + 15;
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
 
       if (imageY + imgHeight > doc.internal.pageSize.getHeight() - 15) {
         doc.addPage();

@@ -6,6 +6,10 @@ import {
   ShieldCheck,
   Target,
   Zap,
+<<<<<<< HEAD
+=======
+  Users,
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
   Award,
   Heart,
   Globe,
@@ -23,6 +27,17 @@ export function About() {
     { icon: Globe, title: 'Free For Everyone', desc: 'We believe financial literacy should be accessible to all. Every tool on FinovaCalc is 100% free to use with no hidden charges or premium tiers.' },
   ];
 
+<<<<<<< HEAD
+=======
+  const milestones = [
+    { year: '2020', title: 'FinovaCalc Founded', desc: 'Started with a vision to democratize financial tools for everyone.' },
+    { year: '2021', title: 'Launched 5 Calculators', desc: 'EMI, Mortgage, Compound Interest, Personal Loan, and ROI calculators went live.' },
+    { year: '2022', title: '10K+ Monthly Users', desc: 'Crossed the 10,000 monthly active users milestone within two years.' },
+    { year: '2023', title: '10+ Calculators Suite', desc: 'Expanded to a full suite of 10+ financial calculators with advanced features.' },
+    { year: '2024', title: '50K+ Users & Growing', desc: 'Now serving 50,000+ users worldwide with 2M+ calculations completed.' },
+  ];
+
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
   return (
     <>
       <Helmet>
@@ -56,6 +71,25 @@ export function About() {
                 <p className="mt-6 text-lg text-gray-300 leading-relaxed max-w-xl">
                   FinovaCalc was founded with a simple belief: everyone deserves access to professional-grade financial tools. We build calculators that are accurate, intuitive, and completely free.
                 </p>
+<<<<<<< HEAD
+=======
+                <div className="mt-8 flex items-center gap-6">
+                  <div className="text-center">
+                    <p className="text-3xl font-extrabold text-brand-accent">50K+</p>
+                    <p className="text-sm text-gray-400">Active Users</p>
+                  </div>
+                  <div className="h-12 w-px bg-white/20" />
+                  <div className="text-center">
+                    <p className="text-3xl font-extrabold text-brand-accent">2M+</p>
+                    <p className="text-sm text-gray-400">Calculations</p>
+                  </div>
+                  <div className="h-12 w-px bg-white/20" />
+                  <div className="text-center">
+                    <p className="text-3xl font-extrabold text-brand-accent">10+</p>
+                    <p className="text-sm text-gray-400">Tools</p>
+                  </div>
+                </div>
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
               </div>
               <div className="hidden lg:block">
                 <div className="relative">
@@ -140,6 +174,7 @@ export function About() {
           </div>
         </section>
 
+<<<<<<< HEAD
         {/* Meet the Team */}
         <section className="py-24 bg-white">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -154,6 +189,29 @@ export function About() {
                 Our dedicated team of FinovaCalc expert, developers, and content strategists works to build high-quality tools for marketers and businesses.
               </p>
             </div>
+=======
+        {/* Our Story Timeline */}
+        <section className="py-24 bg-white">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="text-center reveal">
+              <span className="inline-block text-brand-accent font-bold text-sm uppercase tracking-widest mb-3">Our Journey</span>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
+                The FinovaCalc <span className="text-brand-secondary">Story</span>
+              </h2>
+              <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
+                From a simple idea to serving 50,000+ users worldwide — here is how we got here.
+              </p>
+            </div>
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {milestones.map((m, idx) => (
+                <div key={m.year} className={`reveal delay-${(idx + 1) * 100} bg-gray-50 rounded-2xl p-6 border border-gray-100 card-hover text-center`}>
+                    <span className="text-brand-accent font-bold text-2xl">{m.year}</span>
+                    <h3 className="text-lg font-bold text-gray-900 mt-2">{m.title}</h3>
+                    <p className="text-sm text-gray-500 mt-2 leading-relaxed">{m.desc}</p>
+                </div>
+                ))}
+            </div>
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
           </div>
         </section>
 
@@ -163,9 +221,33 @@ export function About() {
             <div className="grid lg:grid-cols-1 gap-16 items-center">
               <div className="reveal-left">
                 <span className="inline-block text-brand-accent font-bold text-sm uppercase tracking-widest mb-3">Why FinovaCalc</span>
+<<<<<<< HEAD
                 <p className="mt-6 text-gray-300 leading-relaxed">
                   We are not just another calculator website. FinovaCalc provides a comprehensive suite of professional-grade financial tools designed for accuracy, speed, and ease of use. Our calculators are trusted by individuals, financial advisors, and businesses worldwide.
                 </p>
+=======
+                <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+                  Why 50,000+ Users Trust Us With Their Financial Planning
+                </h2>
+                <p className="mt-6 text-gray-300 leading-relaxed">
+                  We are not just another calculator website. FinovaCalc provides a comprehensive suite of professional-grade financial tools designed for accuracy, speed, and ease of use. Our calculators are trusted by individuals, financial advisors, and businesses worldwide.
+                </p>
+                <div className="mt-8 grid grid-cols-2 gap-6">
+                  {[
+                    { icon: Users, label: '50K+ Active Users' },
+                    { icon: ShieldCheck, label: '100% Private & Secure' },
+                    { icon: Zap, label: 'Instant Real-Time Results' },
+                    { icon: Award, label: '4.9/5 User Rating' },
+                  ].map((item) => (
+                    <div key={item.label} className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-brand-accent/20 flex items-center justify-center flex-shrink-0">
+                        <item.icon className="h-5 w-5 text-brand-accent" />
+                      </div>
+                      <span className="text-white text-sm font-medium">{item.label}</span>
+                    </div>
+                  ))}
+                </div>
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
               </div>
             </div>
           </div>

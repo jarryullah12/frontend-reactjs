@@ -141,6 +141,7 @@ export function RetirementCalculator() {
         </div>
       </div>
       <div className="mt-8">
+<<<<<<< HEAD
         <h2 className="text-2xl font-bold mb-4">About the Retirement Calculator</h2>
         <ul className="list-disc list-inside space-y-2">
           <li>A retirement calculator is a tool to help you estimate the future value of your retirement savings.</li>
@@ -153,6 +154,20 @@ export function RetirementCalculator() {
           <li>Keep in mind that this is an estimate and does not account for factors like inflation or changes in investment returns.</li>
           <li>It is a great starting point for anyone looking to take control of their financial future and plan for a secure retirement.</li>
           <li>You can download a PDF of your retirement plan to review and adjust as your circumstances change.</li>
+=======
+        <h2 className="text-2xl font-bold mb-4">About Retirement Calculator</h2>
+        <ul className="list-disc list-inside space-y-2">
+          <li>A retirement calculator helps you estimate the total corpus you will have at retirement.</li>
+          <li>Enter your current age, planned retirement age, current savings, and monthly contributions.</li>
+          <li>Specify the expected annual return on your investments to project your future wealth.</li>
+          <li>The calculator provides an estimate of your total retirement savings.</li>
+          <li>This tool is essential for planning your financial future and ensuring a comfortable retirement.</li>
+          <li>Adjust your monthly contributions to see how it impacts your final retirement corpus.</li>
+          <li>It helps you understand the importance of starting to save early for retirement.</li>
+          <li>The calculator provides a clear picture of your long-term financial planning needs.</li>
+          <li>Our retirement calculator is free, easy to use, and helps you set realistic savings goals.</li>
+          <li>Plan for your golden years with confidence by using this powerful financial planning tool.</li>
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
         </ul>
       </div>
     </CalculatorWrapper>

@@ -103,7 +103,11 @@ export function Home() {
   ];
 
   const steps = [
+<<<<<<< HEAD
     { step: '01', title: 'Choose Calculator', desc: 'Select from 50+ professional financial calculators tailored to your needs.', icon: Target },
+=======
+    { step: '01', title: 'Choose Calculator', desc: 'Select from 10+ professional financial calculators tailored to your needs.', icon: Target },
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
     { step: '02', title: 'Enter Your Details', desc: 'Input your financial data with our intuitive sliders and input fields.', icon: Zap },
     { step: '03', title: 'Get Instant Results', desc: 'See real-time calculations with visual charts and detailed breakdowns.', icon: BarChart3 },
   ];
@@ -208,7 +212,11 @@ export function Home() {
                   <div className="absolute -inset-4 bg-gradient-to-r from-brand-accent/20 to-brand-secondary/20 rounded-3xl blur-2xl" />
                   <div className="relative glass rounded-3xl p-1.5 shadow-2xl">
                     <img
+<<<<<<< HEAD
                       src="https://i.postimg.cc/pV8hQ3Kx/desk.png"
+=======
+                      src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=70"
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
                       alt="Financial Dashboard Analytics"
                       className="rounded-2xl w-full h-auto object-cover"
                     />
@@ -232,7 +240,11 @@ export function Home() {
                         <Calculator className="h-5 w-5 text-brand-accent" />
                       </div>
                       <div>
+<<<<<<< HEAD
                         <p className="text-white font-bold text-sm">50+</p>
+=======
+                        <p className="text-white font-bold text-sm">10+</p>
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
                         <p className="text-gray-400 text-xs">Calculators</p>
                       </div>
                     </div>
@@ -250,6 +262,33 @@ export function Home() {
           </div>
         </section>
 
+<<<<<<< HEAD
+=======
+        {/* ───────── STATS SECTION ───────── */}
+        <section className="py-16 bg-white relative -mt-1">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {[
+                { label: 'Active Users', value: 50000, suffix: '+', prefix: '', icon: Users, color: 'text-blue-600 bg-blue-100' },
+                { label: 'Calculations Done', value: 2, suffix: 'M+', prefix: '', icon: Calculator, color: 'text-emerald-600 bg-emerald-100' },
+                { label: 'Calculators', value: 10, suffix: '+', prefix: '', icon: BarChart3, color: 'text-purple-600 bg-purple-100' },
+                { label: 'User Rating', value: 4.9, suffix: '/5', prefix: '', icon: Star, color: 'text-amber-600 bg-amber-100' },
+              ].map((stat, idx) => (
+                <div key={stat.label} className={`reveal delay-${(idx + 1) * 100} text-center`}>
+                  <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl ${stat.color} mb-4`}>
+                    <stat.icon className="h-7 w-7" />
+                  </div>
+                  <div className="text-3xl md:text-4xl font-extrabold text-brand-primary">
+                    <AnimatedCounter end={stat.value} suffix={stat.suffix} prefix={stat.prefix} />
+                  </div>
+                  <p className="mt-1 text-gray-500 font-medium text-sm">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
         {/* ───────── FEATURED CALCULATORS ───────── */}
         <section className="py-24 bg-gray-50">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -291,7 +330,11 @@ export function Home() {
                 to="/calculators"
                 className="inline-flex items-center gap-2 rounded-xl bg-brand-primary px-8 py-4 text-base font-bold text-white shadow-lg hover:bg-brand-dark hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
               >
+<<<<<<< HEAD
                 View All 50+ Calculators
+=======
+                View All 10+ Calculators
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </div>
@@ -337,7 +380,11 @@ export function Home() {
                   <div className="absolute -inset-6 bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 rounded-3xl blur-2xl" />
                   <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                     <img
+<<<<<<< HEAD
                       src="https://i.postimg.cc/CM6M970X/96c466ee-7a99-42f1-80a0-14c0a763594a.jpg"
+=======
+                      src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=70"
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
                       alt="Financial planning dashboard"
                       className="w-full h-auto"
                     />

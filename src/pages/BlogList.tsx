@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import { PenTool, ChevronRight, ChevronLeft, Tag, Search, User } from 'lucide-react';
+<<<<<<< HEAD
 import { calculators } from '../data/calculators';
+=======
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
 
 interface Post {
   id: number;
@@ -23,14 +26,21 @@ export function BlogList() {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPosts, setTotalPosts] = useState(0);
+<<<<<<< HEAD
   const [categories, setCategories] = useState<string[]>([]);
+=======
+  const [categories, setCategories] = useState<string[]>(['Loan Calculators', 'Investment & Savings']);
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
+<<<<<<< HEAD
     const uniqueCategories = [...new Set(calculators.map(c => c.category))];
     setCategories(uniqueCategories);
 
+=======
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
     const fetchPosts = async () => {
       setLoading(true);
       

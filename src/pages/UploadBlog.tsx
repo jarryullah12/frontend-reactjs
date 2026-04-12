@@ -5,7 +5,10 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import { Upload, FileText, Image, Type, Tag, CheckCircle2, Link as LinkIcon, User } from 'lucide-react';
 import JoditEditor from 'jodit-react';
 import { supabase } from '../supabaseClient';
+<<<<<<< HEAD
 import { calculators } from '../data/calculators';
+=======
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
 
 export function UploadBlog() {
   useScrollReveal();
@@ -20,8 +23,11 @@ export function UploadBlog() {
   const [authorBio, setAuthorBio] = useState('');
   const [isUploading, setIsUploading] = useState(false);
 
+<<<<<<< HEAD
   const categories = [...new Set(calculators.map(c => c.category))];
 
+=======
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTitle = e.target.value;
     setTitle(newTitle);
@@ -146,7 +152,12 @@ export function UploadBlog() {
                 <Tag className="h-4 w-4 text-brand-primary" /> Category
               </label>
               <select value={category} onChange={(e) => setCategory(e.target.value)} className={inputClass} disabled={isUploading}>
+<<<<<<< HEAD
                 {categories.map(cat => <option key={cat}>{cat}</option>)}
+=======
+                <option>Loan Calculators</option>
+                <option>Investment & Savings</option>
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
               </select>
             </div>
 

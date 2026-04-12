@@ -1,11 +1,18 @@
+<<<<<<< HEAD
 
 import { useState, useEffect, useRef } from 'react';
+=======
+import { useState, useEffect } from 'react';
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
 import { Helmet } from 'react-helmet-async';
 import { CalculatorWrapper } from '../../components/CalculatorWrapper';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+<<<<<<< HEAD
 import html2canvas from 'html2canvas-pro';
+=======
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
 
 export function EMICalculator() {
   const [loanAmount, setLoanAmount] = useState(1000000);
@@ -14,7 +21,10 @@ export function EMICalculator() {
   const [emi, setEmi] = useState(0);
   const [totalInterest, setTotalInterest] = useState(0);
   const [totalPayment, setTotalPayment] = useState(0);
+<<<<<<< HEAD
   const chartRef = useRef<HTMLDivElement>(null);
+=======
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
 
   useEffect(() => {
     const p = loanAmount;
@@ -31,12 +41,18 @@ export function EMICalculator() {
   }, [loanAmount, interestRate, tenure]);
 
   const data = [
+<<<<<<< HEAD
     { name: 'Principal Loan Amount', value: loanAmount > 0 ? loanAmount : 0 },
     { name: 'Total Interest', value: totalInterest > 0 ? totalInterest : 0 },
+=======
+    { name: 'Principal Loan Amount', value: loanAmount },
+    { name: 'Total Interest', value: totalInterest },
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
   ];
 
   const COLORS = ['#0B3C5D', '#D9B310'];
 
+<<<<<<< HEAD
   const fmt = (v: number) => `₹${v.toLocaleString()}`;
 
   const handleDownload = async () => {
@@ -98,6 +114,25 @@ export function EMICalculator() {
     } catch (error) {
       console.error("Error generating PDF:", error);
     }
+=======
+  const fmt = (v: number) => `$${v.toLocaleString()}`;
+
+  const handleDownload = () => {
+    const doc = new jsPDF();
+    doc.text("EMI Calculator Report", 20, 10);
+    autoTable(doc, {
+      head: [['Field', 'Value']],
+      body: [
+        ['Loan Amount', fmt(loanAmount)],
+        ['Interest Rate (%)', interestRate],
+        ['Tenure (Years)', tenure],
+        ['Monthly EMI', fmt(emi)],
+        ['Total Interest', fmt(totalInterest)],
+        ['Total Payment', fmt(totalPayment)],
+      ],
+    });
+    doc.save('emi-report.pdf');
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
   };
 
   return (
@@ -210,7 +245,11 @@ export function EMICalculator() {
               </div>
             </div>
 
+<<<<<<< HEAD
             <div className="h-64 w-full mt-6" ref={chartRef}>
+=======
+            <div className="h-64 w-full mt-6">
+>>>>>>> 07dd0a11ae9f46469c2ac6c1ac6bcd9d788fc742
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
