@@ -8,6 +8,8 @@ import { Copy, Download, Loader2, Sparkles, CheckCircle2 } from 'lucide-react';
 import { GoogleGenAI } from '@google/genai';
 import { usePdfGenerator } from '../../hooks/usePdfGenerator';
 
+import { ResultDisplay } from '../../components/ResultDisplay';
+
 export function AIBlogGenerator() {
   const { t } = useTranslation();
   const { downloadTextAsPdf } = usePdfGenerator();
@@ -176,9 +178,7 @@ export function AIBlogGenerator() {
                 <p>{t('tool_page.generate')}...</p>
               </div>
             ) : generatedContent ? (
-              <div className="whitespace-pre-wrap font-sans text-gray-800 dark:text-gray-200 leading-relaxed">
-                {generatedContent}
-              </div>
+              <ResultDisplay result={generatedContent} hideCard={true} />
             ) : (
               <div className="h-full flex flex-col items-center justify-center text-gray-400 dark:text-gray-600">
                 <Sparkles className="w-12 h-12 mb-4 opacity-20" />

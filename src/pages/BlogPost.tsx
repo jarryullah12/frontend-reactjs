@@ -72,6 +72,7 @@ export function BlogPost() {
         description={stripHtml(post.content).substring(0, 160)}
         image={post.image}
         keywords={`${post.category}, SEO, marketing, blog`}
+        canonical={`https://optiseo.com/blog/${post.slug || post.id}`}
       />
       {/* Header & Image Section */}
       <div className="max-w-4xl mx-auto px-4 md:px-8 pt-20 pb-0">

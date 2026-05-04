@@ -69,12 +69,12 @@ export function WebsiteAnalyzer() {
       CRITICAL INSTRUCTION: You MUST base your analysis STRICTLY on the HTML content provided below. Do NOT provide generic SEO advice. Read the HTML carefully. If the HTML already has an H1 tag, do NOT tell the user to "Add a H1 heading". If it has a meta description, do NOT tell the user to "Add a meta description". Only report ACTUAL missing elements or ACTUAL issues found in the provided HTML. If the HTML is a client-side rendered app (like React) and lacks content, mention that it appears to be a JavaScript-rendered page.
 
       HTML Content (truncated):
-      ${htmlContent.slice(0, 30000)}
+      ${htmlContent.slice(0, 15000)}
 
       Analyze the title, meta description, H1 tags, and images.
       Additionally, you MUST provide:
       1. 'tasks_by_priority': Actionable tasks sorted by priority (High, Medium, Low). These MUST be specific to the issues found in the HTML above. Do not hallucinate generic tasks.
-      2. 'detailed_metrics': An array containing exactly these items (infer or simulate realistically if not directly visible in HTML): Canonical link, Crawlability, Language, Alternate/hreflang links, Other meta tags, Domain, Page URL, Charset encoding, Doctype, Favicon, Page quality, Content, Frames, Mobile optimization, Strong and bold tags, Image SEO, Social media, Additional markup, HTTPS, Others, Link structure, Internal links, External links, Server configuration, HTTP redirects, HTTP header, Performance, External factors, Backlinks. For each metric, include an 'explanation' field briefly explaining what this SEO metric is and why it matters.
+      2. 'detailed_metrics': An array containing exactly these 12 key items (infer realistically if not directly visible in HTML): Canonical link, Crawlability, Language, Charset encoding, Doctype, Favicon, Mobile optimization, Image SEO, Social media tags, HTTPS, Internal links, Performance. For each metric, include an 'explanation' field briefly explaining what this SEO metric is and why it matters.
       3. 'category_scores': Provide realistic scores (0-100) for meta_data, page_quality, page_structure, links, server, and external_factors based on the HTML.
       4. 'critical_issues_count': Number of critical issues found.
       5. 'page_details': Provide realistic values for status_code (number), response_time (string, e.g., "0.13 sec"), is_follow (boolean), is_index (boolean), file_size (string, e.g., "0.80 kB"), language (string, e.g., "en" or "-"), word_count (number).
@@ -82,7 +82,7 @@ export function WebsiteAnalyzer() {
       Return the results in the specified JSON format.`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-3.1-flash-lite-preview",
+        model: "gemini-3-flash-preview",
         contents: prompt,
         config: {
           responseMimeType: "application/json",

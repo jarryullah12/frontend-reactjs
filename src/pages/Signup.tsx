@@ -51,7 +51,10 @@ export function Signup() {
             .single();
           
           if (existingUser) {
-            login({ id: existingUser.id, name: existingUser.name, email: existingUser.email, role: existingUser.role });
+            login({ id: existingUser.id, name: existingUser.name, email: existingUser.email, role: existingUser.role, joinDate: existingUser.join_date });
+            if (window.location.hash) {
+              window.history.replaceState(null, '', window.location.pathname + window.location.search);
+            }
             navigate('/');
           } else {
             // Create new user
@@ -67,7 +70,10 @@ export function Signup() {
               .single();
               
             if (newUser) {
-              login({ id: newUser.id, name: newUser.name, email: newUser.email, role: newUser.role });
+              login({ id: newUser.id, name: newUser.name, email: newUser.email, role: newUser.role, joinDate: newUser.join_date });
+              if (window.location.hash) {
+                window.history.replaceState(null, '', window.location.pathname + window.location.search);
+              }
               navigate('/');
             } else if (insertError) {
               console.error('Error creating user from Google signup:', insertError);
@@ -125,7 +131,7 @@ export function Signup() {
 
       if (data && data.length > 0) {
         console.log('User created successfully in Supabase');
-        login({ id: data[0].id, name, email, role: 'user' });
+        login({ id: data[0].id, name, email, role: 'user', joinDate: data[0].join_date });
         navigate('/');
       } else {
         setErrorMsg('Failed to create account: No data returned from database.');

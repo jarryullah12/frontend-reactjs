@@ -52,7 +52,10 @@ export function Login() {
             .single();
           
           if (existingUser) {
-            login({ id: existingUser.id, name: existingUser.name, email: existingUser.email, role: existingUser.role });
+            login({ id: existingUser.id, name: existingUser.name, email: existingUser.email, role: existingUser.role, joinDate: existingUser.join_date });
+            if (window.location.hash) {
+              window.history.replaceState(null, '', window.location.pathname + window.location.search);
+            }
             navigate('/');
           } else {
             // Create new user
@@ -68,7 +71,10 @@ export function Login() {
               .single();
               
             if (newUser) {
-              login({ id: newUser.id, name: newUser.name, email: newUser.email, role: newUser.role });
+              login({ id: newUser.id, name: newUser.name, email: newUser.email, role: newUser.role, joinDate: newUser.join_date });
+              if (window.location.hash) {
+                window.history.replaceState(null, '', window.location.pathname + window.location.search);
+              }
               navigate('/');
             } else if (insertError) {
               console.error('Error creating user from Google login:', insertError);
@@ -127,7 +133,7 @@ export function Login() {
         return;
       }
 
-      login({ id: data.id, name: data.name, email: data.email, role: data.role });
+      login({ id: data.id, name: data.name, email: data.email, role: data.role, joinDate: data.join_date });
       navigate('/');
     } catch (err: any) {
       console.error('Supabase exception:', err);

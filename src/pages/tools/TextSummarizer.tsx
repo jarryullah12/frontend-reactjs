@@ -5,6 +5,8 @@ import { ToolDescription } from '../../components/ToolDescription';
 import { toolDescriptions } from '../../data/toolDescriptions';
 import { GoogleGenAI } from '@google/genai';
 
+import { ResultDisplay } from '../../components/ResultDisplay';
+
 export function TextSummarizer() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -65,14 +67,7 @@ export function TextSummarizer() {
               </div>
             )}
 
-            {result && !loading && (
-              <div className="mt-6 p-6 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Results</h3>
-                <div className="prose dark:prose-invert max-w-none">
-                  {typeof result === 'string' ? <p className="whitespace-pre-wrap">{result}</p> : JSON.stringify(result, null, 2)}
-                </div>
-              </div>
-            )}
+            {result && !loading && <ResultDisplay result={result} />}
           </div>
         </div>
         <ToolDescription points={toolDescriptions['text-summarizer'] || [

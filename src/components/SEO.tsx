@@ -7,9 +7,10 @@ interface SEOProps {
   image?: string;
   url?: string;
   noindex?: boolean;
+  canonical?: string;
 }
 
-export function SEO({ title, description, keywords, image, url, noindex = false }: SEOProps) {
+export function SEO({ title, description, keywords, image, url, noindex = false, canonical }: SEOProps) {
   const siteName = 'OptiSEO';
   const defaultImage = 'https://picsum.photos/seed/optiseo/1200/630'; // Replace with actual default OG image
   const defaultUrl = 'https://optiseo.com'; // Replace with actual domain
@@ -20,6 +21,7 @@ export function SEO({ title, description, keywords, image, url, noindex = false 
       <meta name="description" content={description} />
       {keywords && <meta name="keywords" content={keywords} />}
       {noindex && <meta name="robots" content="noindex, nofollow" />}
+      {canonical && <link rel="canonical" href={canonical} />}
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content="website" />

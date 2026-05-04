@@ -6,6 +6,8 @@ import { usePdfGenerator } from '../../hooks/usePdfGenerator';
 import { ToolDescription } from '../../components/ToolDescription';
 import { toolDescriptions } from '../../data/toolDescriptions';
 
+import { ResultDisplay } from '../../components/ResultDisplay';
+
 export function XmlSitemapGenerator() {
   const { t } = useTranslation();
   const { downloadTextAsPdf } = usePdfGenerator();
@@ -136,9 +138,7 @@ export function XmlSitemapGenerator() {
           
           <div className="flex-1 bg-white dark:bg-black rounded-xl p-4 overflow-auto border border-gray-200 dark:border-gray-800 relative">
             {generated ? (
-              <pre className="text-sm text-gray-800 dark:text-blue-400 font-mono whitespace-pre-wrap break-all">
-                {generated}
-              </pre>
+              <ResultDisplay result={generated} hideCard={true} />
             ) : (
               <div className="absolute inset-0 flex items-center justify-center text-gray-500">
                 <p>{t('tool_page.placeholder_fill')}</p>

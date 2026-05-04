@@ -1,0 +1,11 @@
+const apiKey = process.env.LEMON_SQUEEZY_API_KEY || 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NGQ1OWNlZi1kYmI4LTRlYTUtYjE3OC1kMjU0MGZjZDY5MTkiLCJqdGkiOiJhNjE1NmYwMTlmMDNmOGU2ZmVmZGZhOGNiZDY5NmNjODhiZWIzMWJlYTFiZDkzNDRkMzRhNzczN2RmYWVjNThmMzQ3OTZiZmNmNzhhMWZlMSIsImlhdCI6MTc3NDkzNDYwMS43NDYxMSwibmJmIjoxNzc0OTM0NjAxLjc0NjExMywiZXhwIjoxNzk4Njc1MjAwLjAzMTUyMywic3ViIjoiNjcwNjczMCIsInNjb3BlcyI6W119.eZ23KlHl4KqbHhNfjN8UUXdo21rXNqNayFk4NaEkm4UPuFH7EdgIRT1aUP8B0SWd_nIrl0Bm-QIf3_x1NfwffUs0SIiLmFHc-OKir74yLD17BYOf6OCWQBoUKXH66_qVTpiBMISXYF1WvIl1y901kL0pvJIxUjNKqIlIH-F3bFAT35DS0t2z42QML3yx2aWQeVa3_51d_zuuBQETKDu59ce-a4VdvRfV495oGRqmvaaXeHCtYq442ZZv9ua4AS4rTnjzv_Ly1X_6v_LDp8tqlurWbyQz4xe9eunck_3Scg5TSW_GwRxLMdo6A-m6PoueeeeCKeJn0qVykpMzmMpG8G9f_P_eXXgrWEeAxQe2E2Yqdx3uvVLC8japmIJ8uqzIwxnZKRWDm_jSyujCJE3WP5awoLAuI5WWiQqTu3CNhBO-G5_vlPVKlY7bR-mAYTJz-AHK1CEm1jPmzk85qidDgSHfQ7-IclcDGWuyR93vBXep_CrIfBpthwRmhLJf2FAEH44Qnl7-y0MWpmBvbDBuQqzyaYHuXfrAHeqA7wyXYg_dOe6jsM1xtnfdCSP_Jyavzos684RoiPOjy3_9uq4KZaf7fdzdcxsVoTD79kkB1houZ_aOHa30CUWhLGWSPhMsJkfF85-p4t7itJ0nz8SPMcnAOjDP3x2I0WLKSf0S7NY';
+
+fetch('https://api.lemonsqueezy.com/v1/variants', {
+  headers: {
+    'Accept': 'application/vnd.api+json',
+    'Authorization': `Bearer ${apiKey}`
+  }
+})
+.then(res => res.json())
+.then(data => console.log(JSON.stringify(data).substring(0, 500)))
+.catch(console.error);

@@ -7,6 +7,8 @@ import { usePdfGenerator } from '../../hooks/usePdfGenerator';
 import { ToolDescription } from '../../components/ToolDescription';
 import { toolDescriptions } from '../../data/toolDescriptions';
 
+import { ResultDisplay } from '../../components/ResultDisplay';
+
 export function PrivacyPolicyGenerator() {
   const { t } = useTranslation();
   const { downloadTextAsPdf } = usePdfGenerator();
@@ -120,9 +122,7 @@ export function PrivacyPolicyGenerator() {
           
           <div className="flex-1 bg-white dark:bg-black rounded-xl p-4 overflow-auto border border-gray-200 dark:border-gray-800 relative">
             {generatedDoc ? (
-              <div className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap font-mono">
-                {generatedDoc}
-              </div>
+              <ResultDisplay result={generatedDoc} hideCard={true} />
             ) : (
               <div className="absolute inset-0 flex items-center justify-center text-center p-4 text-gray-500 dark:text-gray-600">
                 <p>{t('tool_page.placeholder_fill')}</p>

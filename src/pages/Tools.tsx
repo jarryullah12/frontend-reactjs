@@ -75,12 +75,12 @@ export function Tools() {
   
   // Check Free Trial
   const joinDate = user?.joinDate || user?.created_at;
-  const daysSinceJoin = joinDate ? Math.floor((new Date().getTime() - new Date(joinDate).getTime()) / (1000 * 3600 * 24)) : 0;
-  const isTrialActive = daysSinceJoin <= 7;
+  const trialDurationMs = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
+  const isTrialActive = joinDate ? (new Date().getTime() - new Date(joinDate).getTime()) < trialDurationMs : false;
 
-  // Check Subscription
-  const isPremiumActive = subscription?.isActive && subscription?.plan === 'premium';
-  const isProActive = subscription?.isActive && (subscription?.plan === 'pro' || subscription?.plan === 'lifetime' || subscription?.plan === 'lifetime pro');
+  // Check Subscription and Role
+  const isPremiumActive = (subscription?.isActive && subscription?.plan === 'premium') || user?.role === 'premium';
+  const isProActive = (subscription?.isActive && (subscription?.plan === 'pro' || subscription?.plan === 'lifetime' || subscription?.plan === 'lifetime pro')) || user?.role === 'pro' || user?.role === 'lifetime' || user?.role === 'lifetime pro';
 
   const checkIsApproved = (toolId: string) => {
     const isFreeTrialTool = FREE_TRIAL_TOOLS.includes(toolId);

@@ -49,6 +49,23 @@ export const useAuthStore = create<AuthState>()(
       fetchSubscription: async () => {
         const user = get().user;
         if (!user) return;
+
+        // Fetch join_date and role to keep the local session fresh
+        const { data: userData } = await supabase
+          .from('users')
+          .select('join_date, role')
+          .eq('id', user.id)
+          .single();
+        
+        if (userData) {
+          set({ 
+            user: { 
+              ...user, 
+              joinDate: userData.join_date || user.joinDate,
+              role: userData.role || user.role
+            } 
+          });
+        }
         
         const { data, error } = await supabase
           .from('payments')

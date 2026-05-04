@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useEffect } from 'react';
+import { useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useAuthStore } from './store';
 import { Layout } from './components/layout/Layout';
@@ -25,109 +25,112 @@ import { Disclaimer } from './pages/Disclaimer';
 import { AccountSettings } from './pages/AccountSettings';
 import { Admin } from './pages/Admin';
 import { AdminLogin } from './pages/AdminLogin';
-import { MetaTagGenerator } from './pages/tools/MetaTagGenerator';
-import { AIBlogGenerator } from './pages/tools/AIBlogGenerator';
-import { RobotsTxtGenerator } from './pages/tools/RobotsTxtGenerator';
-import { XmlSitemapGenerator } from './pages/tools/XmlSitemapGenerator';
-import { CssMinifier } from './pages/tools/CssMinifier';
-import { JsMinifier } from './pages/tools/JsMinifier';
-import { AIArticleRewriter } from './pages/tools/AIArticleRewriter';
-import { AISalesEmail } from './pages/tools/AISalesEmail';
-import { AISocialBio } from './pages/tools/AISocialBio';
-import { AIContentIdeas } from './pages/tools/AIContentIdeas';
-import { SchemaValidator } from './pages/tools/SchemaValidator';
-import { KeywordDensity } from './pages/tools/KeywordDensity';
-import { ContentAnalyzer } from './pages/tools/ContentAnalyzer';
-import { WebsiteAnalyzer } from './pages/tools/WebsiteAnalyzer';
-import { BacklinkChecker } from './pages/tools/BacklinkChecker';
-import { PlagiarismChecker } from './pages/tools/PlagiarismChecker';
-import { AIProductDescription } from './pages/tools/AIProductDescription';
-import { PrivacyPolicyGenerator } from './pages/tools/PrivacyPolicyGenerator';
-import { DAChecker } from './pages/tools/DAChecker';
-import { BrokenLinkChecker } from './pages/tools/BrokenLinkChecker';
-import { AISocialCaption } from './pages/tools/AISocialCaption';
-import { URLEncoderDecoder } from './pages/tools/URLEncoderDecoder';
-import { KeywordSuggestionTool } from './pages/tools/KeywordSuggestionTool';
-import { LongTailKeywordGenerator } from './pages/tools/LongTailKeywordGenerator';
-import { PageAuthorityChecker } from './pages/tools/PageAuthorityChecker';
-import { GoogleIndexChecker } from './pages/tools/GoogleIndexChecker';
-import { XMLSitemapValidator } from './pages/tools/XMLSitemapValidator';
-import { KeywordPositionChecker } from './pages/tools/KeywordPositionChecker';
-import { WordCounter } from './pages/tools/WordCounter';
-import { CharacterCounter } from './pages/tools/CharacterCounter';
-import { CaseConverter } from './pages/tools/CaseConverter';
-import { ReverseImageSearch } from './pages/tools/ReverseImageSearch';
-import { ImageCompressor } from './pages/tools/ImageCompressor';
-import { FaviconGenerator } from './pages/tools/FaviconGenerator';
-import { HtaccessGenerator } from './pages/tools/HtaccessGenerator';
-import { SSLChecker } from './pages/tools/SSLChecker';
-import { WhatIsMyIP } from './pages/tools/WhatIsMyIP';
-import { ServerStatusChecker } from './pages/tools/ServerStatusChecker';
-import { WebsiteScreenshot } from './pages/tools/WebsiteScreenshot';
-import { URLRewritingTool } from './pages/tools/URLRewritingTool';
-import { GrammarChecker } from './pages/tools/GrammarChecker';
-import { ReadabilityChecker } from './pages/tools/ReadabilityChecker';
-import { MD5Generator } from './pages/tools/MD5Generator';
-import { SHA1Generator } from './pages/tools/SHA1Generator';
-import { Base64EncoderDecoder } from './pages/tools/Base64EncoderDecoder';
-import { HTMLMinifier } from './pages/tools/HTMLMinifier';
-import { JSONFormatter } from './pages/tools/JSONFormatter';
-import { UTMBuilder } from './pages/tools/UTMBuilder';
-import { OpenGraphChecker } from './pages/tools/OpenGraphChecker';
-import { TwitterCardGenerator } from './pages/tools/TwitterCardGenerator';
-import { CanonicalTagGenerator } from './pages/tools/CanonicalTagGenerator';
-import { HTTPHeadersChecker } from './pages/tools/HTTPHeadersChecker';
-import { KeywordClusteringTool } from "./pages/tools/KeywordClusteringTool";
-import { SERPSimulator } from "./pages/tools/SERPSimulator";
-import { LSIKeywordGenerator } from "./pages/tools/LSIKeywordGenerator";
-import { BulkURLChecker } from "./pages/tools/BulkURLChecker";
-import { HreflangTagGenerator } from "./pages/tools/HreflangTagGenerator";
-import { SchemaGeneratorFAQ } from "./pages/tools/SchemaGeneratorFAQ";
-import { SchemaGeneratorLocal } from "./pages/tools/SchemaGeneratorLocal";
-import { SchemaGeneratorReview } from "./pages/tools/SchemaGeneratorReview";
-import { MetaDescriptionGenerator } from "./pages/tools/MetaDescriptionGenerator";
-import { TitleTagGenerator } from "./pages/tools/TitleTagGenerator";
-import { BlogPostTitleGenerator } from "./pages/tools/BlogPostTitleGenerator";
-import { ContentOutlineGenerator } from "./pages/tools/ContentOutlineGenerator";
-import { ParagraphRewriter } from "./pages/tools/ParagraphRewriter";
-import { SentenceExpander } from "./pages/tools/SentenceExpander";
-import { TextSummarizer } from "./pages/tools/TextSummarizer";
-import { ReadabilityImprover } from "./pages/tools/ReadabilityImprover";
-import { KeywordTypoGenerator } from "./pages/tools/KeywordTypoGenerator";
-import { GoogleAutocompleteExtractor } from "./pages/tools/GoogleAutocompleteExtractor";
-import { YouTubeKeywordTool } from "./pages/tools/YouTubeKeywordTool";
-import { AmazonKeywordTool } from "./pages/tools/AmazonKeywordTool";
-import { BingKeywordTool } from "./pages/tools/BingKeywordTool";
-import { YandexKeywordTool } from "./pages/tools/YandexKeywordTool";
-import { AppStoreKeywordTool } from "./pages/tools/AppStoreKeywordTool";
-import { SEOReportGenerator } from "./pages/tools/SEOReportGenerator";
-import { CompetitorAnalysisTool } from "./pages/tools/CompetitorAnalysisTool";
-import { BacklinkMaker } from "./pages/tools/BacklinkMaker";
-import { LinkValueCalculator } from "./pages/tools/LinkValueCalculator";
-import { WebsiteSpeedTest } from "./pages/tools/WebsiteSpeedTest";
-import { MobileFriendlyTest } from "./pages/tools/MobileFriendlyTest";
-import { CoreWebVitalsChecker } from "./pages/tools/CoreWebVitalsChecker";
-import { HTMLValidator } from "./pages/tools/HTMLValidator";
-import { CSSValidator } from "./pages/tools/CSSValidator";
-import { XMLSitemapFormatter } from "./pages/tools/XMLSitemapFormatter";
-import { RobotsTxtTester } from "./pages/tools/RobotsTxtTester";
-import { RedirectChecker } from "./pages/tools/RedirectChecker";
-import { HTTP2Checker } from "./pages/tools/HTTP2Checker";
-import { DNSLookupTool } from "./pages/tools/DNSLookupTool";
-import { WHOISLookup } from "./pages/tools/WHOISLookup";
-import { IPLocationFinder } from "./pages/tools/IPLocationFinder";
-import { ReverseIPDomainChecker } from "./pages/tools/ReverseIPDomainChecker";
-import { ServerPortScanner } from "./pages/tools/ServerPortScanner";
-import { EmailPrivacyChecker } from "./pages/tools/EmailPrivacyChecker";
-import { SafeBrowsingChecker } from "./pages/tools/SafeBrowsingChecker";
-import { GoogleCacheChecker } from "./pages/tools/GoogleCacheChecker";
-import { MozrankChecker } from "./pages/tools/MozrankChecker";
-import { AlexaRankChecker } from "./pages/tools/AlexaRankChecker";
-import { KeywordROICalculator } from "./pages/tools/KeywordROICalculator";
-import { CPCCalculator } from "./pages/tools/CPCCalculator";
-import { URLSlugGenerator } from "./pages/tools/URLSlugGenerator";
-import { DomainAgeChecker } from "./pages/tools/DomainAgeChecker";
-import './i18n/i18n'; // Initialize i18n
+import './i18n/i18n';
+
+// Lazy loaded tools
+const MetaTagGenerator = lazy(() => import('./pages/tools/MetaTagGenerator').then(m => ({ default: m.MetaTagGenerator })));
+const AIBlogGenerator = lazy(() => import('./pages/tools/AIBlogGenerator').then(m => ({ default: m.AIBlogGenerator })));
+const RobotsTxtGenerator = lazy(() => import('./pages/tools/RobotsTxtGenerator').then(m => ({ default: m.RobotsTxtGenerator })));
+const XmlSitemapGenerator = lazy(() => import('./pages/tools/XmlSitemapGenerator').then(m => ({ default: m.XmlSitemapGenerator })));
+const CssMinifier = lazy(() => import('./pages/tools/CssMinifier').then(m => ({ default: m.CssMinifier })));
+const JsMinifier = lazy(() => import('./pages/tools/JsMinifier').then(m => ({ default: m.JsMinifier })));
+const AIArticleRewriter = lazy(() => import('./pages/tools/AIArticleRewriter').then(m => ({ default: m.AIArticleRewriter })));
+const AISalesEmail = lazy(() => import('./pages/tools/AISalesEmail').then(m => ({ default: m.AISalesEmail })));
+const AISocialBio = lazy(() => import('./pages/tools/AISocialBio').then(m => ({ default: m.AISocialBio })));
+const AIContentIdeas = lazy(() => import('./pages/tools/AIContentIdeas').then(m => ({ default: m.AIContentIdeas })));
+const SchemaValidator = lazy(() => import('./pages/tools/SchemaValidator').then(m => ({ default: m.SchemaValidator })));
+const KeywordDensity = lazy(() => import('./pages/tools/KeywordDensity').then(m => ({ default: m.KeywordDensity })));
+const ContentAnalyzer = lazy(() => import('./pages/tools/ContentAnalyzer').then(m => ({ default: m.ContentAnalyzer })));
+const WebsiteAnalyzer = lazy(() => import('./pages/tools/WebsiteAnalyzer').then(m => ({ default: m.WebsiteAnalyzer })));
+const BacklinkChecker = lazy(() => import('./pages/tools/BacklinkChecker').then(m => ({ default: m.BacklinkChecker })));
+const PlagiarismChecker = lazy(() => import('./pages/tools/PlagiarismChecker').then(m => ({ default: m.PlagiarismChecker })));
+const AIProductDescription = lazy(() => import('./pages/tools/AIProductDescription').then(m => ({ default: m.AIProductDescription })));
+const PrivacyPolicyGenerator = lazy(() => import('./pages/tools/PrivacyPolicyGenerator').then(m => ({ default: m.PrivacyPolicyGenerator })));
+const DAChecker = lazy(() => import('./pages/tools/DAChecker').then(m => ({ default: m.DAChecker })));
+const BrokenLinkChecker = lazy(() => import('./pages/tools/BrokenLinkChecker').then(m => ({ default: m.BrokenLinkChecker })));
+const AISocialCaption = lazy(() => import('./pages/tools/AISocialCaption').then(m => ({ default: m.AISocialCaption })));
+const URLEncoderDecoder = lazy(() => import('./pages/tools/URLEncoderDecoder').then(m => ({ default: m.URLEncoderDecoder })));
+const KeywordSuggestionTool = lazy(() => import('./pages/tools/KeywordSuggestionTool').then(m => ({ default: m.KeywordSuggestionTool })));
+const LongTailKeywordGenerator = lazy(() => import('./pages/tools/LongTailKeywordGenerator').then(m => ({ default: m.LongTailKeywordGenerator })));
+const PageAuthorityChecker = lazy(() => import('./pages/tools/PageAuthorityChecker').then(m => ({ default: m.PageAuthorityChecker })));
+const GoogleIndexChecker = lazy(() => import('./pages/tools/GoogleIndexChecker').then(m => ({ default: m.GoogleIndexChecker })));
+const XMLSitemapValidator = lazy(() => import('./pages/tools/XMLSitemapValidator').then(m => ({ default: m.XMLSitemapValidator })));
+const KeywordPositionChecker = lazy(() => import('./pages/tools/KeywordPositionChecker').then(m => ({ default: m.KeywordPositionChecker })));
+const WordCounter = lazy(() => import('./pages/tools/WordCounter').then(m => ({ default: m.WordCounter })));
+const CharacterCounter = lazy(() => import('./pages/tools/CharacterCounter').then(m => ({ default: m.CharacterCounter })));
+const CaseConverter = lazy(() => import('./pages/tools/CaseConverter').then(m => ({ default: m.CaseConverter })));
+const ReverseImageSearch = lazy(() => import('./pages/tools/ReverseImageSearch').then(m => ({ default: m.ReverseImageSearch })));
+const ImageCompressor = lazy(() => import('./pages/tools/ImageCompressor').then(m => ({ default: m.ImageCompressor })));
+const FaviconGenerator = lazy(() => import('./pages/tools/FaviconGenerator').then(m => ({ default: m.FaviconGenerator })));
+const HtaccessGenerator = lazy(() => import('./pages/tools/HtaccessGenerator').then(m => ({ default: m.HtaccessGenerator })));
+const SSLChecker = lazy(() => import('./pages/tools/SSLChecker').then(m => ({ default: m.SSLChecker })));
+const WhatIsMyIP = lazy(() => import('./pages/tools/WhatIsMyIP').then(m => ({ default: m.WhatIsMyIP })));
+const ServerStatusChecker = lazy(() => import('./pages/tools/ServerStatusChecker').then(m => ({ default: m.ServerStatusChecker })));
+const WebsiteScreenshot = lazy(() => import('./pages/tools/WebsiteScreenshot').then(m => ({ default: m.WebsiteScreenshot })));
+const URLRewritingTool = lazy(() => import('./pages/tools/URLRewritingTool').then(m => ({ default: m.URLRewritingTool })));
+const GrammarChecker = lazy(() => import('./pages/tools/GrammarChecker').then(m => ({ default: m.GrammarChecker })));
+const ReadabilityChecker = lazy(() => import('./pages/tools/ReadabilityChecker').then(m => ({ default: m.ReadabilityChecker })));
+const MD5Generator = lazy(() => import('./pages/tools/MD5Generator').then(m => ({ default: m.MD5Generator })));
+const SHA1Generator = lazy(() => import('./pages/tools/SHA1Generator').then(m => ({ default: m.SHA1Generator })));
+const Base64EncoderDecoder = lazy(() => import('./pages/tools/Base64EncoderDecoder').then(m => ({ default: m.Base64EncoderDecoder })));
+const HTMLMinifier = lazy(() => import('./pages/tools/HTMLMinifier').then(m => ({ default: m.HTMLMinifier })));
+const JSONFormatter = lazy(() => import('./pages/tools/JSONFormatter').then(m => ({ default: m.JSONFormatter })));
+const UTMBuilder = lazy(() => import('./pages/tools/UTMBuilder').then(m => ({ default: m.UTMBuilder })));
+const OpenGraphChecker = lazy(() => import('./pages/tools/OpenGraphChecker').then(m => ({ default: m.OpenGraphChecker })));
+const TwitterCardGenerator = lazy(() => import('./pages/tools/TwitterCardGenerator').then(m => ({ default: m.TwitterCardGenerator })));
+const CanonicalTagGenerator = lazy(() => import('./pages/tools/CanonicalTagGenerator').then(m => ({ default: m.CanonicalTagGenerator })));
+const HTTPHeadersChecker = lazy(() => import('./pages/tools/HTTPHeadersChecker').then(m => ({ default: m.HTTPHeadersChecker })));
+const KeywordClusteringTool = lazy(() => import('./pages/tools/KeywordClusteringTool').then(m => ({ default: m.KeywordClusteringTool })));
+const SERPSimulator = lazy(() => import('./pages/tools/SERPSimulator').then(m => ({ default: m.SERPSimulator })));
+const LSIKeywordGenerator = lazy(() => import('./pages/tools/LSIKeywordGenerator').then(m => ({ default: m.LSIKeywordGenerator })));
+const BulkURLChecker = lazy(() => import('./pages/tools/BulkURLChecker').then(m => ({ default: m.BulkURLChecker })));
+const HreflangTagGenerator = lazy(() => import('./pages/tools/HreflangTagGenerator').then(m => ({ default: m.HreflangTagGenerator })));
+const SchemaGeneratorFAQ = lazy(() => import('./pages/tools/SchemaGeneratorFAQ').then(m => ({ default: m.SchemaGeneratorFAQ })));
+const SchemaGeneratorLocal = lazy(() => import('./pages/tools/SchemaGeneratorLocal').then(m => ({ default: m.SchemaGeneratorLocal })));
+const SchemaGeneratorReview = lazy(() => import('./pages/tools/SchemaGeneratorReview').then(m => ({ default: m.SchemaGeneratorReview })));
+const MetaDescriptionGenerator = lazy(() => import('./pages/tools/MetaDescriptionGenerator').then(m => ({ default: m.MetaDescriptionGenerator })));
+const TitleTagGenerator = lazy(() => import('./pages/tools/TitleTagGenerator').then(m => ({ default: m.TitleTagGenerator })));
+const BlogPostTitleGenerator = lazy(() => import('./pages/tools/BlogPostTitleGenerator').then(m => ({ default: m.BlogPostTitleGenerator })));
+const ContentOutlineGenerator = lazy(() => import('./pages/tools/ContentOutlineGenerator').then(m => ({ default: m.ContentOutlineGenerator })));
+const ParagraphRewriter = lazy(() => import('./pages/tools/ParagraphRewriter').then(m => ({ default: m.ParagraphRewriter })));
+const SentenceExpander = lazy(() => import('./pages/tools/SentenceExpander').then(m => ({ default: m.SentenceExpander })));
+const TextSummarizer = lazy(() => import('./pages/tools/TextSummarizer').then(m => ({ default: m.TextSummarizer })));
+const ReadabilityImprover = lazy(() => import('./pages/tools/ReadabilityImprover').then(m => ({ default: m.ReadabilityImprover })));
+const KeywordTypoGenerator = lazy(() => import('./pages/tools/KeywordTypoGenerator').then(m => ({ default: m.KeywordTypoGenerator })));
+const GoogleAutocompleteExtractor = lazy(() => import('./pages/tools/GoogleAutocompleteExtractor').then(m => ({ default: m.GoogleAutocompleteExtractor })));
+const YouTubeKeywordTool = lazy(() => import('./pages/tools/YouTubeKeywordTool').then(m => ({ default: m.YouTubeKeywordTool })));
+const AmazonKeywordTool = lazy(() => import('./pages/tools/AmazonKeywordTool').then(m => ({ default: m.AmazonKeywordTool })));
+const BingKeywordTool = lazy(() => import('./pages/tools/BingKeywordTool').then(m => ({ default: m.BingKeywordTool })));
+const YandexKeywordTool = lazy(() => import('./pages/tools/YandexKeywordTool').then(m => ({ default: m.YandexKeywordTool })));
+const AppStoreKeywordTool = lazy(() => import('./pages/tools/AppStoreKeywordTool').then(m => ({ default: m.AppStoreKeywordTool })));
+const SEOReportGenerator = lazy(() => import('./pages/tools/SEOReportGenerator').then(m => ({ default: m.SEOReportGenerator })));
+const CompetitorAnalysisTool = lazy(() => import('./pages/tools/CompetitorAnalysisTool').then(m => ({ default: m.CompetitorAnalysisTool })));
+const BacklinkMaker = lazy(() => import('./pages/tools/BacklinkMaker').then(m => ({ default: m.BacklinkMaker })));
+const LinkValueCalculator = lazy(() => import('./pages/tools/LinkValueCalculator').then(m => ({ default: m.LinkValueCalculator })));
+const WebsiteSpeedTest = lazy(() => import('./pages/tools/WebsiteSpeedTest').then(m => ({ default: m.WebsiteSpeedTest })));
+const MobileFriendlyTest = lazy(() => import('./pages/tools/MobileFriendlyTest').then(m => ({ default: m.MobileFriendlyTest })));
+const CoreWebVitalsChecker = lazy(() => import('./pages/tools/CoreWebVitalsChecker').then(m => ({ default: m.CoreWebVitalsChecker })));
+const HTMLValidator = lazy(() => import('./pages/tools/HTMLValidator').then(m => ({ default: m.HTMLValidator })));
+const CSSValidator = lazy(() => import('./pages/tools/CSSValidator').then(m => ({ default: m.CSSValidator })));
+const XMLSitemapFormatter = lazy(() => import('./pages/tools/XMLSitemapFormatter').then(m => ({ default: m.XMLSitemapFormatter })));
+const RobotsTxtTester = lazy(() => import('./pages/tools/RobotsTxtTester').then(m => ({ default: m.RobotsTxtTester })));
+const RedirectChecker = lazy(() => import('./pages/tools/RedirectChecker').then(m => ({ default: m.RedirectChecker })));
+const HTTP2Checker = lazy(() => import('./pages/tools/HTTP2Checker').then(m => ({ default: m.HTTP2Checker })));
+const DNSLookupTool = lazy(() => import('./pages/tools/DNSLookupTool').then(m => ({ default: m.DNSLookupTool })));
+const WHOISLookup = lazy(() => import('./pages/tools/WHOISLookup').then(m => ({ default: m.WHOISLookup })));
+const IPLocationFinder = lazy(() => import('./pages/tools/IPLocationFinder').then(m => ({ default: m.IPLocationFinder })));
+const ReverseIPDomainChecker = lazy(() => import('./pages/tools/ReverseIPDomainChecker').then(m => ({ default: m.ReverseIPDomainChecker })));
+const ServerPortScanner = lazy(() => import('./pages/tools/ServerPortScanner').then(m => ({ default: m.ServerPortScanner })));
+const EmailPrivacyChecker = lazy(() => import('./pages/tools/EmailPrivacyChecker').then(m => ({ default: m.EmailPrivacyChecker })));
+const SafeBrowsingChecker = lazy(() => import('./pages/tools/SafeBrowsingChecker').then(m => ({ default: m.SafeBrowsingChecker })));
+const GoogleCacheChecker = lazy(() => import('./pages/tools/GoogleCacheChecker').then(m => ({ default: m.GoogleCacheChecker })));
+const MozrankChecker = lazy(() => import('./pages/tools/MozrankChecker').then(m => ({ default: m.MozrankChecker })));
+const AlexaRankChecker = lazy(() => import('./pages/tools/AlexaRankChecker').then(m => ({ default: m.AlexaRankChecker })));
+const KeywordROICalculator = lazy(() => import('./pages/tools/KeywordROICalculator').then(m => ({ default: m.KeywordROICalculator })));
+const CPCCalculator = lazy(() => import('./pages/tools/CPCCalculator').then(m => ({ default: m.CPCCalculator })));
+const URLSlugGenerator = lazy(() => import('./pages/tools/URLSlugGenerator').then(m => ({ default: m.URLSlugGenerator })));
+const DomainAgeChecker = lazy(() => import('./pages/tools/DomainAgeChecker').then(m => ({ default: m.DomainAgeChecker })));
+ // Initialize i18n
 
 export default function App() {
   const { isAuthenticated, fetchSubscription } = useAuthStore();
@@ -140,6 +143,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <Suspense fallback={<div className="flex h-screen items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div></div>}>
       <Routes>
         {/* Auth Routes without Header/Footer */}
         <Route path="/login" element={<Login />} />
@@ -269,6 +273,7 @@ export default function App() {
           </Route>
         </Route>
       </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }

@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 
 import { HowOptiSEOWorks } from '../components/HowOptiSEOWorks';
+import { HomeBlogSection } from '../components/HomeBlogSection';
 import { SEO } from '../components/SEO';
 import { useAuthStore } from '@/store';
 
@@ -363,6 +364,8 @@ export function Home() {
       {/* How OptiSEO Works Section */}
       <HowOptiSEOWorks />
 
+      {/* Blog Section */}
+      <HomeBlogSection />
 
       {/* FAQ Section */}
       <motion.section 

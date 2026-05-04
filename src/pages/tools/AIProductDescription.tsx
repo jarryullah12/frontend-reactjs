@@ -8,6 +8,8 @@ import { usePdfGenerator } from '../../hooks/usePdfGenerator';
 import { ToolDescription } from '../../components/ToolDescription';
 import { toolDescriptions } from '../../data/toolDescriptions';
 
+import { ResultDisplay } from '../../components/ResultDisplay';
+
 export function AIProductDescription() {
   const { t } = useTranslation();
   const { downloadTextAsPdf } = usePdfGenerator();
@@ -115,9 +117,7 @@ export function AIProductDescription() {
           
           <div className="flex-1 bg-white dark:bg-black rounded-xl p-4 overflow-auto border border-gray-200 dark:border-gray-800 relative">
             {generatedDesc ? (
-              <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap">
-                {generatedDesc}
-              </div>
+              <ResultDisplay result={generatedDesc} hideCard={true} />
             ) : (
               <div className="absolute inset-0 flex items-center justify-center text-center p-4 text-gray-500 dark:text-gray-600">
                 <p>{t('tool_page.placeholder_fill')}</p>
