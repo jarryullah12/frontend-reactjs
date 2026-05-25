@@ -83,6 +83,12 @@
         } else {
             document.documentElement.classList.remove('dark');
         }
+        // Suppress Vite HMR WebSocket errors in proxied environments (Replit)
+        window.addEventListener('unhandledrejection', function(e) {
+            if (e.reason && e.reason.message && e.reason.message.includes('WebSocket')) {
+                e.preventDefault();
+            }
+        });
     </script>
 </head>
 <body>
