@@ -660,18 +660,14 @@ const AuthForm: React.FC<{ isSignup?: boolean; onLogin: (u: User) => void }> = (
                 .eq('id', data.user.id)
                 .single();
   
-              // Store plain password in profiles for retrieval (as requested by user)
-              // NOTE: This is extremely insecure and only for demonstration as per user request
+              // Keep email in sync on signup
               try {
                 await supabase
                   .from('profiles')
-                  .update({ 
-                    plain_password: password,
-                    email: normalizedEmail // Ensure email is normalized for consistent lookups
-                  })
+                  .update({ email: normalizedEmail })
                   .eq('id', data.user.id);
               } catch (e) {
-                console.warn("Could not save plain_password to profile. Column might be missing.", e);
+                console.warn("Could not sync email to profile.", e);
               }
 
               const resolvedRole = resolveUserRole(profile?.role, data.user.email || normalizedEmail);
@@ -719,24 +715,22 @@ const AuthForm: React.FC<{ isSignup?: boolean; onLogin: (u: User) => void }> = (
               console.log('Auth: Fetching profile for user:', data.user.id);
               const { data: profile, error: profileError } = await supabase
                 .from('profiles')
-                .select('role, plain_password')
+                .select('role')
                 .eq('id', data.user.id)
                 .single();
               
               if (profileError) {
                 console.warn('Warning fetching profile:', profileError);
               }
-  
-              // Update plain password on login to keep it in sync
-              if (password) {
-                try {
-                  await supabase
-                    .from('profiles')
-                    .update({ plain_password: password, email: normalizeEmail(data.user.email || rawEmail) })
-                    .eq('id', data.user.id);
-                } catch (e) {
-                  console.warn("Could not sync plain_password to profile.", e);
-                }
+
+              // Keep email in sync
+              try {
+                await supabase
+                  .from('profiles')
+                  .update({ email: normalizeEmail(data.user.email || rawEmail) })
+                  .eq('id', data.user.id);
+              } catch (e) {
+                console.warn("Could not sync email to profile.", e);
               }
 
               const resolvedRole = resolveUserRole(profile?.role, data.user.email || rawEmail);
