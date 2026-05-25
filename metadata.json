@@ -1,0 +1,10 @@
+{
+  "name": "ProResumeLab",
+  "description": "A high-end, AI-powered resume builder with real-time preview, professional templates, and recruitment-ready public profiles.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

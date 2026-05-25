@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Medium-like elegant typography for blog content: no word splitting or character breaks */
+.blog-content,
+.blog-content * {
+  word-break: normal !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  hyphens: none !important;
+}
+
+/* Let code blocks scroll horizontally without wrapping */
+.blog-content pre,
+.blog-content pre * {
+  word-break: normal !important;
+  word-wrap: normal !important;
+  overflow-wrap: normal !important;
+  white-space: pre !important;
+}
+
+/* Prevent ugly word splits globally across all headings and cards */
+h1, h2, h3, h4, h5, h6, .break-words {
+  word-break: normal !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  hyphens: none !important;
+}
+

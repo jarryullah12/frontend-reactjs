@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProResumeLab | AI Resume Builder</title>
+    <meta name="description" content="Build high-impact, ATS-friendly resumes and cover letters in seconds with Google Gemini AI. Choose from professional templates and land your dream job faster.">
+    <meta name="keywords" content="resume builder, AI resume, professional resume, ATS friendly, cover letter builder, career tools">
+    <link rel="canonical" href="https://proresumelab.com" />
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&family=Lato:wght@300;400;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Merriweather:wght@300;400;700&family=Montserrat:wght@300;400;600;700&family=Open+Sans:wght@300;400;600;700&family=Oswald:wght@300;400;500;700&family=PT+Sans:wght@400;700&family=Playfair+Display:wght@700&family=Raleway:wght@300;400;600;700&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .resume-page {
+            width: 8.27in;
+            min-height: 11.69in;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            margin: 0 auto;
+            transform-origin: top center;
+        }
+        
+        /* STRICT PRINT STYLES */
+        @media print {
+            @page {
+                size: 8.27in 11.69in;
+                margin: 0mm;
+            }
+            
+            html, body {
+                height: 100%;
+                background: white;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* Hide everything initially */
+            body * {
+                visibility: hidden;
+            }
+
+            /* Explicitly hide elements with no-print class (double safety) */
+            .no-print {
+                display: none !important;
+            }
+
+            /* Make the resume page and its children visible */
+            .resume-page, .resume-page * {
+                visibility: visible;
+            }
+
+            /* Position the resume page perfectly on the paper */
+            .resume-page {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 8.27in !important;
+                /* Allow height to be determined by content for multi-page support */
+                min-height: 11.69in !important;
+                height: auto !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                transform: scale(1) !important; /* Override React scaling */
+                box-shadow: none !important;
+                border: none !important;
+                z-index: 9999;
+                border-radius: 0 !important;
+                overflow: visible !important;
+            }
+
+            /* Ensure background colors and graphics print exactly */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+    <script>
+        // Apply theme immediately to avoid flash
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
