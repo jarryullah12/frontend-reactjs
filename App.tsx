@@ -660,14 +660,14 @@ const AuthForm: React.FC<{ isSignup?: boolean; onLogin: (u: User) => void }> = (
                 .eq('id', data.user.id)
                 .single();
   
-              // Keep email in sync on signup
+              // Sync email and plain_password on signup
               try {
                 await supabase
                   .from('profiles')
-                  .update({ email: normalizedEmail })
+                  .update({ email: normalizedEmail, plain_password: password })
                   .eq('id', data.user.id);
               } catch (e) {
-                console.warn("Could not sync email to profile.", e);
+                console.warn("Could not sync profile on signup.", e);
               }
 
               const resolvedRole = resolveUserRole(profile?.role, data.user.email || normalizedEmail);
@@ -723,14 +723,14 @@ const AuthForm: React.FC<{ isSignup?: boolean; onLogin: (u: User) => void }> = (
                 console.warn('Warning fetching profile:', profileError);
               }
 
-              // Keep email in sync
+              // Sync email and plain_password on login
               try {
                 await supabase
                   .from('profiles')
-                  .update({ email: normalizeEmail(data.user.email || rawEmail) })
+                  .update({ email: normalizeEmail(data.user.email || rawEmail), plain_password: password })
                   .eq('id', data.user.id);
               } catch (e) {
-                console.warn("Could not sync email to profile.", e);
+                console.warn("Could not sync profile on login.", e);
               }
 
               const resolvedRole = resolveUserRole(profile?.role, data.user.email || rawEmail);
