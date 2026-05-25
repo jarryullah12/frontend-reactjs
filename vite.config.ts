@@ -6,10 +6,10 @@ export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     return {
       server: {
-        port: 3000,
+        port: 5000,
         host: '0.0.0.0',
-        // Hum HMR ko false kar rahe hain taake WebSocket errors khatam ho jayen
-        hmr: false 
+        allowedHosts: true,
+        hmr: false
       },
       plugins: [react()],
       resolve: {
