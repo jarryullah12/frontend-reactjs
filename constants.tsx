@@ -170,7 +170,7 @@ export const TEMPLATE_PREVIEW_DATA: ResumeData = {
     location: 'San Francisco, CA',
     website: 'linkedin.com/in/mayabennett',
     jobTitle: 'Senior Operations Manager',
-    summary: 'Senior Operations Manager with 8 years of experience improving service delivery, team performance, and cross-functional execution in fast-paced technology and professional services environments. Skilled at turning complex workflows into scalable processes, building practical reporting frameworks, and aligning people, systems, and priorities around measurable business goals. Known for calm leadership, disciplined planning, and partnering closely with product, finance, sales, and customer success teams to deliver efficient operations and a stronger client experience. Brings a hands-on management style, strong communication skills, and a consistent record of creating clear processes that support growth, reduce friction, and help teams make faster, better-informed decisions across distributed teams, changing priorities, and high-visibility client programs.',
+    summary: 'Results-driven Senior Operations Manager with 7+ years leading cross-functional teams, streamlining workflows, and delivering measurable improvements in service delivery and business performance.',
   },
   experience: [
     {
@@ -180,7 +180,7 @@ export const TEMPLATE_PREVIEW_DATA: ResumeData = {
       startDate: '2020',
       endDate: 'Present',
       current: true,
-      description: 'Lead daily operations for a 45-person client delivery organization serving enterprise accounts across North America. Redesigned intake, staffing, and escalation workflows, reducing project cycle time by 22% and improving on-time delivery from 81% to 95%. Partner with finance and department leads on capacity planning, vendor management, and quarterly forecasts while coaching team managers on service quality, accountability, and performance reviews. Introduced monthly business review dashboards, improved escalation ownership, and created staffing playbooks that helped leaders balance workload, maintain service standards, and support predictable delivery during periods of rapid client growth.'
+      description: '• Led operations for a 45-person delivery team, cutting project cycle time by 22% and lifting on-time delivery from 81% to 95%.\n• Partnered with finance on capacity planning and forecasts; launched dashboards that accelerated executive decisions.'
     },
     {
       id: 'preview-exp-2',
@@ -189,16 +189,7 @@ export const TEMPLATE_PREVIEW_DATA: ResumeData = {
       startDate: '2017',
       endDate: '2020',
       current: false,
-      description: 'Managed process improvement initiatives across onboarding, support, and implementation teams for a growing SaaS business. Introduced weekly KPI reviews, standardized documentation, and service level reporting that improved response consistency and reduced avoidable rework by 18%. Coordinated cross-functional launches with product and customer success teams to support new enterprise clients and improve retention during key renewal periods. Also trained supervisors on planning routines, issue tracking, and decision logs, helping teams resolve blockers faster and improve communication across regional stakeholders and senior leadership.'
-    },
-    {
-      id: 'preview-exp-3',
-      company: 'Horizon Advisory Group',
-      position: 'Business Operations Analyst',
-      startDate: '2014',
-      endDate: '2017',
-      current: false,
-      description: 'Supported leadership with reporting, workflow analysis, and operational planning for client-facing consulting teams. Built Excel and SQL-based dashboards to track utilization, margin, and delivery health, giving managers clearer visibility into resource gaps and project risks. Documented procedures, improved handoff processes, and helped prepare executive summaries for monthly business reviews. Worked closely with team leads to organize data inputs, monitor deadlines, and standardize reporting formats so decisions could be made more quickly and with stronger operational context.'
+      description: '• Drove process improvements across onboarding and support teams, reducing avoidable rework by 18%.\n• Coordinated cross-functional product launches and trained supervisors on planning routines and issue tracking.'
     }
   ],
   education: [
@@ -206,10 +197,10 @@ export const TEMPLATE_PREVIEW_DATA: ResumeData = {
       id: 'preview-edu-1',
       school: 'University of Washington',
       degree: 'Master of Business Administration',
-      field: 'Operations and Strategy',
+      field: 'Operations & Strategy',
       startDate: '2015',
       endDate: '2017',
-      description: 'Focused on operations strategy, financial decision-making, and organizational leadership.'
+      description: 'Focus on operations strategy and organizational leadership.'
     },
     {
       id: 'preview-edu-2',
@@ -218,16 +209,7 @@ export const TEMPLATE_PREVIEW_DATA: ResumeData = {
       field: 'Business Administration',
       startDate: '2010',
       endDate: '2014',
-      description: 'Graduated with honors and completed applied coursework in analytics and project management.'
-    },
-    {
-      id: 'preview-edu-3',
-      school: 'Coursera',
-      degree: 'Operations Analytics Certificate',
-      field: 'Business Analytics',
-      startDate: '2019',
-      endDate: '2019',
-      description: 'Completed coursework in dashboard design, reporting logic, and decision support.'
+      description: 'Graduated with honors.'
     }
   ],
   skills: [
@@ -238,16 +220,11 @@ export const TEMPLATE_PREVIEW_DATA: ResumeData = {
     'Cross-Functional Leadership',
     'Vendor Management',
     'Budget Coordination',
-    'SQL',
-    'Excel',
-    'Project Management',
-    'Reporting Automation',
-    'Service Delivery'
+    'Project Management'
   ],
   languages: [
     'English (Native)',
-    'Spanish (Professional)',
-    'French (Conversational)'
+    'Spanish (Professional)'
   ],
 };
 
