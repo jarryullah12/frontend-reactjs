@@ -837,7 +837,7 @@ export const TemplateRenderer: React.FC<Props> = ({
 
     if (isDeveloper) {
       return (
-        <div className="h-full bg-[#0f172a] text-slate-100 grid grid-cols-[33%_67%]">
+        <div className="h-full bg-[#0f172a] text-slate-100 grid grid-cols-[33%_67%] overflow-hidden">
           <aside className="bg-slate-950 p-[14mm] border-r border-slate-800">
             <div className="text-[10px] uppercase tracking-[0.35em] text-cyan-400 mb-6">Developer Mode</div>
             <ProfileImage className="w-24 h-24 rounded-2xl object-cover border-2 border-slate-700 mb-6" />
@@ -1016,7 +1016,7 @@ export const TemplateRenderer: React.FC<Props> = ({
 
     if (isNova) {
       return (
-        <div className="h-full bg-white relative flex">
+        <div className="h-full bg-white relative flex overflow-hidden">
           <div className="w-[38%] text-white p-10 relative overflow-hidden" style={accentStyle}>
             <div className="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-white/10"></div>
             <div className="absolute -left-20 bottom-0 w-56 h-56 rounded-full bg-black/10"></div>
@@ -1091,7 +1091,7 @@ export const TemplateRenderer: React.FC<Props> = ({
     }
 
     return (
-      <div className="h-full bg-white relative flex flex-row">
+      <div className="h-full bg-white relative flex flex-row overflow-hidden">
          {/* Left/Top Banner */}
          <div className="w-[35%] p-10 flex flex-col text-white" style={accentStyle}>
             <div>
@@ -1187,7 +1187,7 @@ export const TemplateRenderer: React.FC<Props> = ({
     const isOrigin = tid === 'origin';
 
     return (
-      <div className={`h-full relative p-[20mm] text-slate-900 mx-auto max-w-4xl ${isOrigin ? 'bg-[#fffdf8]' : 'bg-white'}`}>
+      <div className={`h-full relative p-[20mm] text-slate-900 mx-auto max-w-4xl overflow-hidden ${isOrigin ? 'bg-[#fffdf8]' : 'bg-white'}`}>
          {isOrigin && <div className="absolute left-0 top-0 bottom-0 w-3" style={accentStyle}></div>}
          <header className={`mb-8 pb-8 ${isStandard ? 'text-left border-l-8 pl-6' : 'text-center border-b-2'} ${isOrigin ? 'border-b border-slate-300 text-left pl-0' : 'border-slate-900'}`} style={isStandard ? borderAccentStyle : undefined}>
             {data.personalInfo.profilePicture && (
@@ -1421,7 +1421,7 @@ export const TemplateRenderer: React.FC<Props> = ({
 
     if (isSimple) {
       return (
-        <div className="h-full bg-white relative p-[20mm] text-black mx-auto">
+        <div className="h-full bg-white relative p-[20mm] text-black mx-auto overflow-hidden">
           <header className="mb-10 border-b border-slate-200 pb-6">
             <h1 className="text-3xl font-semibold tracking-[0.35em] uppercase mb-2">{data.personalInfo.fullName}</h1>
             <h2 className="text-xs tracking-[0.35em] uppercase text-slate-400 mb-4 font-semibold">{data.personalInfo.jobTitle}</h2>
@@ -1504,7 +1504,7 @@ export const TemplateRenderer: React.FC<Props> = ({
 
     if (isOasis) {
       return (
-        <div className="h-full bg-slate-50 relative p-[18mm] text-black mx-auto">
+        <div className="h-full bg-slate-50 relative p-[18mm] text-black mx-auto overflow-hidden">
           <header className="mb-8 bg-white rounded-[2rem] p-8 border border-slate-200 shadow-sm">
             <h1 className="text-4xl font-light tracking-[0.3em] uppercase mb-1">{data.personalInfo.fullName}</h1>
             <h2 className="text-sm tracking-[0.3em] uppercase text-slate-400 mb-6 font-semibold" style={textAccentStyle}>{data.personalInfo.jobTitle}</h2>
@@ -1592,7 +1592,7 @@ export const TemplateRenderer: React.FC<Props> = ({
 
     if (isClean) {
       return (
-        <div className="h-full bg-[#f8fafc] relative p-[18mm] text-slate-900">
+        <div className="h-full bg-[#f8fafc] relative p-[18mm] text-slate-900 overflow-hidden">
           <header className="mb-8 rounded-[1.75rem] border border-slate-200 bg-white p-8 shadow-sm">
             <div className="flex items-start justify-between gap-8">
               <div className="max-w-[70%]">
@@ -1682,7 +1682,7 @@ export const TemplateRenderer: React.FC<Props> = ({
     }
 
     return (
-      <div className="h-full bg-white relative p-[20mm] text-black mx-auto">
+      <div className="h-full bg-white relative p-[20mm] text-black mx-auto overflow-hidden">
         <header className={`mb-10 ${isClarity ? 'text-center border-b-2 pb-8' : 'animate-fade-in'}`}>
            <h1 className={`${isLuna ? 'text-5xl font-serif' : 'text-3xl font-light'} tracking-widest uppercase mb-1`}>{data.personalInfo.fullName}</h1>
            <h2 className="text-sm tracking-widest uppercase text-slate-400 mb-6 font-semibold" style={textAccentStyle}>{data.personalInfo.jobTitle}</h2>
@@ -1779,7 +1779,7 @@ export const TemplateRenderer: React.FC<Props> = ({
     const isNexus = tid === 'nexus';
 
     return (
-      <div className={`h-full relative p-[15mm] font-mono text-sm leading-relaxed ${isEcho ? 'bg-[#0b1120] text-slate-200' : 'bg-slate-900 text-slate-300'} ${isNexus ? 'border-t-[10px]' : 'border-l-[8px]'}`} style={{ borderColor: isGradient ? 'transparent' : data.accentColor, borderImage: isGradient ? `${data.accentColor} 1` : 'none' }}>
+      <div className={`h-full relative p-[15mm] font-mono text-sm leading-relaxed overflow-hidden ${isEcho ? 'bg-[#0b1120] text-slate-200' : 'bg-slate-900 text-slate-300'} ${isNexus ? 'border-t-[10px]' : 'border-l-[8px]'}`} style={{ borderColor: isGradient ? 'transparent' : data.accentColor, borderImage: isGradient ? `${data.accentColor} 1` : 'none' }}>
          {isEcho && <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_bottom,transparent_0%,rgba(255,255,255,0.2)_50%,transparent_100%)] pointer-events-none"></div>}
          <header className={`mb-10 ${isStatic ? 'grid grid-cols-[auto_1fr] gap-6 items-start' : 'flex gap-6 items-center'} ${isNexus ? 'bg-slate-950/80 rounded-2xl p-6 border border-slate-800' : ''}`}>
              {data.personalInfo.profilePicture && (
@@ -2010,7 +2010,7 @@ export const TemplateRenderer: React.FC<Props> = ({
     const isHorizon = tid === 'horizon';
 
     return (
-      <div className={`h-full relative flex text-slate-800 ${isHorizon ? 'flex-col' : 'flex-row'}`}>
+      <div className={`h-full relative flex text-slate-800 overflow-hidden ${isHorizon ? 'flex-col' : 'flex-row'}`}>
          <div className={`${isHorizon ? 'w-full flex flex-row items-center gap-8' : 'w-[30%] flex flex-col gap-10'} ${isSummit ? 'bg-slate-900 text-white' : 'bg-slate-100'} p-8 ${!isHorizon ? 'border-r-4' : 'border-b-4'}`} style={borderAccentStyle}>
             <div>
                <div className={isHorizon ? 'flex items-center gap-6' : ''}>
@@ -2120,7 +2120,7 @@ export const TemplateRenderer: React.FC<Props> = ({
     const isAurora = tid === 'aurora';
 
     return (
-      <div className={`h-full bg-[#faf9f6] relative p-[20mm] text-slate-800 ${isElite ? 'border-[12px]' : 'border-8'}`} style={{ borderColor: isGradient ? 'transparent' : data.accentColor, borderImage: isGradient ? `${data.accentColor} 1` : 'none' }}>
+      <div className={`h-full bg-[#faf9f6] relative p-[20mm] text-slate-800 overflow-hidden ${isElite ? 'border-[12px]' : 'border-8'}`} style={{ borderColor: isGradient ? 'transparent' : data.accentColor, borderImage: isGradient ? `${data.accentColor} 1` : 'none' }}>
         <header className={`text-center mb-10 pb-8 ${isPremium ? 'border-none' : 'border-b-[1px] border-slate-300'}`}>
            <h1 className={`${isElite ? 'text-5xl' : 'text-4xl'} font-serif text-slate-900 mb-2 tracking-wide`}>{data.personalInfo.fullName}</h1>
            <h2 className="text-lg font-serif italic text-slate-600 mb-6" style={textAccentStyle}>{data.personalInfo.jobTitle}</h2>
@@ -2222,7 +2222,7 @@ export const TemplateRenderer: React.FC<Props> = ({
     const isSpectrum = tid === 'spectrum';
 
     return (
-      <div className={`h-full relative p-[15mm] text-black ${isVision ? 'bg-[#f8fafc]' : 'bg-white border-4 border-black'} ${isSpectrum ? 'overflow-hidden' : ''}`}>
+      <div className={`h-full relative p-[15mm] text-black overflow-hidden ${isVision ? 'bg-[#f8fafc]' : 'bg-white border-4 border-black'}`}>
          {isSpectrum && (
             <>
                <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl opacity-20" style={accentStyle}></div>
@@ -2317,7 +2317,7 @@ export const TemplateRenderer: React.FC<Props> = ({
     const isMomentum = tid === 'momentum';
 
     return (
-      <div className={`h-full relative p-[20mm] text-white ${isMomentum ? 'bg-black' : 'bg-slate-900'}`}>
+      <div className={`h-full relative p-[20mm] text-white overflow-hidden ${isMomentum ? 'bg-black' : 'bg-slate-900'}`}>
          {isApex && <div className="absolute top-0 bottom-0 left-0 w-5" style={accentStyle}></div>}
          <header className={`mb-12 pb-8 ${isMomentum ? 'grid grid-cols-[1.2fr_auto] gap-8 items-center bg-slate-950 rounded-[2rem] p-8 border border-slate-800' : 'flex items-center justify-between border-b-2 border-slate-700'} ${isApex ? 'pl-6' : ''}`}>
             <div>
@@ -2406,7 +2406,7 @@ export const TemplateRenderer: React.FC<Props> = ({
     const isNimbus = tid === 'nimbus';
 
     return (
-      <div className={`h-full relative p-[15mm] text-slate-800 text-[11px] leading-snug ${isEssential ? 'bg-white' : 'bg-slate-50'} ${isNimbus ? 'bg-gradient-to-br from-slate-50 to-blue-50' : ''}`}>
+      <div className={`h-full relative p-[15mm] text-slate-800 text-[11px] leading-snug overflow-hidden ${isEssential ? 'bg-white' : 'bg-slate-50'} ${isNimbus ? 'bg-gradient-to-br from-slate-50 to-blue-50' : ''}`}>
          <header className={`flex gap-6 items-center mb-6 p-6 ${isEssential ? 'border-b border-slate-300 rounded-none shadow-none bg-transparent' : 'bg-white rounded-xl shadow-sm border border-slate-200'} ${isNimbus ? 'rounded-[1.75rem] border-blue-100' : ''}`}>
             {data.personalInfo.profilePicture && (
                 <ProfileImage className={`w-20 h-20 object-cover shrink-0 ${isEssential ? 'rounded-xl' : 'rounded-full'}`} />
@@ -2726,7 +2726,7 @@ export const TemplateRenderer: React.FC<Props> = ({
     );
 
     return (
-       <div className={`h-full relative ${bgMain} ${textMain}`}>
+       <div className={`h-full relative overflow-hidden ${bgMain} ${textMain}`}>
           {config.layout === 'stack' && (
              <div className="flex flex-col h-full p-[12mm]">
                 {renderHeaderContent()}
@@ -2880,7 +2880,7 @@ export const TemplateRenderer: React.FC<Props> = ({
         </div>
         ))}
         
-        <div style={resumeWrapperStyle}>
+        <div style={resumeWrapperStyle} className="overflow-hidden">
             {(() => {
                 switch(tid) {
                     // Variations of Corporate
