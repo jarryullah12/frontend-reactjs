@@ -19,7 +19,8 @@ const Builder: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [data, setData] = useState<ResumeData>(TEMPLATE_PREVIEW_DATA);
-  const [activeTab, setActiveTab] = useState<'info' | 'experience' | 'skills' | 'education' | 'template' | 'references' | 'languages'>('info');
+  const [activeTab, setActiveTab] = useState<'info' | 'experience' | 'skills' | 'education' | 'references' | 'languages'>('info');
+  const [showDesignPanel, setShowDesignPanel] = useState(false);
   const [selectionMode, setSelectionMode] = useState<'selecting' | 'editor'>(id ? 'editor' : 'selecting');
   const [activeView, setActiveView] = useState<'resume' | 'cover-letter' | 'ats-check' | 'cv'>('resume');
   const [isGenerating, setIsGenerating] = useState(false);
@@ -705,25 +706,39 @@ const Builder: React.FC = () => {
           
           {/* Resume Tabs */}
           {(activeView === 'resume' || activeView === 'cv') && (
-            <div className="flex border-b dark:border-slate-800 overflow-x-auto no-scrollbar bg-white dark:bg-slate-900 sticky top-0 z-10">
+            <>
+              {/* Design Toggle Button */}
+              <button
+                onClick={() => setShowDesignPanel(p => !p)}
+                className={`w-full flex items-center justify-between px-5 py-3 text-xs font-black uppercase tracking-widest border-b dark:border-slate-800 transition ${showDesignPanel ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400' : 'bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800'}`}
+              >
+                <span className="flex items-center gap-2">
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
+                  Design & Template
+                </span>
+                <svg className={`w-3.5 h-3.5 transition-transform ${showDesignPanel ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+              </button>
+
+              {/* Section Tabs */}
+              <div className="flex border-b dark:border-slate-800 overflow-x-auto no-scrollbar bg-white dark:bg-slate-900">
                 {[
-                { id: 'template', label: 'Design' },
-                { id: 'info', label: 'Info' },
-                { id: 'experience', label: 'Work' },
-                { id: 'education', label: 'Education' },
-                { id: 'skills', label: 'Skills' },
-                { id: 'languages', label: 'Languages' },
-                { id: 'references', label: 'References' }
+                  { id: 'info', label: 'Info' },
+                  { id: 'experience', label: 'Work' },
+                  { id: 'education', label: 'Education' },
+                  { id: 'skills', label: 'Skills' },
+                  { id: 'languages', label: 'Languages' },
+                  { id: 'references', label: 'References' }
                 ].map(tab => (
-                <button
+                  <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id as any)}
-                    className={`flex-1 py-4 px-2 text-[10px] font-black border-b-2 whitespace-nowrap transition uppercase tracking-widest ${activeTab === tab.id ? 'border-blue-600 text-blue-600 dark:border-blue-500 dark:text-blue-500 bg-blue-50/50 dark:bg-blue-900/20' : 'border-transparent text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800'}`}
-                >
+                    className={`flex-1 py-3 px-2 text-[10px] font-black border-b-2 whitespace-nowrap transition uppercase tracking-widest ${activeTab === tab.id ? 'border-blue-600 text-blue-600 dark:border-blue-500 dark:text-blue-500 bg-blue-50/50 dark:bg-blue-900/20' : 'border-transparent text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800'}`}
+                  >
                     {tab.label}
-                </button>
+                  </button>
                 ))}
-            </div>
+              </div>
+            </>
           )}
 
           {/* Cover Letter Header (Visual Only) */}
@@ -828,8 +843,8 @@ const Builder: React.FC = () => {
             )}
 
             {/* RESUME EDITORS */}
-            {(activeView === 'resume' || activeView === 'cv') && activeTab === 'template' && (
-              <div className="space-y-8 animate-in fade-in slide-in-from-left-4 duration-300">
+            {(activeView === 'resume' || activeView === 'cv') && showDesignPanel && (
+              <div className="space-y-8 animate-in fade-in slide-in-from-top-4 duration-300 border-b dark:border-slate-800 pb-6">
                 <div>
                   <label className={labelClass}>Accent Color</label>
                   <div className="flex flex-wrap items-center gap-2">
