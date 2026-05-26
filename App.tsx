@@ -319,12 +319,20 @@ const App: React.FC = () => {
         .eq('id', authUser.id)
         .single();
 
-      if (profileErr) {
+      const isNotFound = profileErr?.code === 'PGRST116';
+      if (profileErr && !isNotFound) {
         console.error('Error fetching profile role:', profileErr);
       }
 
       const resolvedRole = resolveUserRole(profile?.role, authUser.email);
-      if (resolvedRole === 'admin' && profile?.role !== 'admin') {
+
+      if (isNotFound) {
+        await supabase.from('profiles').upsert({
+          id: authUser.id,
+          email: normalizeEmail(authUser.email || ''),
+          role: resolvedRole,
+        }, { onConflict: 'id' });
+      } else if (resolvedRole === 'admin' && profile?.role !== 'admin') {
         await supabase.from('profiles').update({ role: 'admin' }).eq('id', authUser.id);
       }
 
