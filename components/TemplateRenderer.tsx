@@ -33,24 +33,24 @@ const A4_TEMPLATE_OVERRIDES: Record<string, TemplateFitConfig> = {
     languagesMaxItems: 1,
   },
   essential: {
-    summaryMaxChars: 165,
-    experienceMaxItems: 2,
-    experienceDescriptionMaxChars: 105,
-    experienceDescriptionMaxLines: 2,
+    summaryMaxChars: 210,
+    experienceMaxItems: 3,
+    experienceDescriptionMaxChars: 140,
+    experienceDescriptionMaxLines: 3,
     educationMaxItems: 2,
-    educationDescriptionMaxChars: 55,
-    skillsMaxItems: 5,
-    languagesMaxItems: 1,
+    educationDescriptionMaxChars: 70,
+    skillsMaxItems: 9,
+    languagesMaxItems: 2,
   },
   compact: {
-    summaryMaxChars: 160,
-    experienceMaxItems: 2,
-    experienceDescriptionMaxChars: 100,
-    experienceDescriptionMaxLines: 2,
+    summaryMaxChars: 210,
+    experienceMaxItems: 3,
+    experienceDescriptionMaxChars: 140,
+    experienceDescriptionMaxLines: 3,
     educationMaxItems: 2,
-    educationDescriptionMaxChars: 50,
-    skillsMaxItems: 5,
-    languagesMaxItems: 1,
+    educationDescriptionMaxChars: 65,
+    skillsMaxItems: 9,
+    languagesMaxItems: 2,
   },
   spacious: {
     summaryMaxChars: 180,
@@ -83,14 +83,14 @@ const A4_TEMPLATE_OVERRIDES: Record<string, TemplateFitConfig> = {
     languagesMaxItems: 1,
   },
   clarity: {
-    summaryMaxChars: 165,
-    experienceMaxItems: 2,
-    experienceDescriptionMaxChars: 105,
-    experienceDescriptionMaxLines: 2,
+    summaryMaxChars: 210,
+    experienceMaxItems: 3,
+    experienceDescriptionMaxChars: 140,
+    experienceDescriptionMaxLines: 3,
     educationMaxItems: 2,
-    educationDescriptionMaxChars: 55,
-    skillsMaxItems: 5,
-    languagesMaxItems: 1,
+    educationDescriptionMaxChars: 70,
+    skillsMaxItems: 9,
+    languagesMaxItems: 2,
   },
   apex: {
     summaryMaxChars: 175,
@@ -113,14 +113,14 @@ const A4_TEMPLATE_OVERRIDES: Record<string, TemplateFitConfig> = {
     languagesMaxItems: 1,
   },
   nimbus: {
-    summaryMaxChars: 235,
+    summaryMaxChars: 300,
     experienceMaxItems: 3,
-    experienceDescriptionMaxChars: 135,
-    experienceDescriptionMaxLines: 3,
-    educationMaxItems: 2,
-    educationDescriptionMaxChars: 65,
-    skillsMaxItems: 7,
-    languagesMaxItems: 2,
+    experienceDescriptionMaxChars: 175,
+    experienceDescriptionMaxLines: 4,
+    educationMaxItems: 3,
+    educationDescriptionMaxChars: 85,
+    skillsMaxItems: 12,
+    languagesMaxItems: 3,
   },
   zenith: {
     summaryMaxChars: 185,
@@ -921,8 +921,8 @@ export const TemplateRenderer: React.FC<Props> = ({
 
     if (isZenith) {
       return (
-        <div className="h-full bg-slate-50 text-slate-800">
-          <header className="p-[16mm] text-white" style={accentStyle}>
+        <div className="h-full bg-slate-50 text-slate-800 overflow-hidden">
+          <header className="p-[11mm] text-white" style={accentStyle}>
             <div className="flex items-center justify-between gap-8">
               <div className="flex items-center gap-8">
                 <ProfileImage className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-xl" />
@@ -938,21 +938,21 @@ export const TemplateRenderer: React.FC<Props> = ({
             </div>
           </header>
 
-          <div className="p-[16mm] grid grid-cols-[1.15fr_0.85fr] gap-8">
-            <div className="space-y-8">
+          <div className="p-[11mm] grid grid-cols-[1.15fr_0.85fr] gap-6">
+            <div className="space-y-4">
               {data.personalInfo.summary && (
-                <section className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
-                  <h3 className="text-sm font-black uppercase tracking-[0.25em] text-slate-400 mb-4 border-b pb-2">Profile</h3>
+                <section className="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                  <h3 className="text-sm font-black uppercase tracking-[0.25em] text-slate-400 mb-3 border-b pb-2">Profile</h3>
                   <p className="text-sm leading-relaxed text-slate-600 font-medium">{data.personalInfo.summary}</p>
                 </section>
               )}
 
               {data.experience.length > 0 && (
                 <section className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
-                  <h3 className="text-sm font-black uppercase tracking-[0.25em] text-slate-400 mb-4 border-b pb-2">Work Experience</h3>
-                  <div className="space-y-5">
+                  <h3 className="text-sm font-black uppercase tracking-[0.25em] text-slate-400 mb-3 border-b pb-2">Work Experience</h3>
+                  <div className="space-y-3">
                     {data.experience.map(exp => (
-                      <div key={exp.id} className="rounded-2xl bg-slate-50 border border-slate-100 p-5">
+                      <div key={exp.id} className="rounded-2xl bg-slate-50 border border-slate-100 p-4">
                         <div className="flex justify-between items-center gap-4 mb-2">
                           <div>
                             <h4 className="text-lg font-bold text-slate-900">{exp.position}</h4>
@@ -968,10 +968,10 @@ export const TemplateRenderer: React.FC<Props> = ({
               )}
             </div>
 
-            <div className="space-y-8">
+            <div className="space-y-4">
               {data.skills.length > 0 && (
-                <section className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
-                  <h3 className="text-sm font-black uppercase tracking-[0.25em] text-slate-400 mb-4 border-b pb-2">Skills & Expertise</h3>
+                <section className="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                  <h3 className="text-sm font-black uppercase tracking-[0.25em] text-slate-400 mb-3 border-b pb-2">Skills & Expertise</h3>
                   <div className="flex flex-wrap gap-3">
                     {data.skills.map(skill => (
                       <span key={skill} className="bg-slate-50 px-3 py-1 rounded-full text-xs font-bold border border-slate-100">{skill}</span>
@@ -981,8 +981,8 @@ export const TemplateRenderer: React.FC<Props> = ({
               )}
 
               {(data.languages || []).length > 0 && (
-                <section className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
-                  <h3 className="text-sm font-black uppercase tracking-[0.25em] text-slate-400 mb-4 border-b pb-2">Languages</h3>
+                <section className="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                  <h3 className="text-sm font-black uppercase tracking-[0.25em] text-slate-400 mb-3 border-b pb-2">Languages</h3>
                   <div className="flex flex-wrap gap-3">
                     {(data.languages || []).map(lang => (
                       <span key={lang} className="bg-slate-50 px-3 py-1 rounded-full text-xs font-bold border border-slate-100">{lang}</span>
@@ -992,9 +992,9 @@ export const TemplateRenderer: React.FC<Props> = ({
               )}
 
               {data.education.length > 0 && (
-                <section className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
-                  <h3 className="text-sm font-black uppercase tracking-[0.25em] text-slate-400 mb-4 border-b pb-2">Education</h3>
-                  <div className="space-y-4">
+                <section className="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                  <h3 className="text-sm font-black uppercase tracking-[0.25em] text-slate-400 mb-3 border-b pb-2">Education</h3>
+                  <div className="space-y-3">
                     {data.education.map(edu => (
                       <div key={edu.id}>
                         <h4 className="text-base font-bold text-slate-900">{edu.degree}</h4>
@@ -1187,9 +1187,9 @@ export const TemplateRenderer: React.FC<Props> = ({
     const isOrigin = tid === 'origin';
 
     return (
-      <div className={`h-full relative p-[20mm] text-slate-900 mx-auto max-w-4xl overflow-hidden ${isOrigin ? 'bg-[#fffdf8]' : 'bg-white'}`}>
+      <div className={`h-full relative p-[14mm] text-slate-900 mx-auto max-w-4xl overflow-hidden ${isOrigin ? 'bg-[#fffdf8]' : 'bg-white'}`}>
          {isOrigin && <div className="absolute left-0 top-0 bottom-0 w-3" style={accentStyle}></div>}
-         <header className={`mb-8 pb-8 ${isStandard ? 'text-left border-l-8 pl-6' : 'text-center border-b-2'} ${isOrigin ? 'border-b border-slate-300 text-left pl-0' : 'border-slate-900'}`} style={isStandard ? borderAccentStyle : undefined}>
+         <header className={`mb-5 pb-5 ${isStandard ? 'text-left border-l-8 pl-6' : 'text-center border-b-2'} ${isOrigin ? 'border-b border-slate-300 text-left pl-0' : 'border-slate-900'}`} style={isStandard ? borderAccentStyle : undefined}>
             {data.personalInfo.profilePicture && (
                 <ProfileImage className={`w-28 h-28 border-2 shadow-sm mb-6 ${isStandard ? 'rounded-2xl' : 'rounded-full'} ${isStandard ? '' : 'mx-auto'}`} style={isStandard ? borderAccentStyle : { borderColor: '#0f172a' }} />
             )}
@@ -1207,7 +1207,7 @@ export const TemplateRenderer: React.FC<Props> = ({
             </div>
          </header>
 
-         <div className="space-y-8">
+         <div className="space-y-5">
             {data.personalInfo.summary && (
                <section className={isStandard ? 'bg-slate-50 border border-slate-200 rounded-2xl p-5' : ''}>
                   <h3 className={`text-base font-bold uppercase tracking-widest mb-3 py-1 ${isStandard || isOrigin ? 'text-left' : 'text-center'}`} style={isStandard || isOrigin ? textAccentStyle : accentStyle}>
@@ -1682,8 +1682,8 @@ export const TemplateRenderer: React.FC<Props> = ({
     }
 
     return (
-      <div className="h-full bg-white relative p-[20mm] text-black mx-auto overflow-hidden">
-        <header className={`mb-10 ${isClarity ? 'text-center border-b-2 pb-8' : 'animate-fade-in'}`}>
+      <div className="h-full bg-white relative p-[14mm] text-black mx-auto overflow-hidden">
+        <header className={`mb-5 ${isClarity ? 'text-center border-b-2 pb-4' : 'animate-fade-in'}`}>
            <h1 className={`${isLuna ? 'text-5xl font-serif' : 'text-3xl font-light'} tracking-widest uppercase mb-1`}>{data.personalInfo.fullName}</h1>
            <h2 className="text-sm tracking-widest uppercase text-slate-400 mb-6 font-semibold" style={textAccentStyle}>{data.personalInfo.jobTitle}</h2>
            
@@ -1694,9 +1694,9 @@ export const TemplateRenderer: React.FC<Props> = ({
            </div>
         </header>
 
-        <div className={`grid ${isClarity ? 'grid-cols-1' : 'grid-cols-[1fr_2fr]'} gap-12`}>
+        <div className={`grid ${isClarity ? 'grid-cols-1' : 'grid-cols-[1fr_2fr]'} gap-7`}>
             {!isClarity && (
-              <div className="space-y-10">
+              <div className="space-y-6">
                 {data.personalInfo.profilePicture && (
                     <ProfileImage className={`w-full aspect-square grayscale object-cover mb-6 ${isLuna ? 'rounded-full' : ''}`} />
                 )}
@@ -1734,8 +1734,8 @@ export const TemplateRenderer: React.FC<Props> = ({
 
                {data.experience.length > 0 && (
                   <section>
-                     <h3 className="text-xs uppercase tracking-[0.2em] font-bold border-b border-black pb-2 mb-6">Experience</h3>
-                     <div className="space-y-8">
+                     <h3 className="text-xs uppercase tracking-[0.2em] font-bold border-b border-black pb-2 mb-4">Experience</h3>
+                     <div className="space-y-5">
                         {data.experience.map(exp => (
                            <div key={exp.id}>
                               <div className="flex justify-between items-baseline mb-1">
@@ -1752,8 +1752,8 @@ export const TemplateRenderer: React.FC<Props> = ({
 
                {data.education.length > 0 && (
                   <section>
-                     <h3 className="text-xs uppercase tracking-[0.2em] font-bold border-b border-black pb-2 mb-6">Education</h3>
-                     <div className="space-y-6">
+                     <h3 className="text-xs uppercase tracking-[0.2em] font-bold border-b border-black pb-2 mb-4">Education</h3>
+                     <div className="space-y-4">
                         {data.education.map(edu => (
                            <div key={edu.id}>
                               <div className="flex justify-between items-baseline mb-1">
@@ -1886,7 +1886,7 @@ export const TemplateRenderer: React.FC<Props> = ({
 
     return (
       <div className={`h-full relative overflow-hidden flex flex-col ${isSpacious ? 'bg-[#f8fafc]' : 'bg-white'}`}>
-         <header className={`${isSpacious ? 'bg-white border-b border-slate-200 px-[15mm] py-[12mm] flex items-center justify-between' : 'bg-slate-100 p-[15mm] text-center'}`}>
+         <header className={`${isSpacious ? 'bg-white border-b border-slate-200 px-[15mm] py-[8mm] flex items-center justify-between' : 'bg-slate-100 p-[12mm] text-center'}`}>
              {isSpacious ? (
                <>
                  <div className="max-w-[70%]">
@@ -1919,7 +1919,7 @@ export const TemplateRenderer: React.FC<Props> = ({
              )}
          </header>
 
-         <div className={`flex flex-grow ${isSpacious ? 'gap-6 p-[10mm]' : ''}`}>
+         <div className={`flex flex-grow ${isSpacious ? 'gap-6 p-[7mm]' : ''}`}>
              <div className={`${isSpacious ? 'w-[32%] bg-white rounded-3xl border border-slate-200 p-[10mm] text-slate-700' : 'w-[30%] bg-slate-800 p-[10mm] text-slate-300'}`}>
                  {data.skills.length > 0 && (
                     <section className="mb-10">
@@ -1966,10 +1966,10 @@ export const TemplateRenderer: React.FC<Props> = ({
                  )}
              </div>
 
-             <div className={`${isSpacious ? 'w-[68%] bg-white rounded-3xl border border-slate-200 p-[15mm]' : 'w-[70%] p-[15mm]'}`}>
+             <div className={`${isSpacious ? 'w-[68%] bg-white rounded-3xl border border-slate-200 p-[10mm]' : 'w-[70%] p-[12mm]'}`}>
                 {data.personalInfo.summary && (
-                   <section className="mb-10">
-                      <h3 className="text-base font-black uppercase tracking-widest text-slate-800 mb-4 flex items-center gap-2">
+                   <section className="mb-6">
+                      <h3 className="text-base font-black uppercase tracking-widest text-slate-800 mb-3 flex items-center gap-2">
                          <span className="w-2 h-2 rounded-full" style={accentStyle}></span> Profile
                       </h3>
                       <p className={`text-sm leading-relaxed ${isSpacious ? 'text-slate-700' : 'text-slate-600 font-medium'}`}>{data.personalInfo.summary}</p>
@@ -1978,10 +1978,10 @@ export const TemplateRenderer: React.FC<Props> = ({
 
                 {data.experience.length > 0 && (
                    <section>
-                      <h3 className="text-base font-black uppercase tracking-widest text-slate-800 mb-6 flex items-center gap-2">
+                      <h3 className="text-base font-black uppercase tracking-widest text-slate-800 mb-4 flex items-center gap-2">
                          <span className="w-2 h-2 rounded-full" style={accentStyle}></span> Experience
                       </h3>
-                      <div className={`space-y-8 ${isSpacious ? 'border-l-2 pl-5' : ''}`} style={isSpacious ? borderAccentStyle : undefined}>
+                      <div className={`space-y-5 ${isSpacious ? 'border-l-2 pl-5' : ''}`} style={isSpacious ? borderAccentStyle : undefined}>
                          {data.experience.map(exp => (
                             <div key={exp.id} className={isSpacious ? 'relative' : ''}>
                                {isSpacious && <div className="absolute -left-[26px] top-1.5 w-3 h-3 rounded-full ring-4 ring-white" style={accentStyle}></div>}
@@ -2317,11 +2317,11 @@ export const TemplateRenderer: React.FC<Props> = ({
     const isMomentum = tid === 'momentum';
 
     return (
-      <div className={`h-full relative p-[20mm] text-white overflow-hidden ${isMomentum ? 'bg-black' : 'bg-slate-900'}`}>
+      <div className={`h-full relative p-[14mm] text-white overflow-hidden ${isMomentum ? 'bg-black' : 'bg-slate-900'}`}>
          {isApex && <div className="absolute top-0 bottom-0 left-0 w-5" style={accentStyle}></div>}
-         <header className={`mb-12 pb-8 ${isMomentum ? 'grid grid-cols-[1.2fr_auto] gap-8 items-center bg-slate-950 rounded-[2rem] p-8 border border-slate-800' : 'flex items-center justify-between border-b-2 border-slate-700'} ${isApex ? 'pl-6' : ''}`}>
+         <header className={`mb-7 pb-5 ${isMomentum ? 'grid grid-cols-[1.2fr_auto] gap-6 items-center bg-slate-950 rounded-[2rem] p-6 border border-slate-800' : 'flex items-center justify-between border-b-2 border-slate-700'} ${isApex ? 'pl-6' : ''}`}>
             <div>
-               <h1 className={`uppercase mb-2 ${isMomentum ? 'text-6xl font-black leading-none' : 'text-5xl font-black tracking-tight text-white'}`}>{data.personalInfo.fullName}</h1>
+               <h1 className={`uppercase mb-2 ${isMomentum ? 'text-4xl font-black leading-none' : 'text-3xl font-black tracking-tight text-white'}`}>{data.personalInfo.fullName}</h1>
                <h2 className={`font-bold uppercase ${isMomentum ? 'text-sm tracking-[0.5em] text-slate-300' : 'text-xl tracking-widest'}`} style={!isMomentum ? textAccentStyle : undefined}>{data.personalInfo.jobTitle}</h2>
             </div>
             {data.personalInfo.profilePicture && (
@@ -2329,8 +2329,8 @@ export const TemplateRenderer: React.FC<Props> = ({
             )}
          </header>
 
-         <div className={`gap-12 ${isMomentum ? 'grid grid-cols-[1.1fr_1.9fr]' : 'grid grid-cols-[1fr_2fr]'} ${isApex ? 'pl-6' : ''}`}>
-             <div className="space-y-12">
+         <div className={`gap-8 ${isMomentum ? 'grid grid-cols-[1.1fr_1.9fr]' : 'grid grid-cols-[1fr_2fr]'} ${isApex ? 'pl-6' : ''}`}>
+             <div className="space-y-7">
                 <section className={isMomentum ? 'bg-slate-950 rounded-2xl p-5 border border-slate-800' : ''}>
                    <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 mb-4">Contact</h3>
                    <div className="space-y-4 text-sm font-medium">
@@ -2356,7 +2356,7 @@ export const TemplateRenderer: React.FC<Props> = ({
                 )}
              </div>
 
-             <div className="space-y-12">
+             <div className="space-y-7">
                 {data.personalInfo.summary && (
                    <section className={isApex ? 'border-l-4 pl-5' : isMomentum ? 'bg-slate-950 rounded-2xl p-6 border border-slate-800' : ''} style={isApex ? borderAccentStyle : undefined}>
                       <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 mb-4">Profile</h3>
@@ -2367,12 +2367,12 @@ export const TemplateRenderer: React.FC<Props> = ({
                 {data.experience.length > 0 && (
                    <section>
                       <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 mb-6">Experience</h3>
-                      <div className={`space-y-10 ${isApex ? 'border-l border-slate-700 pl-6' : ''}`}>
+                      <div className={`space-y-5 ${isApex ? 'border-l border-slate-700 pl-6' : ''}`}>
                          {data.experience.map(exp => (
                             <div key={exp.id} className={isMomentum ? 'bg-slate-950 rounded-2xl p-6 border border-slate-800' : 'relative'}>
                                {isApex && <div className="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full" style={accentStyle}></div>}
                                <div className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">{exp.startDate} - {exp.endDate}</div>
-                               <h4 className="text-2xl font-black uppercase text-white mb-1">{exp.position}</h4>
+                               <h4 className="text-xl font-black uppercase text-white mb-1">{exp.position}</h4>
                                <h5 className="text-base font-bold uppercase mb-4" style={textAccentStyle}>{exp.company}</h5>
                                <p className="text-sm leading-relaxed text-slate-300 font-medium whitespace-pre-line">{exp.description}</p>
                             </div>
@@ -2383,8 +2383,8 @@ export const TemplateRenderer: React.FC<Props> = ({
 
                 {data.education.length > 0 && (
                    <section>
-                      <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 mb-6">Education</h3>
-                      <div className="space-y-6">
+                      <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 mb-4">Education</h3>
+                      <div className="space-y-4">
                          {data.education.map(edu => (
                             <div key={edu.id} className={isMomentum ? 'bg-slate-950 rounded-2xl p-5 border border-slate-800' : ''}>
                                <div className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-1">{edu.startDate} - {edu.endDate}</div>
@@ -2495,20 +2495,20 @@ export const TemplateRenderer: React.FC<Props> = ({
       <div className={`h-full relative text-slate-800 overflow-hidden ${isPulse ? 'bg-[#fff7fb]' : 'bg-white'}`}>
          <div className={`absolute shadow-md z-0 ${isElevate ? 'top-0 bottom-0 left-0 w-56 skew-x-[-10deg] origin-top-left' : 'top-0 left-0 right-0 h-64 -skew-y-3 origin-top-left'} ${isPulse ? 'top-0 left-0 right-0 h-72 rounded-b-[3rem]' : ''}`} style={accentStyle}></div>
          
-         <div className={`relative z-10 ${isElevate ? 'px-[15mm] pt-10 pb-6 grid grid-cols-[auto_1fr] gap-8 items-center text-white' : 'px-[15mm] pt-12 pb-8 flex gap-8 items-end text-white'}`}>
+         <div className={`relative z-10 ${isElevate ? 'px-[15mm] pt-7 pb-4 grid grid-cols-[auto_1fr] gap-8 items-center' : 'px-[15mm] pt-10 pb-6 flex gap-8 items-end text-white'}`}>
             {data.personalInfo.profilePicture && (
                 <ProfileImage className={`object-cover border-4 border-white shadow-lg shrink-0 ${isPulse ? 'w-32 h-32 rounded-[2rem]' : 'w-36 h-36 rounded-full'}`} />
             )}
             <div className="mb-4">
-               <h1 className={`font-black tracking-tight drop-shadow-md mb-1 ${isPulse ? 'text-5xl' : 'text-4xl'}`}>{data.personalInfo.fullName}</h1>
-               <h2 className={`font-bold uppercase tracking-widest opacity-90 drop-shadow ${isPulse ? 'text-sm bg-white/20 inline-block px-4 py-1 rounded-full' : 'text-lg'}`}>{data.personalInfo.jobTitle}</h2>
+               <h1 className={`font-black tracking-tight drop-shadow-md mb-1 ${isPulse ? 'text-5xl' : 'text-4xl'} ${isElevate ? 'text-slate-900' : ''}`}>{data.personalInfo.fullName}</h1>
+               <h2 className={`font-bold uppercase tracking-widest opacity-90 drop-shadow ${isPulse ? 'text-sm bg-white/20 inline-block px-4 py-1 rounded-full' : 'text-lg'} ${isElevate ? 'text-slate-600' : ''}`}>{data.personalInfo.jobTitle}</h2>
             </div>
          </div>
 
-         <div className={`relative z-10 px-[15mm] gap-12 mt-6 ${isElevate ? 'grid grid-cols-[0.9fr_1.1fr]' : 'flex'} ${isPulse ? 'grid grid-cols-[0.95fr_1.05fr]' : ''}`}>
-            <div className={`${isElevate || isPulse ? 'space-y-8' : 'w-[35%] space-y-8'}`}>
-               <section className={`p-6 shadow-sm border ${isPulse ? 'bg-white/85 backdrop-blur rounded-[1.75rem] border-pink-100' : 'bg-slate-50 rounded-2xl border-slate-100'} ${isElevate ? 'bg-white rounded-[1.75rem] border-slate-200' : ''}`}>
-                  <h3 className="text-sm font-black uppercase tracking-widest text-slate-900 mb-4 flex items-center gap-2">
+         <div className={`relative z-10 px-[15mm] gap-8 mt-4 ${isElevate ? 'grid grid-cols-[0.9fr_1.1fr]' : 'flex'} ${isPulse ? 'grid grid-cols-[0.95fr_1.05fr]' : ''}`}>
+            <div className={`${isElevate || isPulse ? 'space-y-5' : 'w-[35%] space-y-8'}`}>
+               <section className={`p-4 shadow-sm border ${isPulse ? 'bg-white/85 backdrop-blur rounded-[1.75rem] border-pink-100' : 'bg-slate-50 rounded-2xl border-slate-100'} ${isElevate ? 'bg-white rounded-[1.75rem] border-slate-200' : ''}`}>
+                  <h3 className="text-sm font-black uppercase tracking-widest text-slate-900 mb-3 flex items-center gap-2">
                      <span className="w-4 h-4" style={textAccentStyle}>{Icons.User}</span> Contact
                   </h3>
                   <div className="space-y-3 text-xs font-semibold text-slate-600">
@@ -2520,8 +2520,8 @@ export const TemplateRenderer: React.FC<Props> = ({
                </section>
 
                {data.skills.length > 0 && (
-                  <section className={`p-6 shadow-sm border ${isPulse ? 'bg-white/85 backdrop-blur rounded-[1.75rem] border-pink-100' : 'bg-slate-50 rounded-2xl border-slate-100'} ${isElevate ? 'bg-white rounded-[1.75rem] border-slate-200' : ''}`}>
-                     <h3 className="text-sm font-black uppercase tracking-widest text-slate-900 mb-4 flex items-center gap-2">
+                  <section className={`p-4 shadow-sm border ${isPulse ? 'bg-white/85 backdrop-blur rounded-[1.75rem] border-pink-100' : 'bg-slate-50 rounded-2xl border-slate-100'} ${isElevate ? 'bg-white rounded-[1.75rem] border-slate-200' : ''}`}>
+                     <h3 className="text-sm font-black uppercase tracking-widest text-slate-900 mb-3 flex items-center gap-2">
                         <span className="w-4 h-4" style={textAccentStyle}>{Icons.Briefcase}</span> Skills
                      </h3>
                      <div className={`${isPulse ? 'flex flex-wrap gap-2' : 'flex flex-col gap-2'}`}>
@@ -2536,18 +2536,18 @@ export const TemplateRenderer: React.FC<Props> = ({
                )}
             </div>
 
-            <div className={`${isElevate || isPulse ? 'space-y-8' : 'w-[65%] space-y-8'}`}>
+            <div className={`${isElevate || isPulse ? 'space-y-5' : 'w-[65%] space-y-8'}`}>
                {data.personalInfo.summary && (
-                  <section className={isElevate || isPulse ? 'bg-white rounded-[1.75rem] border border-slate-200 p-6 shadow-sm' : ''}>
+                  <section className={isElevate || isPulse ? 'bg-white rounded-[1.75rem] border border-slate-200 p-4 shadow-sm' : ''}>
                      <h3 className="text-xl font-black text-slate-900 mb-3" style={textAccentStyle}>Profile.</h3>
                      <p className="text-sm leading-relaxed text-slate-600 font-medium">{data.personalInfo.summary}</p>
                   </section>
                )}
 
                {data.experience.length > 0 && (
-                  <section className={isElevate || isPulse ? 'bg-white rounded-[1.75rem] border border-slate-200 p-6 shadow-sm' : ''}>
-                     <h3 className="text-xl font-black text-slate-900 mb-5" style={textAccentStyle}>Experience.</h3>
-                     <div className="space-y-6">
+                  <section className={isElevate || isPulse ? 'bg-white rounded-[1.75rem] border border-slate-200 p-4 shadow-sm' : ''}>
+                     <h3 className="text-xl font-black text-slate-900 mb-3" style={textAccentStyle}>Experience.</h3>
+                     <div className="space-y-4">
                         {data.experience.map(exp => (
                            <div key={exp.id} className={`relative pl-6 ${isPulse ? 'bg-pink-50/50 rounded-2xl p-5 pl-8 border border-pink-100' : ''}`}>
                               <div className="absolute left-0 top-1.5 w-2 h-2 rounded-full ring-4 ring-slate-100" style={accentStyle}></div>
@@ -2564,9 +2564,9 @@ export const TemplateRenderer: React.FC<Props> = ({
                )}
 
                {data.education.length > 0 && (
-                  <section className={isElevate || isPulse ? 'bg-white rounded-[1.75rem] border border-slate-200 p-6 shadow-sm' : ''}>
-                     <h3 className="text-xl font-black text-slate-900 mb-5" style={textAccentStyle}>Education.</h3>
-                     <div className={`space-y-6 ${isElevate ? 'grid grid-cols-2 gap-4 space-y-0' : ''}`}>
+                  <section className={isElevate || isPulse ? 'bg-white rounded-[1.75rem] border border-slate-200 p-4 shadow-sm' : ''}>
+                     <h3 className="text-xl font-black text-slate-900 mb-3" style={textAccentStyle}>Education.</h3>
+                     <div className={`space-y-4 ${isElevate ? 'grid grid-cols-2 gap-3 space-y-0' : ''}`}>
                         {data.education.map(edu => (
                            <div key={edu.id} className={`relative pl-6 ${isPulse ? 'bg-pink-50/50 rounded-2xl p-5 pl-8 border border-pink-100' : ''}`}>
                               <div className="absolute left-0 top-1.5 w-2 h-2 rounded-full ring-4 ring-slate-100" style={accentStyle}></div>
