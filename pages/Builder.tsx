@@ -612,6 +612,7 @@ const Builder: React.FC = () => {
             scale={1}
             view={activeView === 'ats-check' ? 'resume' : activeView}
             pages={data.pages || 1}
+            fit="a4"
           />
         </div>
       </div>
@@ -939,6 +940,7 @@ const Builder: React.FC = () => {
                                 scale={1}
                                 view={activeView}
                                 pages={1}
+                                fit="a4"
                               />
                             </div>
                           </div>
@@ -1358,7 +1360,7 @@ const Builder: React.FC = () => {
           </div>
           
           <div className="flex flex-col items-center gap-6 my-8">
-            <TemplateRenderer data={data} scale={previewScale} view={activeView === 'ats-check' ? 'resume' : activeView} pages={data.pages || 1} />
+            <TemplateRenderer data={data} scale={previewScale} view={activeView === 'ats-check' ? 'resume' : activeView} pages={data.pages || 1} fit="a4" />
             
             {(activeView === 'resume' || activeView === 'cv') && (
                 <div className="flex gap-4 no-print">
