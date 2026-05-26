@@ -360,13 +360,19 @@ const App: React.FC = () => {
       const code = url.searchParams.get('code');
       if (!code) return;
 
+      console.log('[Auth] Code found in URL, exchanging for session...');
       try {
-        const { error } = await supabase.auth.exchangeCodeForSession(code);
-        if (error) throw error;
+        const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+        if (error) {
+          console.error('[Auth] exchangeCodeForSession error:', error);
+          throw error;
+        }
+        console.log('[Auth] Session exchange success, user:', data?.session?.user?.email);
       } catch (err: any) {
         const message = err?.message || String(err);
+        console.error('[Auth] Code exchange failed:', message);
         if (isMounted) {
-          setAuthCallbackError(message);
+          setAuthCallbackError(`Google login failed: ${message}`);
         }
       } finally {
         url.searchParams.delete('code');
@@ -783,19 +789,22 @@ const AuthForm: React.FC<{ isSignup?: boolean; onLogin: (u: User) => void }> = (
     setIsError('');
     setIsLoading(true);
     const supabase = getSupabase();
+    const redirectTo = `${window.location.origin}/`;
+    console.log('[Auth] Starting Google OAuth, redirectTo:', redirectTo);
     try {
-      const { error } = await supabase.auth.signInWithOAuth({
+      const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          // Keep redirect on a public route so session can hydrate before hitting protected pages.
-          redirectTo: `${window.location.origin}/`,
+          redirectTo,
         }
       });
+      console.log('[Auth] signInWithOAuth result — error:', error, 'url:', data?.url);
       if (error) throw error;
     } catch (err: any) {
       const rawMessage = err?.message || '';
+      console.error('[Auth] Google login error:', rawMessage);
       if (rawMessage.toLowerCase().includes('redirect') || rawMessage.toLowerCase().includes('not allowed')) {
-        setIsError('Google login redirect blocked hai. Supabase Auth me Site URL aur Redirect URLs verify karein.');
+        setIsError('Google login redirect blocked. Supabase Dashboard → Auth → URL Configuration mein Redirect URL add karein.');
       } else {
         setIsError(rawMessage || 'Failed to authenticate with Google');
       }
