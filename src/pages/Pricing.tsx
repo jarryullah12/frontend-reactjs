@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CheckCircle2, X, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -11,55 +11,108 @@ export function Pricing() {
   const { user, isAuthenticated } = useAuthStore();
   const navigate = useNavigate();
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
-  const [prices, setPrices] = useState<Record<string, { price: number, formatted: string }>>({});
+  const [activeTab, setActiveTab] = useState<'monthly' | 'yearly'>('monthly');
 
-  useEffect(() => {
-    fetch('/api/lemonsqueezy/prices')
-      .then(res => res.json())
-      .then(data => {
-        if (!data.error) {
-          setPrices(data);
-        }
-      })
-      .catch(console.error);
-  }, []);
+  const buildDirectCheckoutUrl = (rawCheckoutUrl: string) => {
+    const checkoutUrl = new URL(rawCheckoutUrl);
+    if (user?.id) {
+      checkoutUrl.searchParams.set('checkout[custom][user_id]', user.id);
+    }
+    if (user?.email) {
+      checkoutUrl.searchParams.set('checkout[email]', user.email);
+    }
+    return checkoutUrl.toString();
+  };
 
-  const handleCheckout = async (planName: string, checkoutId?: string) => {
+  const redirectToDirectCheckout = (checkoutUrl?: string | null) => {
+    if (!checkoutUrl) return false;
+    window.location.href = buildDirectCheckoutUrl(checkoutUrl);
+    return true;
+  };
+
+  const handleCheckout = async (planName: string, variantId?: string | null, checkoutUrl?: string | null) => {
+    // Prefer direct shareable checkout links when available.
+    if (redirectToDirectCheckout(checkoutUrl)) {
+      return;
+    }
+
     if (!isAuthenticated || !user) {
       navigate('/login');
       return;
     }
 
-    if (!checkoutId) {
-      // Free plan
+    if (!variantId) {
       navigate('/');
       return;
     }
 
     setLoadingPlan(planName);
     try {
-      // Use direct Lemon Squeezy checkout URL (works perfectly on static/live domains without needing a backend)
-      const checkoutUrl = new URL(`https://checkout.getoptiseo.com/checkout/buy/${checkoutId}`);
-      
-      // Pass the user ID to Lemon Squeezy so it comes back in the webhook
-      checkoutUrl.searchParams.append('checkout[custom][user_id]', user.id);
-      checkoutUrl.searchParams.append('logo', '0');
-      
-      // Redirect user to checkout
-      window.location.href = checkoutUrl.toString();
-    } catch (error) {
+      const baseUrl = import.meta.env.VITE_API_URL || '';
+      const apiUrl = `${baseUrl}/api/lemonsqueezy/checkout`;
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          variantId,
+          userId: user.id || 'anonymous',
+          redirectUrl: 'https://getoptiseo.com/'
+        }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Checkout API non-200 response:', response.status, errorText);
+        if (redirectToDirectCheckout(checkoutUrl)) {
+          return;
+        }
+        throw new Error(`Checkout request failed (${response.status})`);
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes("application/json")) {
+        const text = await response.text();
+        console.error('Non-JSON response text is:', text);
+        if (redirectToDirectCheckout(checkoutUrl)) {
+          return;
+        }
+        throw new Error('Server returned an unexpected response: ' + text.substring(0, 100));
+      }
+
+      const data = await response.json();
+
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        if (redirectToDirectCheckout(checkoutUrl)) {
+          return;
+        }
+        throw new Error('No checkout URL returned');
+      }
+    } catch (error: any) {
       console.error('Checkout error:', error);
-      alert('Failed to initiate checkout. Please try again or check your variant IDs.');
+      if (redirectToDirectCheckout(checkoutUrl)) {
+        return;
+      }
+      alert('Failed to initiate checkout: ' + error.message);
       setLoadingPlan(null);
     }
   };
 
-  const plans = [
+  const monthlyPlans = [
     {
       name: 'Free Trial',
       description: '7 Days free access to 50 free tools.',
       price: 0,
       currency: '$',
+      formattedPrice: '0',
       period: '/7 days',
       features: [
         { name: '50 Free SEO Tools', included: true },
@@ -67,19 +120,19 @@ export function Pricing() {
         { name: 'Unlimited Tool Uses', included: true },
         { name: 'Advanced SEO Analysis', included: false },
         { name: 'Priority Support', included: false },
-        { name: 'Export Results', included: false },
+        { name: 'Export Results (PDF)', included: false },
       ],
       cta: 'Start Free Trial',
       popular: false,
       variantId: null,
-      checkoutId: null
+      checkoutUrl: null
     },
     {
       name: 'Premium',
       description: 'Continue using 50 free SEO tools.',
-      price: prices['1469064']?.price || 1.99,
-      currency: prices['1469064']?.formatted ? '' : '$',
-      formattedPrice: prices['1469064']?.formatted || '1.99',
+      price: 14.99,
+      currency: '$',
+      formattedPrice: '14.99',
       period: '/month',
       features: [
         { name: '50 Free SEO Tools', included: true },
@@ -87,19 +140,19 @@ export function Pricing() {
         { name: 'Unlimited Tool Uses', included: true },
         { name: 'Advanced SEO Analysis', included: false },
         { name: 'Priority Support', included: false },
-        { name: 'Export Results', included: false },
+        { name: 'Export Results (PDF)', included: false },
       ],
       cta: 'Get Premium',
       popular: false,
       variantId: '1469064',
-      checkoutId: 'b4efcbb2-b77a-486f-8929-32580046e8c5'
+      checkoutUrl: 'https://getoptiseo.lemonsqueezy.com/checkout/buy/b4efcbb2-b77a-486f-8929-32580046e8c5'
     },
     {
       name: 'Pro',
       description: 'Unlock more power with all 100+ SEO tools.',
-      price: prices['1469062']?.price || 3.99,
-      currency: prices['1469062']?.formatted ? '' : '$',
-      formattedPrice: prices['1469062']?.formatted || '3.99',
+      price: 17.99,
+      currency: '$',
+      formattedPrice: '17.99',
       period: '/month',
       features: [
         { name: '50 Free SEO Tools', included: true },
@@ -107,33 +160,114 @@ export function Pricing() {
         { name: 'Unlimited Tool Uses', included: true },
         { name: 'Advanced SEO Analysis', included: true },
         { name: 'Priority Support', included: true },
-        { name: 'Export Results', included: true },
+        { name: 'Export Results (PDF)', included: true },
       ],
       cta: 'Get Pro',
       popular: true,
       variantId: '1469062',
-      checkoutId: '55333cfd-17b9-4fe4-923f-79f3ecdf447f'
-    },
+      checkoutUrl: 'https://getoptiseo.lemonsqueezy.com/checkout/buy/55333cfd-17b9-4fe4-923f-79f3ecdf447f'
+    }
+  ];
+
+  const yearlyPlans = [
     {
-      name: 'Lifetime Pro',
-      description: 'Get lifetime access to all premium features.',
-      price: prices['1436021']?.price || 79.99,
-      currency: prices['1436021']?.formatted ? '' : '$',
-      formattedPrice: prices['1436021']?.formatted || '79.99',
-      period: '',
+      name: 'Yearly Plan 1',
+      description: 'Get access to premium features.',
+      price: 9.99,
+      currency: '$',
+      formattedPrice: '9.99',
+      period: '/month',
       features: [
         { name: '50 Free SEO Tools', included: true },
         { name: '100+ Premium SEO Tools', included: true },
         { name: 'Unlimited Tool Uses', included: true },
         { name: 'Advanced SEO Analysis', included: true },
         { name: 'Priority Support', included: true },
-        { name: 'Export Results', included: true },
+        { name: 'Export Results (PDF)', included: true },
       ],
-      cta: 'Get Lifetime Access',
-      popular: false,
+      cta: 'Get Yearly Plan 1',
+      popular: true,
       variantId: '1436021',
-      checkoutId: 'c77fe82c-549f-4750-beaf-649cda680661'
+      checkoutUrl: 'https://getoptiseo.lemonsqueezy.com/checkout/buy/c77fe82c-549f-4750-beaf-649cda680661'
+    },
+    {
+      name: 'Yearly Plan 2',
+      description: 'Get access to premium features.',
+      price: 11.99,
+      currency: '$',
+      formattedPrice: '11.99',
+      period: '/month',
+      features: [
+        { name: '50 Free SEO Tools', included: true },
+        { name: '100+ Premium SEO Tools', included: true },
+        { name: 'Unlimited Tool Uses', included: true },
+        { name: 'Advanced SEO Analysis', included: true },
+        { name: 'Priority Support', included: true },
+        { name: 'Export Results (PDF)', included: true },
+      ],
+      cta: 'Get Yearly Plan 2',
+      popular: false,
+      variantId: '1630945',
+      checkoutUrl: 'https://getoptiseo.lemonsqueezy.com/checkout/buy/a846a2fc-0c2b-434d-9634-f1aad95dc629'
+    },
+    {
+      name: 'Yearly Plan 3',
+      description: 'Get access to premium features.',
+      price: 12.99,
+      currency: '$',
+      formattedPrice: '12.99',
+      period: '/month',
+      features: [
+        { name: '50 Free SEO Tools', included: true },
+        { name: '100+ Premium SEO Tools', included: true },
+        { name: 'Unlimited Tool Uses', included: true },
+        { name: 'Advanced SEO Analysis', included: true },
+        { name: 'Priority Support', included: true },
+        { name: 'Export Results (PDF)', included: true },
+      ],
+      cta: 'Get Yearly Plan 3',
+      popular: false,
+      variantId: '1631002',
+      checkoutUrl: 'https://getoptiseo.lemonsqueezy.com/checkout/buy/5aa484ad-afc8-4ed2-9ec5-281bfec2ebfd'
     }
+  ];
+
+  const currentPlans = activeTab === "monthly" ? monthlyPlans : yearlyPlans;
+  const getYearlySavingsText = (planName: string) => {
+    if (planName === 'Yearly Plan 1') return 'billed yearly, save 20%';
+    if (planName === 'Yearly Plan 2') return 'billed yearly, save 15%';
+    if (planName === 'Yearly Plan 3') return 'billed yearly, save 10%';
+    return 'billed yearly';
+  };
+
+  const freeTools = [
+    'Meta Tag Generator', 'Robots.txt Generator', 'XML Sitemap Generator', 'Backlink Checker', 'DA Checker', 
+    'Broken Link Checker', 'Schema Validator', 'Plagiarism Checker', 'Keyword Density', 'Website Analyzer', 
+    'Content Analyzer', 'CSS Minifier', 'JS Minifier', 'AI Blog Generator', 'AI Article Rewriter', 
+    'AI Product Description', 'AI Content Ideas', 'AI Sales Email', 'AI Social Bio', 'AI Social Caption', 
+    'Keyword Suggestion Tool', 'Long Tail Keyword Generator', 'Page Authority Checker', 'Google Index Checker', 
+    'XML Sitemap Validator', 'Keyword Position Checker', 'Word Counter', 'Character Counter', 'Case Converter', 
+    'Reverse Image Search', 'Image Compressor', 'Favicon Generator', 'Htaccess Generator', 'SSL Checker', 
+    'What Is My IP', 'Server Status Checker', 'Website Screenshot Generator', 'URL Rewriting Tool', 
+    'Grammar Checker', 'Readability Checker', 'MD5 Generator', 'SHA1 Generator', 'Base64 Encoder/Decoder', 
+    'HTML Minifier', 'JSON Formatter', 'UTM Builder', 'Open Graph Checker', 'Twitter Card Generator', 
+    'Canonical Tag Generator', 'HTTP Headers Checker'
+  ];
+
+  const premiumTools = [
+    'Privacy Policy Generator', 'URL Encoder/Decoder', 'Keyword Clustering Tool', 'SERP Simulator', 
+    'LSI Keyword Generator', 'Bulk URL Checker', 'Hreflang Tag Generator', 'Schema Generator (FAQ)', 
+    'Schema Generator (Local Business)', 'Schema Generator (Review)', 'Meta Description Generator', 
+    'Title Tag Generator', 'Blog Post Title Generator', 'Content Outline Generator', 'Paragraph Rewriter', 
+    'Sentence Expander', 'Text Summarizer', 'Readability Improver', 'Keyword Typo Generator', 
+    'Google Autocomplete Extractor', 'YouTube Keyword Tool', 'Amazon Keyword Tool', 'Bing Keyword Tool', 
+    'Yandex Keyword Tool', 'App Store Keyword Tool', 'SEO Report Generator', 'Competitor Analysis Tool', 
+    'Backlink Maker', 'Link Value Calculator', 'Website Speed Test', 'Mobile Friendly Test', 
+    'Core Web Vitals Checker', 'HTML Validator', 'CSS Validator', 'XML Sitemap Formatter', 'Robots.txt Tester', 
+    'Redirect Checker', 'HTTP/2 Checker', 'DNS Lookup Tool', 'WHOIS Lookup', 'IP Location Finder', 
+    'Reverse IP Domain Checker', 'Server Port Scanner', 'Email Privacy Checker', 'Safe Browsing Checker', 
+    'Google Cache Checker', 'Mozrank Checker', 'Alexa Rank Checker', 'Keyword ROI Calculator', 'CPC Calculator', 
+    'URL Slug Generator', 'Domain Age Checker'
   ];
 
   return (
@@ -145,15 +279,38 @@ export function Pricing() {
       />
       <div className="text-center max-w-3xl mx-auto mb-16">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
-          {t('pricing.title')}
+          Pricing Plans
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-400 mb-10">
-          {t('pricing.subtitle')}
+          Supercharge your SEO strategy with our specialized AI tools.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-24">
-        {plans.map((plan, index) => (
+      <div className="flex justify-center mb-10">
+        <div className="bg-gray-100 dark:bg-gray-800 p-1.5 rounded-2xl flex">
+          <button 
+            onClick={() => setActiveTab("monthly")}
+            className={cn(
+              "px-8 py-3 rounded-xl text-sm font-semibold transition-all duration-300",
+              activeTab === "monthly" ? "bg-white dark:bg-gray-700 text-[#4f39f6] shadow-sm transform scale-105" : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+            )}
+          >
+            Monthly Plans
+          </button>
+          <button 
+            onClick={() => setActiveTab("yearly")}
+            className={cn(
+              "px-8 py-3 rounded-xl text-sm font-semibold transition-all duration-300",
+              activeTab === "yearly" ? "bg-white dark:bg-gray-700 text-[#4f39f6] shadow-sm transform scale-105" : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+            )}
+          >
+            Yearly - Save 20%
+          </button>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-24">
+        {currentPlans.map((plan, index) => (
           <div
             key={index}
             className={cn(
@@ -174,16 +331,24 @@ export function Pricing() {
               <p className="text-gray-500 dark:text-gray-400 text-sm h-10">{plan.description}</p>
             </div>
 
-            <div className="mb-8 flex items-baseline text-gray-900 dark:text-white">
-              <span className="text-gray-500 dark:text-gray-400 mr-1 font-medium text-2xl">
-                {plan.currency}
-              </span>
-              <span className="text-5xl font-extrabold tracking-tight">
-                {plan.formattedPrice || plan.price.toLocaleString()}
-              </span>
-              <span className="text-gray-500 dark:text-gray-400 ml-1 font-medium">
-                {plan.period}
-              </span>
+            <div className="mb-8">
+              <div className="flex items-baseline text-gray-900 dark:text-white">
+                <span className="text-gray-500 dark:text-gray-400 mr-1 font-medium text-2xl">
+                  {plan.currency}
+                </span>
+                <span className="text-5xl font-extrabold tracking-tight">
+                  {plan.formattedPrice || plan.price.toLocaleString()}
+                </span>
+                <span className="text-gray-500 dark:text-gray-400 ml-1 font-medium">
+                  {plan.period}
+                </span>
+              </div>
+              {activeTab === "yearly" && (
+                <div className="mt-2 text-sm font-medium text-green-600 dark:text-green-400">
+                  {getYearlySavingsText(plan.name)}
+                </div>
+              )}
+              
             </div>
 
             <ul className="space-y-4 mb-8 flex-1">
@@ -202,7 +367,7 @@ export function Pricing() {
             </ul>
 
             <button
-              onClick={() => handleCheckout(plan.name, plan.checkoutId || undefined)}
+              onClick={() => handleCheckout(plan.name, plan.variantId, plan.checkoutUrl)}
               disabled={loadingPlan === plan.name}
               className={cn(
                 "w-full py-4 px-6 rounded-xl font-semibold transition-colors flex items-center justify-center gap-2",
@@ -225,7 +390,6 @@ export function Pricing() {
         ))}
       </div>
 
-      {/* Plan Comparison Section */}
       <div className="container mx-auto px-4 py-16 border-t border-gray-200 dark:border-gray-800">
         <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">Plan Comparison</h2>
         <div className="overflow-x-auto">
@@ -236,36 +400,52 @@ export function Pricing() {
                 <th className="p-4 border-b border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white text-center">Free Trial</th>
                 <th className="p-4 border-b border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white text-center">Premium</th>
                 <th className="p-4 border-b border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white text-center">Pro</th>
-                <th className="p-4 border-b border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white text-center">Lifetime Pro</th>
+                <th className="p-4 border-b border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white text-center">Yearly Plan 1</th>
+                <th className="p-4 border-b border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white text-center">Yearly Plan 2</th>
+                <th className="p-4 border-b border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white text-center">Yearly Plan 3</th>
               </tr>
             </thead>
             <tbody>
-              {plans[0].features.map((feature, i) => (
+              {monthlyPlans[0].features.map((feature, i) => (
                 <tr key={i} className="border-b border-gray-100 dark:border-gray-800">
                   <td className="p-4 text-gray-600 dark:text-gray-300">{feature.name}</td>
                   <td className="p-4 text-center">
-                    {plans[0].features[i].included ? (
+                    {monthlyPlans[0].features[i].included ? (
                       <CheckCircle2 className="w-5 h-5 text-[#4f39f6] mx-auto" />
                     ) : (
                       <X className="w-5 h-5 text-gray-300 dark:text-gray-600 mx-auto" />
                     )}
                   </td>
                   <td className="p-4 text-center">
-                    {plans[1].features[i].included ? (
+                    {monthlyPlans[1].features[i].included ? (
                       <CheckCircle2 className="w-5 h-5 text-[#4f39f6] mx-auto" />
                     ) : (
                       <X className="w-5 h-5 text-gray-300 dark:text-gray-600 mx-auto" />
                     )}
                   </td>
                   <td className="p-4 text-center">
-                    {plans[2].features[i].included ? (
+                    {monthlyPlans[2].features[i].included ? (
                       <CheckCircle2 className="w-5 h-5 text-[#4f39f6] mx-auto" />
                     ) : (
                       <X className="w-5 h-5 text-gray-300 dark:text-gray-600 mx-auto" />
                     )}
                   </td>
                   <td className="p-4 text-center">
-                    {plans[3].features[i].included ? (
+                    {yearlyPlans[0].features[i].included ? (
+                      <CheckCircle2 className="w-5 h-5 text-[#4f39f6] mx-auto" />
+                    ) : (
+                      <X className="w-5 h-5 text-gray-300 dark:text-gray-600 mx-auto" />
+                    )}
+                  </td>
+                  <td className="p-4 text-center">
+                    {yearlyPlans[1].features[i].included ? (
+                      <CheckCircle2 className="w-5 h-5 text-[#4f39f6] mx-auto" />
+                    ) : (
+                      <X className="w-5 h-5 text-gray-300 dark:text-gray-600 mx-auto" />
+                    )}
+                  </td>
+                  <td className="p-4 text-center">
+                    {yearlyPlans[2].features[i].included ? (
                       <CheckCircle2 className="w-5 h-5 text-[#4f39f6] mx-auto" />
                     ) : (
                       <X className="w-5 h-5 text-gray-300 dark:text-gray-600 mx-auto" />
@@ -278,135 +458,53 @@ export function Pricing() {
         </div>
       </div>
 
-      {/* Tools Included in Free Trial & Premium */}
-      <div className="container mx-auto px-4 py-16 border-t border-gray-200 dark:border-gray-800 max-w-5xl">
-        <h2 className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">
-          All SEO Tools Overview
-        </h2>
-        <div className="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800 shadow-sm">
-          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { name: t('tools_list.items.meta_tag.name'), type: 'Free' },
-              { name: t('tools_list.items.robots.name'), type: 'Free' },
-              { name: t('tools_list.items.sitemap.name'), type: 'Free' },
-              { name: t('tools_list.items.backlink_checker.name'), type: 'Free' },
-              { name: t('tools_list.items.da_checker.name'), type: 'Free' },
-              { name: t('tools_list.items.broken_link.name'), type: 'Free' },
-              { name: t('tools_list.items.schema.name'), type: 'Free' },
-              { name: t('tools_list.items.plagiarism_checker.name'), type: 'Free' },
-              { name: t('tools_list.items.density.name'), type: 'Free' },
-              { name: t('tools_list.items.website_analyzer.name'), type: 'Free' },
-              { name: t('tools_list.items.analyzer.name'), type: 'Free' },
-              { name: t('tools_list.items.css_min.name'), type: 'Free' },
-              { name: t('tools_list.items.js_min.name'), type: 'Free' },
-              { name: t('tools_list.items.blog_gen.name'), type: 'Free' },
-              { name: t('tools_list.items.rewriter.name'), type: 'Free' },
-              { name: t('tools_list.items.product_description.name'), type: 'Free' },
-              { name: t('tools_list.items.ideas.name'), type: 'Free' },
-              { name: t('tools_list.items.sales_email.name'), type: 'Free' },
-              { name: t('tools_list.items.bio.name'), type: 'Free' },
-              { name: t('tools_list.items.social_caption.name'), type: 'Free' },
-              { name: 'Keyword Suggestion Tool', type: 'Free' },
-              { name: 'Long Tail Keyword Generator', type: 'Free' },
-              { name: 'Page Authority Checker', type: 'Free' },
-              { name: 'Google Index Checker', type: 'Free' },
-              { name: 'XML Sitemap Validator', type: 'Free' },
-              { name: 'Keyword Position Checker', type: 'Free' },
-              { name: 'Word Counter', type: 'Free' },
-              { name: 'Character Counter', type: 'Free' },
-              { name: 'Case Converter', type: 'Free' },
-              { name: 'Reverse Image Search', type: 'Free' },
-              { name: 'Image Compressor', type: 'Free' },
-              { name: 'Favicon Generator', type: 'Free' },
-              { name: 'Htaccess Generator', type: 'Free' },
-              { name: 'SSL Checker', type: 'Free' },
-              { name: 'What Is My IP', type: 'Free' },
-              { name: 'Server Status Checker', type: 'Free' },
-              { name: 'Website Screenshot Generator', type: 'Free' },
-              { name: 'URL Rewriting Tool', type: 'Free' },
-              { name: 'Grammar Checker', type: 'Free' },
-              { name: 'Readability Checker', type: 'Free' },
-              { name: 'MD5 Generator', type: 'Free' },
-              { name: 'SHA1 Generator', type: 'Free' },
-              { name: 'Base64 Encoder/Decoder', type: 'Free' },
-              { name: 'HTML Minifier', type: 'Free' },
-              { name: 'JSON Formatter', type: 'Free' },
-              { name: 'UTM Builder', type: 'Free' },
-              { name: 'Open Graph Checker', type: 'Free' },
-              { name: 'Twitter Card Generator', type: 'Free' },
-              { name: 'Canonical Tag Generator', type: 'Free' },
-              { name: 'HTTP Headers Checker', type: 'Free' },
-              { name: t('tools_list.items.privacy_policy.name'), type: 'Premium' },
-              { name: t('tools_list.items.url_codec.name'), type: 'Premium' },
-              { name: 'Keyword Clustering Tool', type: 'Premium' },
-              { name: 'SERP Simulator', type: 'Premium' },
-              { name: 'LSI Keyword Generator', type: 'Premium' },
-              { name: 'Bulk URL Checker', type: 'Premium' },
-              { name: 'Hreflang Tag Generator', type: 'Premium' },
-              { name: 'Schema Generator (FAQ)', type: 'Premium' },
-              { name: 'Schema Generator (Local Business)', type: 'Premium' },
-              { name: 'Schema Generator (Review)', type: 'Premium' },
-              { name: 'Meta Description Generator', type: 'Premium' },
-              { name: 'Title Tag Generator', type: 'Premium' },
-              { name: 'Blog Post Title Generator', type: 'Premium' },
-              { name: 'Content Outline Generator', type: 'Premium' },
-              { name: 'Paragraph Rewriter', type: 'Premium' },
-              { name: 'Sentence Expander', type: 'Premium' },
-              { name: 'Text Summarizer', type: 'Premium' },
-              { name: 'Readability Improver', type: 'Premium' },
-              { name: 'Keyword Typo Generator', type: 'Premium' },
-              { name: 'Google Autocomplete Extractor', type: 'Premium' },
-              { name: 'YouTube Keyword Tool', type: 'Premium' },
-              { name: 'Amazon Keyword Tool', type: 'Premium' },
-              { name: 'Bing Keyword Tool', type: 'Premium' },
-              { name: 'Yandex Keyword Tool', type: 'Premium' },
-              { name: 'App Store Keyword Tool', type: 'Premium' },
-              { name: 'SEO Report Generator', type: 'Premium' },
-              { name: 'Competitor Analysis Tool', type: 'Premium' },
-              { name: 'Backlink Maker', type: 'Premium' },
-              { name: 'Link Value Calculator', type: 'Premium' },
-              { name: 'Website Speed Test', type: 'Premium' },
-              { name: 'Mobile Friendly Test', type: 'Premium' },
-              { name: 'Core Web Vitals Checker', type: 'Premium' },
-              { name: 'HTML Validator', type: 'Premium' },
-              { name: 'CSS Validator', type: 'Premium' },
-              { name: 'XML Sitemap Formatter', type: 'Premium' },
-              { name: 'Robots.txt Tester', type: 'Premium' },
-              { name: 'Redirect Checker', type: 'Premium' },
-              { name: 'HTTP/2 Checker', type: 'Premium' },
-              { name: 'DNS Lookup Tool', type: 'Premium' },
-              { name: 'WHOIS Lookup', type: 'Premium' },
-              { name: 'IP Location Finder', type: 'Premium' },
-              { name: 'Reverse IP Domain Checker', type: 'Premium' },
-              { name: 'Server Port Scanner', type: 'Premium' },
-              { name: 'Email Privacy Checker', type: 'Premium' },
-              { name: 'Safe Browsing Checker', type: 'Premium' },
-              { name: 'Google Cache Checker', type: 'Premium' },
-              { name: 'Mozrank Checker', type: 'Premium' },
-              { name: 'Alexa Rank Checker', type: 'Premium' },
-              { name: 'Keyword ROI Calculator', type: 'Premium' },
-              { name: 'CPC Calculator', type: 'Premium' },
-              { name: 'URL Slug Generator', type: 'Premium' },
-              { name: 'Domain Age Checker', type: 'Premium' }
-            ].map((tool, index) => (
-              <li key={index} className="flex items-center justify-between gap-3 text-gray-700 dark:text-gray-300 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors border border-transparent hover:border-gray-100 dark:hover:border-gray-800">
-                <div className="flex items-center gap-3">
-                  <CheckCircle2 className={cn("w-5 h-5 shrink-0", tool.type === 'Free' ? "text-emerald-500" : "text-[#4f39f6]")} />
-                  <span className="font-medium text-sm">{tool.name}</span>
-                </div>
-                <span className={cn(
-                  "text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full",
-                  tool.type === 'Free' 
-                    ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" 
-                    : "bg-[#4f39f6]/10 text-[#4f39f6] dark:bg-[#4f39f6]/20"
-                )}>
-                  {tool.type}
-                </span>
-              </li>
-            ))}
-          </ul>
+      <div className="container mx-auto px-4 py-20">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Complete Tool Access Directory</h2>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            See exactly which tools are included in each plan.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
+          {/* Free Tools */}
+          <div className="bg-white dark:bg-gray-800 rounded-3xl p-10 border border-gray-200 dark:border-gray-700 shadow-sm relative overflow-hidden transition-all duration-300 hover:shadow-lg">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gray-100 dark:bg-gray-700/50 rounded-bl-full -mr-10 -mt-10 transition-transform hover:scale-110"></div>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white border-b border-gray-100 dark:border-gray-700 pb-4 mb-6 relative z-10 flex items-center gap-3">
+              <span className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs px-2.5 py-1 rounded-md uppercase tracking-wider font-bold shadow-sm">Free Trial</span>
+              Free Trial Tools (50 Tools)
+            </h3>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 relative z-10">
+              {freeTools.map((tool, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-gray-400 shrink-0 mt-0.5" />
+                  <span className="text-gray-700 dark:text-gray-300 text-sm font-medium">{tool}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Premium Tools */}
+          <div className="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-gray-900 dark:to-[#0f0c29] rounded-3xl p-10 border border-indigo-100 dark:border-gray-800 shadow-md relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-[#4f39f6]/10">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#4f39f6]/10 rounded-bl-full -mr-10 -mt-10 transition-transform hover:scale-110"></div>
+            <h3 className="text-2xl font-bold text-[#4f39f6] dark:text-white border-b border-indigo-100 dark:border-gray-800 pb-4 mb-6 relative z-10 flex items-center gap-3">
+              <span className="bg-[#4f39f6] text-white text-xs px-2.5 py-1 rounded-md uppercase tracking-wider font-bold shadow-sm">Pro</span>
+              Premium Tools (50+ Tools)
+            </h3>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 relative z-10">
+              {premiumTools.map((tool, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <div className="bg-[#4f39f6] rounded-full p-0.5 mt-0.5 shrink-0 shadow-sm shadow-[#4f39f6]/30">
+                     <CheckCircle2 className="w-4 h-4 text-white" />
+                  </div>
+                  <span className="text-gray-900 dark:text-gray-100 text-sm font-medium">{tool}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
+
     </div>
   );
 }

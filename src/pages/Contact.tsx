@@ -44,7 +44,7 @@ export function Contact() {
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Email Us</h3>
-                <p className="text-gray-600 dark:text-gray-400">jarryullah46@gmail.com</p>
+                <p className="text-gray-600 dark:text-gray-400">support@getoptiseo.com</p>
               </div>
             </div>
 
@@ -65,7 +65,7 @@ export function Contact() {
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Visit Us</h3>
                 <p className="text-gray-600 dark:text-gray-400">
-                  Bhutto colony Sargodha Road Faisalabad
+                  Bhutto colony Sargodha Road Faisalabad,Pakistan
                 </p>
               </div>
             </div>
@@ -118,6 +118,18 @@ export function Contact() {
             </button>
           </form>
         </div>
+      </div>
+
+      <div className="mt-16 w-full h-[400px] rounded-3xl overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700">
+        <iframe
+          width="100%"
+          height="100%"
+          frameBorder="0"
+          style={{ border: 0 }}
+          src="https://maps.google.com/maps?q=Bhutto%20colony%20Sargodha%20Road%20Faisalabad,%20Pakistan&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          allowFullScreen
+          title="Google Maps"
+        />
       </div>
     </div>
   );

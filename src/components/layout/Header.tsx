@@ -26,7 +26,7 @@ export function Header() {
     navigate('/login');
   };
 
-      const tools = [
+  const tools = [
     { id: 'meta-tag-generator', name: t('tools_list.items.meta_tag.name') },
     { id: 'robots-txt-generator', name: t('tools_list.items.robots.name') },
     { id: 'xml-sitemap-generator', name: t('tools_list.items.sitemap.name') },
@@ -148,6 +148,7 @@ export function Header() {
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600 dark:text-gray-300">
             <Link to="/tools" className="hover:text-[#4f39f6] dark:hover:text-[#4f39f6] transition-colors">{t('nav.tools')}</Link>
             <Link to="/pricing" className="hover:text-[#4f39f6] dark:hover:text-[#4f39f6] transition-colors">{t('nav.pricing')}</Link>
+            <Link to="/docs" className="hover:text-[#4f39f6] dark:hover:text-[#4f39f6] transition-colors">{t('nav.docs')}</Link>
             <Link to="/blog" className="hover:text-[#4f39f6] dark:hover:text-[#4f39f6] transition-colors">{t('nav.blog')}</Link>
             <Link to="/contact" className="hover:text-[#4f39f6] dark:hover:text-[#4f39f6] transition-colors">{t('nav.contact')}</Link>
             <Link to="/about" className="hover:text-[#4f39f6] dark:hover:text-[#4f39f6] transition-colors">{t('nav.about')}</Link>
@@ -200,6 +201,7 @@ export function Header() {
           <nav className="flex flex-col gap-4 text-sm font-medium text-gray-600 dark:text-gray-300">
             <Link to="/tools" onClick={() => setIsMenuOpen(false)}>{t('nav.tools')}</Link>
             <Link to="/pricing" onClick={() => setIsMenuOpen(false)}>{t('nav.pricing')}</Link>
+            <Link to="/docs" onClick={() => setIsMenuOpen(false)}>{t('nav.docs')}</Link>
             <Link to="/blog" onClick={() => setIsMenuOpen(false)}>{t('nav.blog')}</Link>
             <Link to="/contact" onClick={() => setIsMenuOpen(false)}>{t('nav.contact')}</Link>
             <Link to="/about" onClick={() => setIsMenuOpen(false)}>{t('nav.about')}</Link>

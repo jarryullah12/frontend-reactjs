@@ -32,9 +32,16 @@ export function Layout() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 font-sans transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-50/30 via-white to-purple-50/30 dark:from-gray-950 dark:via-[#0c0a1f] dark:to-gray-950 text-gray-900 dark:text-gray-100 font-sans transition-colors duration-200 relative">
+      {/* Ambient glowing background shapes */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 select-none">
+        <div className="absolute -top-[10%] -left-[10%] w-[40vw] h-[40vw] rounded-full bg-indigo-400/10 dark:bg-indigo-600/10 blur-[120px] mix-blend-multiply dark:mix-blend-screen opacity-70 animate-pulse" style={{ animationDuration: '8s' }}></div>
+        <div className="absolute top-[20%] -right-[10%] w-[30vw] h-[30vw] rounded-full bg-purple-400/10 dark:bg-purple-600/10 blur-[100px] mix-blend-multiply dark:mix-blend-screen opacity-60 animate-pulse" style={{ animationDuration: '10s' }}></div>
+        <div className="absolute -bottom-[10%] left-[20%] w-[35vw] h-[35vw] rounded-full bg-[#4f39f6]/10 dark:bg-[#4f39f6]/10 blur-[120px] mix-blend-multiply dark:mix-blend-screen opacity-60 animate-pulse" style={{ animationDuration: '12s' }}></div>
+      </div>
+
       <Header />
-      <main className="flex-1 flex flex-col">
+      <main className="flex-1 flex flex-col relative z-10">
         <Outlet />
       </main>
       <Footer />

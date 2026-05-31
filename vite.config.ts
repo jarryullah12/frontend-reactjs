@@ -13,6 +13,9 @@ export default defineConfig(({mode}) => {
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),
+        'formdata-polyfill': path.resolve(__dirname, './src/dummy.js'),
+        'whatwg-fetch': path.resolve(__dirname, './src/dummy.js'),
+        'node-fetch': path.resolve(__dirname, './src/dummy.js')
       },
     },
     server: {

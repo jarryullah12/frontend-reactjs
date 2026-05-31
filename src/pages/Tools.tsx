@@ -74,13 +74,23 @@ export function Tools() {
   const isAdmin = user?.role === 'admin';
   
   // Check Free Trial
-  const joinDate = user?.joinDate || user?.created_at;
+  const joinDate = user?.joinDate || user?.created_at || new Date().toISOString();
   const trialDurationMs = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
   const isTrialActive = joinDate ? (new Date().getTime() - new Date(joinDate).getTime()) < trialDurationMs : false;
 
   // Check Subscription and Role
-  const isPremiumActive = (subscription?.isActive && subscription?.plan === 'premium') || user?.role === 'premium';
-  const isProActive = (subscription?.isActive && (subscription?.plan === 'pro' || subscription?.plan === 'lifetime' || subscription?.plan === 'lifetime pro')) || user?.role === 'pro' || user?.role === 'lifetime' || user?.role === 'lifetime pro';
+  const isPremiumActive = (subscription ? (subscription.isActive && subscription.plan === 'premium') : user?.role === 'premium');
+  const proPlans = ['pro', 'yearly', 'yearly plan', '1 year plan', '5 year plan', '5 year', '10 year plan', '10 year', 'lifetime', 'lifetime pro', 'yearly plan 1', 'yearly plan 2', 'yearly plan 3'];
+  let isProActive = false;
+  if (subscription) {
+    isProActive = subscription.isActive && proPlans.includes(subscription.plan);
+  } else {
+    isProActive = proPlans.includes(user?.role);
+  }
+  // Allow if lifetime role
+  if (user?.role === 'lifetime' || user?.role === 'lifetime pro') {
+    isProActive = true;
+  }
 
   const checkIsApproved = (toolId: string) => {
     const isFreeTrialTool = FREE_TRIAL_TOOLS.includes(toolId);
@@ -269,10 +279,10 @@ export function Tools() {
                     key={category.id}
                     onClick={() => setActiveCategory(category.id)}
                     className={cn(
-                      "w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg transition-colors",
+                      "w-full flex items-center gap-3 px-4 py-3 text-sm font-semibold rounded-xl transition-all duration-200",
                       activeCategory === category.id
-                        ? "bg-[#4f39f6]/10 text-[#4f39f6] dark:bg-[#4f39f6]/20 dark:text-[#4f39f6]"
-                        : "text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                        ? "bg-gradient-to-r from-[#4f39f6] to-[#6b58ff] text-white shadow-lg shadow-[#4f39f6]/30 transform scale-[1.02]"
+                        : "text-gray-600 hover:bg-gray-100/80 dark:text-gray-400 dark:hover:bg-gray-800/80 hover:scale-[1.01]"
                     )}
                   >
                     {category.icon}
@@ -286,15 +296,15 @@ export function Tools() {
 
         {/* Main Content */}
         <main className="flex-1">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">{t('tools_list.title')}</h1>
-            <div className="relative max-w-xl">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <div className="mb-10 text-center md:text-left">
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-6 text-gray-900 dark:text-white drop-shadow-sm">{t('tools_list.title')}</h1>
+            <div className="relative max-w-xl mx-auto md:mx-0">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <Search className="h-5 w-5 text-gray-400" />
               </div>
               <input
                 type="text"
-                className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-700 rounded-xl leading-5 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#4f39f6] focus:border-[#4f39f6] sm:text-sm transition-shadow"
+                className="block w-full pl-12 pr-4 py-4 border border-gray-200/50 dark:border-gray-700/50 rounded-2xl leading-5 bg-white/60 dark:bg-gray-900/60 backdrop-blur-xl text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-[#4f39f6]/20 focus:border-[#4f39f6] sm:text-base transition-all shadow-sm hover:shadow-md"
                 placeholder={t('tools.search_placeholder')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -313,28 +323,27 @@ export function Tools() {
                 <Link
                   to={`/tools/${tool.id}`}
                   onClick={(e) => handleToolClick(e, tool.id)}
-                  className="block h-full bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 hover:border-[#4f39f6] dark:hover:border-[#4f39f6] hover:shadow-md transition-all group relative overflow-hidden"
+                  className="block h-full bg-white/60 dark:bg-gray-800/60 backdrop-blur-xl rounded-2xl border border-gray-200/50 dark:border-gray-700/50 p-6 hover:border-[#4f39f6]/50 dark:hover:border-[#4f39f6]/50 hover:shadow-xl dark:shadow-black/20 transition-all group relative overflow-hidden"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="p-3 bg-[#4f39f6]/10 dark:bg-[#4f39f6]/20 text-[#4f39f6] rounded-xl group-hover:scale-110 transition-transform">
+                    <div className="p-3 bg-gradient-to-br from-[#4f39f6]/10 to-[#4f39f6]/5 dark:from-[#4f39f6]/20 dark:to-[#4f39f6]/10 text-[#4f39f6] rounded-xl group-hover:scale-110 group-hover:shadow-[#4f39f6]/20 group-hover:shadow-lg transition-all duration-300">
                       {tool.icon}
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1 group-hover:text-[#4f39f6] transition-colors flex items-center gap-2">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-[#4f39f6] transition-colors flex items-center gap-2">
                         {tool.name}
                         {!checkIsApproved(tool.id) && (
-                          <Lock className="w-4 h-4 text-gray-400" />
+                          <span className="text-[10px] uppercase tracking-wider font-bold text-[#4f39f6] bg-[#4f39f6]/10 px-2 py-0.5 rounded-md">Unlock</span>
                         )}
                       </h3>
-                      <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">
+                      <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-2">
                         {tool.description}
                       </p>
                     </div>
                   </div>
                   {!checkIsApproved(tool.id) && (
-                    <div className="absolute inset-0 bg-gray-50/50 dark:bg-gray-900/50 backdrop-blur-[1px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <span className="bg-white dark:bg-gray-800 px-4 py-2 rounded-full text-sm font-medium shadow-sm border border-gray-200 dark:border-gray-700 flex items-center gap-2">
-                        <Lock className="w-4 h-4" />
+                    <div className="absolute inset-0 bg-white/40 dark:bg-gray-900/40 backdrop-blur-[2px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span className="bg-white/90 dark:bg-gray-900/90 text-gray-900 dark:text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg border border-[#4f39f6]/20 flex items-center justify-center transform translate-y-2 group-hover:translate-y-0 transition-all">
                         Unlock Tool
                       </span>
                     </div>

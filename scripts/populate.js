@@ -71,8 +71,7 @@ export function ProtectedToolRoute() {
 
   // Check Subscription and Role
   const isPremiumActive = (subscription?.isActive && subscription?.plan === 'premium') || user?.role === 'premium';
-  const proPlans = ['pro', 'yearly', 'yearly plan', '1 year plan', '5 year plan', '5 year', '10 year plan', '10 year', 'lifetime', 'lifetime pro'];
-  const isProActive = (subscription?.isActive && proPlans.includes(subscription?.plan)) || proPlans.includes(user?.role);
+  const isProActive = (subscription?.isActive && (subscription?.plan === 'pro' || subscription?.plan === 'lifetime' || subscription?.plan === 'lifetime pro')) || user?.role === 'pro' || user?.role === 'lifetime' || user?.role === 'lifetime pro';
 
   // Make the URL matching more flexible for free trial tools
   const currentPath = location.pathname.endsWith('/') ? location.pathname.slice(0, -1) : location.pathname;

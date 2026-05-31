@@ -4,6 +4,7 @@ import { Search, Activity } from 'lucide-react';
 import { ToolDescription } from '../../components/ToolDescription';
 import { toolDescriptions } from '../../data/toolDescriptions';
 import { GoogleGenAI } from '@google/genai';
+import { fetchWebsiteHtml } from '../../lib/fetchWebsiteHtml';
 
 import { ResultDisplay } from '../../components/ResultDisplay';
 
@@ -22,15 +23,15 @@ export function SEOReportGenerator() {
       if (!/^https?:\/\//i.test(formattedUrl)) {
         formattedUrl = 'https://' + formattedUrl;
       }
-      
-      const proxyResponse = await fetch(`/api/proxy-fetch?url=${encodeURIComponent(formattedUrl)}`);
-      if (!proxyResponse.ok) {
-        throw new Error('Failed to fetch website content. The website might be blocking automated requests.');
-      }
-      const htmlContent = await proxyResponse.text();
+
+      const htmlContent = await fetchWebsiteHtml(formattedUrl);
 
       // Step 2: Analyze with Gemini
-      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+      const geminiApiKey = import.meta.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY || '';
+      if (!geminiApiKey) {
+        throw new Error('Missing GEMINI API key.');
+      }
+      const ai = new GoogleGenAI({ apiKey: geminiApiKey });
       const prompt = `You are an expert SEO auditor. Your task is to generate a comprehensive SEO audit report for the following URL: ${formattedUrl}.
       
       CRITICAL INSTRUCTION: You MUST base your analysis STRICTLY on the HTML content provided below. Do NOT provide generic SEO advice. Read the HTML carefully. If the HTML already has an H1 tag, do NOT tell the user to "Add a H1 heading". If it has a meta description, do NOT tell the user to "Add a meta description". Only report ACTUAL missing elements or ACTUAL issues found in the provided HTML.
@@ -47,7 +48,13 @@ export function SEOReportGenerator() {
       setResult(response.text);
     } catch (error: any) {
       console.error(error);
-      setResult(`An error occurred: ${error.message || 'Failed to process your request.'}`);
+      let message = error.message || 'Failed to process your request.';
+      if (message.includes('Netlify 404 HTML') || message.includes('/api/proxy-fetch')) {
+        message = 'Proxy endpoint issue detected. Fallback sources also failed. Please redeploy backend/proxy or test another URL.';
+      } else if (message.includes('Missing GEMINI API key')) {
+        message = 'Gemini API key missing. Configure GEMINI_API_KEY or VITE_GEMINI_API_KEY and redeploy.';
+      }
+      setResult(`An error occurred: ${message}`);
     } finally {
       setLoading(false);
     }
@@ -65,8 +72,9 @@ export function SEOReportGenerator() {
           <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm">
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Website URL</label>
-              <textarea
-                className="w-full p-4 border border-gray-300 dark:border-gray-700 rounded-xl bg-transparent text-gray-900 dark:text-white focus:ring-2 focus:ring-[#4f39f6] focus:border-transparent min-h-[150px]"
+              <input
+                type="url"
+                className="w-full p-4 border border-gray-200 dark:border-gray-700 rounded-xl bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm text-gray-900 dark:text-white focus:ring-4 focus:ring-[#4f39f6]/20 focus:border-[#4f39f6] transition-all"
                 placeholder="Enter website URL..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}

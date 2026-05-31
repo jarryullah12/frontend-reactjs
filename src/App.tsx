@@ -22,6 +22,7 @@ import { ForgotPassword } from './pages/ForgotPassword';
 import { PrivacyPolicy } from './pages/PrivacyPolicy';
 import { TermsOfService } from './pages/TermsOfService';
 import { Disclaimer } from './pages/Disclaimer';
+import { Docs } from './pages/Docs';
 import { AccountSettings } from './pages/AccountSettings';
 import { Admin } from './pages/Admin';
 import { AdminLogin } from './pages/AdminLogin';
@@ -158,7 +159,8 @@ export default function App() {
           <Route path="tools" element={<Tools />} />
           <Route path="pricing" element={<Pricing />} />
           <Route path="blog" element={<Blog />} />
-          <Route path="blog/:id" element={<BlogPost />} />
+          <Route path="blog/:slug" element={<BlogPost />} />
+          <Route path="docs" element={<Docs />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route path="privacy" element={<PrivacyPolicy />} />

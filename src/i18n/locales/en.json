@@ -1,4 +1,7 @@
 {
+  "common": {
+    "analyzing": "Analyzing"
+  },
   "home": {
     "languages_customization": {
       "title": "Languages and Customization Options",
@@ -25,6 +28,7 @@
     "tools": "Tools",
     "blog": "Blog",
     "pricing": "Pricing",
+    "docs": "Docs",
     "about": "About",
     "contact": "Contact",
     "reviews": "Reviews",
@@ -38,7 +42,7 @@
     "subtitle": "Boost your website's ranking and generate high-quality content with our suite of 100+ professional tools.",
     "cta_primary": "Get Started for Free",
     "cta_secondary": "Explore Tools",
-    "no_card": "Monthly & Lifetime Payment Required",
+    "no_card": "Monthly & Yearly Payment Required",
     "free_tools": "100+ Premium Tools",
     "search_placeholder": "Enter website URL for analysis",
     "analyze_button": "Analyze",
@@ -154,9 +158,9 @@
     "month": "one-time",
     "popular": "Best Value",
     "pro": {
-      "name": "Lifetime Pro",
-      "description": "Permanent access to all professional features and future updates.",
-      "cta": "Get Lifetime Access",
+      "name": "Yearly Plan",
+      "description": "Yearly access to all professional features and future updates.",
+      "cta": "Get Yearly Access",
       "features": {
         "tools": "Unlimited Tool Uses",
         "ai": "Unlimited AI Generations",
@@ -175,8 +179,8 @@
     "info_desc": "Fill out the form and our team will get back to you within 24 hours. For urgent inquiries, please call us directly.",
     "email": {
       "title": "Email Us",
-      "support": "jarryullah46@gmail.com",
-      "sales": "jarryullah46@gmail.com"
+      "support": "support@getoptiseo.com",
+      "sales": "support@getoptiseo.com"
     },
     "phone": {
       "title": "Call Us",

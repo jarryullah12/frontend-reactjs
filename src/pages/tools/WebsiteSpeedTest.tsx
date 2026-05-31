@@ -43,12 +43,13 @@ export function WebsiteSpeedTest() {
           <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm">
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Website URL</label>
-              <textarea
-                className="w-full p-4 border border-gray-300 dark:border-gray-700 rounded-xl bg-transparent text-gray-900 dark:text-white focus:ring-2 focus:ring-[#4f39f6] focus:border-transparent min-h-[150px]"
-                placeholder="Enter website URL..."
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-              />
+               <input
+                              type="url"
+                              className="w-full p-4 border border-gray-200 dark:border-gray-700 rounded-xl bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm text-gray-900 dark:text-white focus:ring-4 focus:ring-[#4f39f6]/20 focus:border-[#4f39f6] transition-all"
+                              placeholder="Enter website URL..."
+                              value={input}
+                              onChange={(e) => setInput(e.target.value)}
+                            />
             </div>
             <div className="flex justify-end mb-8">
               <button

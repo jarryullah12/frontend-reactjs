@@ -1,7 +1,7 @@
 import { SEO } from '../../components/SEO';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Copy, Download, CheckCircle2 } from 'lucide-react';
+import { Copy, Download, CheckCircle2, FileText } from 'lucide-react';
 import { usePdfGenerator } from '../../hooks/usePdfGenerator';
 import { ToolDescription } from '../../components/ToolDescription';
 import { toolDescriptions } from '../../data/toolDescriptions';
@@ -56,13 +56,13 @@ export function RobotsTxtGenerator() {
     <>
       <SEO title="{t('tool_page.robots.title')} - OptiSEO Tools" description="{t('tool_page.robots.subtitle')}" />
       <div className="container mx-auto px-4 py-12 max-w-4xl">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">{t('tool_page.robots.title')}</h1>
-        <p className="text-gray-600 dark:text-gray-400">{t('tool_page.robots.subtitle')}</p>
+      <div className="mb-12 text-center md:text-left">
+        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-2 text-gray-900 dark:text-white">{t('tool_page.robots.title')}</h1>
+        <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl">{t('tool_page.robots.subtitle')}</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm">
+        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-2xl rounded-2xl border border-white/50 dark:border-gray-700/50 p-6 shadow-xl dark:shadow-2xl dark:shadow-black/40 transition-all hover:shadow-2xl ">
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t('tool_page.robots.form.user_agent')}</label>
@@ -70,7 +70,7 @@ export function RobotsTxtGenerator() {
                 type="text"
                 value={userAgent}
                 onChange={(e) => setUserAgent(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#4f39f6]"
+                className="w-full px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-xl bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm text-gray-900 dark:text-white focus:ring-4 focus:ring-[#4f39f6]/20 focus:border-[#4f39f6] transition-all "
                 placeholder="*"
               />
               <p className="text-xs text-gray-500 mt-1">* applies to all crawlers</p>
@@ -82,7 +82,7 @@ export function RobotsTxtGenerator() {
                 value={disallow}
                 onChange={(e) => setDisallow(e.target.value)}
                 rows={4}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#4f39f6]"
+                className="w-full px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-xl bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm text-gray-900 dark:text-white focus:ring-4 focus:ring-[#4f39f6]/20 focus:border-[#4f39f6] transition-all "
                 placeholder="/private/&#10;/tmp/"
               />
             </div>
@@ -93,7 +93,7 @@ export function RobotsTxtGenerator() {
                 value={allow}
                 onChange={(e) => setAllow(e.target.value)}
                 rows={3}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#4f39f6]"
+                className="w-full px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-xl bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm text-gray-900 dark:text-white focus:ring-4 focus:ring-[#4f39f6]/20 focus:border-[#4f39f6] transition-all "
                 placeholder="/public/&#10;/assets/"
               />
             </div>
@@ -104,7 +104,7 @@ export function RobotsTxtGenerator() {
                 type="url"
                 value={sitemap}
                 onChange={(e) => setSitemap(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#4f39f6]"
+                className="w-full px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-xl bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm text-gray-900 dark:text-white focus:ring-4 focus:ring-[#4f39f6]/20 focus:border-[#4f39f6] transition-all "
                 placeholder="https://example.com/sitemap.xml"
               />
             </div>
@@ -118,7 +118,7 @@ export function RobotsTxtGenerator() {
           </div>
         </div>
 
-        <div className="bg-gray-50 dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-6 flex flex-col">
+        <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 rounded-2xl border border-gray-200/50 dark:border-gray-700/50 p-6 shadow-lg  flex flex-col">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('tool_page.robots.output')}</h3>
             {generated && (
@@ -141,12 +141,15 @@ export function RobotsTxtGenerator() {
             )}
           </div>
           
-          <div className="flex-1 bg-white dark:bg-black rounded-xl p-4 overflow-auto border border-gray-200 dark:border-gray-800 relative">
+          <div className="flex-1 bg-white dark:bg-black rounded-xl p-4 overflow-auto border border-gray-200 dark:border-gray-800 relative min-h-[300px]">
             {generated ? (
               <ResultDisplay result={generated} hideCard={true} />
             ) : (
-              <div className="absolute inset-0 flex items-center justify-center text-gray-500">
-                <p>{t('tool_page.placeholder_fill')}</p>
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 p-8 text-center">
+                <div className="w-16 h-16 mb-4 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center border border-gray-200 dark:border-gray-700">
+                  <FileText className="w-8 h-8 text-gray-400 dark:text-gray-500" />
+                </div>
+                <p className="text-sm font-medium">{t('tool_page.placeholder_fill')}</p>
               </div>
             )}
           </div>

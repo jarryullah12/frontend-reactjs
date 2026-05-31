@@ -1,10 +1,11 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { Calendar, User, ArrowLeft, Clock, Share2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { useAdminStore } from '@/store';
 import { SEO } from '../components/SEO';
+import { toCanonicalUrl } from '@/lib/seo';
 
 
 const stripHtml = (html: string) => {
@@ -35,15 +36,45 @@ const sanitizeQuillHtml = (html: string): string => {
 };
 
 export function BlogPost() {
-  const { id } = useParams();
+  const { slug } = useParams();
   const { t } = useTranslation();
   const { blogs, fetchBlogs } = useAdminStore();
+  const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
-    fetchBlogs();
+    let mounted = true;
+
+    const loadBlogs = async () => {
+      await fetchBlogs();
+      if (mounted) {
+        setIsLoading(false);
+      }
+    };
+
+    loadBlogs();
+    return () => {
+      mounted = false;
+    };
   }, [fetchBlogs]);
 
-  const post = blogs.find(p => p.slug === id || p.id === id);
+  const routeValue = slug?.trim() || '';
+  const post = blogs.find((p) => p.slug === routeValue || p.id === routeValue);
+  const preferredSlug = post?.slug || post?.id || '';
+  const canonicalPath = preferredSlug ? `/blog/${preferredSlug}` : '/blog';
+  const canonicalUrl = toCanonicalUrl(canonicalPath);
+
+  if (!isLoading && post && routeValue !== preferredSlug) {
+    return <Navigate to={canonicalPath} replace />;
+  }
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto px-4 py-32 text-center">
+        <h1 className="text-2xl font-bold mb-4">Loading...</h1>
+      </div>
+    );
+  }
+
   const rawContent = post ? post.content : '<p>Content coming soon...</p>';
   // Sanitize newlines inside text nodes (Quill stores \n mid-word, pre-wrap renders them)
   const htmlContent = typeof document !== 'undefined' ? sanitizeQuillHtml(rawContent) : rawContent;
@@ -55,6 +86,12 @@ export function BlogPost() {
   if (!post) {
     return (
       <div className="container mx-auto px-4 py-32 text-center">
+        <SEO
+          title="Post Not Found"
+          description="The requested blog post could not be found."
+          noindex
+          canonical="/blog"
+        />
         <h1 className="text-2xl font-bold mb-4">Post not found</h1>
         <Link to="/blog" className="text-[#4f39f6] hover:underline">Back to Blog</Link>
       </div>
@@ -72,7 +109,8 @@ export function BlogPost() {
         description={stripHtml(post.content).substring(0, 160)}
         image={post.image}
         keywords={`${post.category}, SEO, marketing, blog`}
-        canonical={`https://optiseo.com/blog/${post.slug || post.id}`}
+        canonical={canonicalUrl}
+        url={canonicalUrl}
       />
       {/* Header & Image Section */}
       <div className="max-w-4xl mx-auto px-4 md:px-8 pt-20 pb-0">
@@ -141,7 +179,7 @@ export function BlogPost() {
           <div className="w-full border-t border-gray-200 dark:border-gray-800 pt-12">
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">Related Posts</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {blogs.filter(p => p.slug !== id && p.id !== id).slice(0, 3).map(p => (
+              {blogs.filter((p) => p.slug !== routeValue && p.id !== routeValue).slice(0, 3).map(p => (
                 <Link key={p.id} to={`/blog/${p.slug || p.id}`} className="block group bg-gray-50 dark:bg-gray-900 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-[#4f39f6] dark:hover:border-[#4f39f6] transition-all">
                   <h4 className="text-lg font-medium text-gray-900 dark:text-white group-hover:text-[#4f39f6] transition-colors line-clamp-2 mb-2">
                     {p.title}

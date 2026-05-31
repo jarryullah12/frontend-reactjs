@@ -1,6 +1,6 @@
 import { SEO } from '../../components/SEO';
 import { useState } from 'react';
-import { Search, Activity } from 'lucide-react';
+import {  Search, Activity , FileText } from 'lucide-react';
 import { ToolDescription } from '../../components/ToolDescription';
 import { GoogleGenAI } from '@google/genai';
 import { toolDescriptions } from '../../data/toolDescriptions';
@@ -36,15 +36,16 @@ export function GoogleCacheChecker() {
       <SEO title="Google Cache Checker - OptiSEO Tools" description="Check the Google cache status of a URL." />
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Google Cache Checker</h1>
-            <p className="text-gray-600 dark:text-gray-400">Check the Google cache status of a URL.</p>
+          <div className="mb-12 text-center md:text-left">
+        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-4">Google Cache Checker</h1>
+        <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl">Check the Google cache status of a URL.</p>
           </div>
-          <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm">
+          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-2xl p-6 rounded-2xl border border-white/50 dark:border-gray-700/50 shadow-xl dark:shadow-2xl dark:shadow-black/40 transition-all hover:shadow-2xl ">
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Website URL</label>
-              <textarea
-                className="w-full p-4 border border-gray-300 dark:border-gray-700 rounded-xl bg-transparent text-gray-900 dark:text-white focus:ring-2 focus:ring-[#4f39f6] focus:border-transparent min-h-[150px]"
+              <input
+                type="url"
+                className="w-full p-4 border border-gray-200 dark:border-gray-700 rounded-xl bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm text-gray-900 dark:text-white focus:ring-4 focus:ring-[#4f39f6]/20 focus:border-[#4f39f6] transition-all"
                 placeholder="Enter website URL..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -54,7 +55,7 @@ export function GoogleCacheChecker() {
               <button
                 onClick={handleAnalyze}
                 disabled={loading || !input}
-                className="px-6 py-2 text-sm font-medium text-white bg-[#4f39f6] hover:bg-[#4f39f6]/90 rounded-lg transition-colors disabled:opacity-50 flex items-center gap-2"
+                className="px-6 py-2.5 text-sm font-medium text-white bg-[#4f39f6] hover:bg-[#432ddb] hover:shadow-lg hover:shadow-[#4f39f6]/30 rounded-xl transition-all active:scale-[0.98]  disabled:opacity-50 flex items-center gap-2"
               >
                 {loading ? <Activity className="w-4 h-4 animate-spin" /> : <Search className="w-4 h-4" />}
                 Process

@@ -67,7 +67,7 @@ export function Home() {
     { name: t('popular_tools_items.meta.name'), category: t('popular_tools_items.meta.category'), icon: <FileText className="w-5 h-5" />, link: "/tools/meta-tag-generator" },
     { name: t('popular_tools_items.blog.name'), category: t('popular_tools_items.blog.category'), icon: <PenTool className="w-5 h-5" />, link: "/tools/ai-blog-generator" },
     { name: t('popular_tools_items.keyword.name'), category: t('popular_tools_items.keyword.category'), icon: <BarChart className="w-5 h-5" />, link: "/tools/keyword-density" },
-    { name: t('popular_tools_items.speed.name'), category: t('popular_tools_items.speed.category'), icon: <Zap className="w-5 h-5" />, link: "/tools/speed-test" },
+    { name: t('popular_tools_items.speed.name'), category: t('popular_tools_items.speed.category'), icon: <Zap className="w-5 h-5" />, link: "/tools/website-speed-test" },
   ];
 
   return (
@@ -264,9 +264,19 @@ export function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('features.title')}</h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12">
               {t('features.subtitle')}
             </p>
+            <motion.img 
+              src="https://i.postimg.cc/JhbmpVXd/main-page.png" 
+              alt="Dashboard Preview" 
+              className="mx-auto rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800"
+              referrerPolicy="no-referrer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            />
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -295,14 +305,6 @@ export function Home() {
       {/* Popular Tools Section */}
       <section className="py-24">
         <div className="container mx-auto px-4">
-          <motion.img 
-            src="https://i.postimg.cc/ZnYfNDNZ/main-page.png" 
-            alt="Popular Tools" 
-            className="mx-auto mb-8 rounded-2xl shadow-lg"
-            referrerPolicy="no-referrer"
-            animate={{ y: [-10, 10, -10] }}
-            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-          />
           <div className="flex justify-between items-end mb-12">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('popular.title')}</h2>
@@ -349,7 +351,7 @@ export function Home() {
           </div>
           <div className="max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800 bg-black aspect-video relative">
             <iframe 
-              src="https://go.screenpal.com/player/cOfV1bnTzzO?width=100%&height=100%&ff=1&title=0&controls=1" 
+              src="https://go.screenpal.com/player/cOhIhsnt3Rj?width=100%&height=100%&ff=1&title=0&controls=1" 
               width="100%" 
               height="100%" 
               frameBorder="0" 

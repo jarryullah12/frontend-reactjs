@@ -1,3 +1,2 @@
-/sitemap.xml  https://ais-pre-qcwohw666cvff75ozkpblu-348430235973.asia-east1.run.app/api/sitemap.xml  200
 /api/*  https://ais-pre-qcwohw666cvff75ozkpblu-348430235973.asia-east1.run.app/api/:splat  200
 /*      /index.html   200

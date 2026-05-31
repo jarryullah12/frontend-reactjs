@@ -4,6 +4,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '@/lib/supabase';
+import disposableDomains from 'disposable-email-domains';
+import MailChecker from 'mailchecker';
 
 const GoogleIcon = () => (
   <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
@@ -41,6 +43,27 @@ export function Signup() {
       const { data: { session } } = await supabase.auth.getSession();
       if (session?.user) {
         const { user } = session;
+        
+        if (user.email) {
+          const trimmedEmail = user.email.trim().toLowerCase();
+          const domain = trimmedEmail.split('@')[1];
+          if (domain) {
+            const parts = domain.split('.');
+            const baseDomain = parts.length > 2 ? parts.slice(-2).join('.') : domain;
+            const domainsList = Array.isArray(disposableDomains) ? disposableDomains : Object.values(disposableDomains || {});
+            const CUSTOM_BLOCKLIST = ['kynninc.com', 'tozya.com', 'maxsmail.com', 'fmaildes.com', 'mailto.plus', '1secmail.com', '1secmail.net', '1secmail.org'];
+            const isDisposable = domainsList.includes(domain) || domainsList.includes(baseDomain) || 
+              CUSTOM_BLOCKLIST.includes(domain) || CUSTOM_BLOCKLIST.includes(baseDomain) || 
+              !MailChecker.isValid(user.email) ||
+              /temp|throwaway|disposable|fake|10minute|yopmail|mailinator|trash|guerrilla|nada|drop|burner|generator|kynninc/i.test(domain);
+            
+            if (isDisposable) {
+              setErrorMsg('Disposable email addresses are not allowed. Please use a verified provider.');
+              await supabase.auth.signOut();
+              return;
+            }
+          }
+        }
         
         try {
           // Check if user exists in our custom 'users' table
@@ -117,6 +140,26 @@ export function Signup() {
     e.preventDefault();
     setErrorMsg(null);
     
+    if (email) {
+      const trimmedEmail = email.trim().toLowerCase();
+      const domain = trimmedEmail.split('@')[1];
+      if (domain) {
+        const parts = domain.split('.');
+        const baseDomain = parts.length > 2 ? parts.slice(-2).join('.') : domain;
+        const domainsList = Array.isArray(disposableDomains) ? disposableDomains : Object.values(disposableDomains || {});
+        const CUSTOM_BLOCKLIST = ['kynninc.com', 'tozya.com', 'maxsmail.com', 'fmaildes.com', 'mailto.plus', '1secmail.com', '1secmail.net', '1secmail.org'];
+        const isDisposable = domainsList.includes(domain) || domainsList.includes(baseDomain) || 
+          CUSTOM_BLOCKLIST.includes(domain) || CUSTOM_BLOCKLIST.includes(baseDomain) || 
+          !MailChecker.isValid(email) ||
+          /temp|throwaway|disposable|fake|10minute|yopmail|mailinator|trash|guerrilla|nada|drop|burner|generator|kynninc/i.test(domain);
+        
+        if (isDisposable) {
+          setErrorMsg('Disposable email addresses are not allowed. Please use a verified provider.');
+          return;
+        }
+      }
+    }
+
     try {
       // Insert user into Supabase
       const { data, error } = await supabase.from('users').insert([

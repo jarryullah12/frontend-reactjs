@@ -1,6 +1,19 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+const resolveApiBase = () => {
+  const configuredApiUrl = (import.meta.env.VITE_API_URL as string | undefined)?.trim();
+  if (configuredApiUrl) {
+    return configuredApiUrl.replace(/\/+$/, '');
+  }
+
+  if (typeof window !== 'undefined' && window.location?.origin) {
+    return window.location.origin.replace(/\/+$/, '');
+  }
+
+  return '';
+};
+
 interface ThemeState {
   theme: 'light' | 'dark';
   toggleTheme: () => void;
@@ -53,11 +66,32 @@ export const useAuthStore = create<AuthState>()(
         // Fetch join_date and role to keep the local session fresh
         const { data: userData } = await supabase
           .from('users')
-          .select('join_date, role')
+          .select('*')
           .eq('id', user.id)
           .single();
         
         if (userData) {
+          const joinDate = new Date(userData.join_date || user.joinDate);
+          const twoMonthsAgo = new Date();
+          twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 2);
+
+          let hasPurchased = userData.role !== 'user';
+          if (!hasPurchased) {
+            const { data: payments } = await supabase.from('payments').select('id').eq('user_id', user.id).eq('status', 'approved').limit(1);
+            if (payments && payments.length > 0) hasPurchased = true;
+          }
+
+          if (userData.role !== 'admin' && !hasPurchased && joinDate < twoMonthsAgo) {
+            await supabase.from('users').delete().eq('id', user.id);
+            await supabase.auth.signOut();
+            set({ isAuthenticated: false, user: null, subscription: null });
+            // Let the frontend know so it can show an alert or redirect, typically the app will redirect to login once auth state changes
+            if (window.location.pathname !== '/login') {
+                window.location.href = '/login?error=account_disabled';
+            }
+            return;
+          }
+
           set({ 
             user: { 
               ...user, 
@@ -83,7 +117,59 @@ export const useAuthStore = create<AuthState>()(
           let expiresAt: string | null = null;
           let isActive = true;
           
-          if (plan.toLowerCase() !== 'lifetime' && plan.toLowerCase() !== 'lifetime pro') {
+          if (plan.toLowerCase() === 'yearly plan 1' || plan.toLowerCase() === 'yearly plan 2' || plan.toLowerCase() === 'yearly plan 3') {
+            const expiryDate = new Date(approvedAt);
+            expiryDate.setMonth(expiryDate.getMonth() + 1); // 1 month
+            expiresAt = expiryDate.toISOString();
+            isActive = new Date() < expiryDate;
+          } else if (plan.toLowerCase() === '1 year plan' || plan.toLowerCase() === 'yearly' || plan.toLowerCase() === 'yearly plan') {
+            const expiryDate = new Date(approvedAt);
+            expiryDate.setDate(expiryDate.getDate() + 365); // 1 year
+            expiresAt = expiryDate.toISOString();
+            isActive = new Date() < expiryDate;
+          } else if (plan.toLowerCase() === '5 year plan' || plan.toLowerCase() === '5 year') {
+            const expiryDate = new Date(approvedAt);
+            expiryDate.setDate(expiryDate.getDate() + (365 * 5)); // 5 years
+            expiresAt = expiryDate.toISOString();
+            isActive = new Date() < expiryDate;
+          } else if (plan.toLowerCase() === '10 year plan' || plan.toLowerCase() === '10 year') {
+            const expiryDate = new Date(approvedAt);
+            expiryDate.setDate(expiryDate.getDate() + (365 * 10)); // 10 years
+            expiresAt = expiryDate.toISOString();
+            isActive = new Date() < expiryDate;
+          } else if (plan.toLowerCase() !== 'lifetime' && plan.toLowerCase() !== 'lifetime pro') {
+            const expiryDate = new Date(approvedAt);
+            expiryDate.setDate(expiryDate.getDate() + 30); // 30 days for premium/pro
+            expiresAt = expiryDate.toISOString();
+            isActive = new Date() < expiryDate;
+          }
+          
+          set({
+            subscription: {
+              plan: plan.toLowerCase(),
+              expiresAt,
+              isActive
+            }
+          });
+        } else if (userData && userData.role && userData.role !== 'user') {
+          // Fallback to role-based expiry for Lemon Squeezy Users
+          const plan = userData.role;
+          const approvedAt = userData.subscription_created ? new Date(userData.subscription_created) : new Date(userData.join_date);
+          
+          let expiresAt: string | null = null;
+          let isActive = true;
+          
+          if (plan.toLowerCase() === 'yearly plan 1' || plan.toLowerCase() === 'yearly plan 2' || plan.toLowerCase() === 'yearly plan 3') {
+            const expiryDate = new Date(approvedAt);
+            expiryDate.setMonth(expiryDate.getMonth() + 1); // 1 month
+            expiresAt = expiryDate.toISOString();
+            isActive = new Date() < expiryDate;
+          } else if (plan.toLowerCase() === '1 year plan' || plan.toLowerCase() === 'yearly' || plan.toLowerCase() === 'yearly plan') {
+            const expiryDate = new Date(approvedAt);
+            expiryDate.setDate(expiryDate.getDate() + 365); // 1 year
+            expiresAt = expiryDate.toISOString();
+            isActive = new Date() < expiryDate;
+          } else if (plan.toLowerCase() !== 'lifetime' && plan.toLowerCase() !== 'admin') {
             const expiryDate = new Date(approvedAt);
             expiryDate.setDate(expiryDate.getDate() + 30); // 30 days for premium/pro
             expiresAt = expiryDate.toISOString();
@@ -203,6 +289,27 @@ export const useAdminStore = create<AdminState>()(
           date: new Date(data[0].date).toISOString().split('T')[0]
         };
         set((state) => ({ blogs: [newBlog, ...state.blogs] }));
+
+        const apiBase = resolveApiBase();
+        const endpoint = apiBase ? `${apiBase}/api/sitemap/blog` : '/api/sitemap/blog';
+        const blogSlug = newBlog.slug || slug;
+
+        if (blogSlug) {
+          try {
+            const response = await fetch(endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ slug: blogSlug }),
+            });
+
+            if (!response.ok) {
+              const responseText = await response.text();
+              console.error('Sitemap update failed:', response.status, responseText);
+            }
+          } catch (sitemapError) {
+            console.error('Error updating sitemap after blog creation:', sitemapError);
+          }
+        }
       } else {
         console.error('Error adding blog:', error);
       }
@@ -268,7 +375,8 @@ export const useAdminStore = create<AdminState>()(
         
         // If approved, update user role
         if (status === 'approved') {
-          const newRole = 'premium';
+          const payment = get().payments.find(p => p.id === id);
+          const newRole = payment?.plan ? payment.plan.toLowerCase() : 'premium';
           await get().updateUserRole(userId, newRole);
         }
       }

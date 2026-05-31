@@ -5,6 +5,8 @@ import { ArrowLeft, Eye, EyeOff } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Logo } from '../components/Logo';
 import { supabase } from '@/lib/supabase';
+import disposableDomains from 'disposable-email-domains';
+import MailChecker from 'mailchecker';
 
 const GoogleIcon = () => (
   <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
@@ -38,12 +40,42 @@ export function Login() {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('error') === 'account_disabled') {
+      setError('Your account has been disabled and removed because no purchase was made within 2 months of registration.');
+      // Optionally remove the query param so it doesn't persist on refresh
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, []);
+
+  useEffect(() => {
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session?.user) {
         const { user } = session;
         
         try {
+          if (user.email) {
+            const trimmedEmail = user.email.trim().toLowerCase();
+            const domain = trimmedEmail.split('@')[1];
+            if (domain) {
+              const parts = domain.split('.');
+              const baseDomain = parts.length > 2 ? parts.slice(-2).join('.') : domain;
+              const domainsList = Array.isArray(disposableDomains) ? disposableDomains : Object.values(disposableDomains || {});
+              const CUSTOM_BLOCKLIST = ['kynninc.com', 'tozya.com', 'maxsmail.com', 'fmaildes.com', 'mailto.plus', '1secmail.com', '1secmail.net', '1secmail.org'];
+              const isDisposable = domainsList.includes(domain) || domainsList.includes(baseDomain) || 
+                CUSTOM_BLOCKLIST.includes(domain) || CUSTOM_BLOCKLIST.includes(baseDomain) || 
+                !MailChecker.isValid(user.email) ||
+                /temp|throwaway|disposable|fake|10minute|yopmail|mailinator|trash|guerrilla|nada|drop|burner|generator|kynninc/i.test(domain);
+              
+              if (isDisposable) {
+                setError('Disposable email addresses are not allowed. Please use a verified provider.');
+                await supabase.auth.signOut();
+                return;
+              }
+            }
+          }
+          
           // Check if user exists in our custom 'users' table
           const { data: existingUser } = await supabase
             .from('users')
@@ -52,6 +84,23 @@ export function Login() {
             .single();
           
           if (existingUser) {
+            const joinDate = new Date(existingUser.join_date);
+            const twoMonthsAgo = new Date();
+            twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 2);
+
+            let hasPurchased = existingUser.role !== 'user';
+            if (!hasPurchased) {
+              const { data: payments } = await supabase.from('payments').select('id').eq('user_id', existingUser.id).eq('status', 'approved').limit(1);
+              if (payments && payments.length > 0) hasPurchased = true;
+            }
+
+            if (existingUser.role !== 'admin' && !hasPurchased && joinDate < twoMonthsAgo) {
+              await supabase.from('users').delete().eq('id', existingUser.id);
+              setError('Your account has been disabled and removed because no purchase was made within 2 months of registration.');
+              await supabase.auth.signOut();
+              return;
+            }
+
             login({ id: existingUser.id, name: existingUser.name, email: existingUser.email, role: existingUser.role, joinDate: existingUser.join_date });
             if (window.location.hash) {
               window.history.replaceState(null, '', window.location.pathname + window.location.search);
@@ -130,6 +179,23 @@ export function Login() {
       if (fetchError || !data) {
         console.error('Error fetching user:', fetchError);
         setError(fetchError?.message || 'User not found. Please check your credentials or sign up.');
+        return;
+      }
+
+      const joinDate = new Date(data.join_date);
+      const twoMonthsAgo = new Date();
+      twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 2);
+
+      let hasPurchased = data.role !== 'user';
+      if (!hasPurchased) {
+        const { data: payments } = await supabase.from('payments').select('id').eq('user_id', data.id).eq('status', 'approved').limit(1);
+        if (payments && payments.length > 0) hasPurchased = true;
+      }
+
+      if (data.role !== 'admin' && !hasPurchased && joinDate < twoMonthsAgo) {
+        await supabase.from('users').delete().eq('id', data.id);
+        setError('Your account has been disabled and removed because no purchase was made within 2 months of registration.');
+        await supabase.auth.signOut();
         return;
       }
 

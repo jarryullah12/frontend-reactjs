@@ -71,7 +71,7 @@ export function PrivacyPolicy() {
           <p className="mb-4">OptiSEO does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.</p>
 
           <h2 className="text-2xl font-semibold mb-4">11. Contact Us</h2>
-          <p>If you have any questions about this Privacy Policy, please contact us at jarryullah46@gmail.com.</p>
+          <p>If you have any questions about this Privacy Policy, please contact us at support@getoptiseo.com.</p>
         </div>
       </div>
     </div>

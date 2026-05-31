@@ -59,7 +59,7 @@ export function Disclaimer() {
         <section>
           <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">7. Contact Us</h2>
           <p className="text-gray-600 dark:text-gray-300">
-            If you require any more information or have any questions about our site's disclaimer, please feel free to contact us by email at jarryullah46@gmail.com.
+            If you require any more information or have any questions about our site's disclaimer, please feel free to contact us by email at support@getoptiseo.com.
           </p>
         </section>
       </div>

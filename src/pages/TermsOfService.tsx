@@ -47,7 +47,7 @@ export function TermsOfService() {
           <p className="mb-4">These terms and conditions are governed by and construed in accordance with the laws and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.</p>
           
           <h2 className="text-2xl font-semibold mb-4">9. Contact Us</h2>
-          <p>If you have any questions about these Terms, please contact us at jarryullah46@gmail.com.</p>
+          <p>If you have any questions about these Terms, please contact us at support@getoptiseo.com.</p>
         </div>
       </div>
     </div>
