@@ -2,11 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { Sparkles, CheckCircle2, Zap, Layout, FileText, Loader2, Plus, Minus, ArrowUp, ChevronRight } from 'lucide-react';
+import { Sparkles, CheckCircle2, Zap, Layout, FileText, Loader2, Plus, Minus, ArrowUp, ChevronRight, Shield, Globe, Award, Star } from 'lucide-react';
 import { generateSlug } from '../utils/slugify';
 import { TemplateRenderer } from '../components/TemplateRenderer';
 import { TEMPLATE_PREVIEW_DATA } from '../constants';
-
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -521,6 +520,7 @@ const BlogGrid = () => {
   );
 };
 
+        
 const TemplateCarousel = () => {
   const featuredTemplates = TEMPLATES.filter(t => t.recommended).slice(0, 8);
 
@@ -719,6 +719,9 @@ const Home: React.FC = () => {
 
       {/* Trust Section - Seamless SVG Logo Marquee */}
       <section className="py-12 bg-white dark:bg-slate-950 border-y border-slate-100 dark:border-slate-800 overflow-hidden relative">
+         <div className="max-w-7xl mx-auto px-4 mb-12 text-center">
+           <h3 className="text-slate-400 dark:text-slate-500 font-black uppercase text-[10px] tracking-[0.4em]">Our customers have been hired at</h3>
+        </div>
         <div className="absolute left-0 top-0 bottom-0 w-48 bg-gradient-to-r from-white dark:from-slate-950 to-transparent z-10" />
         <div className="absolute right-0 top-0 bottom-0 w-48 bg-gradient-to-l from-white dark:from-slate-950 to-transparent z-10" />
         
@@ -782,7 +785,7 @@ const Home: React.FC = () => {
           <div className="text-blue-600 font-black uppercase text-xs tracking-widest mb-4">Powerful Features</div>
           <h2 className="text-4xl lg:text-5xl font-black text-slate-900 dark:text-white">Everything you need to <br /> get hired faster.</h2>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             { 
               title: 'AI Content Generation', 
@@ -801,6 +804,24 @@ const Home: React.FC = () => {
               desc: 'Our templates are optimized to pass through Applicant Tracking Systems.', 
               icon: <CheckCircle2 className="text-emerald-600" />,
               color: 'bg-emerald-50'
+            },
+            { 
+              title: 'Secure Data Privacy', 
+              desc: 'Your data is encrypted and stored securely. You own your information.', 
+              icon: <Shield className="text-amber-600" />,
+              color: 'bg-amber-50'
+            },
+            { 
+              title: 'Multi-Format Export', 
+              desc: 'Download your resume in PDF, Word, or plain text formats easily.', 
+              icon: <FileText className="text-pink-600" />,
+              color: 'bg-pink-50'
+            },
+            { 
+              title: 'Professional Awards', 
+              desc: 'Special sections to highlight certifications and career achievements.', 
+              icon: <Award className="text-purple-600" />,
+              color: 'bg-purple-50'
             }
           ].map((f, i) => (
             <motion.div 
@@ -815,6 +836,69 @@ const Home: React.FC = () => {
               <p className="text-slate-500 dark:text-slate-400 font-medium leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}
+        </div>
+
+        {/* Trustpilot Review Section */}
+        <div className="mt-32">
+          <div className="flex flex-col items-center mb-12">
+            <div className="flex items-center gap-1 mb-2">
+              <span className="text-[#00b67a] font-bold text-xl mr-2">Trustpilot</span>
+              {[...Array(5)].map((_, i) => (
+                <div key={i} className="bg-[#00b67a] p-1 rounded-sm">
+                  <Star className="text-white fill-white" size={16} />
+                </div>
+              ))}
+            </div>
+            <p className="text-sm font-bold text-slate-500 dark:text-slate-400">
+              Rated <span className="text-slate-900 dark:text-white">4.9 / 5</span> based on 2,500+ reviews
+            </p>
+          </div>
+
+          <div className="relative overflow-hidden">
+            <motion.div 
+              animate={{ x: [0, -1000] }}
+              transition={{ 
+                duration: 40, 
+                repeat: Infinity, 
+                ease: "linear" 
+              }}
+              className="flex gap-6 w-max"
+            >
+              {[...Array(12)].map((_, i) => {
+                const reviews = [
+                  { name: "Sarah J.", text: "This tool helped me land my dream job at Google! The AI suggestions are brilliant.", role: "Software Engineer" },
+                  { name: "Michael R.", text: "Best resume builder I've ever used. The templates are clean and modern.", role: "Marketing Manager" },
+                  { name: "David K.", text: "I was struggling with ATS, but this builder fixed everything. Highly recommend!", role: "Product Designer" },
+                  { name: "Emily W.", text: "The real-time preview is a game changer. I could see exactly how it looked.", role: "Data Analyst" },
+                  { name: "James L.", text: "Professional and easy to use. I finished my resume in under 15 minutes.", role: "Sales Director" },
+                  { name: "Anna S.", text: "The layout options are amazing. It really makes my profile stand out.", role: "UX Researcher" }
+                ];
+                const review = reviews[i % reviews.length];
+                
+                return (
+                  <div key={i} className="w-[350px] p-8 bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 shadow-sm flex-shrink-0">
+                    <div className="flex gap-0.5 mb-4">
+                      {[...Array(5)].map((_, j) => (
+                        <div key={j} className="bg-[#00b67a] p-0.5 rounded-sm">
+                          <Star className="text-white fill-white" size={12} />
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-slate-800 dark:text-slate-200 font-medium mb-6 italic">"{review.text}"</p>
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 font-bold">
+                        {review.name[0]}
+                      </div>
+                      <div>
+                        <div className="font-bold text-slate-900 dark:text-white text-sm">{review.name}</div>
+                        <div className="text-slate-400 text-xs font-medium">{review.role}</div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </motion.div>
+          </div>
         </div>
 
         <div className="mt-32">

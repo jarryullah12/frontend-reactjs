@@ -3,9 +3,11 @@ import path from "path";
 import { createServer as createHttpServer } from "http";
 import { createServer as createViteServer, loadEnv } from "vite";
 import { GoogleGenAI, Type } from "@google/genai";
+import { createClient } from "@supabase/supabase-js";
 
 // Load environment variables from .env file
-const env = loadEnv('', process.cwd(), '');
+const MODE = process.env.NODE_ENV === "production" ? "production" : "development";
+const env = loadEnv(MODE, process.cwd(), '');
 
 async function startServer() {
   const app = express();
@@ -13,7 +15,7 @@ async function startServer() {
 
   app.use("/_supabase", express.raw({ type: "*/*", limit: "10mb" }), async (req, res) => {
     // Read REAL Supabase URL directly from .env to avoid proxy loops
-    const envFile = loadEnv('', process.cwd(), '');
+    const envFile = loadEnv(MODE, process.cwd(), '');
     const realSupabaseUrl = process.env.VITE_SUPABASE_URL || envFile.VITE_SUPABASE_URL;
     const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || envFile.VITE_SUPABASE_ANON_KEY;
 
@@ -24,6 +26,7 @@ async function startServer() {
 
     const targetUrl = realSupabaseUrl.replace(/\/$/, "") + req.originalUrl.replace(/^\/_supabase/, "");
     console.log(`[Supabase Proxy] ${req.method} ${targetUrl}`);
+    console.log(`[Supabase Proxy] Headers: ${JSON.stringify(Object.keys(req.headers))}`);
 
     const headers: Record<string, string> = {};
     for (const [key, value] of Object.entries(req.headers)) {
@@ -42,18 +45,32 @@ async function startServer() {
         ? incomingAuth.slice(7).trim()
         : "";
 
-    if (!incomingToken || incomingToken === "public-anon" || incomingToken === "placeholder_key") {
+    // If no token or placeholder token, use the real anon key
+    const isPlaceholder = !incomingToken || 
+                         incomingToken === "public-anon" || 
+                         incomingToken === "placeholder_key" || 
+                         incomingToken === "undefined" || 
+                         incomingToken === "null";
+
+    if (isPlaceholder) {
+      console.log(`[Supabase Proxy] Using Anon Key for ${req.method} ${targetUrl}`);
       headers["authorization"] = `Bearer ${supabaseAnonKey}`;
+    } else {
+      console.log(`[Supabase Proxy] Using User Token (${incomingToken.substring(0, 10)}...) for ${req.method} ${targetUrl}`);
     }
 
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s server-side timeout
 
+      const wantsAuthRedirect =
+        typeof req.originalUrl === "string" && req.originalUrl.startsWith("/_supabase/auth/v1/authorize");
+
       const fetchOptions: any = {
         method: req.method,
         headers,
-        signal: controller.signal
+        signal: controller.signal,
+        redirect: wantsAuthRedirect ? "manual" : "follow"
       };
 
       if (req.method !== "GET" && req.method !== "HEAD" && req.body && Buffer.isBuffer(req.body) && req.body.length > 0) {
@@ -72,6 +89,9 @@ async function startServer() {
       });
 
       const buffer = Buffer.from(await response.arrayBuffer());
+      if (response.status >= 400) {
+        console.error(`[Supabase Proxy] Error response: ${response.status}`, buffer.toString());
+      }
       res.send(buffer);
     } catch (error: any) {
       console.error(`[Supabase Proxy] Error: ${error.message}`);
@@ -80,6 +100,153 @@ async function startServer() {
   });
 
   app.use(express.json({ limit: '10mb' }));
+
+  const getServerSupabase = () => {
+    const envFile = loadEnv(MODE, process.cwd(), '');
+    const realSupabaseUrl = process.env.VITE_SUPABASE_URL || envFile.VITE_SUPABASE_URL;
+    const anonKey = process.env.VITE_SUPABASE_ANON_KEY || envFile.VITE_SUPABASE_ANON_KEY;
+    const serviceRoleKey =
+      process.env.SUPABASE_SERVICE_ROLE_KEY || envFile.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (!realSupabaseUrl || !anonKey) {
+      throw new Error("Supabase URL/Key missing on server");
+    }
+
+    const keyToUse = serviceRoleKey || anonKey;
+    return createClient(realSupabaseUrl, keyToUse, {
+      auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
+    });
+  };
+
+  app.delete("/api/account", async (req, res) => {
+    try {
+      const envFile = loadEnv(MODE, process.cwd(), '');
+      const realSupabaseUrl = process.env.VITE_SUPABASE_URL || envFile.VITE_SUPABASE_URL;
+      const anonKey = process.env.VITE_SUPABASE_ANON_KEY || envFile.VITE_SUPABASE_ANON_KEY;
+      const serviceRoleKey =
+        process.env.SUPABASE_SERVICE_ROLE_KEY || envFile.SUPABASE_SERVICE_ROLE_KEY;
+
+      if (!realSupabaseUrl || !anonKey) {
+        return res.status(500).json({ error: "Supabase URL/Key missing on server" });
+      }
+
+      const authHeader = String(req.headers.authorization || '');
+      const token = authHeader.toLowerCase().startsWith('bearer ') ? authHeader.slice(7).trim() : '';
+      if (!token) {
+        return res.status(401).json({ error: "Missing Authorization token" });
+      }
+
+      const authClient = createClient(realSupabaseUrl, anonKey, {
+        auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
+      });
+
+      const { data: { user }, error: userError } = await authClient.auth.getUser(token);
+      if (userError || !user) {
+        return res.status(401).json({ error: "Invalid or expired session" });
+      }
+
+      if (!serviceRoleKey) {
+        return res.status(500).json({ error: "Server is not configured for account deletion (missing service role key)" });
+      }
+
+      const adminClient = createClient(realSupabaseUrl, serviceRoleKey, {
+        auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
+      });
+
+      const { error: resumeError } = await adminClient.from('resumes').delete().eq('user_id', user.id);
+      if (resumeError) {
+        return res.status(500).json({ error: resumeError.message || "Failed to delete resumes" });
+      }
+
+      const { error: profileError } = await adminClient.from('profiles').delete().eq('id', user.id);
+      if (profileError) {
+        return res.status(500).json({ error: profileError.message || "Failed to delete profile" });
+      }
+
+      const { error: authDeleteError } = await adminClient.auth.admin.deleteUser(user.id);
+      if (authDeleteError) {
+        return res.status(500).json({ error: authDeleteError.message || "Failed to delete auth user" });
+      }
+
+      return res.json({ ok: true });
+    } catch (e: any) {
+      return res.status(500).json({ error: e?.message || String(e) });
+    }
+  });
+
+  app.get("/api/blog/posts", async (req, res) => {
+    try {
+      const includeContent = String(req.query.includeContent || "0") === "1";
+      const supabase = getServerSupabase();
+      const selectColumns = includeContent
+        ? "*"
+        : "id,title,excerpt,author,date,category,image,status";
+
+      let { data, error } = await supabase
+        .from("blog_posts")
+        .select(selectColumns)
+        .eq("status", "published")
+        .order("created_at", { ascending: false });
+
+      if (error && typeof error.message === "string" && error.message.toLowerCase().includes("created_at")) {
+        const retry = await supabase
+          .from("blog_posts")
+          .select(selectColumns)
+          .eq("status", "published")
+          .order("date", { ascending: false });
+        data = retry.data;
+        error = retry.error;
+      }
+
+      if (error) {
+        return res.status(500).json({ error: error.message });
+      }
+      res.json({ posts: data || [] });
+    } catch (e: any) {
+      res.status(500).json({ error: e?.message || String(e) });
+    }
+  });
+
+  app.get("/api/blog/post/:id", async (req, res) => {
+    try {
+      const supabase = getServerSupabase();
+      const { data, error } = await supabase
+        .from("blog_posts")
+        .select("*")
+        .eq("id", req.params.id)
+        .eq("status", "published")
+        .single();
+      if (error) return res.status(404).json({ error: error.message });
+      res.json({ post: data });
+    } catch (e: any) {
+      res.status(500).json({ error: e?.message || String(e) });
+    }
+  });
+
+  app.get("/api/blog/recent", async (req, res) => {
+    try {
+      const limit = Math.max(1, Math.min(10, Number(req.query.limit || 3)));
+      const excludeId = String(req.query.excludeId || "");
+      const supabase = getServerSupabase();
+
+      let query: any = supabase
+        .from("blog_posts")
+        .select("id,title,excerpt,author,date,category,image,status")
+        .eq("status", "published")
+        .order("created_at", { ascending: false })
+        .limit(limit);
+
+      if (excludeId) {
+        query = query.neq("id", excludeId);
+      }
+
+      const { data, error } = await query;
+      if (error) return res.status(500).json({ error: error.message });
+      res.json({ posts: data || [] });
+    } catch (e: any) {
+      res.status(500).json({ error: e?.message || String(e) });
+    }
+  });
 
   // Gemini API Endpoint
   app.post("/api/gemini", async (req, res) => {

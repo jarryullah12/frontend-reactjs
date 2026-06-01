@@ -10,52 +10,54 @@ const isMissingColumnError = (error: any) => {
 export const resumeService = {
   getResumes: async (userId: string, userEmail?: string): Promise<any[]> => {
     const supabase = getSupabase();
-    try {
-      await getAuthenticatedUser(3, 250);
+    const authUser = await getAuthenticatedUser(3, 250);
+    if (!authUser) {
+      throw new Error('Session expired. Please login again.');
+    }
 
-      const { data: byUserId, error: byUserIdError } = await supabase
+    const { data: byUserId, error: byUserIdError } = await supabase
+      .from('resumes')
+      .select('*')
+      .eq('user_id', userId)
+      .order('updated_at', { ascending: false });
+
+    if (byUserIdError) throw byUserIdError;
+    let combined = byUserId || [];
+
+    const normalizedEmail = userEmail ? normalizeEmail(userEmail) : '';
+    let normalizedRows: any[] = [];
+    if (normalizedEmail) {
+      const byNormalized = await supabase
         .from('resumes')
         .select('*')
-        .eq('user_id', userId)
+        .eq('owner_email_normalized', normalizedEmail)
         .order('updated_at', { ascending: false });
 
-      if (byUserIdError) throw byUserIdError;
-      let combined = byUserId || [];
-
-      const normalizedEmail = userEmail ? normalizeEmail(userEmail) : '';
-      if (normalizedEmail) {
-        const byNormalized = await supabase
-          .from('resumes')
-          .select('*')
-          .eq('owner_email_normalized', normalizedEmail)
-          .order('updated_at', { ascending: false });
-
-        if (byNormalized.error && !isMissingColumnError(byNormalized.error)) {
-          throw byNormalized.error;
-        }
-
-        if (byNormalized.data?.length) {
-          const seen = new Set(combined.map(r => r.id));
-          const merged = [...combined];
-          byNormalized.data.forEach(row => {
-            if (!seen.has(row.id)) {
-              merged.push(row);
-              seen.add(row.id);
-            }
-          });
-          combined = merged.sort((a, b) => {
-            const aTs = new Date(a.updated_at || 0).getTime();
-            const bTs = new Date(b.updated_at || 0).getTime();
-            return bTs - aTs;
-          });
-        }
+      if (byNormalized.error && !isMissingColumnError(byNormalized.error)) {
+        throw byNormalized.error;
       }
-      
-      return combined;
-    } catch (e) {
-      console.error('Error fetching resumes:', e);
-      return [];
+      if (byNormalized.data?.length) {
+        normalizedRows = byNormalized.data;
+      }
     }
+
+    if (normalizedRows.length) {
+      const seen = new Set(combined.map(r => r.id));
+      const merged = [...combined];
+      normalizedRows.forEach(row => {
+        if (!seen.has(row.id)) {
+          merged.push(row);
+          seen.add(row.id);
+        }
+      });
+      combined = merged.sort((a, b) => {
+        const aTs = new Date(a.updated_at || 0).getTime();
+        const bTs = new Date(b.updated_at || 0).getTime();
+        return bTs - aTs;
+      });
+    }
+    
+    return combined;
   },
 
   getResumeById: async (id: string): Promise<ResumeData | null> => {

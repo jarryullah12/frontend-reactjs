@@ -22,7 +22,7 @@ import BlogPostDetail from './pages/BlogPostDetail';
 import Admin from './pages/Admin';
 import DebugAuth from './pages/DebugAuth';
 import { User } from './types';
-import { getSupabase } from './services/supabase';
+import { clearLocalAuthStorage, getAuthenticatedUser, getSupabase } from './services/supabase';
 import { normalizeEmail } from './utils/email';
 import { resolveUserRole } from './utils/auth';
 import { Sparkles, ChevronRight, Menu, X } from 'lucide-react';
@@ -290,7 +290,55 @@ const App: React.FC = () => {
   const [authCallbackError, setAuthCallbackError] = useState<string | null>(null);
   const [showBanner, setShowBanner] = useState(localStorage.getItem('hideFreeTrial') !== 'true');
 
+  console.log('[App] State:', { userEmail: user?.email, loading, authCallbackError });
+
+  const buildUserData = async (authUser: any) => {
+    const supabase = getSupabase();
+    console.log('[Auth] Building user data for:', authUser.email);
+    try {
+      const { data: profile, error: profileErr } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', authUser.id)
+        .single();
+
+      const isNotFound = profileErr?.code === 'PGRST116';
+      if (profileErr && !isNotFound) {
+        console.error('[Auth] Error fetching profile role:', profileErr);
+      }
+
+      const resolvedRole = resolveUserRole(profile?.role, authUser.email);
+
+      if (isNotFound) {
+        console.log('[Auth] Profile not found, creating...');
+        await supabase.from('profiles').upsert({
+          id: authUser.id,
+          email: normalizeEmail(authUser.email || ''),
+          role: resolvedRole,
+        }, { onConflict: 'id' });
+      } else if (resolvedRole === 'admin' && profile?.role !== 'admin') {
+        console.log('[Auth] Updating user to admin...');
+        await supabase.from('profiles').update({ role: 'admin' }).eq('id', authUser.id);
+      }
+
+      return {
+        id: authUser.id,
+        email: normalizeEmail(authUser.email || ''),
+        name: authUser.user_metadata?.full_name || authUser.email?.split('@')[0] || 'User',
+        role: resolvedRole
+      };
+    } catch (err) {
+      console.error('[Auth] buildUserData unexpected error:', err);
+      throw err;
+    }
+  };
+
   useEffect(() => {
+    const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
+      console.error('[Unhandled Rejection]', event.reason);
+    };
+    window.addEventListener('unhandledrejection', handleUnhandledRejection);
+    
     let isMounted = true;
 
     // Listen for custom event to hide banner immediately across components
@@ -301,6 +349,53 @@ const App: React.FC = () => {
     window.addEventListener('hideFreeTrialBanner', handleHideBanner);
 
     const supabase = getSupabase();
+
+    // 1. Subscribe to auth changes FIRST to catch any events triggered by subsequent calls
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log('[Auth] State Change:', event, session?.user?.email);
+      
+      if (session?.user) {
+        try {
+          const verifiedUser = await getAuthenticatedUser(1, 250);
+          if (!verifiedUser) {
+            clearUserState();
+            return;
+          }
+          const userData = await buildUserData(verifiedUser);
+          console.log('[Auth] User data built successfully:', userData.email);
+          if (isMounted) {
+            setUser(userData);
+            setDbConnectionError(null);
+            setAuthCallbackError(null);
+          }
+          localStorage.setItem('user', JSON.stringify(userData));
+        } catch (err) {
+          console.error('[Auth] Error building user data:', err);
+          const userDataFallback = {
+            id: session.user.id,
+            email: normalizeEmail(session.user.email || ''),
+            name: session.user.user_metadata?.full_name || session.user.email?.split('@')[0] || 'User',
+            role: 'user' as const
+          };
+          if (isMounted) setUser(userDataFallback);
+          localStorage.setItem('user', JSON.stringify(userDataFallback));
+        }
+      } else if (event === 'SIGNED_OUT') {
+        console.log('[Auth] Event SIGNED_OUT: Clearing state');
+        clearUserState();
+      } else if (event === 'INITIAL_SESSION' && !session) {
+        console.log('[Auth] Event INITIAL_SESSION (null): No existing session found');
+        // If we're not currently in the middle of a code exchange, clear the stale user state
+        if (!window.location.search.includes('code=')) {
+          console.log('[Auth] No OAuth code in URL, clearing potentially stale local user state');
+          clearUserState();
+        }
+      }
+
+      window.clearTimeout(authBootstrapTimer);
+      stopLoading();
+    });
+
     const stopLoading = () => {
       if (!isMounted) return;
       setLoading(false);
@@ -312,114 +407,105 @@ const App: React.FC = () => {
       }
     };
 
-    const buildUserData = async (authUser: any) => {
-      const { data: profile, error: profileErr } = await supabase
-        .from('profiles')
-        .select('role')
-        .eq('id', authUser.id)
-        .single();
-
-      const isNotFound = profileErr?.code === 'PGRST116';
-      if (profileErr && !isNotFound) {
-        console.error('Error fetching profile role:', profileErr);
-      }
-
-      const resolvedRole = resolveUserRole(profile?.role, authUser.email);
-
-      if (isNotFound) {
-        await supabase.from('profiles').upsert({
-          id: authUser.id,
-          email: normalizeEmail(authUser.email || ''),
-          role: resolvedRole,
-        }, { onConflict: 'id' });
-      } else if (resolvedRole === 'admin' && profile?.role !== 'admin') {
-        await supabase.from('profiles').update({ role: 'admin' }).eq('id', authUser.id);
-      }
-
-      return {
-        id: authUser.id,
-        email: normalizeEmail(authUser.email || ''),
-        name: authUser.user_metadata?.full_name || authUser.email?.split('@')[0] || 'User',
-        role: resolvedRole
-      };
-    };
-
     const handleAuthCallback = async () => {
       const url = new URL(window.location.href);
-      const errorDescription = url.searchParams.get('error_description') || url.searchParams.get('error');
+      const fromSearch = url.searchParams;
+      const fromHash = new URLSearchParams((url.hash || '').replace(/^#/, '?'));
+      const code = fromSearch.get('code') || fromHash.get('code');
+      const errorDescription =
+        fromSearch.get('error_description') ||
+        fromSearch.get('error') ||
+        fromHash.get('error_description') ||
+        fromHash.get('error');
+
       if (errorDescription) {
-        if (isMounted) {
-          try {
-            setAuthCallbackError(decodeURIComponent(errorDescription));
-          } catch {
-            setAuthCallbackError(errorDescription);
-          }
+        console.error('[Auth] OAuth Error in URL:', errorDescription);
+        try {
+          if (isMounted) setAuthCallbackError(decodeURIComponent(errorDescription));
+        } catch {
+          if (isMounted) setAuthCallbackError(errorDescription);
         }
       }
 
-      const code = url.searchParams.get('code');
       if (!code) return;
 
-      console.log('[Auth] Code found in URL, exchanging for session...');
+      console.log('[Auth] OAuth Code detected, exchanging for session...');
       try {
-        const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+        const { error } = await supabase.auth.exchangeCodeForSession(code);
         if (error) {
-          console.error('[Auth] exchangeCodeForSession error:', error);
-          throw error;
+          if (error.message.includes('already been used')) {
+            console.log('[Auth] Code already used, likely handled by auto-detect.');
+          } else {
+            throw error;
+          }
         }
-        console.log('[Auth] Session exchange success, user:', data?.session?.user?.email);
+        console.log('[Auth] Code exchange successful');
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.user) {
+          window.location.replace('/settings');
+        }
       } catch (err: any) {
-        const message = err?.message || String(err);
-        console.error('[Auth] Code exchange failed:', message);
-        if (isMounted) {
-          setAuthCallbackError(`Google login failed: ${message}`);
-        }
+        console.error('[Auth] Code exchange failed:', err.message);
+        if (isMounted) setAuthCallbackError(`Login failed: ${err.message}`);
       } finally {
-        url.searchParams.delete('code');
-        url.searchParams.delete('state');
-        url.searchParams.delete('error');
-        url.searchParams.delete('error_description');
-        window.history.replaceState(null, '', url.pathname + url.search + url.hash);
+        // Cleanup URL
+        fromSearch.delete('code');
+        fromSearch.delete('state');
+        fromSearch.delete('error');
+        fromSearch.delete('error_description');
+        const cleanUrl = url.pathname + (fromSearch.toString() ? `?${fromSearch.toString()}` : '');
+        window.history.replaceState(null, '', cleanUrl);
       }
     };
 
-    void handleAuthCallback();
-    const authBootstrapTimer = window.setTimeout(() => {
-      stopLoading();
-    }, 1500);
-
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (session?.user) {
-        try {
-          const userData = await buildUserData(session.user);
-          if (isMounted) {
-            setUser(userData);
-            setDbConnectionError(null);
-            setAuthCallbackError(null);
+    const checkInitialSession = async () => {
+      // Check if localStorage is working
+      try {
+        localStorage.setItem('test', '1');
+        localStorage.removeItem('test');
+        
+        // Cleanup old potentially corrupt keys from previous versions
+        const oldKeys = ['proresumelab-auth-token', 'supabase.auth.token'];
+        oldKeys.forEach(k => {
+          if (localStorage.getItem(k)) {
+            console.log('[Auth] Removing stale storage key:', k);
+            localStorage.removeItem(k);
           }
-          localStorage.setItem('user', JSON.stringify(userData));
-        } catch (err) {
-          console.error('Error updating user role on auth change:', err);
-          const userDataFallback = {
-            id: session.user.id,
-            email: normalizeEmail(session.user.email || ''),
-            name: session.user.user_metadata?.full_name || session.user.email?.split('@')[0] || 'User',
-            role: 'user' as const
-          };
-          if (isMounted) {
-            setUser(userDataFallback);
-          }
-          localStorage.setItem('user', JSON.stringify(userDataFallback));
-        }
-      } else if (event === 'SIGNED_OUT' || event === 'INITIAL_SESSION') {
-        if (session?.user) return;
-        clearUserState();
+        });
+      } catch (e) {
+        console.error('[Auth] LocalStorage BLOCKED!', e);
+        setAuthCallbackError('Browser storage is blocked. Please enable cookies and site data.');
+        return;
       }
 
-      window.clearTimeout(authBootstrapTimer);
-      stopLoading();
+      // If we have a code, handleAuthCallback will take care of it
+      if (window.location.search.includes('code=') || window.location.hash.includes('code=')) {
+        console.log('[Auth] Skipping initial getSession because code is present');
+        return;
+      }
+
+      try {
+        const verifiedUser = await getAuthenticatedUser(1, 250);
+        console.log('[Auth] Initial verified user result:', !!verifiedUser);
+        if (verifiedUser) {
+          const userData = await buildUserData(verifiedUser);
+          if (isMounted) setUser(userData);
+        }
+      } catch (err) {
+        console.error('[Auth] getSession check failed:', err);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    };
+    
+    // Kick off initialization
+    void handleAuthCallback().then(() => {
+      void checkInitialSession();
     });
+
+    const authBootstrapTimer = window.setTimeout(() => {
+      if (isMounted) stopLoading();
+    }, 10000);
 
     return () => {
       isMounted = false;
@@ -430,15 +516,24 @@ const App: React.FC = () => {
   }, []);
 
   const handleLogout = async () => {
-    localStorage.removeItem('user');
-    setUser(null);
+    console.log('[Auth] Logging out...');
     try {
       const supabase = getSupabase();
-      await supabase.auth.signOut();
+      try {
+        (supabase.auth as any).stopAutoRefresh?.();
+      } catch {
+      }
+      try {
+        await (supabase.auth as any).signOut({ scope: 'global' });
+      } catch {
+        await supabase.auth.signOut();
+      }
     } catch (e) {
       console.warn("Logout signout error", e);
     }
-    window.location.href = '/';
+    clearLocalAuthStorage();
+    setUser(null);
+    window.location.replace('/');
   };
 
   const requireAuth = (element: React.ReactNode) => {
@@ -495,11 +590,12 @@ const App: React.FC = () => {
               <Route path="/cookie-policy" element={<CookiePolicy />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:id" element={<BlogPostDetail />} />
+              <Route path="/auth/callback" element={<AuthCallback />} />
               <Route path="/admin" element={loading ? requireAuth(<Admin user={user} />) : <Admin user={user} />} />
               <Route path="/debug-auth" element={<DebugAuth />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/login" element={<AuthForm onLogin={(u) => { setUser(u); localStorage.setItem('user', JSON.stringify(u)); }} />} />
-              <Route path="/signup" element={<AuthForm isSignup onLogin={(u) => { setUser(u); localStorage.setItem('user', JSON.stringify(u)); }} />} />
+              <Route path="/login" element={<AuthForm buildUserData={buildUserData} onLogin={(u) => { setUser(u); localStorage.setItem('user', JSON.stringify(u)); }} />} />
+              <Route path="/signup" element={<AuthForm buildUserData={buildUserData} isSignup onLogin={(u) => { setUser(u); localStorage.setItem('user', JSON.stringify(u)); }} />} />
             </Routes>
           </main>
           <CookieConsent />
@@ -608,7 +704,11 @@ const Footer: React.FC = () => {
   );
 };
 
-const AuthForm: React.FC<{ isSignup?: boolean; onLogin: (u: User) => void }> = ({ isSignup, onLogin }) => {
+const AuthForm: React.FC<{ 
+  isSignup?: boolean; 
+  onLogin: (u: User) => void;
+  buildUserData: (authUser: any) => Promise<User>;
+}> = ({ isSignup, onLogin, buildUserData }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [email, setEmail] = useState('');
@@ -636,7 +736,7 @@ const AuthForm: React.FC<{ isSignup?: boolean; onLogin: (u: User) => void }> = (
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Auth Form: handleSubmit called, isSignup:', isSignup);
+    console.log('[AuthForm] handleSubmit triggered. isSignup:', isSignup, 'Email:', email);
     setIsError('');
     setIsLoading(true);
     const supabase = getSupabase();
@@ -661,12 +761,8 @@ const AuthForm: React.FC<{ isSignup?: boolean; onLogin: (u: User) => void }> = (
             }
           });
           if (error) throw error;
-          if (!data.session) {
-            setIsError('Email verify nahi hui. Inbox/spam me verification email check karke account confirm karein.');
-            return;
-          }
-
-            if (data.user) {
+          
+          if (data.user) {
               // Fetch role after signup (trigger handles creation)
               const { data: profile } = await supabase
                 .from('profiles')
@@ -709,55 +805,43 @@ const AuthForm: React.FC<{ isSignup?: boolean; onLogin: (u: User) => void }> = (
             let error: any = null;
 
             for (const candidateEmail of loginCandidates) {
-              console.log('Auth Form: Trying email:', candidateEmail);
-              const attempt = await supabase.auth.signInWithPassword({
+              console.log('[AuthForm] Attempting login with:', candidateEmail);
+              const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
                 email: candidateEmail,
                 password,
               });
-              data = attempt.data;
-              error = attempt.error;
-              console.log('Auth Form: Attempt result - error:', error?.message, 'user:', !!data?.user);
-              if (!error && data?.user) break;
+              
+              data = loginData;
+              error = loginError;
+
+              if (!error && data?.user) {
+                console.log('[AuthForm] Login successful for:', candidateEmail);
+                break;
+              }
+              console.warn(`[AuthForm] Login failed for ${candidateEmail}:`, error?.message);
             }
 
-            if (error || !data?.user) throw error || new Error('Invalid login credentials');
+            if (error || !data?.user) {
+              throw error || new Error('Invalid login credentials');
+            }
+
             if (data.user) {
-              if (!data.session) {
-                throw new Error('Email not confirmed');
-              }
-              // Fetch role
-              console.log('Auth: Fetching profile for user:', data.user.id);
-              const { data: profile, error: profileError } = await supabase
-                .from('profiles')
-                .select('role')
-                .eq('id', data.user.id)
-                .single();
+              console.log('[AuthForm] Processing user session...');
               
-              if (profileError) {
-                console.warn('Warning fetching profile:', profileError);
+              // We should have a session if verification is disabled/completed
+              if (!data.session) {
+                console.warn('[AuthForm] User logged in but no session found. This might be due to unconfirmed email.');
+                // Even if the user said verification is removed, Supabase might still require it if not configured correctly.
+                throw new Error('Email verification pending or session could not be established.');
               }
 
-              // Sync email and plain_password on login
-              try {
-                await supabase
-                  .from('profiles')
-                  .update({ email: normalizeEmail(data.user.email || rawEmail), plain_password: password })
-                  .eq('id', data.user.id);
-              } catch (e) {
-                console.warn("Could not sync profile on login.", e);
-              }
-
-              const resolvedRole = resolveUserRole(profile?.role, data.user.email || rawEmail);
-              if (resolvedRole === 'admin' && profile?.role !== 'admin') {
-                await supabase.from('profiles').update({ role: 'admin' }).eq('id', data.user.id);
-              }
-
-              onLogin({ 
-                id: data.user.id, 
-                email: normalizeEmail(data.user.email || rawEmail), 
-                name: data.user.user_metadata?.full_name || data.user.email?.split('@')[0] || 'User',
-                role: resolvedRole
-              });
+              // Build user data
+              const userData = await buildUserData(data.user);
+              
+              // Update local state and storage immediately
+              onLogin(userData);
+              
+              console.log('[AuthForm] Navigating to settings...');
               navigate('/settings');
             }
           } catch (supabaseError: any) {
@@ -765,19 +849,8 @@ const AuthForm: React.FC<{ isSignup?: boolean; onLogin: (u: User) => void }> = (
           }
         }
     } catch (err: any) {
-      const rawMessage = err?.message || '';
-      if (rawMessage.toLowerCase().includes('email not confirmed')) {
-        try {
-          const supabase = getSupabase();
-          const resendEmail = normalizeEmail(email.trim());
-          if (resendEmail) {
-            await supabase.auth.resend({ type: 'signup', email: resendEmail });
-          }
-        } catch {}
-        setIsError('Email verify nahi hui. Inbox/spam me verification email check karein. Verification email dobara send kar di gayi hai.');
-      } else {
-        setIsError(rawMessage || 'An error occurred');
-      }
+      const rawMessage = err?.message || 'An error occurred';
+      setIsError(rawMessage);
     } finally {
       setIsLoading(false);
     }
@@ -789,7 +862,7 @@ const AuthForm: React.FC<{ isSignup?: boolean; onLogin: (u: User) => void }> = (
     setIsError('');
     setIsLoading(true);
     const supabase = getSupabase();
-    const redirectTo = `${window.location.origin}/`;
+    const redirectTo = window.location.origin + '/auth/callback';
     console.log('[Auth] Starting Google OAuth, redirectTo:', redirectTo);
     try {
       const { data, error } = await supabase.auth.signInWithOAuth({
@@ -800,11 +873,22 @@ const AuthForm: React.FC<{ isSignup?: boolean; onLogin: (u: User) => void }> = (
       });
       console.log('[Auth] signInWithOAuth result — error:', error, 'url:', data?.url);
       if (error) throw error;
+      
+      if (data?.url) {
+        console.log('[Auth] Redirecting to:', data.url);
+        window.location.href = data.url;
+      } else {
+        throw new Error('Google OAuth URL missing');
+      }
     } catch (err: any) {
       const rawMessage = err?.message || '';
       console.error('[Auth] Google login error:', rawMessage);
       if (rawMessage.toLowerCase().includes('redirect') || rawMessage.toLowerCase().includes('not allowed')) {
-        setIsError('Google login redirect blocked. Supabase Dashboard → Auth → URL Configuration mein Redirect URL add karein.');
+        setIsError(
+          `Google login redirect blocked.\n` +
+          `1) Google Cloud Console (OAuth) → Authorized redirect URIs mein ye add karein: https://sdbwfxhxdruwhomelvdz.supabase.co/auth/v1/callback\n` +
+          `2) Supabase Dashboard → Auth → URL Configuration → Additional Redirect URLs mein ye add karein: ${redirectTo}`
+        );
       } else {
         setIsError(rawMessage || 'Failed to authenticate with Google');
       }
@@ -915,6 +999,17 @@ const AuthForm: React.FC<{ isSignup?: boolean; onLogin: (u: User) => void }> = (
 };
 
 export default App;
+
+const AuthCallback: React.FC = () => {
+  return (
+    <div className="min-h-[70vh] flex items-center justify-center px-4">
+      <div className="flex flex-col items-center gap-4 text-center">
+        <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+        <p className="text-sm font-bold text-slate-600 dark:text-slate-300">Signing you in...</p>
+      </div>
+    </div>
+  );
+};
 
 const CookieConsent = () => {
   const [isVisible, setIsVisible] = useState(false);

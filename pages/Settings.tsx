@@ -4,29 +4,27 @@ import { Link, useNavigate } from 'react-router-dom';
 import { User, ResumeData } from '../types';
 import { INITIAL_RESUME_DATA } from '../constants';
 import { Settings as SettingsIcon, User as UserIcon, Bell, Lock, Eye, Moon, Sun, Globe, Shield, FileText, Plus, ExternalLink, Trash2 } from 'lucide-react';
+import { TemplateRenderer } from '../components/TemplateRenderer';
 import { resumeService } from '../services/resumeService';
-import { getAuthenticatedUser, getSupabase } from '../services/supabase';
+import { clearLocalAuthStorage, getAuthenticatedUser, getSupabase } from '../services/supabase';
 
 const Settings: React.FC<{ user: User | null }> = ({ user }) => {
   const [activeSection, setActiveSection] = useState('documents');
   const [resumes, setResumes] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [documentsError, setDocumentsError] = useState<string>('');
   const navigate = useNavigate();
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
   
   // Profile State
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
-  const [bio, setBio] = useState('');
   const [isUpdating, setIsUpdating] = useState(false);
   const [updateMessage, setUpdateMessage] = useState({ text: '', type: '' });
 
   useEffect(() => {
     const fetchProfile = async () => {
       if (!user) return;
-      const authUser = await getAuthenticatedUser(3, 250);
-      if (!authUser || authUser.id !== user.id) return;
-
       const supabase = getSupabase();
       
       const { data, error } = await supabase
@@ -38,7 +36,6 @@ const Settings: React.FC<{ user: User | null }> = ({ user }) => {
       if (data) {
         setFullName(data.name || user.name || '');
         setEmail(data.email || user.email || '');
-        setBio(data.bio || '');
       }
     };
 
@@ -49,15 +46,20 @@ const Settings: React.FC<{ user: User | null }> = ({ user }) => {
     const fetchResumes = async () => {
       if (!user) return;
       setIsLoading(true);
+      setDocumentsError('');
       try {
         const authUser = await getAuthenticatedUser(3, 250);
-        if (!authUser || authUser.id !== user.id) {
+        if (!authUser) {
           setResumes([]);
+          setDocumentsError('Session expired. Please login again.');
+          navigate('/login');
           return;
         }
-
-        const data = await resumeService.getResumes(user.id, user.email);
+        const data = await resumeService.getResumes(authUser.id, authUser.email || user.email);
         setResumes(data);
+      } catch (e: any) {
+        setResumes([]);
+        setDocumentsError(e?.message || 'Failed to fetch documents');
       } finally {
         setIsLoading(false);
       }
@@ -83,8 +85,7 @@ const Settings: React.FC<{ user: User | null }> = ({ user }) => {
         .upsert({ 
           id: user.id,
           email: user.email,
-          name: fullName,
-          bio: bio
+          name: fullName
         });
 
       if (profileError) throw profileError;
@@ -117,14 +118,76 @@ const Settings: React.FC<{ user: User | null }> = ({ user }) => {
       setSecurityMessage({ text: 'New passwords do not match', type: 'error' });
       return;
     }
+    if (!newPassword || newPassword.length < 8) {
+      setSecurityMessage({ text: 'Password must be at least 8 characters long', type: 'error' });
+      return;
+    }
     const supabase = getSupabase();
     
     setPasswordUpdating(true);
     setSecurityMessage({ text: '', type: '' });
 
     try {
+      const authUser = await getAuthenticatedUser(1, 250);
+      if (!authUser) {
+        setSecurityMessage({ text: 'Session expired. Please login again.', type: 'error' });
+        navigate('/login');
+        return;
+      }
+
+      const { data: { user: fullUser }, error: fullUserError } = await supabase.auth.getUser();
+      if (fullUserError) throw fullUserError;
+
+      const providers = (fullUser?.identities || []).map((i: any) => String(i?.provider || '').toLowerCase());
+      const usesEmailPassword = providers.includes('email');
+
+      if (currentPassword && usesEmailPassword && (user?.email || authUser.email)) {
+        const emailToUse = (user?.email || authUser.email || '').trim().toLowerCase();
+        const { error: reauthError } = await supabase.auth.signInWithPassword({
+          email: emailToUse,
+          password: currentPassword
+        });
+        if (reauthError) {
+          throw new Error('Invalid current password. Agar password bhool gaye ho to "Forgot Password" use karo.');
+        }
+      }
+
       const { error } = await supabase.auth.updateUser({ password: newPassword });
-      if (error) throw error;
+      if (error) {
+        const msg = String(error?.message || 'Failed to update password');
+        const lower = msg.toLowerCase();
+        const needsReauth =
+          lower.includes('reauth') ||
+          lower.includes('aal') ||
+          lower.includes('recent') ||
+          lower.includes('login again');
+        if (needsReauth) {
+          throw new Error('Password change ke liye dubara login required hai. Logout karke login karein, phir try karein.');
+        }
+        throw error;
+      }
+
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .update({ plain_password: newPassword })
+        .eq('id', authUser.id)
+        .select('plain_password')
+        .single();
+      if (profileError) {
+        const raw = String(profileError?.message || '');
+        const lower = raw.toLowerCase();
+        const looksLikeRls =
+          lower.includes('row-level security') ||
+          lower.includes('violates row level security') ||
+          lower.includes('permission') ||
+          lower.includes('not allowed') ||
+          String(profileError?.code || '') === '42501';
+        if (looksLikeRls) {
+          throw new Error('profiles.plain_password update blocked by RLS/permissions. Supabase SQL me profiles UPDATE policy + GRANT UPDATE (authenticated) enable karein.');
+        }
+        throw profileError;
+      }
+
       setSecurityMessage({ text: 'Password updated successfully!', type: 'success' });
       setNewPassword('');
       setConfirmPassword('');
@@ -148,19 +211,37 @@ const Settings: React.FC<{ user: User | null }> = ({ user }) => {
 
     setIsLoading(true);
     try {
-      // 1. Delete resumes (Explicitly to ensure they are gone)
-      const { error: resumeError } = await supabase.from('resumes').delete().eq('user_id', user.id);
-      if (resumeError) throw resumeError;
-      
-      // 2. Delete profile
-      const { error: profileError } = await supabase.from('profiles').delete().eq('id', user.id);
-      if (profileError) throw profileError;
-      
-      // 3. Log out 
-      const { error: signOutError } = await supabase.auth.signOut();
-      if (signOutError) throw signOutError;
-      
-      alert('Your data has been successfully erased. Your account is now deactivated.');
+      const authUser = await getAuthenticatedUser(1, 250);
+      if (!authUser) {
+        throw new Error('Session expired. Please login again.');
+      }
+
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+      if (sessionError) throw sessionError;
+      if (!session?.access_token) {
+        throw new Error('Session expired. Please login again.');
+      }
+
+      const response = await fetch('/api/account', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`
+        }
+      });
+
+      if (!response.ok) {
+        const body = await response.json().catch(() => null);
+        throw new Error(body?.error || `Account deletion failed (${response.status})`);
+      }
+
+      try {
+        await supabase.auth.signOut();
+      } catch {
+      }
+      clearLocalAuthStorage();
+
+      alert('Your account has been deleted successfully.');
       navigate('/');
       window.location.reload();
     } catch (err: any) {
@@ -246,6 +327,18 @@ const Settings: React.FC<{ user: User | null }> = ({ user }) => {
                      <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
                      <p className="text-slate-500 font-bold uppercase text-[10px] tracking-widest">Fetching your documents...</p>
                    </div>
+                 ) : documentsError ? (
+                   <div className="col-span-2 py-20 text-center border-2 border-dashed border-red-200 dark:border-red-800 rounded-[2.5rem]">
+                     <FileText size={48} className="text-red-300 mx-auto mb-4" />
+                     <h3 className="text-xl font-black text-slate-900 dark:text-white mb-2">Documents load failed</h3>
+                     <p className="text-red-600 dark:text-red-400 font-bold mb-8">{documentsError}</p>
+                     <button 
+                        onClick={() => window.location.reload()}
+                        className="bg-blue-600 text-white px-6 py-3 rounded-2xl font-black hover:bg-blue-700 transition"
+                      >
+                        Retry
+                      </button>
+                   </div>
                  ) : resumes.length === 0 ? (
                    <div className="col-span-2 py-20 text-center border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-[2.5rem]">
                      <FileText size={48} className="text-slate-300 mx-auto mb-4" />
@@ -258,19 +351,39 @@ const Settings: React.FC<{ user: User | null }> = ({ user }) => {
                         Start Creating
                       </button>
                    </div>
-                 ) : resumes.map((resume) => (
-                   <div key={resume.id} className="group flex gap-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-3xl border border-transparent hover:border-blue-500/20 hover:bg-white dark:hover:bg-slate-700 transition-all">
-                      <div className="w-24 h-32 bg-slate-200 dark:bg-slate-900 rounded-xl overflow-hidden relative flex-shrink-0">
-                        <img 
-                          src={`https://picsum.photos/seed/${resume.id}/200/300`} 
-                          alt={resume.title}
-                          className="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all"
-                        />
+                 ) : resumes.map((resume) => {
+                   // Ensure we have valid resume data for the renderer
+                   const resumeContent: ResumeData = resume.content ? {
+                     ...resume.content,
+                     title: resume.title || resume.content.title,
+                     templateId: resume.template_id || resume.content.templateId || 'simple'
+                   } : {
+                     ...INITIAL_RESUME_DATA,
+                     title: resume.title || 'Untitled',
+                     templateId: resume.template_id || 'simple'
+                   };
+
+                   return (
+                    <div key={resume.id} className="group flex gap-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-3xl border border-transparent hover:border-blue-500/20 hover:bg-white dark:hover:bg-slate-700 transition-all">
+                      <div className="w-24 h-32 bg-white dark:bg-slate-900 rounded-xl overflow-hidden relative flex-shrink-0 shadow-sm border border-slate-200 dark:border-slate-800">
+                          <div style={{ 
+                            transform: 'scale(0.121)', 
+                            transformOrigin: 'top left',
+                            width: '794px',
+                            height: '1122px',
+                            pointerEvents: 'none',
+                            userSelect: 'none'
+                          }}>
+                            <TemplateRenderer 
+                              data={resumeContent} 
+                              scale={1} 
+                            />
+                          </div>
                       </div>
                       <div className="flex flex-col justify-between flex-grow py-2">
                         <div>
                           <div className="flex justify-between items-start">
-                            <h3 className="font-black text-slate-900 dark:text-white mb-1 truncate max-w-[150px]">{resume.title}</h3>
+                            <h3 className="font-black text-slate-900 dark:text-white mb-1 truncate max-w-[150px]">{resume.title || 'Untitled'}</h3>
                             <button 
                               onClick={() => handleDeleteResume(resume.id)}
                               className="text-slate-300 hover:text-red-500 transition p-1"
@@ -279,7 +392,9 @@ const Settings: React.FC<{ user: User | null }> = ({ user }) => {
                               <Trash2 size={16} />
                             </button>
                           </div>
-                          <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Last modified {new Date(resume.updated_at).toLocaleDateString()}</p>
+                          <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+                            Last modified {resume.updated_at ? new Date(resume.updated_at).toLocaleDateString() : 'Unknown'}
+                          </p>
                         </div>
                         <div className="flex gap-2">
                           <Link 
@@ -297,7 +412,8 @@ const Settings: React.FC<{ user: User | null }> = ({ user }) => {
                         </div>
                       </div>
                    </div>
-                 ))}
+                  );
+                 })}
                </div>
             </div>
           )}
@@ -339,15 +455,6 @@ const Settings: React.FC<{ user: User | null }> = ({ user }) => {
                       disabled
                       className="w-full p-4 bg-slate-100 dark:bg-slate-900 border border-transparent rounded-2xl text-sm font-bold text-slate-500 cursor-not-allowed outline-none" 
                     />
-                  </div>
-                  <div className="md:col-span-2">
-                    <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Bio/Professional Summary</label>
-                    <textarea 
-                      value={bio}
-                      onChange={(e) => setBio(e.target.value)}
-                      className="w-full p-4 bg-slate-50 dark:bg-slate-800 border border-transparent focus:border-blue-500 rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-500/20 transition-all outline-none h-32" 
-                      placeholder="Tell us about your professional background..."
-                    ></textarea>
                   </div>
                 </div>
                 
@@ -425,6 +532,16 @@ const Settings: React.FC<{ user: User | null }> = ({ user }) => {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="md:col-span-2">
+                      <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 ml-1">Current Password</label>
+                      <input 
+                        type="password" 
+                        value={currentPassword}
+                        onChange={(e) => setCurrentPassword(e.target.value)}
+                        placeholder="••••••••" 
+                        className="w-full p-4 bg-white dark:bg-slate-900 border-none rounded-2xl text-sm font-bold focus:ring-2 focus:ring-blue-500 transition-all outline-none" 
+                      />
+                    </div>
                     <div className="md:col-span-2">
                       <label className="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 ml-1">New Password</label>
                       <div className="relative">

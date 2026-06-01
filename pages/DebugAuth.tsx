@@ -88,6 +88,17 @@ const DebugAuth: React.FC = () => {
     }
   };
 
+  const resetAuth = () => {
+    localStorage.clear();
+    // Also clear specific supabase keys just in case
+    Object.keys(localStorage).forEach(key => {
+      if (key.includes('supabase') || key.includes('auth') || key.includes('proresumelab')) {
+        localStorage.removeItem(key);
+      }
+    });
+    setOutput('Local storage cleared. Please refresh the page.');
+  };
+
   return (
     <div className="max-w-2xl mx-auto p-8 bg-white dark:bg-slate-900 rounded-lg border">
       <h1 className="text-3xl font-bold mb-6">🔍 Debug Auth</h1>
@@ -115,6 +126,13 @@ const DebugAuth: React.FC = () => {
           className="w-full px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 disabled:opacity-50"
         >
           Check Profiles Table
+        </button>
+
+        <button
+          onClick={resetAuth}
+          className="w-full px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+        >
+          Reset All Auth Data (Local Storage)
         </button>
       </div>
 

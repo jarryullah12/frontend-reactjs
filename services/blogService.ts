@@ -31,13 +31,11 @@ export const blogService = {
         ? '*'
         : 'id,title,excerpt,author,date,category,image,status';
 
-      // Primary query: latest by created_at
       let { data, error } = await supabase
         .from('blog_posts')
         .select(selectColumns)
         .order('created_at', { ascending: false });
 
-      // Fallback query for older schemas where created_at may not exist.
       if (error && typeof error.message === 'string' && error.message.toLowerCase().includes('created_at')) {
         console.warn('blogService: created_at not found, retrying without created_at ordering');
         const retry = await supabase
