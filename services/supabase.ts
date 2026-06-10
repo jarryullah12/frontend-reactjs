@@ -1,10 +1,26 @@
 import { createClient, Session, SupabaseClient, User } from '@supabase/supabase-js';
 
 const resolveSupabaseUrl = () => {
-    // In the browser, always prefer the same-origin proxy to avoid third-party cookie/CORS issues
     if (typeof window !== 'undefined') {
+        const candidate = import.meta.env.VITE_SUPABASE_URL || '';
+        if (candidate && !candidate.includes('placeholder')) {
+            return candidate;
+        }
+
+        const host = window.location.hostname;
+        const isLocalhost =
+            host === 'localhost' ||
+            host === '127.0.0.1' ||
+            host === '0.0.0.0' ||
+            host.endsWith('.local');
+
         const proxyUrl = `${window.location.origin}/_supabase`;
-        console.log('[Supabase] Browser environment detected, using proxy:', proxyUrl);
+        if (isLocalhost) {
+            console.log('[Supabase] Using same-origin proxy:', proxyUrl);
+            return proxyUrl;
+        }
+
+        console.warn('[Supabase] VITE_SUPABASE_URL missing in browser build. This will break on static hosts (e.g., Netlify).');
         return proxyUrl;
     }
     

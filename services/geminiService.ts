@@ -1,25 +1,63 @@
 
 import { AtsResult } from "../types";
 
-const callGeminiApi = async (type: string, payload: any) => {
-  const response = await fetch("/api/gemini", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ type, payload }),
-  });
-  
-  if (!response.ok) {
-    let errorMessage = "Failed to communicate with AI server";
-    try {
-      const errorData = await response.json();
-      errorMessage = errorData.error || errorMessage;
-    } catch (e) {
-      console.error("Could not parse error response", e);
+const getGeminiEndpoints = () => {
+  const endpoints: string[] = ["/api/gemini", "/.netlify/functions/gemini"];
+  if (typeof window !== "undefined") {
+    const host = window.location.hostname.toLowerCase();
+    const isNetlify = host.endsWith(".netlify.app") || host.includes("netlify");
+    if (isNetlify) {
+      return ["/.netlify/functions/gemini", "/api/gemini"];
     }
-    throw new Error(errorMessage);
   }
-  
-  return response.json();
+  return endpoints;
+};
+
+const callGeminiApi = async (type: string, payload: any) => {
+  const endpoints = getGeminiEndpoints();
+  let lastError: unknown = null;
+
+  for (const endpoint of endpoints) {
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type, payload }),
+      });
+
+      if (response.ok) {
+        return response.json();
+      }
+
+      if (response.status === 404) {
+        lastError = new Error(`AI endpoint not found: ${endpoint}`);
+        continue;
+      }
+
+      let errorMessage = `AI server error (${response.status})`;
+      try {
+        const asJson = await response.json();
+        errorMessage = asJson?.error || errorMessage;
+      } catch {
+        try {
+          const asText = await response.text();
+          if (asText) errorMessage = `${errorMessage}: ${asText.substring(0, 200)}`;
+        } catch {
+        }
+      }
+      throw new Error(errorMessage);
+    } catch (e: any) {
+      const message = String(e?.message || e);
+      const looksLikeNetwork = message.toLowerCase().includes("failed to fetch") || message.toLowerCase().includes("network");
+      lastError = e;
+      if (looksLikeNetwork) {
+        continue;
+      }
+      throw e;
+    }
+  }
+
+  throw (lastError as any) || new Error("Failed to communicate with AI server");
 };
 
 export const generateProfessionalSummary = async (jobTitle: string, skills: string[]) => {
