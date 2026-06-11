@@ -2,14 +2,12 @@
 import { AtsResult } from "../types";
 
 const getGeminiEndpoints = () => {
-  const endpoints: string[] = ["/api/gemini", "/.netlify/functions/gemini"];
-  if (typeof window !== "undefined") {
-    const host = window.location.hostname.toLowerCase();
-    const isNetlify = host.endsWith(".netlify.app") || host.includes("netlify");
-    if (isNetlify) {
-      return ["/.netlify/functions/gemini", "/api/gemini"];
-    }
-  }
+  const configured = (import.meta as any)?.env?.VITE_AI_ENDPOINT as string | undefined;
+  const normalizedConfigured = configured ? String(configured).trim() : "";
+  const primary = normalizedConfigured || ((import.meta as any)?.env?.PROD ? "/.netlify/functions/gemini" : "/api/gemini");
+  const endpoints: string[] = [primary];
+  if (primary !== "/.netlify/functions/gemini") endpoints.push("/.netlify/functions/gemini");
+  if (primary !== "/api/gemini") endpoints.push("/api/gemini");
   return endpoints;
 };
 

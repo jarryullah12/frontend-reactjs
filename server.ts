@@ -249,7 +249,39 @@ async function startServer() {
   });
 
   // Gemini API Endpoint
+  const applyCors = (req: any, res: any) => {
+    const origin = String(req.headers.origin || '');
+    if (!origin) return;
+
+    const envFile = loadEnv(MODE, process.cwd(), '');
+    const raw = String(process.env.CORS_ORIGINS || envFile.CORS_ORIGINS || '');
+    const allowList = raw
+      .split(',')
+      .map(s => s.trim())
+      .filter(Boolean);
+
+    const defaultAllowed = [
+      'http://localhost:5000',
+      'http://127.0.0.1:5000'
+    ];
+
+    const isExplicitlyAllowed = [...defaultAllowed, ...allowList].includes(origin);
+    const isNetlifyAllowed = origin.endsWith('.netlify.app');
+    if (isExplicitlyAllowed || isNetlifyAllowed) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+      res.setHeader('Vary', 'Origin');
+      res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    }
+  };
+
+  app.options("/api/gemini", (req, res) => {
+    applyCors(req, res);
+    res.status(204).send();
+  });
+
   app.post("/api/gemini", async (req, res) => {
+    applyCors(req, res);
     const { type, payload } = req.body;
     const apiKey = process.env.GEMINI_API_KEY || env.GEMINI_API_KEY || env.VITE_GEMINI_API_KEY;
 
