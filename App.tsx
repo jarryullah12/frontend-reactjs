@@ -356,12 +356,7 @@ const App: React.FC = () => {
       
       if (session?.user) {
         try {
-          const verifiedUser = await getAuthenticatedUser(1, 250);
-          if (!verifiedUser) {
-            clearUserState();
-            return;
-          }
-          const userData = await buildUserData(verifiedUser);
+          const userData = await buildUserData(session.user);
           console.log('[Auth] User data built successfully:', userData.email);
           if (isMounted) {
             setUser(userData);
@@ -369,6 +364,16 @@ const App: React.FC = () => {
             setAuthCallbackError(null);
           }
           localStorage.setItem('user', JSON.stringify(userData));
+
+          void (async () => {
+            try {
+              const verifiedUser = await getAuthenticatedUser(0, 0, 6000);
+              if (!verifiedUser) {
+                clearUserState();
+              }
+            } catch {
+            }
+          })();
         } catch (err) {
           console.error('[Auth] Error building user data:', err);
           const userDataFallback = {
@@ -485,11 +490,21 @@ const App: React.FC = () => {
       }
 
       try {
-        const verifiedUser = await getAuthenticatedUser(1, 250);
-        console.log('[Auth] Initial verified user result:', !!verifiedUser);
-        if (verifiedUser) {
-          const userData = await buildUserData(verifiedUser);
+        const { data: { session }, error } = await supabase.auth.getSession();
+        console.log('[Auth] Initial getSession result:', !!session, error?.message);
+        if (session?.user) {
+          const userData = await buildUserData(session.user);
           if (isMounted) setUser(userData);
+
+          void (async () => {
+            try {
+              const verifiedUser = await getAuthenticatedUser(0, 0, 6000);
+              if (!verifiedUser) {
+                clearUserState();
+              }
+            } catch {
+            }
+          })();
         }
       } catch (err) {
         console.error('[Auth] getSession check failed:', err);
@@ -517,23 +532,25 @@ const App: React.FC = () => {
 
   const handleLogout = async () => {
     console.log('[Auth] Logging out...');
+    const supabase = getSupabase();
     try {
-      const supabase = getSupabase();
-      try {
-        (supabase.auth as any).stopAutoRefresh?.();
-      } catch {
-      }
-      try {
-        await (supabase.auth as any).signOut({ scope: 'global' });
-      } catch {
-        await supabase.auth.signOut();
-      }
-    } catch (e) {
-      console.warn("Logout signout error", e);
+      (supabase.auth as any).stopAutoRefresh?.();
+    } catch {
     }
+
     clearLocalAuthStorage();
     setUser(null);
     window.location.replace('/');
+
+    void (async () => {
+      try {
+        await Promise.race([
+          (supabase.auth as any).signOut?.({ scope: 'global' }) ?? supabase.auth.signOut(),
+          new Promise((resolve) => window.setTimeout(resolve, 1500))
+        ]);
+      } catch {
+      }
+    })();
   };
 
   const requireAuth = (element: React.ReactNode) => {

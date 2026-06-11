@@ -36,7 +36,7 @@ const resolveAnonKey = () => {
 };
 
 let supabaseClient: SupabaseClient | null = null;
-const DEFAULT_AUTH_TIMEOUT_MS = 15000;
+const DEFAULT_AUTH_TIMEOUT_MS = 8000;
 const AUTH_STORAGE_KEYS = ['proresumelab-session-v1', 'proresumelab-auth-token', 'supabase.auth.token'];
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

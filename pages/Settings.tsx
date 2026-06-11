@@ -48,7 +48,7 @@ const Settings: React.FC<{ user: User | null }> = ({ user }) => {
       setIsLoading(true);
       setDocumentsError('');
       try {
-        const authUser = await getAuthenticatedUser(3, 250);
+        const authUser = await getAuthenticatedUser(1, 200, 6000);
         if (!authUser) {
           setResumes([]);
           setDocumentsError('Session expired. Please login again.');

@@ -1,5 +1,5 @@
 import { ResumeData } from '../types';
-import { getAuthenticatedUser, getSupabase } from './supabase';
+import { getSupabase } from './supabase';
 import { normalizeEmail } from '../utils/email';
 
 const isMissingColumnError = (error: any) => {
@@ -10,11 +10,6 @@ const isMissingColumnError = (error: any) => {
 export const resumeService = {
   getResumes: async (userId: string, userEmail?: string): Promise<any[]> => {
     const supabase = getSupabase();
-    const authUser = await getAuthenticatedUser(3, 250);
-    if (!authUser) {
-      throw new Error('Session expired. Please login again.');
-    }
-
     const { data: byUserId, error: byUserIdError } = await supabase
       .from('resumes')
       .select('*')
@@ -63,8 +58,6 @@ export const resumeService = {
   getResumeById: async (id: string): Promise<ResumeData | null> => {
     const supabase = getSupabase();
     try {
-      await getAuthenticatedUser(3, 250);
-
       const { data, error } = await supabase
         .from('resumes')
         .select('*')
@@ -109,7 +102,6 @@ export const resumeService = {
   saveResume: async (userId: string, data: ResumeData, resumeId?: string, userEmail?: string): Promise<string | null> => {
     const supabase = getSupabase();
     try {
-      await getAuthenticatedUser(3, 250);
       console.log('Attempting to save resume for user:', userId, 'with resumeId:', resumeId);
       
       const resumePayload: any = {
@@ -179,7 +171,6 @@ export const resumeService = {
   deleteResume: async (id: string, userId: string, userEmail?: string): Promise<boolean> => {
     const supabase = getSupabase();
     try {
-      await getAuthenticatedUser(3, 250);
       let error: any = null;
       const normalized = userEmail ? normalizeEmail(userEmail) : '';
 
