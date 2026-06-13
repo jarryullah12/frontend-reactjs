@@ -46,10 +46,11 @@ export const Logo: React.FC<{ size?: string }> = ({ size = "w-8 h-8" }) => (
 
 const ThemeToggle = () => {
   const [isDark, setIsDark] = useState(() => {
-    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+    try {
       return localStorage.getItem('theme') === 'dark';
+    } catch {
+      return false;
     }
-    return document.documentElement.classList.contains('dark');
   });
   
   useEffect(() => {

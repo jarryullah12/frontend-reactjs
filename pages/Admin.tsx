@@ -211,6 +211,22 @@ const Admin: React.FC<{ user?: User | null }> = ({ user: appUser }) => {
     u.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const normalizeRole = (u: User): 'admin' | 'pro' | 'user' => {
+    if (u.role === 'admin' || isAdminEmail(u.email)) return 'admin';
+    if (u.role === 'pro') return 'pro';
+    return 'user';
+  };
+
+  const getRoleLabel = (role: 'admin' | 'pro' | 'user') => {
+    if (role === 'admin') return 'Admin User';
+    if (role === 'pro') return 'Premium User';
+    return 'Free User';
+  };
+
+  const adminUsersCount = users.filter(u => normalizeRole(u) === 'admin').length;
+  const premiumUsersCount = users.filter(u => normalizeRole(u) === 'pro').length;
+  const freeUsersCount = users.filter(u => normalizeRole(u) === 'user').length;
+
   if (loading && !isAdmin) {
     return (
       <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center p-4">
@@ -517,16 +533,16 @@ const Admin: React.FC<{ user?: User | null }> = ({ user: appUser }) => {
         <div className="space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
              <div className="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl">
-               <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Total Population</p>
-               <h3 className="text-4xl font-black text-slate-900 dark:text-white">{users.length}</h3>
+               <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Premium Users</p>
+               <h3 className="text-4xl font-black text-amber-600">{premiumUsersCount}</h3>
              </div>
              <div className="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl">
-               <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">System Admins</p>
-               <h3 className="text-4xl font-black text-blue-600">{users.filter(u => u.role === 'admin').length}</h3>
+               <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Free Users</p>
+               <h3 className="text-4xl font-black text-slate-900 dark:text-white">{freeUsersCount}</h3>
              </div>
              <div className="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-xl">
-               <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Active Users</p>
-               <h3 className="text-4xl font-black text-emerald-500">{users.filter(u => u.role !== 'admin').length}</h3>
+               <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Admin Users</p>
+               <h3 className="text-4xl font-black text-blue-600">{adminUsersCount}</h3>
              </div>
           </div>
 
@@ -580,9 +596,15 @@ const Admin: React.FC<{ user?: User | null }> = ({ user: appUser }) => {
                         </div>
                       </td>
                       <td className="px-8 py-6">
-                        <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest ${user.role === 'admin' ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400' : 'bg-slate-50 text-slate-500 dark:bg-slate-800/50 dark:text-slate-400'}`}>
+                        <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest ${
+                          normalizeRole(user) === 'admin'
+                            ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400'
+                            : normalizeRole(user) === 'pro'
+                              ? 'bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400'
+                              : 'bg-slate-50 text-slate-500 dark:bg-slate-800/50 dark:text-slate-400'
+                        }`}>
                           <Shield size={12} />
-                          {user.role || 'user'}
+                          {getRoleLabel(normalizeRole(user))}
                         </div>
                       </td>
                       <td className="px-8 py-6">
