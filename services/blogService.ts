@@ -1,5 +1,9 @@
 import { BlogPost } from '../types';
+<<<<<<< HEAD
 import { ensureAuthReady, getSupabase } from './supabase';
+=======
+import { getSupabase } from './supabase';
+>>>>>>> 1bb8a577d0f5e33703f7cd6abae11848554b39b0
 
 // Simple in-memory cache
 const postsCache: Record<string, BlogPost> = {};
@@ -145,7 +149,10 @@ export const blogService = {
   },
 
   savePost: async (post: BlogPost): Promise<BlogPost | null> => {
+<<<<<<< HEAD
     await ensureAuthReady();
+=======
+>>>>>>> 1bb8a577d0f5e33703f7cd6abae11848554b39b0
     try {
       console.log('blogService: saving post:', post);
       
@@ -180,7 +187,10 @@ export const blogService = {
   },
 
   deletePost: async (id: string): Promise<void> => {
+<<<<<<< HEAD
     await ensureAuthReady();
+=======
+>>>>>>> 1bb8a577d0f5e33703f7cd6abae11848554b39b0
     try {
       const { error } = await getSupabase().from('blog_posts').delete().eq('id', id);
       if (error) throw error;

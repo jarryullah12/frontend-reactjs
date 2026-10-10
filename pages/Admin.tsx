@@ -1,7 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
 import { getAuthenticatedUser, getSupabase, ensureAuthReady } from '../services/supabase';
+=======
+import { getAuthenticatedUser, getSupabase } from '../services/supabase';
+>>>>>>> 1bb8a577d0f5e33703f7cd6abae11848554b39b0
 import { blogService } from '../services/blogService';
 import { BlogPost, User } from '../types';
 import { isAdminEmail } from '../utils/auth';
@@ -66,7 +70,10 @@ const Admin: React.FC<{ user?: User | null }> = ({ user: appUser }) => {
   const fetchData = async () => {
     setLoading(true);
     try {
+<<<<<<< HEAD
       await ensureAuthReady();
+=======
+>>>>>>> 1bb8a577d0f5e33703f7cd6abae11848554b39b0
       await Promise.all([fetchBlogs(), fetchUsers()]);
     } finally {
       setLoading(false);

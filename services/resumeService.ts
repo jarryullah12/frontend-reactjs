@@ -1,5 +1,9 @@
 import { ResumeData } from '../types';
+<<<<<<< HEAD
 import { ensureAuthReady, getSupabase } from './supabase';
+=======
+import { getSupabase } from './supabase';
+>>>>>>> 1bb8a577d0f5e33703f7cd6abae11848554b39b0
 import { normalizeEmail } from '../utils/email';
 
 const isMissingColumnError = (error: any) => {
@@ -10,7 +14,10 @@ const isMissingColumnError = (error: any) => {
 export const resumeService = {
   getResumes: async (userId: string, userEmail?: string): Promise<any[]> => {
     const supabase = getSupabase();
+<<<<<<< HEAD
     await ensureAuthReady();
+=======
+>>>>>>> 1bb8a577d0f5e33703f7cd6abae11848554b39b0
     const { data: byUserId, error: byUserIdError } = await supabase
       .from('resumes')
       .select('*')
@@ -58,7 +65,10 @@ export const resumeService = {
 
   getResumeById: async (id: string): Promise<ResumeData | null> => {
     const supabase = getSupabase();
+<<<<<<< HEAD
     await ensureAuthReady();
+=======
+>>>>>>> 1bb8a577d0f5e33703f7cd6abae11848554b39b0
     try {
       const { data, error } = await supabase
         .from('resumes')
@@ -103,7 +113,10 @@ export const resumeService = {
 
   saveResume: async (userId: string, data: ResumeData, resumeId?: string, userEmail?: string): Promise<string | null> => {
     const supabase = getSupabase();
+<<<<<<< HEAD
     await ensureAuthReady();
+=======
+>>>>>>> 1bb8a577d0f5e33703f7cd6abae11848554b39b0
     try {
       console.log('Attempting to save resume for user:', userId, 'with resumeId:', resumeId);
       
@@ -173,7 +186,10 @@ export const resumeService = {
 
   deleteResume: async (id: string, userId: string, userEmail?: string): Promise<boolean> => {
     const supabase = getSupabase();
+<<<<<<< HEAD
     await ensureAuthReady();
+=======
+>>>>>>> 1bb8a577d0f5e33703f7cd6abae11848554b39b0
     try {
       let error: any = null;
       const normalized = userEmail ? normalizeEmail(userEmail) : '';

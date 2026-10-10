@@ -10,7 +10,11 @@ import { Loader2, Sparkles, Save, ChevronDown } from 'lucide-react';
 import * as pdfjs from 'pdfjs-dist';
 import mammoth from 'mammoth';
 import { resumeService } from '../services/resumeService';
+<<<<<<< HEAD
 import { getAuthenticatedUser, ensureAuthReady } from '../services/supabase';
+=======
+import { getAuthenticatedUser } from '../services/supabase';
+>>>>>>> 1bb8a577d0f5e33703f7cd6abae11848554b39b0
 
 // Set worker source for PDF.js
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
@@ -126,7 +130,10 @@ const Builder: React.FC = () => {
           setSelectionMode('editor');
         } else if (id.length > 20) { // Likely a database UUID
           setIsGenerating(true);
+<<<<<<< HEAD
           await ensureAuthReady();
+=======
+>>>>>>> 1bb8a577d0f5e33703f7cd6abae11848554b39b0
           const fetched = await resumeService.getResumeById(id);
           if (fetched) {
             setData(fetched);

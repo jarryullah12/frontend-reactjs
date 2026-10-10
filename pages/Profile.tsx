@@ -3,7 +3,10 @@ import { useParams, Link } from 'react-router-dom';
 import { INITIAL_RESUME_DATA } from '../constants';
 import { TemplateRenderer } from '../components/TemplateRenderer';
 import { resumeService } from '../services/resumeService';
+<<<<<<< HEAD
 import { ensureAuthReady } from '../services/supabase';
+=======
+>>>>>>> 1bb8a577d0f5e33703f7cd6abae11848554b39b0
 import { ResumeData } from '../types';
 
 const Profile: React.FC = () => {
@@ -15,7 +18,10 @@ const Profile: React.FC = () => {
     const fetchResume = async () => {
       if (id && id.length > 20) {
         setLoading(true);
+<<<<<<< HEAD
         await ensureAuthReady();
+=======
+>>>>>>> 1bb8a577d0f5e33703f7cd6abae11848554b39b0
         const fetched = await resumeService.getResumeById(id);
         if (fetched) {
           setData(fetched);

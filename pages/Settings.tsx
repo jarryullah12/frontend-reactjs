@@ -42,6 +42,7 @@ const Settings: React.FC<{ user: User | null }> = ({ user }) => {
     fetchProfile();
   }, [user]);
 
+<<<<<<< HEAD
 useEffect(() => {
   const fetchResumes = async () => {
     if (!user) return;
@@ -80,6 +81,35 @@ useEffect(() => {
     fetchResumes();
   }
 }, [user, activeSection]);
+=======
+  useEffect(() => {
+    const fetchResumes = async () => {
+      if (!user) return;
+      setIsLoading(true);
+      setDocumentsError('');
+      try {
+        const authUser = await getAuthenticatedUser(1, 200, 6000);
+        if (!authUser) {
+          setResumes([]);
+          setDocumentsError('Session expired. Please login again.');
+          navigate('/login');
+          return;
+        }
+        const data = await resumeService.getResumes(authUser.id, authUser.email || user.email);
+        setResumes(data);
+      } catch (e: any) {
+        setResumes([]);
+        setDocumentsError(e?.message || 'Failed to fetch documents');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (activeSection === 'documents') {
+      fetchResumes();
+    }
+  }, [user, activeSection]);
+>>>>>>> 1bb8a577d0f5e33703f7cd6abae11848554b39b0
 
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
